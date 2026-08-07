@@ -3,248 +3,158 @@ import { Container } from "@/components/common";
 
 export const HowItWorksSection: React.FC = () => {
   const steps = [
-    {
-      stepNumber: "01",
-      title: "Choose Pickup",
-      description: "Enter your pickup and destination.",
-      badgeText: "ETA 3 mins",
-      badgeIcon: "📍",
-      badgeColor: "text-[#D97706] bg-[#FFFBEB] border-[#FEF3C7]",
-      iconBg: "bg-[#F6C64A]/25 text-[#D97706]",
-      icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-        </svg>
-      ),
+    { 
+      num: 1, 
+      img: "/images/img_1.png",
+      title: "Choose Your Ride",
+      desc: "Enter your pickup and drop location, choose your preferred ride – Bike, Auto, Car or Outstation."
     },
-    {
-      stepNumber: "02",
-      title: "Get Matched",
-      description:
-        "We'll instantly connect you with the nearest verified driver.",
-      badgeText: "Driver Found",
-      badgeIcon: "✨",
-      badgeColor: "text-[#0284C7] bg-[#F0F9FF] border-[#E0F2FE]",
-      iconBg: "bg-[#7CC8FF]/25 text-[#0284C7]",
-      icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2.2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-          />
-        </svg>
-      ),
+    { 
+      num: 2, 
+      img: "/images/img2.png",
+      title: "We Find You a Rider",
+      desc: "We match you with the nearest rider. Track their real-time location as they arrive."
     },
-    {
-      stepNumber: "03",
-      title: "Ride Safely",
-      description:
-        "Track your ride live and rate your experience after the trip.",
-      badgeText: "Ride Confirmed",
-      badgeIcon: "🛡️",
-      badgeColor: "text-[#15803D] bg-[#F0FDF4] border-[#DCFCE7]",
-      iconBg: "bg-[#7ED9A3]/30 text-[#15803D]",
-      icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2.2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-          />
-        </svg>
-      ),
+    { 
+      num: 3, 
+      img: "/images/img_3.png",
+      title: "Enjoy Your Ride",
+      desc: "Ride comfortably with verified riders. Share your trip details with your loved ones for added safety."
+    },
+    { 
+      num: 4, 
+      img: "/images/img4.png",
+      title: "Reach & Pay",
+      desc: "Reach your destination safely. Pay easily – Cash, UPI or Wallet. Rate your ride and help us improve."
     },
   ];
 
   return (
-    <section
-      id="how-it-works"
-      className="relative bg-[#FFFDF5] py-20 lg:py-28 overflow-hidden"
-    >
-      {/* Soft Radial Gradients in Background */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-[#F6C64A]/15 to-transparent blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[450px] h-[450px] rounded-full bg-gradient-to-tl from-[#7CC8FF]/15 to-[#7ED9A3]/10 blur-3xl pointer-events-none" />
-
-      {/* Abstract Clouds & Sparkles */}
-      <div className="absolute top-16 left-12 w-32 h-14 bg-white/50 rounded-full blur-[2px] hidden lg:block pointer-events-none" />
-      <div className="absolute top-28 right-16 w-40 h-16 bg-white/40 rounded-full blur-[2px] hidden lg:block pointer-events-none" />
-      <span className="absolute top-20 right-1/3 text-xl text-[#F6C64A] animate-pulse hidden md:block pointer-events-none">
-        ✦
-      </span>
-      <span className="absolute top-44 left-1/4 text-sm text-[#7CC8FF] animate-pulse hidden md:block pointer-events-none">
-        ✨
-      </span>
-      <span className="absolute bottom-28 right-1/4 text-lg text-[#7ED9A3] animate-pulse hidden md:block pointer-events-none">
-        ✦
-      </span>
-
-      {/* Floating Glowing Dots */}
-      <div className="absolute top-36 left-20 w-2.5 h-2.5 rounded-full bg-[#F6C64A]/60 shadow-sm pointer-events-none" />
-      <div className="absolute top-52 right-24 w-3 h-3 rounded-full bg-[#7CC8FF]/60 shadow-sm pointer-events-none" />
-      <div className="absolute bottom-40 left-1/3 w-2 h-2 rounded-full bg-[#7ED9A3]/60 shadow-sm pointer-events-none" />
-
-      {/* Minimal Decorative Travel Lines in Background */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-25"
-        viewBox="0 0 1440 600"
-        fill="none"
-      >
-        <path
-          d="M100 200 C 400 100, 800 350, 1340 180"
-          stroke="#F6C64A"
-          strokeWidth="1.5"
-          strokeDasharray="8 8"
-        />
-      </svg>
-
-      {/* Low-opacity City Skyline Silhouette across bottom (no roads, cars, scooters) */}
-      <div className="absolute bottom-0 left-0 w-full h-40 pointer-events-none overflow-hidden z-0">
-        <svg
-          className="w-full h-full text-[#F6C64A]/20"
-          viewBox="0 0 1200 160"
-          fill="currentColor"
-          preserveAspectRatio="none"
-        >
-          {/* Abstract Architectural Skyline Domes & Buildings */}
-          <path d="M0 160V120h40v-20h20v20h40v40H0z" />
-          <path d="M140 160V90c0-20 20-35 40-35s40 15 40 35v70h-80z" />
-          <path d="M260 160V110h20V85l15-15 15 15v25h20v50H260z" />
-          <path d="M400 160V100c0-15 15-25 30-25s30 10 30 25v60h-60z" />
-          <path d="M780 160V100c0-15 15-25 30-25s30 10 30 25v60h-60z" />
-          <path d="M920 160V90c0-20 20-35 40-35s40 15 40 35v70h-80z" />
-          <path d="M1060 160V120h30V95l15-15 15 15v25h30v40h-90z" />
-        </svg>
-      </div>
-
-      <Container className="relative z-10">
-        {/* Top Center Header */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-16 lg:mb-20">
-          {/* Small Rounded Pill Badge */}
-          <div className="inline-flex items-center gap-1.5 bg-[#FEF9C3] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-3">
-            <span>⚡</span>
-            <span>How It Works</span>
+    <section id="how-it-works" className="bg-[#FEFCE8] py-16 md:py-24 overflow-hidden">
+      <Container className="max-w-[1400px] mx-auto px-4 md:px-8">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
+          <div className="inline-flex items-center justify-center bg-white border border-gray-100 text-[#1E293B] font-bold text-[10px] px-4 py-1.5 rounded-full tracking-wider uppercase shadow-sm mb-4">
+            How It Works
           </div>
-
-          {/* Bold Heading */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1E293B] tracking-tight">
-            Book Your Ride in{" "}
-            <span className="text-[#EAB308]">Just 3 Simple Steps</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#1E293B] tracking-tight mb-3">
+            Your Journey in <span className="text-[#F8D84E]">4 Simple Steps</span>
           </h2>
-
-          {/* Subtitle */}
-          <p className="text-base sm:text-lg text-gray-600 font-normal mt-3 leading-relaxed">
-            Choose your destination, get matched with a nearby verified driver,
-            and enjoy a safe journey.
+          <p className="text-sm sm:text-base text-gray-600 font-medium">
+            From booking to destination — we make every ride smooth, safe & reliable.
           </p>
         </div>
 
-        {/* 3 Cards Container with Curved Dotted Route Line connecting them */}
-        <div className="relative max-w-6xl mx-auto">
-          {/* Connecting Curved Dotted SVG Route Line (desktop only) */}
-          <div className="absolute top-28 left-0 w-full h-24 pointer-events-none hidden lg:block z-0">
-            <svg
-              className="w-full h-full"
-              viewBox="0 0 1000 100"
-              fill="none"
-            >
-              <path
-                d="M 180 50 Q 330 0, 500 50 T 820 50"
-                stroke="#EAB308"
-                strokeWidth="2.5"
-                strokeDasharray="8 8"
-                strokeLinecap="round"
-                opacity="0.7"
-              />
-            </svg>
-          </div>
+        {/* 4 Cards Grid with connecting line */}
+        <div className="relative mb-16 pt-4">
+          {/* Continuous Dashed Line for Desktop running across all 4 columns */}
+          <div className="hidden lg:block absolute top-[16px] left-[12.5%] right-[12.5%] h-0 border-t-[2px] border-dashed border-[#F8D84E] z-0" />
 
-          {/* 3 Glassmorphism Cards Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 relative z-10">
-            {steps.map((step, index) => (
-              <div
-                key={step.stepNumber}
-                className="relative bg-white/85 backdrop-blur-md rounded-[32px] p-8 border border-white/80 shadow-[0_15px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_22px_60px_rgba(0,0,0,0.11)] transition-all duration-300 flex flex-col justify-between group min-h-[320px]"
-              >
-                {/* Floating Notification Badge near Card */}
-                <div
-                  className={`absolute -top-3 right-6 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold border shadow-md bg-white/95 backdrop-blur-sm ${step.badgeColor} z-20`}
-                >
-                  <span>{step.badgeIcon}</span>
-                  <span>{step.badgeText}</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+            {steps.map((step) => (
+              <div key={step.num} className="relative">
+                {/* Number Circle */}
+                <div className="absolute -top-[16px] left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-[#F8D84E] text-white font-bold text-[15px] flex items-center justify-center shadow-md z-20">
+                  {step.num}
                 </div>
 
-                {/* Top Section: Step Number & Circular Icon */}
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    {/* Large Colored Circular Icon */}
-                    <div
-                      className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm transition-transform duration-300 group-hover:scale-110 ${step.iconBg}`}
-                    >
-                      {step.icon}
-                    </div>
-
-                    {/* Step Number Badge */}
-                    <span className="text-2xl font-black text-gray-200 group-hover:text-gray-300 transition-colors select-none font-mono">
-                      {step.stepNumber}
-                    </span>
+                {/* Card Container */}
+                <div className="bg-white rounded-[28px] p-6 border border-gray-100 flex flex-col items-center justify-start h-full shadow-[0_4px_20px_rgba(0,0,0,0.02)] pt-12">
+                  <div className="h-40 sm:h-48 w-full flex items-center justify-center mb-6">
+                    <img
+                      src={step.img}
+                      alt={`Step ${step.num}`}
+                      className="max-h-full max-w-full object-contain drop-shadow-sm"
+                    />
                   </div>
-
-                  {/* Card Title & Description */}
-                  <h3 className="text-xl font-black text-[#1E293B] mb-2">
+                  
+                  <h3 className="text-[17px] font-black text-[#1E293B] mb-2.5 text-center">
                     {step.title}
                   </h3>
-                  <p className="text-sm sm:text-[15px] text-gray-600 font-normal leading-relaxed">
-                    {step.description}
+                  <p className="text-[12px] text-gray-500 font-medium text-center leading-relaxed px-1">
+                    {step.desc}
                   </p>
-                </div>
-
-                {/* Bottom Decorative Minimal Dot Line */}
-                <div className="mt-8 pt-4 border-t border-gray-100/80 flex items-center justify-between text-xs text-gray-400 font-medium">
-                  <span>Step {index + 1} of 3</span>
-                  <div className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-                    <span
-                      className={`w-4 h-1.5 rounded-full ${
-                        index === 0
-                          ? "bg-[#F6C64A]"
-                          : index === 1
-                          ? "bg-[#7CC8FF]"
-                          : "bg-[#7ED9A3]"
-                      }`}
-                    />
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-                  </div>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* CTA Banner */}
+        <div className="bg-[#FFFBEB] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 mb-8 max-w-6xl mx-auto border border-[#FEF08A]/50 shadow-sm">
+          <div className="flex items-center gap-6 z-10 relative">
+            <div className="w-20 h-20 shrink-0 flex items-center justify-center">
+               <img src="/images/hero.png" alt="Scooter" className="w-full h-full object-contain" />
+            </div>
+            <div>
+              <h3 className="text-xl md:text-[22px] font-black text-[#1E293B] mb-1">Ready to ride?</h3>
+              <p className="text-gray-600 font-medium text-[13px] md:text-sm">Ghummakkadh ke saath har safar easy, safe aur affordable.</p>
+            </div>
+          </div>
+          
+          <div className="flex-1 hidden md:flex items-center justify-center px-4 relative z-0">
+             {/* Map dashed line graphic */}
+             <svg className="w-full max-w-[250px] h-10 text-[#F8D84E]" viewBox="0 0 200 40" fill="none">
+                <path d="M10 20 Q 50 0, 100 20 T 190 20" stroke="currentColor" strokeWidth="2" strokeDasharray="6 6" fill="none"/>
+                <circle cx="10" cy="20" r="4" fill="currentColor" />
+                <circle cx="190" cy="20" r="4" fill="currentColor" />
+             </svg>
+          </div>
+
+          <a href="#book" className="shrink-0 bg-[#F8D84E] hover:bg-[#E5C330] text-[#1E293B] font-bold text-[15px] px-7 py-3.5 rounded-xl shadow-sm transition-all z-10 relative">
+            Book Your Ride →
+          </a>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-gray-100 max-w-6xl mx-auto">
+          {/* Feature 1 */}
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-[#FFFBEB] text-[#F8D84E] flex items-center justify-center shrink-0">
+               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+               </svg>
+            </div>
+            <div>
+              <h4 className="text-[#1E293B] font-bold text-[13px] mb-0.5">Safe & Secure</h4>
+              <p className="text-gray-500 text-[11px] font-medium">Verified riders & secure rides</p>
+            </div>
+          </div>
+          {/* Feature 2 */}
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-[#FFFBEB] text-[#F8D84E] flex items-center justify-center shrink-0">
+               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+               </svg>
+            </div>
+            <div>
+              <h4 className="text-[#1E293B] font-bold text-[13px] mb-0.5">Multiple Payments</h4>
+              <p className="text-gray-500 text-[11px] font-medium">Cash, UPI, Wallet & more</p>
+            </div>
+          </div>
+          {/* Feature 3 */}
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-[#FFFBEB] text-[#F8D84E] flex items-center justify-center shrink-0">
+               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                 <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+               </svg>
+            </div>
+            <div>
+              <h4 className="text-[#1E293B] font-bold text-[13px] mb-0.5">24/7 Support</h4>
+              <p className="text-gray-500 text-[11px] font-medium">We're here for you anytime</p>
+            </div>
+          </div>
+          {/* Feature 4 */}
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-[#FFFBEB] text-[#F8D84E] flex items-center justify-center shrink-0">
+               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                 <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+               </svg>
+            </div>
+            <div>
+              <h4 className="text-[#1E293B] font-bold text-[13px] mb-0.5">Affordable Rides</h4>
+              <p className="text-gray-500 text-[11px] font-medium">Best prices for every journey</p>
+            </div>
           </div>
         </div>
       </Container>

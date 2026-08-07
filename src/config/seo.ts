@@ -7,7 +7,7 @@ export const defaultMetadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ["ride booking", "bike ride", "auto ride", "cab ride", "Ghummakad", "India commute"],
+  keywords: ["ride booking", "bike ride", "auto ride", "cab ride", "Ghumakkadh", "India commute"],
   openGraph: {
     type: "website",
     locale: "en_IN",

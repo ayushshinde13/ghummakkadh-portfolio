@@ -63,9 +63,6 @@ export const RideCard: React.FC<RideCardProps> = ({
             <h3 className="text-2xl font-black text-[#1E293B] tracking-tight">
               {type}
             </h3>
-            <span className="bg-[#FEF08A] text-[#1E293B] font-extrabold text-xs px-3.5 py-1 rounded-full shadow-sm">
-              {priceEstimate}
-            </span>
           </div>
           <p className="text-xs sm:text-sm text-gray-500 font-normal leading-relaxed max-w-[150px]">
             {tagline}

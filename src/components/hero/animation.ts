@@ -2,7 +2,7 @@ import { Transition } from "framer-motion";
 
 /**
  * Reusable Choreography Timings & Easing Curves
- * Production-ready Framer Motion animation constants for the Ghummakkad Hero sequence.
+ * Production-ready Framer Motion animation constants for the Ghumakkadh Hero sequence.
  *
  * Choreography Timeline:
  * 0.0s - Background radial gradients & container fade in

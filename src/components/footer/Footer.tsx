@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
           <p className="text-sm text-gray-400 mt-1">{siteConfig.description}</p>
         </div>
         <div className="text-sm text-gray-400">
-          © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+          © {new Date().getFullYear()} Hindustaan Innovations Private Limited. All rights reserved.
         </div>
       </Container>
     </footer>

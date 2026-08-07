@@ -11,7 +11,7 @@ export const DriverCard: React.FC = () => {
         Earn on Your Own Schedule
       </Heading>
       <p className="text-sm text-gray-300">
-        Join thousands of verified Ghummakad partners earning daily with flexible hours and instant payouts.
+        Join thousands of verified Ghumakkadh partners earning daily with flexible hours and instant payouts.
       </p>
     </Card>
   );

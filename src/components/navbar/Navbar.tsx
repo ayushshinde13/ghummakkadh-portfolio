@@ -3,7 +3,7 @@ import { Container } from "@/components/common";
 
 export const Navbar: React.FC = () => {
   const navLinks = [
-    { label: "How it works", href: "#how-it-works" },
+    { label: "How it works", href: "/how-it-works" },
     { label: "Ride", href: "#ride" },
     { label: "Drive", href: "#drive" },
     { label: "Cities", href: "#cities" },

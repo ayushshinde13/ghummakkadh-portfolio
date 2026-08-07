@@ -6,7 +6,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role: "Daily Commuter",
     location: "Bangalore, KA",
     comment:
-      "Ghummakkad has made my daily office commute effortless and economical! The rides are quick, affordable and super reliable.",
+      "Ghumakkadh has made my daily office commute effortless and economical! The rides are quick, affordable and super reliable.",
     highlightedText: "effortless and economical!",
     rating: 5,
     avatarBg: "from-amber-400 to-yellow-500",
@@ -30,7 +30,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role: "Student",
     location: "New Delhi, DL",
     comment:
-      "Quick pickups and verified drivers make it super safe to travel. I use Ghummakkad every day for college and it never disappoints!",
+      "Quick pickups and verified drivers make it super safe to travel. I use Ghumakkadh every day for college and it never disappoints!",
     highlightedText: "super safe to travel.",
     rating: 5,
     isFeatured: true,
@@ -55,7 +55,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role: "Working Professional",
     location: "Mumbai, MH",
     comment:
-      "As a business traveler, Ghummakkad helps me reach meetings on time. Comfortable rides, great service and transparent fares!",
+      "As a business traveler, Ghumakkadh helps me reach meetings on time. Comfortable rides, great service and transparent fares!",
     highlightedText: "on time.",
     rating: 5,
     avatarBg: "from-emerald-500 to-teal-600",

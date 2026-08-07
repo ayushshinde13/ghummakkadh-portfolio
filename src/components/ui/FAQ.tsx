@@ -10,7 +10,7 @@ export const FAQ: React.FC = () => {
         <SectionHeading
           badge="FAQ"
           title="Frequently Asked Questions"
-          subtitle="Everything you need to know about booking rides with Ghummakad"
+          subtitle="Everything you need to know about booking rides with Ghumakkadh"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {FAQS.map((faq) => (
