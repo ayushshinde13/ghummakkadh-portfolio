@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,8 +22,20 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@/components/common": ["./src/components/common/index.ts"],
+      "@/components/ui": ["./src/components/ui/index.ts"],
+      "@/components/hero": ["./src/components/hero/index.ts"],
+      "@/components/navbar": ["./src/components/navbar/index.ts"],
+      "@/components/footer": ["./src/components/footer/index.ts"],
+      "@/components/ride": ["./src/components/ride/index.ts"],
+      "@/components/driver": ["./src/components/driver/index.ts"],
+      "@/components/customer": ["./src/components/customer/index.ts"],
+      "@/components/city": ["./src/components/city/index.ts"],
+      "@/components/animations": ["./src/components/animations/index.ts"],
+      "@/design-system": ["./src/design-system/index.ts"]
     }
   },
   "include": [
@@ -30,5 +46,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

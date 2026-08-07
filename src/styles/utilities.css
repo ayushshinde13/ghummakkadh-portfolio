@@ -1,0 +1,5 @@
+@layer utilities {
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-[#F8D84E] to-[#7DD3FC] bg-clip-text text-transparent;
+  }
+}

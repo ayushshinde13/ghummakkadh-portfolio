@@ -1,0 +1,137 @@
+import React from "react";
+
+export const HeroContent: React.FC = () => {
+  return (
+    <div className="flex flex-col items-start text-left justify-center gap-4 sm:gap-5 max-w-xl z-10">
+      {/* Top Live Badge - Match Image 2 */}
+      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-gray-200 shadow-sm">
+        <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
+        <span className="text-[#1E293B] text-[11px] font-bold tracking-wider uppercase">
+          NOW LIVE IN 12 CITIES ACROSS INDIA
+        </span>
+      </div>
+
+      {/* Main H1 Headline - Compact for 1-screen fit without scroll */}
+      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.06] text-[#1E293B]">
+        Ride Smarter.
+        <br />
+        <span className="text-[#EAB308] relative inline-block">
+          Travel Faster.
+          {/* Subtle Golden Underline Brush Stroke */}
+          <svg
+            className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#F8D84E]"
+            viewBox="0 0 240 12"
+            fill="none"
+          >
+            <path
+              d="M3 9C60 3 180 3 237 9"
+              stroke="currentColor"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+          </svg>
+        </span>
+      </h1>
+
+      {/* Description paragraph - Match Image 2 */}
+      <p className="text-sm sm:text-base text-gray-700 font-normal leading-relaxed max-w-lg">
+        Book rides in seconds with transparent fares, OTP-verified drivers and live GPS tracking.
+      </p>
+
+      {/* CTA Buttons Row - Match Image 2 */}
+      <div className="flex flex-wrap items-center gap-3 pt-1">
+        <a
+          href="#book"
+          className="inline-flex items-center gap-2 bg-[#F8D84E] hover:bg-[#E5C330] text-[#1E293B] font-bold text-sm sm:text-base px-6 py-3 rounded-full shadow-md transition-colors"
+        >
+          <span>Book a Ride</span>
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            />
+          </svg>
+        </a>
+        <a
+          href="#driver"
+          className="inline-flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-[#1E293B] font-semibold text-sm sm:text-base px-6 py-3 rounded-full shadow-sm transition-colors"
+        >
+          {/* User Icon */}
+          <svg
+            className="w-4 h-4 text-gray-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+          <span>Drive &amp; Earn</span>
+        </a>
+      </div>
+
+      {/* Stats Row with Yellow Square Icons and Vertical Dividers - Match Image 2 */}
+      <div className="flex flex-wrap items-center gap-5 sm:gap-7 pt-5 mt-2 border-t border-gray-200/60 w-full">
+        {/* Stat 1: Rating */}
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-[#FEF9C3] flex items-center justify-center text-[#CA8A04] shrink-0 font-bold text-base">
+            ★
+          </div>
+          <div>
+            <div className="text-lg sm:text-xl font-black text-[#1E293B]">
+              4.8
+            </div>
+            <div className="text-[11px] text-gray-500 font-medium">
+              App Rating
+            </div>
+          </div>
+        </div>
+
+        <div className="h-8 w-[1px] bg-gray-300 hidden sm:block" />
+
+        {/* Stat 2: Rides Completed */}
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-[#FEF9C3] flex items-center justify-center text-[#CA8A04] shrink-0 text-base">
+            🛵
+          </div>
+          <div>
+            <div className="text-lg sm:text-xl font-black text-[#1E293B]">
+              3.2M+
+            </div>
+            <div className="text-[11px] text-gray-500 font-medium">
+              Rides Completed
+            </div>
+          </div>
+        </div>
+
+        <div className="h-8 w-[1px] bg-gray-300 hidden sm:block" />
+
+        {/* Stat 3: Verified Drivers */}
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-[#FEF9C3] flex items-center justify-center text-[#CA8A04] shrink-0 text-base">
+            👥
+          </div>
+          <div>
+            <div className="text-lg sm:text-xl font-black text-[#1E293B]">
+              45K+
+            </div>
+            <div className="text-[11px] text-gray-500 font-medium">
+              Verified Drivers
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
