@@ -6,6 +6,7 @@ interface SectionHeadingProps {
   title: string;
   subtitle?: string;
   centered?: boolean;
+  className?: string;
 }
 
 export const SectionHeading: React.FC<SectionHeadingProps> = ({
@@ -13,12 +14,13 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   title,
   subtitle,
   centered = true,
+  className = "",
 }) => {
   return (
     <div
       className={`flex flex-col gap-3 mb-12 ${
         centered ? "items-center text-center max-w-2xl mx-auto" : "items-start"
-      }`}
+      } ${className}`}
     >
       {badge && <Badge variant="primary">{badge}</Badge>}
       <Heading level={2} className="text-[#111827]">

@@ -12,9 +12,8 @@ export const Footer: React.FC = () => {
             <div className="w-10 h-10 flex items-center justify-center shrink-0">
               <img src="/images/logo.png" alt="Ghumakkadh Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="text-2xl font-bold">
-              Ghum<span className="text-[#77FF00]">ak</span>
-              <span className="text-[#FF7700]">kadh</span>
+            <span className="text-2xl font-bold text-white">
+              Ghumakkadh
             </span>
           </a>
           <p className="text-sm text-gray-400 mt-1">{siteConfig.description}</p>

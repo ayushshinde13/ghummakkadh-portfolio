@@ -1,3 +1,1 @@
-export const CITIES = [
-  { name: "Pan India", active: true },
-];
+export const CITIES = [];
