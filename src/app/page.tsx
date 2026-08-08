@@ -2,7 +2,6 @@ import React from "react";
 import { Hero } from "./(landing)/hero";
 import { FeaturesSection } from "./(landing)/features";
 import { RideOptionsSection } from "./(landing)/ride-options";
-import { CitiesSection } from "./(landing)/cities";
 import { TestimonialsSection } from "./(landing)/testimonials";
 import { FAQ, CTA, Stats } from "@/components/ui";
 
@@ -12,7 +11,6 @@ export default function HomePage() {
       <Hero />
       <FeaturesSection />
       <RideOptionsSection />
-      <CitiesSection />
       <TestimonialsSection />
       <FAQ />
       <CTA />

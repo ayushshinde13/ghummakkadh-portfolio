@@ -1,1 +1,1 @@
-export const CITIES = [];
+export const CITIES: { name: string; active: boolean }[] = [];
