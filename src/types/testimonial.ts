@@ -1,8 +1,10 @@
+import { LucideIcon } from "lucide-react";
+
 export interface TestimonialTag {
   label: string;
   bg: string;
   text: string;
-  icon: string;
+  icon: LucideIcon;
 }
 
 export interface Testimonial {

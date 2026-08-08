@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "@/components/common";
 import { CustomerCard } from "@/components/customer";
 import { TESTIMONIALS } from "@/constants/testimonials";
+import { Heart } from "lucide-react";
 
 export const TestimonialsSection: React.FC = () => {
   return (
@@ -18,14 +19,14 @@ export const TestimonialsSection: React.FC = () => {
         >
           <path
             d="M 10 100 Q 150 20, 270 40"
-            stroke="#EAB308"
+            stroke="#77FF00"
             strokeWidth="2.5"
             strokeDasharray="6 6"
             strokeLinecap="round"
           />
         </svg>
         {/* Glowing GPS Pin matching Screenshot */}
-        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#F8D84E] shadow-[0_8px_20px_rgba(234,179,8,0.45)] border-4 border-white flex items-center justify-center text-[#1E293B]">
+        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#77FF00] shadow-[0_8px_20px_rgba(234,179,8,0.45)] border-4 border-white flex items-center justify-center text-[#1E293B]">
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"
@@ -59,20 +60,20 @@ export const TestimonialsSection: React.FC = () => {
         {/* Section Header matching Screenshot exactly */}
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
           {/* Yellow Badge Pill */}
-          <div className="inline-flex items-center gap-2 bg-[#FEF9C3] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-3">
-            <span>💛</span>
+          <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-3">
+            <span><Heart className="w-4 h-4 fill-yellow-400 text-yellow-400" /></span>
             <span>Testimonials</span>
           </div>
 
           {/* H2 Headline */}
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1E293B] tracking-tight">
             Loved by Commuters{" "}
-            <span className="text-[#EAB308]">Across India</span>
+            <span className="text-[#77FF00]">Across India</span>
           </h2>
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg text-gray-600 font-normal mt-2">
-            See what our daily riders and partners have to say about Ghummakkadh.
+            See what our daily riders and partners have to say about Ghumakkadh.
           </p>
         </div>
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Container } from "@/components/common";
+import { Star } from "lucide-react";
 
 export const FeaturesSection: React.FC = () => {
   const leftFeatures = [
@@ -19,7 +20,7 @@ export const FeaturesSection: React.FC = () => {
           />
         </svg>
       ),
-      iconBg: "bg-[#FEF9C3] text-[#CA8A04]",
+      iconBg: "bg-[#F0FFEA] text-[#4D9900]",
       title: "Safe & Secure",
       subtitle: "Verified drivers & OTP protection",
     },
@@ -45,7 +46,7 @@ export const FeaturesSection: React.FC = () => {
           />
         </svg>
       ),
-      iconBg: "bg-[#E0F2FE] text-[#0284C7]",
+      iconBg: "bg-[#E0F2FE] text-[#CC5F00]",
       title: "Live Tracking",
       subtitle: "Track your ride in real-time",
     },
@@ -82,7 +83,7 @@ export const FeaturesSection: React.FC = () => {
           className="w-full h-full"
           style={{
             backgroundImage:
-              "radial-gradient(#EAB308 1.5px, transparent 1.5px)",
+              "radial-gradient(#77FF00 1.5px, transparent 1.5px)",
             backgroundSize: "18px 18px",
           }}
         />
@@ -91,7 +92,7 @@ export const FeaturesSection: React.FC = () => {
       {/* Right Background Glow & Golden City Skyline with Ferris Wheel */}
       <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full pointer-events-none overflow-hidden z-0">
         {/* Soft Golden Sun Circle */}
-        <div className="absolute -top-12 -right-12 w-[420px] h-[420px] rounded-full bg-[#FEF08A]/45 blur-2xl" />
+        <div className="absolute -top-12 -right-12 w-[420px] h-[420px] rounded-full bg-[#E0FFCC]/45 blur-2xl" />
 
         {/* Golden City Skyline & Ferris Wheel SVG */}
         <svg
@@ -169,7 +170,7 @@ export const FeaturesSection: React.FC = () => {
 
         {/* Floating Golden GPS Location Pin on Stand */}
         <div className="absolute bottom-28 right-16 z-10 flex flex-col items-center">
-          <div className="w-14 h-14 rounded-full bg-[#F8D84E] shadow-[0_10px_25px_rgba(234,179,8,0.45)] border-4 border-white flex items-center justify-center text-[#1E293B]">
+          <div className="w-14 h-14 rounded-full bg-[#77FF00] shadow-[0_10px_25px_rgba(234,179,8,0.45)] border-4 border-white flex items-center justify-center text-[#1E293B]">
             <svg
               className="w-7 h-7"
               fill="currentColor"
@@ -182,7 +183,7 @@ export const FeaturesSection: React.FC = () => {
               />
             </svg>
           </div>
-          <div className="w-10 h-3 bg-[#EAB308]/30 rounded-full blur-[2px] mt-1" />
+          <div className="w-10 h-3 bg-[#77FF00]/30 rounded-full blur-[2px] mt-1" />
         </div>
       </div>
 
@@ -192,8 +193,8 @@ export const FeaturesSection: React.FC = () => {
           {/* Left Column (6 Cols): Badge, Title, Subtitle, 4 Icons */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             {/* Top Badge Pill */}
-            <div className="inline-flex items-center gap-2 bg-[#FEF9C3] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-5">
-              <span className="text-[#CA8A04] text-sm">★</span>
+            <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-5">
+              <span className="text-[#4D9900] text-sm"><Star className="w-4 h-4 fill-current" /></span>
               <span>WHY CHOOSE US</span>
             </div>
 
@@ -201,7 +202,7 @@ export const FeaturesSection: React.FC = () => {
             <h2 className="text-4xl sm:text-5xl lg:text-[54px] font-black tracking-tight leading-[1.08] text-[#1E293B] mb-5">
               Smart Features for
               <br />
-              <span className="text-[#EAB308]">Modern Commuters</span>
+              <span className="text-[#77FF00]">Modern Commuters</span>
             </h2>
 
             {/* Subtitle paragraph */}
@@ -241,12 +242,12 @@ export const FeaturesSection: React.FC = () => {
               {/* Golden Dotted Arch over Card 1 */}
               <path
                 d="M 120 180 Q 150 70, 260 120"
-                stroke="#EAB308"
+                stroke="#77FF00"
                 strokeWidth="3.5"
                 strokeDasharray="6 6"
                 strokeLinecap="round"
               />
-              <circle cx="120" cy="180" r="7" fill="#EAB308" />
+              <circle cx="120" cy="180" r="7" fill="#77FF00" />
               {/* Blue Dotted Arch over Card 2 to GPS Pin */}
               <path
                 d="M 280 120 Q 360 70, 460 150"
@@ -263,10 +264,10 @@ export const FeaturesSection: React.FC = () => {
               <div className="bg-white rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.1)] transition-all">
                 <div>
                   {/* Top Yellow Circle Icon */}
-                  <div className="w-16 h-16 rounded-full bg-[#FEF9C3] flex items-center justify-center mb-6 shadow-sm">
+                  <div className="w-16 h-16 rounded-full bg-[#F0FFEA] flex items-center justify-center mb-6 shadow-sm">
                     {/* Phone & Taxi SVG Illustration */}
                     <svg
-                      className="w-8 h-8 text-[#CA8A04]"
+                      className="w-8 h-8 text-[#4D9900]"
                       viewBox="0 0 32 32"
                       fill="none"
                     >
@@ -283,7 +284,7 @@ export const FeaturesSection: React.FC = () => {
                       {/* Taxi symbol inside */}
                       <path
                         d="M18 16L20 12H28L30 16V22H18V16Z"
-                        fill="#F8D84E"
+                        fill="#77FF00"
                         stroke="#1E293B"
                         strokeWidth="1.8"
                       />
@@ -305,7 +306,7 @@ export const FeaturesSection: React.FC = () => {
 
                 {/* Bottom-Right Circle Arrow Button (Yellow) */}
                 <div className="flex justify-end mt-6">
-                  <div className="w-11 h-11 rounded-full bg-[#F8D84E] text-[#1E293B] flex items-center justify-center font-bold text-lg shadow-sm group-hover:bg-[#E5C330] transition-colors">
+                  <div className="w-11 h-11 rounded-full bg-[#77FF00] text-[#1E293B] flex items-center justify-center font-bold text-lg shadow-sm group-hover:bg-[#66E000] transition-colors">
                     <svg
                       className="w-5 h-5"
                       fill="none"

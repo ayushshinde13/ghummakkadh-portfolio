@@ -1,4 +1,5 @@
 import { Testimonial } from "@/types/testimonial";
+import { Leaf, ShieldCheck, Clock, Car, IndianRupee } from "lucide-react";
 
 export const TESTIMONIALS: Testimonial[] = [
   {
@@ -13,15 +14,15 @@ export const TESTIMONIALS: Testimonial[] = [
     tags: [
       {
         label: "Affordable",
-        icon: "🍃",
+        icon: Leaf,
         bg: "bg-[#DCFCE7]",
         text: "text-[#166534]",
       },
       {
         label: "Verified Drivers",
-        icon: "🛡️",
-        bg: "bg-[#FEF9C3]",
-        text: "text-[#CA8A04]",
+        icon: ShieldCheck,
+        bg: "bg-[#F0FFEA]",
+        text: "text-[#4D9900]",
       },
     ],
   },
@@ -38,13 +39,13 @@ export const TESTIMONIALS: Testimonial[] = [
     tags: [
       {
         label: "Safe Rides",
-        icon: "🛡️",
+        icon: ShieldCheck,
         bg: "bg-[#E0F2FE]",
-        text: "text-[#0284C7]",
+        text: "text-[#CC5F00]",
       },
       {
         label: "Quick Pickup",
-        icon: "⏱️",
+        icon: Clock,
         bg: "bg-[#F3E8FF]",
         text: "text-[#9333EA]",
       },
@@ -62,13 +63,13 @@ export const TESTIMONIALS: Testimonial[] = [
     tags: [
       {
         label: "Comfortable",
-        icon: "🚕",
+        icon: Car,
         bg: "bg-[#F3E8FF]",
         text: "text-[#9333EA]",
       },
       {
         label: "No Surge Pricing",
-        icon: "💰",
+        icon: IndianRupee,
         bg: "bg-[#FEF3C7]",
         text: "text-[#D97706]",
       },

@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "@/components/common";
 import { RideCard } from "@/components/ride";
 import { RIDE_OPTIONS } from "@/constants/rideOptions";
+import { Users } from "lucide-react";
 
 export const RideOptionsSection: React.FC = () => {
   const features = [
@@ -21,7 +22,7 @@ export const RideOptionsSection: React.FC = () => {
           />
         </svg>
       ),
-      iconBg: "bg-[#FEF9C3] text-[#CA8A04]",
+      iconBg: "bg-[#F0FFEA] text-[#4D9900]",
       title: "Safe & Secure",
       subtitle: "Verified drivers & OTP protection",
     },
@@ -47,7 +48,7 @@ export const RideOptionsSection: React.FC = () => {
           />
         </svg>
       ),
-      iconBg: "bg-[#E0F2FE] text-[#0284C7]",
+      iconBg: "bg-[#E0F2FE] text-[#CC5F00]",
       title: "24/7 Support",
       subtitle: "We're here. Always.",
     },
@@ -61,7 +62,7 @@ export const RideOptionsSection: React.FC = () => {
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
       ),
-      iconBg: "bg-[#FEF08A] text-[#CA8A04]",
+      iconBg: "bg-[#E0FFCC] text-[#4D9900]",
       title: "Top Rated Service",
       subtitle: "Loved by 3M+ happy riders",
     },
@@ -73,8 +74,8 @@ export const RideOptionsSection: React.FC = () => {
         {/* Section Header matching Screenshot exactly */}
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
           {/* Badge Pill */}
-          <div className="inline-flex items-center gap-2 bg-[#FEF9C3] text-[#1E293B] text-xs font-extrabold px-4 py-1.5 rounded-full shadow-sm mb-3">
-            <span>👥</span>
+          <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] text-xs font-extrabold px-4 py-1.5 rounded-full shadow-sm mb-3">
+            <span><Users className="w-4 h-4" /></span>
             <span>Ride for Everyone</span>
           </div>
 

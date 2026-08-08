@@ -11,9 +11,9 @@ export const CitiesSection: React.FC = () => {
         <SectionHeading
           badge="Network"
           title="We Are Present in Your City"
-          subtitle="Expanding rapidly across major metro cities in India."
+          subtitle="Providing service across India."
         />
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
           {CITIES.map((city) => (
             <CityCard key={city.name} city={city} />
           ))}

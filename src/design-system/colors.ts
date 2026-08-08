@@ -1,9 +1,9 @@
 export const colors = {
-  primary: "#F8D84E",
-  primaryDark: "#E5C330",
+  primary: "#77FF00",
+  primaryDark: "#66E000",
   primaryLight: "#FCE888",
-  accent: "#7DD3FC",
-  secondary: "#7DD3FC",
+  accent: "#FF7700",
+  secondary: "#FF7700",
   background: "#FEFCE8",
   card: "#FFFFFF",
   surface: "#FFFFFF",
@@ -15,5 +15,5 @@ export const colors = {
   success: "#22C55E",
   danger: "#EF4444",
   info: "#3B82F6",
-  warning: "#F8D84E",
+  warning: "#77FF00",
 };

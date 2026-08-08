@@ -16,8 +16,8 @@ export const RideCard: React.FC<RideCardProps> = ({
   const theme =
     type === "Bike"
       ? {
-          buttonBg: "bg-[#FEF9C3] group-hover:bg-[#FDE047]",
-          skylineColor: "text-[#FEF08A]/40",
+          buttonBg: "bg-[#F0FFEA] group-hover:bg-[#FDE047]",
+          skylineColor: "text-[#E0FFCC]/40",
           imageSrc: "/images/bike.png",
         }
       : type === "Auto"
@@ -50,7 +50,7 @@ export const RideCard: React.FC<RideCardProps> = ({
       <div className="relative z-10 w-40 sm:w-44 lg:w-48 h-32 sm:h-36 flex items-center justify-center shrink-0 -ml-2">
         <img
           src={theme.imageSrc}
-          alt={`Ghummakkadh ${type}`}
+          alt={`Ghumakkadh ${type}`}
           className="w-full h-auto max-h-full object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.22)]"
         />
       </div>

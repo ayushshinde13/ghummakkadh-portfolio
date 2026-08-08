@@ -1,6 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/cn";
 import { Testimonial } from "@/types/testimonial";
+import { Star, MapPin } from "lucide-react";
 
 interface CustomerCardProps {
   testimonial: Testimonial;
@@ -16,9 +17,7 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
     <div
       className={cn(
         "bg-white rounded-[32px] p-7 lg:p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-300 min-h-[380px]",
-        testimonial.isFeatured
-          ? "border-2 border-[#FBBF24] shadow-[0_20px_55px_rgba(251,191,36,0.2)] scale-[1.03] z-10"
-          : "border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)]"
+        "border-2 border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.06)] hover:border-[#FBBF24] hover:shadow-[0_20px_55px_rgba(251,191,36,0.2)] hover:-translate-y-1 hover:z-10"
       )}
     >
       <div>
@@ -29,7 +28,7 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
           </span>
           <div className="flex items-center gap-1 text-[#FBBF24] text-lg">
             {Array.from({ length: testimonial.rating }).map((_, i) => (
-              <span key={i}>★</span>
+              <span key={i}><Star className="w-4 h-4 fill-current" /></span>
             ))}
           </div>
         </div>
@@ -39,7 +38,7 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
           &ldquo;
           {parts[0]}
           {testimonial.highlightedText && (
-            <span className="bg-[#FEF08A] font-extrabold px-1 py-0.5 rounded text-[#1E293B]">
+            <span className="bg-[#E0FFCC] font-extrabold px-1 py-0.5 rounded text-[#1E293B]">
               {testimonial.highlightedText}
             </span>
           )}
@@ -94,7 +93,7 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
 
             {/* Location */}
             <div className="text-xs text-gray-400 font-medium flex items-center gap-1 mt-0.5">
-              <span>📍</span>
+              <span><MapPin className="w-3 h-3" /></span>
               <span>{testimonial.location}</span>
             </div>
           </div>
@@ -102,7 +101,9 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
 
         {/* Bottom Tags Pills Row */}
         <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-gray-100">
-          {testimonial.tags.map((tag, i) => (
+          {testimonial.tags.map((tag, i) => {
+            const IconComponent = tag.icon;
+            return (
             <span
               key={i}
               className={cn(
@@ -111,10 +112,11 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
                 tag.text
               )}
             >
-              <span>{tag.icon}</span>
+              <span><IconComponent className="w-3.5 h-3.5" /></span>
               <span>{tag.label}</span>
             </span>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/cn";
+import { Lock, ShieldCheck, MapPin, Battery, Bike, CarFront, Car } from "lucide-react";
 
 export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
   return (
@@ -17,13 +18,13 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
       >
         <path
           d="M50 400 C 150 200, 350 100, 450 150"
-          stroke="#EAB308"
+          stroke="#77FF00"
           strokeWidth="2"
           strokeDasharray="6 6"
         />
         <path
           d="M100 450 C 250 300, 400 250, 480 300"
-          stroke="#EAB308"
+          stroke="#77FF00"
           strokeWidth="2"
           strokeDasharray="6 6"
         />
@@ -31,9 +32,9 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
 
       <div className="relative z-10">
         {/* Floating Card 1: Fare Locked (Left of phone, shifted safely away from notch) */}
-        <div className="absolute -left-4 sm:-left-20 top-24 z-30 bg-[#FFFDEB] rounded-2xl p-3 shadow-[0_12px_28px_rgba(0,0,0,0.06)] border border-[#FEF08A] hidden sm:flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-[#FEF9C3] flex items-center justify-center text-[#CA8A04] text-base font-bold">
-            🔒
+        <div className="absolute -left-4 sm:-left-20 top-24 z-30 bg-[#FFFDEB] rounded-2xl p-3 shadow-[0_12px_28px_rgba(0,0,0,0.06)] border border-[#E0FFCC] hidden sm:flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-[#F0FFEA] flex items-center justify-center text-[#4D9900] text-base font-bold">
+            <Lock className="w-4 h-4" />
           </div>
           <div>
             <div className="text-xs font-black text-[#1E293B]">
@@ -48,7 +49,7 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
         {/* Floating Card 2: OTP Verified (Right of phone) */}
         <div className="absolute -right-4 sm:-right-20 top-28 z-30 bg-[#FFFDEB] rounded-2xl p-3 shadow-[0_12px_28px_rgba(0,0,0,0.06)] border border-[#DCFCE7] hidden sm:flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-[#DCFCE7] flex items-center justify-center text-[#166534] text-base font-bold">
-            🛡️
+            <ShieldCheck className="w-4 h-4" />
           </div>
           <div>
             <div className="text-xs font-black text-[#1E293B]">
@@ -63,7 +64,7 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
         {/* Floating Card 3: Driver Nearby (Middle-Right of phone) */}
         <div className="absolute -right-4 sm:-right-20 bottom-28 z-30 bg-[#FFFDEB] rounded-2xl p-3 shadow-[0_12px_28px_rgba(0,0,0,0.06)] border border-[#FFEDD5] hidden sm:flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-[#FFEDD5] flex items-center justify-center text-[#EA580C] text-base font-bold">
-            📍
+            <MapPin className="w-4 h-4" />
           </div>
           <div>
             <div className="text-xs font-black text-[#1E293B]">
@@ -77,8 +78,8 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
 
         {/* Floating Card 4: Live Tracking (Bottom-Left overlapping guardrail matching Image 2) */}
         <div className="absolute left-6 sm:left-4 -bottom-6 z-40 bg-[#FFFDEB] rounded-2xl p-3 shadow-[0_12px_28px_rgba(0,0,0,0.12)] border border-[#E0F2FE] hidden sm:flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-[#E0F2FE] flex items-center justify-center text-[#0284C7] text-base font-bold">
-            📍
+          <div className="w-8 h-8 rounded-xl bg-[#E0F2FE] flex items-center justify-center text-[#CC5F00] text-base font-bold">
+            <MapPin className="w-4 h-4" />
           </div>
           <div>
             <div className="text-xs font-black text-[#1E293B]">
@@ -98,7 +99,7 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
             <div className="w-20 h-3.5 bg-[#1E293B] rounded-full" />
             <div className="flex items-center gap-1 text-[9px] text-[#1E293B] font-bold">
               <span>5G</span>
-              <span>🔋</span>
+              <span><Battery className="w-3 h-3" /></span>
             </div>
           </div>
 
@@ -148,7 +149,7 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
             >
               <path
                 d="M40 150 Q 130 110, 230 30"
-                stroke="#EAB308"
+                stroke="#77FF00"
                 strokeWidth="3.5"
                 strokeDasharray="5 5"
                 strokeLinecap="round"
@@ -160,7 +161,7 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
             <div className="absolute top-6 right-10 z-10 w-3.5 h-3.5 bg-[#22C55E] rounded-full border-2 border-white shadow" />
             {/* Scooter Icon on route */}
             <div className="absolute top-16 left-32 z-10 bg-white px-2 py-0.5 rounded-full shadow-sm text-xs font-bold border border-yellow-300">
-              🛵
+              <Bike className="w-3 h-3 text-[#1E293B]" />
             </div>
           </div>
 
@@ -173,7 +174,7 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
             {/* Bike */}
             <div className="flex items-center justify-between py-1.5 border-b border-gray-100">
               <div className="flex items-center gap-2.5">
-                <span className="text-base">🏍️</span>
+                <span className="text-base"><Bike className="w-4 h-4" /></span>
                 <div className="text-left">
                   <div className="text-[11px] font-bold text-[#1E293B]">
                     Bike
@@ -189,7 +190,7 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
             {/* Auto */}
             <div className="flex items-center justify-between py-1.5 border-b border-gray-100">
               <div className="flex items-center gap-2.5">
-                <span className="text-base">🛺</span>
+                <span className="text-base"><CarFront className="w-4 h-4" /></span>
                 <div className="text-left">
                   <div className="text-[11px] font-bold text-[#1E293B]">
                     Auto
@@ -205,7 +206,7 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
             {/* Cab */}
             <div className="flex items-center justify-between py-1.5 mb-2">
               <div className="flex items-center gap-2.5">
-                <span className="text-base">🚗</span>
+                <span className="text-base"><Car className="w-4 h-4" /></span>
                 <div className="text-left">
                   <div className="text-[11px] font-bold text-[#1E293B]">Cab</div>
                   <div className="text-[9px] text-gray-400">5 mins away</div>
@@ -217,7 +218,7 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
             </div>
 
             {/* Book Now Button */}
-            <button className="w-full bg-[#F8D84E] hover:bg-[#E5C330] text-[#1E293B] font-bold text-xs py-2.5 rounded-xl shadow-sm transition-colors">
+            <button className="w-full bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-xs py-2.5 rounded-xl shadow-sm transition-colors">
               Book Now
             </button>
           </div>

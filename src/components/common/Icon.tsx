@@ -16,7 +16,7 @@ export const Icon: React.FC<IconProps> = ({
   return (
     <span
       className={cn(
-        "inline-flex items-center justify-center font-mono font-bold bg-[#7DD3FC]/30 text-[#0284C7] rounded-full",
+        "inline-flex items-center justify-center font-mono font-bold bg-[#FF7700]/30 text-[#CC5F00] rounded-full",
         icons.sizes[size],
         className
       )}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Star, Bike, Users } from "lucide-react";
 
 export const HeroContent: React.FC = () => {
   return (
@@ -7,7 +8,7 @@ export const HeroContent: React.FC = () => {
       <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-gray-200 shadow-sm">
         <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
         <span className="text-[#1E293B] text-[11px] font-bold tracking-wider uppercase">
-          NOW LIVE IN 12 CITIES ACROSS INDIA
+          NOW LIVE ACROSS PAN INDIA
         </span>
       </div>
 
@@ -15,11 +16,11 @@ export const HeroContent: React.FC = () => {
       <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.06] text-[#1E293B]">
         Ride Smarter.
         <br />
-        <span className="text-[#EAB308] relative inline-block">
+        <span className="text-[#77FF00] relative inline-block">
           Travel Faster.
           {/* Subtle Golden Underline Brush Stroke */}
           <svg
-            className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#F8D84E]"
+            className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#77FF00]"
             viewBox="0 0 240 12"
             fill="none"
           >
@@ -42,7 +43,7 @@ export const HeroContent: React.FC = () => {
       <div className="flex flex-wrap items-center gap-3 pt-1">
         <a
           href="#book"
-          className="inline-flex items-center gap-2 bg-[#F8D84E] hover:bg-[#E5C330] text-[#1E293B] font-bold text-sm sm:text-base px-6 py-3 rounded-full shadow-md transition-colors"
+          className="inline-flex items-center gap-2 bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-sm sm:text-base px-6 py-3 rounded-full shadow-md transition-colors"
         >
           <span>Book a Ride</span>
           <svg
@@ -85,8 +86,8 @@ export const HeroContent: React.FC = () => {
       <div className="flex flex-wrap items-center gap-5 sm:gap-7 pt-5 mt-2 border-t border-gray-200/60 w-full">
         {/* Stat 1: Rating */}
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-[#FEF9C3] flex items-center justify-center text-[#CA8A04] shrink-0 font-bold text-base">
-            ★
+          <div className="w-9 h-9 rounded-xl bg-[#F0FFEA] flex items-center justify-center text-[#4D9900] shrink-0 font-bold text-base">
+            <Star className="w-5 h-5 fill-current" />
           </div>
           <div>
             <div className="text-lg sm:text-xl font-black text-[#1E293B]">
@@ -102,8 +103,8 @@ export const HeroContent: React.FC = () => {
 
         {/* Stat 2: Rides Completed */}
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-[#FEF9C3] flex items-center justify-center text-[#CA8A04] shrink-0 text-base">
-            🛵
+          <div className="w-9 h-9 rounded-xl bg-[#F0FFEA] flex items-center justify-center text-[#4D9900] shrink-0 text-base">
+            <Bike className="w-5 h-5" />
           </div>
           <div>
             <div className="text-lg sm:text-xl font-black text-[#1E293B]">
@@ -119,8 +120,8 @@ export const HeroContent: React.FC = () => {
 
         {/* Stat 3: Verified Drivers */}
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-[#FEF9C3] flex items-center justify-center text-[#CA8A04] shrink-0 text-base">
-            👥
+          <div className="w-9 h-9 rounded-xl bg-[#F0FFEA] flex items-center justify-center text-[#4D9900] shrink-0 text-base">
+            <Users className="w-5 h-5" />
           </div>
           <div>
             <div className="text-lg sm:text-xl font-black text-[#1E293B]">

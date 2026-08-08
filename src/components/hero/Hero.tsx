@@ -12,15 +12,20 @@ export const Hero: React.FC = () => {
   const { scrollY } = useScroll();
 
   // Scroll-driven parallax: As you scroll down the page, Scooter drives from right screen to LEFT along the road
-  // Disable animation on mobile and tablet (only animate on desktop >= 1024px)
-  const isDesktop = width >= 1024;
-  const targetX = isDesktop ? -1500 : 0;
+  // Adjust animation distance based on screen size to keep speed reasonable across devices
+  // Limit distance on mobile and tab so the scooty stays on the screen and doesn't run off
+  const targetX = width < 768 ? -180 : width < 1024 ? -400 : -1500;
   
-  const scooterX = useTransform(scrollY, [0, 900], [0, targetX]);
+  // On mobile/tablet, the Hero section is stacked and much taller. 
+  // We delay the start of the scroll animation so it begins exactly when the road comes into view.
+  const scrollStart = width < 768 ? 650 : width < 1024 ? 400 : 0;
+  const scrollEnd = scrollStart + 900;
+  
+  const scooterX = useTransform(scrollY, [scrollStart, scrollEnd], [0, targetX]);
   // Dashed yellow road lane lines shift RIGHT to create realistic road velocity
-  const roadX = useTransform(scrollY, [0, 800], [0, 400]);
+  const roadX = useTransform(scrollY, [scrollStart, scrollEnd], [0, 400]);
   // Background city skyline moves gently for depth parallax
-  const skylineX = useTransform(scrollY, [0, 800], [0, 150]);
+  const skylineX = useTransform(scrollY, [scrollStart, scrollEnd], [0, 150]);
 
   return (
     <section className="relative bg-[#FFFCE8] pt-4 lg:pt-6 pb-0 overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-between">
@@ -100,7 +105,7 @@ export const Hero: React.FC = () => {
         {/* Scooter Image: Still when resting; runs horizontally ONLY when you scroll the page */}
         <img
           src="/images/hero.png"
-          alt="Ghummakkadh Scooter"
+          alt="Ghumakkadh Scooter"
           className="w-[260px] sm:w-[350px] md:w-[420px] lg:w-[520px] xl:w-[560px] h-auto object-contain drop-shadow-[0_18px_25px_rgba(0,0,0,0.55)]"
         />
       </motion.div>
