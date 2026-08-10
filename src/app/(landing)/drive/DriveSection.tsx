@@ -1,289 +1,252 @@
 import React from "react";
 import { Container } from "@/components/common";
 import { 
-  User, Wallet, Clock, IndianRupee, Headphones, 
-  Bike, ShieldCheck, Users, Signal, Battery, 
-  Menu, ChevronRight, Home, Map, Star, Circle,
-  MapPin, CheckCircle2, ArrowRight
+  Car, Wallet, Clock, ShieldCheck, 
+  UserRound, ArrowRight, IndianRupee, 
+  Gift, Headphones, Star
 } from "lucide-react";
 
-export const DriveSection: React.FC = () => {
-  return (
-    <section className="bg-[#FEFCE8] pt-8 pb-16 md:pt-12 md:pb-24 overflow-hidden relative" id="drive">
-      <Container className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
-        
-        {/* Section Badge */}
-        <div className="flex justify-center mb-10 md:mb-16">
-          <div className="inline-flex items-center justify-center bg-white border border-gray-100 text-[#1E293B] font-bold text-[10px] px-4 py-1.5 rounded-full tracking-wider uppercase shadow-sm">
-            For Drivers
-          </div>
-        </div>
+interface DriveSectionProps {
+  hideBadge?: boolean;
+}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center mb-16">
-          {/* Left Column: Text and Features */}
-          <div className="flex flex-col items-start text-left z-20">
-            {/* Headline */}
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-[#1E293B] leading-[1.1] tracking-tight mb-4 sm:mb-6">
-              Earn More.<br />
-              <span className="text-[#77FF00] underline decoration-[#77FF00] underline-offset-[8px] sm:underline-offset-[12px] decoration-4 sm:decoration-8">Drive On.</span>
+export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false }) => {
+  return (
+    <section className="bg-[#FFFEF8] pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden relative" id="drive">
+      <Container className="max-w-[1440px] mx-auto px-4 md:px-8 relative z-10">
+        
+        {/* HERO AREA - 3 Columns on Desktop */}
+        <div className="flex flex-col xl:flex-row gap-8 items-center xl:items-start justify-between mb-16">
+          
+          {/* LEFT: Content (~35%) */}
+          <div className="flex-1 w-full max-w-[420px] flex flex-col items-start text-left z-20 xl:shrink-0 xl:pt-4">
+            {/* Badge */}
+            {!hideBadge && (
+              <div className="inline-flex items-center gap-2 bg-[#F3FCEB] text-green-700 font-bold text-[11px] px-3 py-1.5 rounded-full mb-6 border border-green-100">
+                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                Drive with Ghumakkadh
+              </div>
+            )}
+
+            {/* Main Headline */}
+            <h2 className="text-4xl sm:text-5xl lg:text-[68px] font-black text-[#162238] leading-[1.05] tracking-tight mb-6">
+              Drive. Earn.<br />
+              <span className="text-[#57E600]">Grow with us.</span>
             </h2>
 
             {/* Description */}
-            <p className="text-gray-600 text-base sm:text-lg md:text-xl font-medium max-w-lg mb-8 sm:mb-12">
-              Flexible hours, quick payouts, and full support to help you grow with every ride.
+            <p className="text-[#526174] text-sm sm:text-base font-medium max-w-[360px] mb-12 leading-relaxed">
+              Join thousands of drivers who are earning flexibly and building their future with Ghumakkadh.
             </p>
 
-            {/* Features Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 w-full">
-              {/* Feature 1 */}
-              <div className="flex items-start gap-4 text-left">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-50 flex items-center justify-center shrink-0 border border-orange-100 shadow-sm">
-                  <Wallet className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
+            {/* Three Benefit Blocks */}
+            <div className="flex flex-col sm:flex-row gap-5 mb-8 w-full justify-start">
+              
+              <div className="flex flex-col gap-2.5 flex-1">
+                <div className="w-10 h-10 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
+                  <Wallet className="w-5 h-5 text-[#57E600]" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-[#1E293B] text-[15px] sm:text-[17px] mb-1">High Earnings</h4>
-                  <p className="text-[13px] sm:text-sm text-gray-500 font-medium leading-relaxed">Incentives & bonuses on every ride</p>
-                </div>
+                <h4 className="font-black text-[#162238] text-[13px]">Great Earnings</h4>
+                <p className="text-[11px] text-[#526174] font-medium leading-snug">Earn more with<br/>better incentives</p>
               </div>
 
-              {/* Feature 2 */}
-              <div className="flex items-start gap-4 text-left">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-50 flex items-center justify-center shrink-0 border border-orange-100 shadow-sm">
-                  <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
+              <div className="flex flex-col gap-2.5 flex-1">
+                <div className="w-10 h-10 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
+                  <Clock className="w-5 h-5 text-[#57E600]" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-[#1E293B] text-[15px] sm:text-[17px] mb-1">Flexible Hours</h4>
-                  <p className="text-[13px] sm:text-sm text-gray-500 font-medium leading-relaxed">Work on your own schedule</p>
-                </div>
+                <h4 className="font-black text-[#162238] text-[13px]">Flexible Hours</h4>
+                <p className="text-[11px] text-[#526174] font-medium leading-snug">Drive on your time,<br/>your way</p>
               </div>
 
-              {/* Feature 3 */}
-              <div className="flex items-start gap-4 text-left">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-50 flex items-center justify-center shrink-0 border border-orange-100 shadow-sm">
-                  <IndianRupee className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
+              <div className="flex flex-col gap-2.5 flex-1">
+                <div className="w-10 h-10 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-5 h-5 text-[#57E600]" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-[#1E293B] text-[15px] sm:text-[17px] mb-1">Quick Payouts</h4>
-                  <p className="text-[13px] sm:text-sm text-gray-500 font-medium leading-relaxed">Get paid weekly without delay</p>
-                </div>
+                <h4 className="font-black text-[#162238] text-[13px]">Safe & Secure</h4>
+                <p className="text-[11px] text-[#526174] font-medium leading-snug">Your safety is our<br/>top priority</p>
               </div>
 
-              {/* Feature 4 */}
-              <div className="flex items-start gap-4 text-left">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-50 flex items-center justify-center shrink-0 border border-orange-100 shadow-sm">
-                  <Headphones className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-[#1E293B] text-[15px] sm:text-[17px] mb-1">Driver Support</h4>
-                  <p className="text-[13px] sm:text-sm text-gray-500 font-medium leading-relaxed">24/7 support whenever you need</p>
-                </div>
-              </div>
             </div>
+          </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full justify-center lg:justify-start">
-              <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#E66000] text-white font-bold text-sm px-8 py-3.5 rounded-full shadow-sm transition-colors">
-                <span>Join as a Driver</span>
+          {/* CENTER: Hero Illustration (~50%) */}
+          <div className="flex-1 w-full max-w-[650px] relative flex justify-center items-center z-10 xl:-mx-6">
+            <img 
+              src="/images/ghumakkadh_drive_car_driver_asset.png" 
+              alt="Drive with Ghumakkadh" 
+              className="w-full h-auto object-contain scale-100 xl:scale-[1.05]"
+            />
+          </div>
+
+          {/* RIGHT: 3 Simple Steps Card (~20%) */}
+          <div className="w-full max-w-[340px] shrink-0 relative z-20 flex justify-center xl:justify-end xl:pt-4">
+            <div className="w-full bg-white rounded-[28px] p-6 sm:p-8 border border-gray-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] flex flex-col">
+              
+              <div className="mb-8">
+                <p className="text-[13px] font-black text-[#162238] mb-0.5">Start earning in</p>
+                <h3 className="text-xl font-black text-[#57E600]">3 simple steps</h3>
+              </div>
+
+              <div className="flex flex-col gap-0 relative">
+                
+                {/* Connector Lines */}
+                <div className="absolute left-[15px] top-[20px] bottom-[40px] w-[1.5px] border-l-[1.5px] border-dashed border-[#57E600]/30 z-0"></div>
+
+                {/* Step 1 */}
+                <div className="flex gap-4 mb-6 relative z-10">
+                  <div className="relative shrink-0">
+                    <div className="w-8 h-8 bg-[#F3FCEB] rounded-full flex items-center justify-center">
+                      <UserRound className="w-4 h-4 text-[#57E600]" />
+                    </div>
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#57E600] rounded-full border-2 border-white flex items-center justify-center">
+                      <span className="text-[8px] font-black text-white">1</span>
+                    </div>
+                  </div>
+                  <div className="pt-1">
+                    <h4 className="text-[14px] font-black text-[#162238] mb-1">Sign Up</h4>
+                    <p className="text-[11px] text-[#526174] font-medium leading-snug">Register in just a<br/>few minutes</p>
+                  </div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="flex gap-4 mb-6 relative z-10">
+                  <div className="relative shrink-0">
+                    <div className="w-8 h-8 bg-[#F3FCEB] rounded-full flex items-center justify-center">
+                      <ShieldCheck className="w-4 h-4 text-[#57E600]" />
+                    </div>
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#57E600] rounded-full border-2 border-white flex items-center justify-center">
+                      <span className="text-[8px] font-black text-white">2</span>
+                    </div>
+                  </div>
+                  <div className="pt-1">
+                    <h4 className="text-[14px] font-black text-[#162238] mb-1">Get Verified</h4>
+                    <p className="text-[11px] text-[#526174] font-medium leading-snug">Upload documents<br/>and complete<br/>verification</p>
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="flex gap-4 mb-8 relative z-10">
+                  <div className="relative shrink-0">
+                    <div className="w-8 h-8 bg-[#F3FCEB] rounded-full flex items-center justify-center">
+                      <Car className="w-4 h-4 text-[#57E600]" />
+                    </div>
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#57E600] rounded-full border-2 border-white flex items-center justify-center">
+                      <span className="text-[8px] font-black text-white">3</span>
+                    </div>
+                  </div>
+                  <div className="pt-1">
+                    <h4 className="text-[14px] font-black text-[#162238] mb-1">Start Driving</h4>
+                    <p className="text-[11px] text-[#526174] font-medium leading-snug">Go online and start<br/>earning</p>
+                  </div>
+                </div>
+              </div>
+
+              <button className="w-full bg-[#57E600] hover:bg-[#4ddb00] text-white font-bold text-sm py-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
+                <span>Become a driver</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
-              <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-[#1E293B] font-bold text-sm px-8 py-3.5 rounded-full shadow-sm border border-gray-200 transition-colors">
-                <span className="w-4 h-4 border-2 border-[#1E293B] rounded-full flex items-center justify-center text-[8px]">i</span>
-                <span>Learn More</span>
-              </button>
+
             </div>
           </div>
 
-          {/* Right Column: Phone Mockup */}
-          <div className="relative flex justify-center lg:justify-end z-10 w-full mt-8 lg:mt-0 lg:h-[650px]">
-            {/* Wrapper for Phone + Decor */}
-            <div className="relative">
-              {/* Background Decor */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] bg-[#77FF00]/10 rounded-full blur-3xl pointer-events-none" />
-              
-              {/* Phone Frame */}
-              <div className="relative w-[280px] sm:w-[320px] h-[580px] sm:h-[640px] bg-white rounded-[40px] sm:rounded-[48px] shadow-2xl border-[6px] sm:border-[8px] border-[#1E293B] overflow-hidden shrink-0 mx-auto z-20">
-                {/* Notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100px] sm:w-[120px] h-[24px] sm:h-[28px] bg-[#1E293B] rounded-b-[16px] sm:rounded-b-[20px] z-30" />
-                
-                {/* Status Bar */}
-                <div className="flex items-center justify-between px-4 sm:px-5 pt-2.5 sm:pt-3 pb-1.5 sm:pb-2 bg-white z-20">
-                  <span className="text-[10px] sm:text-[11px] font-bold text-[#1E293B]">9:41</span>
-                  <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] text-[#1E293B] font-bold">
-                    <Signal className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                    <span>5G</span>
-                    <Battery className="w-3 h-3 sm:w-4 sm:h-4" />
-                  </div>
-                </div>
+        </div>
 
-                {/* App Content */}
-                <div className="flex-1 overflow-y-auto bg-gray-50/50 flex flex-col h-[calc(100%-80px)]">
-                  {/* Header */}
-                  <div className="px-5 pt-2 pb-4 flex items-center justify-between bg-white">
-                    <Menu className="w-5 h-5 text-[#1E293B]" />
-                    <div className="bg-white border border-gray-200 rounded-full px-3 py-1 flex items-center gap-2 shadow-sm">
-                      <span className="w-2 h-2 rounded-full bg-[#77FF00]" />
-                      <span className="text-[10px] font-bold text-[#1E293B]">Online</span>
-                      <ChevronRight className="w-3 h-3 text-gray-400" />
-                    </div>
-                  </div>
+        {/* BENEFITS STRIP */}
+        <div className="w-full bg-white rounded-[32px] p-6 sm:p-8 mb-12 border border-gray-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.03)] overflow-x-auto">
+          <div className="flex items-center min-w-[900px] xl:min-w-0 justify-between gap-4">
+            
+            <div className="flex items-center gap-4 flex-1">
+              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
+                <IndianRupee className="w-5 h-5 text-[#162238]" />
+              </div>
+              <div>
+                <h4 className="font-black text-[#162238] text-[13px] mb-0.5">High Earnings</h4>
+                <p className="text-[11px] text-[#526174] font-medium">Competitive fares and<br/>regular bonuses</p>
+              </div>
+            </div>
 
-                  <div className="px-5 pt-2 pb-4">
-                    <h3 className="text-sm font-black text-[#1E293B] mb-3">Hello, Driver!</h3>
-                    
-                    {/* Earnings Card (Green) */}
-                    <div className="bg-[#77FF00] rounded-2xl p-4 shadow-lg shadow-[#77FF00]/20 mb-4 relative overflow-hidden">
-                      <div className="relative z-10">
-                        <div className="text-[10px] font-bold text-[#1E293B]/80 mb-1">Today's Earnings</div>
-                        <div className="text-3xl font-black text-[#1E293B] mb-2">₹1,245</div>
-                        <div className="text-[9px] font-bold text-[#1E293B]/80 flex items-center gap-1">
-                          <span>↑ 12% more than yesterday</span>
-                        </div>
-                      </div>
-                      <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-90">
-                        <Wallet className="w-12 h-12 text-white" strokeWidth={1.5} />
-                      </div>
-                    </div>
+            <div className="w-[1px] h-10 bg-gray-100 shrink-0 mx-2"></div>
 
-                    {/* Stats Row */}
-                    <div className="grid grid-cols-3 gap-2 mb-6">
-                      <div className="bg-white rounded-xl p-3 border border-gray-100 flex flex-col items-center justify-center text-center shadow-sm">
-                        <div className="text-sm font-black text-[#1E293B]">8</div>
-                        <div className="text-[8px] text-gray-500 font-medium leading-tight">Rides<br/>Completed</div>
-                      </div>
-                      <div className="bg-white rounded-xl p-3 border border-gray-100 flex flex-col items-center justify-center text-center shadow-sm">
-                        <div className="text-sm font-black text-[#1E293B]">32 km</div>
-                        <div className="text-[8px] text-gray-500 font-medium leading-tight">Distance<br/>Traveled</div>
-                      </div>
-                      <div className="bg-white rounded-xl p-3 border border-gray-100 flex flex-col items-center justify-center text-center shadow-sm">
-                        <div className="text-sm font-black text-[#1E293B]">4.8</div>
-                        <div className="text-[8px] text-gray-500 font-medium leading-tight mb-1">Rating</div>
-                        <Star className="w-2.5 h-2.5 text-[#FBBF24]" fill="#FBBF24" />
-                      </div>
-                    </div>
+            <div className="flex items-center gap-4 flex-1">
+              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
+                <Gift className="w-5 h-5 text-[#57E600]" />
+              </div>
+              <div>
+                <h4 className="font-black text-[#162238] text-[13px] mb-0.5">Incentives & Bonuses</h4>
+                <p className="text-[11px] text-[#526174] font-medium">Boost your income with<br/>exciting offers</p>
+              </div>
+            </div>
 
-                    {/* Progress Bar */}
-                    <div className="mb-6">
-                      <div className="flex justify-between items-end mb-2">
-                        <span className="text-[10px] font-black text-[#1E293B]">Today's Progress</span>
-                        <span className="text-sm font-black text-[#1E293B]">75%</span>
-                      </div>
-                      <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden mb-1">
-                        <div className="w-[75%] h-full bg-[#77FF00] rounded-full" />
-                      </div>
-                      <div className="text-[8px] text-gray-500 font-medium">Complete 12 more rides to get bonus</div>
-                    </div>
+            <div className="w-[1px] h-10 bg-gray-100 shrink-0 mx-2"></div>
 
-                    {/* Recent Rides */}
-                    <div>
-                      <div className="flex justify-between items-center mb-3">
-                        <span className="text-[10px] font-black text-[#1E293B]">Recent Rides</span>
-                        <span className="text-[10px] font-bold text-[#77FF00]">View All</span>
-                      </div>
-                      
-                      <div className="flex flex-col gap-2 pb-10">
-                        {/* Ride 1 */}
-                        <div className="bg-white rounded-xl p-3 flex items-center justify-between border border-gray-100 shadow-sm">
-                          <div className="flex items-center gap-3">
-                            <Bike className="w-4 h-4 text-[#1E293B]" />
-                            <div>
-                              <div className="text-[10px] font-black text-[#1E293B]">Nehru Nagar</div>
-                              <div className="text-[8px] text-gray-500">Raipur</div>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-[10px] font-black text-[#1E293B]">₹125</div>
-                            <div className="text-[8px] text-[#77FF00] font-bold">Cash</div>
-                          </div>
-                        </div>
-                        
-                        {/* Ride 2 */}
-                        <div className="bg-white rounded-xl p-3 flex items-center justify-between border border-gray-100 shadow-sm">
-                          <div className="flex items-center gap-3">
-                            <Circle className="w-4 h-4 text-[#1E293B]" />
-                            <div>
-                              <div className="text-[10px] font-black text-[#1E293B]">Pandri Chowk</div>
-                              <div className="text-[8px] text-gray-500">Raipur</div>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-[10px] font-black text-[#1E293B]">₹98</div>
-                            <div className="text-[8px] text-[#77FF00] font-bold">UPI</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="flex items-center gap-4 flex-1">
+              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
+                <Headphones className="w-5 h-5 text-[#57E600]" />
+              </div>
+              <div>
+                <h4 className="font-black text-[#162238] text-[13px] mb-0.5">24/7 Support</h4>
+                <p className="text-[11px] text-[#526174] font-medium">We're here to help<br/>you anytime</p>
+              </div>
+            </div>
 
-                {/* Bottom Nav */}
-                <div className="absolute bottom-0 left-0 w-full bg-white border-t border-gray-100 px-6 py-3 flex justify-between items-center pb-5 z-20">
-                  <div className="flex flex-col items-center gap-1 cursor-pointer">
-                    <Home className="w-5 h-5 text-[#77FF00]" fill="#77FF00" />
-                    <span className="text-[8px] font-bold text-[#77FF00]">Home</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1 cursor-pointer opacity-40">
-                    <IndianRupee className="w-5 h-5 text-[#1E293B]" />
-                    <span className="text-[8px] font-bold text-[#1E293B]">Earnings</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1 cursor-pointer opacity-40">
-                    <Map className="w-5 h-5 text-[#1E293B]" />
-                    <span className="text-[8px] font-bold text-[#1E293B]">Trips</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1 cursor-pointer opacity-40">
-                    <User className="w-5 h-5 text-[#1E293B]" />
+            <div className="w-[1px] h-10 bg-gray-100 shrink-0 mx-2"></div>
+
+            <div className="flex items-center gap-4 flex-1">
+              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-5 h-5 text-[#57E600]" />
+              </div>
+              <div>
+                <h4 className="font-black text-[#162238] text-[13px] mb-0.5">Insurance Cover</h4>
+                <p className="text-[11px] text-[#526174] font-medium">Comprehensive insurance<br/>for your safety</p>
+              </div>
+            </div>
+
+            <div className="w-[1px] h-10 bg-gray-100 shrink-0 mx-2"></div>
+
+            <div className="flex items-center gap-4 flex-1">
+              <div className="w-12 h-12 rounded-full bg-[#57E600] flex items-center justify-center shrink-0">
+                <Star className="w-5 h-5 text-white" fill="currentColor" />
+              </div>
+              <div>
+                <h4 className="font-black text-[#162238] text-[13px] mb-0.5">Grow with Us</h4>
+                <p className="text-[11px] text-[#526174] font-medium">Opportunities, rewards<br/>and recognition</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* BOTTOM CTA */}
+        <div className="w-full bg-[#F3FCEB] rounded-[24px] p-8 md:p-0 md:h-[110px] flex flex-col md:flex-row items-center justify-between border border-[#E8F8DD] relative overflow-hidden">
+          
+          <div className="flex items-center md:pl-10 z-10 w-full md:w-auto text-center md:text-left flex-col md:flex-row gap-6">
+            
+            <div className="hidden md:block relative h-[140px] w-[90px] mt-10 shrink-0 transform -rotate-12">
+              <div className="absolute bottom-0 w-[70px] h-[100px] bg-[#162238] rounded-[14px] border-4 border-[#162238] overflow-hidden flex flex-col justify-center items-center shadow-lg left-4">
+                <div className="w-full h-full bg-white flex items-center justify-center">
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center bg-gray-50 border border-gray-100">
+                    <img src="/images/logo.png" alt="logo" className="w-4 h-4 object-contain" />
                   </div>
                 </div>
               </div>
+              <div className="absolute -bottom-2 -left-2 w-[100px] h-[70px] bg-[#F2C999] rounded-full blur-sm opacity-90 z-[-1]"></div>
+            </div>
+
+            <div className="pt-0 md:pt-1">
+              <h3 className="text-[19px] font-black text-[#162238] mb-0.5">Ready to hit the road?</h3>
+              <p className="text-[#526174] font-medium text-[12px]">Join Ghumakkadh today and be your own boss.</p>
             </div>
           </div>
+
+          <div className="mt-6 md:mt-0 md:pr-10 z-10 w-full md:w-auto">
+            <button className="w-full md:w-auto bg-[#57E600] hover:bg-[#4ddb00] text-white font-bold text-[13px] px-8 py-3 rounded-full flex items-center justify-center gap-2 transition-colors shadow-sm">
+              <span>Join now</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
         </div>
 
-        {/* Bottom Benefits Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 relative z-20">
-          {/* Card 1 */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-[#77FF00]/50 transition-all hover:-translate-y-1">
-            <div className="w-12 h-12 bg-[#77FF00]/10 rounded-full flex items-center justify-center mb-4">
-              <User className="w-6 h-6 text-[#77FF00]" />
-            </div>
-            <h4 className="text-sm font-black text-[#1E293B] mb-2">Be Your Own Boss</h4>
-            <p className="text-xs text-gray-500 font-medium leading-relaxed">
-              Work independently on your own terms. Set your own schedule, choose your hours, and drive whenever it suits your lifestyle.
-            </p>
-          </div>
-
-          {/* Card 2 */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-[#77FF00]/50 transition-all hover:-translate-y-1">
-            <div className="w-12 h-12 bg-[#77FF00]/10 rounded-full flex items-center justify-center mb-4">
-              <CheckCircle2 className="w-6 h-6 text-[#77FF00]" />
-            </div>
-            <h4 className="text-sm font-black text-[#1E293B] mb-2">Easy Onboarding</h4>
-            <p className="text-xs text-gray-500 font-medium leading-relaxed">
-              Get verified quickly with our streamlined process. Submit your documents online and start driving within 24 hours.
-            </p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-[#77FF00]/50 transition-all hover:-translate-y-1">
-            <div className="w-12 h-12 bg-[#77FF00]/10 rounded-full flex items-center justify-center mb-4">
-              <ShieldCheck className="w-6 h-6 text-[#77FF00]" />
-            </div>
-            <h4 className="text-sm font-black text-[#1E293B] mb-2">Safe Platform</h4>
-            <p className="text-xs text-gray-500 font-medium leading-relaxed">
-              Drive with peace of mind. All our riders are verified, and you have access to a dedicated 24/7 SOS emergency support line.
-            </p>
-          </div>
-
-          {/* Card 4 */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-[#77FF00]/50 transition-all hover:-translate-y-1">
-            <div className="w-12 h-12 bg-[#77FF00]/10 rounded-full flex items-center justify-center mb-4">
-              <Wallet className="w-6 h-6 text-[#77FF00]" />
-            </div>
-            <h4 className="text-sm font-black text-[#1E293B] mb-2">Daily Payouts</h4>
-            <p className="text-xs text-gray-500 font-medium leading-relaxed">
-              No more waiting for weeks to get paid. Transfer your daily earnings to your bank account instantly with zero hassle.
-            </p>
-          </div>
-        </div>
       </Container>
     </section>
   );

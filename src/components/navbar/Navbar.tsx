@@ -1,19 +1,21 @@
 "use client";
 
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/common";
 import { Smartphone, Menu, X } from "lucide-react";
 
 export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname() || "/";
 
   const navLinks = [
-    { label: "Home", href: "/" },
     { label: "How it works", href: "/how-it-works" },
     { label: "Ride", href: "/ride" },
     { label: "Drive", href: "/drive" },
-    { label: "About us", href: "#about" },
-    { label: "Support & Features", href: "#support-features" },
+    { label: "Parcel", href: "/parcel" },
+    { label: "About us", href: "/about" },
+    { label: "Support & Features", href: "/support" },
   ];
 
   return (
@@ -21,14 +23,14 @@ export const Navbar: React.FC = () => {
       <Container className="flex items-center justify-between h-20">
         {/* Logo matching Image 2: Yellow map pin + Ghumakkadh + Slogan */}
         <a href="/" className="flex items-center gap-3">
-          <div className="w-12 h-12 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center shrink-0">
             <img src="/images/logo.png" alt="Ghumakkadh Logo" className="w-full h-full object-contain" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl sm:text-2xl font-black tracking-tight text-[#1E293B] leading-none">
+            <span className="text-lg sm:text-2xl font-black tracking-tight text-[#1E293B] leading-none">
               Ghumakkadh
             </span>
-            <span className="text-[11px] font-medium text-gray-500 mt-0.5">
+            <span className="text-[9px] sm:text-[11px] font-medium text-gray-500 mt-0.5 whitespace-nowrap">
               Chalo. Ghoomo. Khush Raho.
             </span>
           </div>
@@ -36,15 +38,24 @@ export const Navbar: React.FC = () => {
 
         {/* Navigation Links - Desktop */}
         <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-gray-700 hover:text-[#1E293B] transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            // Check if the current pathname matches the link href
+            const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "/");
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                className={`text-sm font-medium transition-colors relative flex flex-col items-center ${
+                  isActive ? "text-[#1E293B]" : "text-gray-700 hover:text-[#1E293B]"
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <div className="absolute -bottom-2 w-[40px] h-[3px] bg-[#57E600] rounded-full"></div>
+                )}
+              </a>
+            );
+          })}
         </nav>
 
         {/* Right CTAs matching Image 2 */}
@@ -57,9 +68,9 @@ export const Navbar: React.FC = () => {
           </a>
           <a
             href="#download"
-            className="inline-flex items-center gap-2 bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-sm transition-colors"
+            className="inline-flex items-center gap-2 bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full shadow-sm transition-colors"
           >
-            <span><Smartphone className="w-4 h-4" /></span>
+            <span><Smartphone className="w-3 h-3 sm:w-4 sm:h-4" /></span>
             <span className="hidden sm:inline">Get the app</span>
             <span className="sm:hidden">App</span>
           </a>

@@ -1,7 +1,11 @@
 import React from "react";
 import { Container } from "@/components/common";
 
-export const HowItWorksSection: React.FC = () => {
+interface HowItWorksSectionProps {
+  hideBadge?: boolean;
+}
+
+export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge = false }) => {
   const steps = [
     { 
       num: 1, 
@@ -33,11 +37,9 @@ export const HowItWorksSection: React.FC = () => {
     <section id="how-it-works" className="bg-[#FEFCE8] pt-6 pb-16 md:pt-10 md:pb-24 overflow-hidden">
       <Container className="max-w-[1400px] mx-auto px-4 md:px-8">
         {/* Header */}
-        <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center justify-center bg-white border border-gray-100 text-[#1E293B] font-bold text-[10px] px-4 py-1.5 rounded-full tracking-wider uppercase shadow-sm mb-4">
-            How It Works
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#1E293B] tracking-tight mb-3">
+        <div className="flex flex-col items-start lg:items-center text-left lg:text-center mb-16 lg:mb-20 w-full">
+
+          <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-black text-[#1E293B] tracking-tight mb-3">
             Your Journey in <span className="text-[#77FF00]">4 Simple Steps</span>
           </h2>
           <p className="text-sm sm:text-base text-gray-600 font-medium">

@@ -19,13 +19,13 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   return (
     <div
       className={`flex flex-col gap-3 mb-12 ${
-        centered ? "items-center text-center max-w-2xl mx-auto" : "items-start"
+        centered ? "items-start lg:items-center text-left lg:text-center max-w-2xl mx-auto w-full" : "items-start"
       } ${className}`}
     >
       {badge && <Badge variant="primary">{badge}</Badge>}
-      <Heading level={2} className="text-[#111827]">
+      <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-[#111827] tracking-tight">
         {title}
-      </Heading>
+      </h2>
       {subtitle && <p className="text-gray-600 text-base">{subtitle}</p>}
     </div>
   );

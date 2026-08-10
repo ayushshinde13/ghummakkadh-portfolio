@@ -72,7 +72,7 @@ export const RideOptionsSection: React.FC = () => {
     <section id="ride-options" className="bg-[#FFFDF5] pt-4 lg:pt-6 pb-6 lg:pb-8 relative">
       <Container>
         {/* Section Header matching Screenshot exactly */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
+        <div className="flex flex-col items-start lg:items-center text-left lg:text-center max-w-2xl mx-auto w-full">
           {/* Badge Pill */}
           <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] text-xs font-extrabold px-4 py-1.5 rounded-full shadow-sm mb-3">
             <span><Users className="w-4 h-4" /></span>
@@ -80,7 +80,7 @@ export const RideOptionsSection: React.FC = () => {
           </div>
 
           {/* H2 Title */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1E293B] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-[#1E293B] tracking-tight">
             Choose Your Ride Option
           </h2>
 

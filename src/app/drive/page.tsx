@@ -9,7 +9,7 @@ export const metadata = {
 export default function DrivePage() {
   return (
     <main>
-      <DriveSection />
+      <DriveSection hideBadge={true} />
     </main>
   );
 }

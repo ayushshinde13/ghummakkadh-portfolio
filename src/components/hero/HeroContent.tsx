@@ -90,10 +90,7 @@ export const HeroContent: React.FC = () => {
             <Star className="w-5 h-5 fill-current" />
           </div>
           <div>
-            <div className="text-lg sm:text-xl font-black text-[#1E293B]">
-              4.8
-            </div>
-            <div className="text-[11px] text-gray-500 font-medium">
+            <div className="text-[14px] sm:text-[15px] font-bold text-[#1E293B]">
               App Rating
             </div>
           </div>
@@ -107,10 +104,7 @@ export const HeroContent: React.FC = () => {
             <Bike className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-lg sm:text-xl font-black text-[#1E293B]">
-              3.2M+
-            </div>
-            <div className="text-[11px] text-gray-500 font-medium">
+            <div className="text-[14px] sm:text-[15px] font-bold text-[#1E293B]">
               Rides Completed
             </div>
           </div>
@@ -124,10 +118,7 @@ export const HeroContent: React.FC = () => {
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-lg sm:text-xl font-black text-[#1E293B]">
-              45K+
-            </div>
-            <div className="text-[11px] text-gray-500 font-medium">
+            <div className="text-[14px] sm:text-[15px] font-bold text-[#1E293B]">
               Verified Drivers
             </div>
           </div>

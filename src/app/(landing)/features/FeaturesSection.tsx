@@ -199,7 +199,7 @@ export const FeaturesSection: React.FC = () => {
             </div>
 
             {/* H2 Title matching Screenshot exactly */}
-            <h2 className="text-4xl sm:text-5xl lg:text-[54px] font-black tracking-tight leading-[1.08] text-[#1E293B] mb-5">
+            <h2 className="text-3xl sm:text-4xl lg:text-[54px] font-black tracking-tight leading-[1.08] text-[#1E293B] mb-5">
               Smart Features for
               <br />
               <span className="text-[#77FF00]">Modern Commuters</span>

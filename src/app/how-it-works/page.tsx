@@ -3,6 +3,6 @@ import { HowItWorksSection } from "@/app/(landing)/how-it-works";
 
 export default function HowItWorksPage() {
   return (
-    <HowItWorksSection />
+    <HowItWorksSection hideBadge={true} />
   );
 }

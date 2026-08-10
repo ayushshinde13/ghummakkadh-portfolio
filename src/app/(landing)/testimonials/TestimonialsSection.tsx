@@ -58,7 +58,7 @@ export const TestimonialsSection: React.FC = () => {
 
       <Container className="relative z-10">
         {/* Section Header matching Screenshot exactly */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
+        <div className="flex flex-col items-start lg:items-center text-left lg:text-center max-w-2xl mx-auto w-full">
           {/* Yellow Badge Pill */}
           <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-3">
             <span><Heart className="w-4 h-4 fill-yellow-400 text-yellow-400" /></span>
@@ -66,7 +66,7 @@ export const TestimonialsSection: React.FC = () => {
           </div>
 
           {/* H2 Headline */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1E293B] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-[#1E293B] tracking-tight">
             Loved by Commuters{" "}
             <span className="text-[#77FF00]">Across India</span>
           </h2>
