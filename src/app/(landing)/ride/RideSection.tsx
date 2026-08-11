@@ -43,7 +43,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
 
             <div className="flex xl:hidden w-full relative justify-center items-center z-10 pb-12 sm:pb-16">
               <img 
-                src="/images/ride_img1.png" 
+                src="/images/ride_main.png" 
                 alt="Ghumakkadh Ride Illustration" 
                 className="w-full max-w-[400px] h-auto object-contain"
               />
@@ -88,7 +88,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
           {/* CENTER: Hero Illustration (Desktop Only) */}
           <div className="hidden xl:flex flex-1 w-full max-w-3xl relative justify-center items-center z-10 xl:-mx-12 pt-12 md:pt-20">
             <img 
-              src="/images/ride_img1.png" 
+              src="/images/ride_main.png" 
               alt="Ghumakkadh Ride Illustration" 
               className="w-full max-w-[500px] h-auto object-contain"
             />

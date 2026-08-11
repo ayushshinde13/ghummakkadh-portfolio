@@ -36,7 +36,7 @@ export const ParcelIntroSection: React.FC<ParcelIntroSectionProps> = ({ hideBadg
           {/* Left Text Content */}
           <div className="w-full lg:w-[55%] flex flex-col gap-6 z-10">
             <h2 className="text-2xl sm:text-3xl lg:text-3xl font-black text-white m-0 leading-tight tracking-tight">
-              Send Packages Across Town with Ease
+              Your Parcels, Delivered with Care
             </h2>
 
             <p className="text-gray-400 text-base leading-relaxed max-w-lg">
