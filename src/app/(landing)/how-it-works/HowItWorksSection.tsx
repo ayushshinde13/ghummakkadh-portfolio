@@ -86,7 +86,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
         <div className="bg-white/5 backdrop-blur-md rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 mb-8 max-w-6xl mx-auto border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.2)]">
           <div className="flex items-center gap-6 z-10 relative">
             <div className="w-20 h-20 shrink-0 flex items-center justify-center">
-              <img src="/images/hero.png" alt="Scooter" className="w-full h-full object-contain" />
+              <img src="/images/hero_img.png" alt="Scooter" className="w-full h-full object-contain" />
             </div>
             <div>
               <h3 className="text-xl md:text-[22px] font-black text-white mb-1">Ready to ride?</h3>

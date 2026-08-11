@@ -267,7 +267,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
               <div className="bg-[#0A0E1A]/80 border border-white/10 rounded-2xl p-5 flex items-center justify-between shadow-inner">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center p-2">
-                     <img src="/images/Bike.png" alt="Bike" className="w-full h-full object-contain" />
+                     <img src="/images/bike.png" alt="Bike" className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h5 className="text-sm font-black text-white">Bike Drivers</h5>
@@ -325,7 +325,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {[
-              { type: "Bike", img: "/images/Bike.png", req: "2-Wheeler License", desc: "Best for part-time earners and students. Navigate through traffic quickly and earn daily.", highlight: "Highest trips per hour" },
+              { type: "Bike", img: "/images/bike.png", req: "2-Wheeler License", desc: "Best for part-time earners and students. Navigate through traffic quickly and earn daily.", highlight: "Highest trips per hour" },
               { type: "Auto", img: "/images/Auto.png", req: "Commercial Badge", desc: "Steady daily earnings with massive local demand. Lowest platform commissions.", highlight: "Consistent daily demand" },
               { type: "Cab (Mini/Sedan)", img: "/images/cab.png", req: "Commercial License (Yellow Plate)", desc: "Maximize earnings with longer routes, airport drops, and outstation trips.", highlight: "Highest per-trip earnings" },
               { type: "Outstation SUV", img: "/images/Auto.png", req: "All India Tourist Permit", desc: "Drive families and groups between cities. Big ticket sizes and assured return fares.", highlight: "Premium fares & bonuses" }

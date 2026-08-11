@@ -362,7 +362,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
 
             {/* Bike */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[32px] p-6 lg:p-8 flex flex-col items-center text-center shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:-translate-y-1 transition-all duration-300">
-              <img src="/images/Bike.png" alt="Bike" className="w-32 h-20 object-contain mb-4" />
+              <img src="/images/bike.png" alt="Bike" className="w-32 h-20 object-contain mb-4" />
               <h4 className="text-xl font-black text-white mb-1">Bike</h4>
               <p className="text-[13px] text-gray-400 font-medium flex items-center justify-center gap-1.5 mb-5 w-full">
                 1 Seater <Users className="w-3 h-3 text-gray-500" />
