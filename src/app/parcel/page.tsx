@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function ParcelPage() {
   return (
-    <main>
+    <main className="pt-20">
       <ParcelSection hideBadge={true} />
     </main>
   );

@@ -3,7 +3,7 @@ import { Container, Section, Heading, Button } from "@/components/common";
 
 export const CTA: React.FC = () => {
   return (
-    <Section className="bg-[#1E293B] text-white py-20 border-t border-white/10">
+    <Section className="bg-transparent text-white py-20 border-t border-white/10">
       <Container className="text-center flex flex-col items-center gap-6 max-w-3xl mx-auto">
         <Heading level={2} className="text-white">
           Ready to Ride With <span className="text-[#77FF00]">Ghumakkadh</span>{" "}

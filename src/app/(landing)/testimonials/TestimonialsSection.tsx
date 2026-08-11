@@ -8,7 +8,7 @@ export const TestimonialsSection: React.FC = () => {
   return (
     <section
       id="testimonials"
-      className="relative bg-[#FFFDF5] pt-10 lg:pt-14 pb-20 lg:pb-28 overflow-hidden"
+      className="relative pt-10 lg:pt-14 pb-20 lg:pb-28 overflow-hidden"
     >
       {/* Top Right Dotted Golden Route & Glowing Yellow GPS Location Pin */}
       <div className="absolute top-10 right-10 w-96 h-40 pointer-events-none hidden lg:block">
@@ -58,7 +58,7 @@ export const TestimonialsSection: React.FC = () => {
 
       <Container className="relative z-10">
         {/* Section Header matching Screenshot exactly */}
-        <div className="flex flex-col items-start lg:items-center text-left lg:text-center max-w-2xl mx-auto w-full">
+        <div className="flex flex-col items-start lg:items-center text-left lg:text-center max-w-2xl lg:mx-auto w-full">
           {/* Yellow Badge Pill */}
           <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-3">
             <span><Heart className="w-4 h-4 fill-yellow-400 text-yellow-400" /></span>
@@ -66,13 +66,13 @@ export const TestimonialsSection: React.FC = () => {
           </div>
 
           {/* H2 Headline */}
-          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-[#1E293B] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-white tracking-tight">
             Loved by Commuters{" "}
             <span className="text-[#77FF00]">Across India</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-gray-600 font-normal mt-2">
+          <p className="text-base sm:text-lg text-gray-300 font-normal mt-2">
             See what our daily riders and partners have to say about Ghumakkadh.
           </p>
         </div>

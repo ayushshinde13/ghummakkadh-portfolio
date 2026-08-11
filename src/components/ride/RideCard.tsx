@@ -33,18 +33,7 @@ export const RideCard: React.FC<RideCardProps> = ({
         };
 
   return (
-    <div className="bg-white rounded-[32px] border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.05)] p-6 sm:p-7 relative overflow-hidden flex items-center justify-between group hover:shadow-[0_20px_50px_rgba(0,0,0,0.09)] transition-all duration-300 min-h-[210px]">
-      {/* Subtle City Skyline Silhouette at Bottom-Left */}
-      <div className="absolute bottom-0 left-0 w-44 h-24 pointer-events-none overflow-hidden z-0">
-        <svg
-          className={cn("w-full h-full", theme.skylineColor)}
-          viewBox="0 0 200 100"
-          fill="currentColor"
-        >
-          <path d="M0 100V60h20v-15h15v15h25v-25h15v25h35V45h20v10h15v-15h20v45H0z" />
-          <path d="M120 100V70h15v-20h15v20h20v-30h15v60h-65z" opacity="0.6" />
-        </svg>
-      </div>
+    <div className="bg-white/5 backdrop-blur-md rounded-[32px] border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.2)] p-6 sm:p-7 relative overflow-hidden flex items-center justify-between group hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-300 min-h-[210px]">
 
       {/* Left Side: Vehicle PNG Image matching Screenshot */}
       <div className="relative z-10 w-40 sm:w-44 lg:w-48 h-32 sm:h-36 flex items-center justify-center shrink-0 -ml-2">
@@ -60,11 +49,11 @@ export const RideCard: React.FC<RideCardProps> = ({
         {/* Top Price Pill & Title */}
         <div>
           <div className="flex items-center justify-between gap-2 mb-1">
-            <h3 className="text-2xl font-black text-[#1E293B] tracking-tight">
+            <h3 className="text-2xl font-black text-white tracking-tight">
               {type}
             </h3>
           </div>
-          <p className="text-xs sm:text-sm text-gray-500 font-normal leading-relaxed max-w-[150px]">
+          <p className="text-xs sm:text-sm text-gray-400 font-normal leading-relaxed max-w-[150px]">
             {tagline}
           </p>
         </div>

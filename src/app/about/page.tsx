@@ -9,9 +9,11 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main>
+    <main className="pt-20 bg-[#0A0E1A] min-h-screen text-white">
       <AboutSection hideBadge={true} />
-      <ParcelIntroSection hideBadge={true} />
+      <div className="mt-20 lg:mt-32 pb-20">
+        <ParcelIntroSection hideBadge={true} />
+      </div>
     </main>
   );
 }

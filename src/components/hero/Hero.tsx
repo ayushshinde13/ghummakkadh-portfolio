@@ -28,7 +28,23 @@ export const Hero: React.FC = () => {
   const skylineX = useTransform(scrollY, [scrollStart, scrollEnd], [0, 150]);
 
   return (
-    <section className="relative bg-[#FFFCE8] pt-4 lg:pt-6 pb-0 overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-between">
+    <section className="relative pt-4 lg:pt-6 pb-0 overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-between bg-gradient-to-b from-[#0a0e1a] via-[#2a2140] to-[#4a3a2a]">
+      {/* Dark Night Sky Background Effects */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Soft radial blue glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[120px] rounded-full" />
+        
+        {/* Scattered Stars */}
+        <div className="absolute top-[15%] left-[20%] w-1 h-1 bg-white/60 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+        <div className="absolute top-[25%] left-[80%] w-1.5 h-1.5 bg-blue-100/50 rounded-full blur-[1px]" />
+        <div className="absolute top-[10%] left-[60%] w-0.5 h-0.5 bg-white/80 rounded-full" />
+        <div className="absolute top-[45%] left-[10%] w-1 h-1 bg-white/40 rounded-full" />
+        <div className="absolute top-[35%] left-[85%] w-0.5 h-0.5 bg-blue-200/60 rounded-full" />
+        <div className="absolute top-[20%] left-[35%] w-1.5 h-1.5 bg-white/30 rounded-full blur-[1px]" />
+        <div className="absolute top-[55%] left-[70%] w-1 h-1 bg-white/50 rounded-full" />
+        <div className="absolute top-[8%] left-[45%] w-1 h-1 bg-blue-100/70 rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]" />
+      </div>
+
       {/* Golden City Skyline, Skyscraper & Bridge Silhouette with Parallax */}
       <motion.div
         style={{ x: skylineX }}
@@ -69,15 +85,7 @@ export const Hero: React.FC = () => {
 
       {/* Highway Guardrail & Asphalt Road at the Bottom - Fully visible in 1 screen height without scroll */}
       <div className="relative w-full z-20 mt-auto">
-        {/* Silver Metal Highway Guardrail with vertical posts */}
-        <div className="w-full h-6 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 border-y-2 border-gray-400 shadow-sm relative flex items-center justify-between px-6">
-          {Array.from({ length: 30 }).map((_, i) => (
-            <div
-              key={i}
-              className="w-1.5 h-full bg-gray-400/80 border-r border-white/40"
-            />
-          ))}
-        </div>
+
 
         {/* Asphalt Highway Road with scroll-driven dashed yellow markings */}
         <div className="w-full h-20 sm:h-24 bg-gradient-to-b from-[#475569] via-[#334155] to-[#1E293B] relative overflow-hidden flex items-center justify-center">
@@ -99,14 +107,14 @@ export const Hero: React.FC = () => {
         className="absolute bottom-2 sm:bottom-4 lg:bottom-8 right-0 sm:right-4 lg:right-16 z-40 pointer-events-none flex items-end"
       >
         {/* Realistic white smoke / dust cloud from rear tire on asphalt */}
-        <div className="absolute -left-6 sm:-left-10 bottom-1 w-24 sm:w-36 h-8 sm:h-12 bg-white/80 rounded-full blur-xl" />
-        <div className="absolute -left-4 sm:-left-6 bottom-2 w-16 sm:w-24 h-6 sm:h-8 bg-white/90 rounded-full blur-md" />
+        <div className="hidden lg:block absolute -left-10 bottom-1 w-36 h-12 bg-white/80 rounded-full blur-xl" />
+        <div className="hidden lg:block absolute -left-6 bottom-2 w-24 h-8 bg-white/90 rounded-full blur-md" />
 
         {/* Scooter Image: Still when resting; runs horizontally ONLY when you scroll the page */}
         <img
-          src="/images/hero.png"
+          src="/images/hero_img.png"
           alt="Ghumakkadh Scooter"
-          className="w-[260px] sm:w-[350px] md:w-[420px] lg:w-[520px] xl:w-[560px] h-auto object-contain drop-shadow-[0_18px_25px_rgba(0,0,0,0.55)]"
+          className="w-[260px] sm:w-[350px] md:w-[420px] lg:w-[520px] xl:w-[560px] h-auto object-contain"
         />
       </motion.div>
     </section>

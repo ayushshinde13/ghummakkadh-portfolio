@@ -3,7 +3,7 @@ import { RideSection } from "@/app/(landing)/ride";
 
 export default function RidePage() {
   return (
-    <div className="min-h-[calc(100vh-80px)]">
+    <div className="min-h-[calc(100vh-80px)] pt-20">
       <RideSection hideBadge={true} />
     </div>
   );

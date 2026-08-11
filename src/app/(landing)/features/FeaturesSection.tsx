@@ -20,13 +20,13 @@ export const FeaturesSection: React.FC = () => {
           />
         </svg>
       ),
-      iconBg: "bg-[#F0FFEA] text-[#4D9900]",
+      iconBg: "bg-green-500/10 text-[#57E600] border border-green-500/20",
       title: "Safe & Secure",
       subtitle: "Verified drivers & OTP protection",
     },
     {
       icon: <span className="text-lg font-black">₹</span>,
-      iconBg: "bg-[#DCFCE7] text-[#166534]",
+      iconBg: "bg-green-500/10 text-[#57E600] border border-green-500/20",
       title: "Affordable Rides",
       subtitle: "Best prices. No hidden charges",
     },
@@ -46,7 +46,7 @@ export const FeaturesSection: React.FC = () => {
           />
         </svg>
       ),
-      iconBg: "bg-[#E0F2FE] text-[#CC5F00]",
+      iconBg: "bg-blue-500/10 text-[#3B82F6] border border-blue-500/20",
       title: "Live Tracking",
       subtitle: "Track your ride in real-time",
     },
@@ -66,7 +66,7 @@ export const FeaturesSection: React.FC = () => {
           />
         </svg>
       ),
-      iconBg: "bg-[#F3E8FF] text-[#9333EA]",
+      iconBg: "bg-purple-500/10 text-[#A855F7] border border-purple-500/20",
       title: "24/7 Support",
       subtitle: "We're here. Always.",
     },
@@ -75,7 +75,7 @@ export const FeaturesSection: React.FC = () => {
   return (
     <section
       id="features"
-      className="relative bg-[#FFFDF5] pt-20 lg:pt-28 pb-4 lg:pb-6 overflow-hidden"
+      className="bg-gradient-to-b from-[#0A0E1A] to-[#0D1220] relative pt-6 lg:pt-10 pb-4 lg:pb-6 overflow-hidden"
     >
       {/* Background Subtle Dotted Matrix & City Skyline with Ferris Wheel on the Right */}
       <div className="absolute top-10 left-1/3 w-64 h-32 opacity-30 pointer-events-none">
@@ -91,82 +91,9 @@ export const FeaturesSection: React.FC = () => {
 
       {/* Right Background Glow & Golden City Skyline with Ferris Wheel */}
       <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full pointer-events-none overflow-hidden z-0">
-        {/* Soft Golden Sun Circle */}
-        <div className="absolute -top-12 -right-12 w-[420px] h-[420px] rounded-full bg-[#E0FFCC]/45 blur-2xl" />
-
-        {/* Golden City Skyline & Ferris Wheel SVG */}
-        <svg
-          className="absolute bottom-0 right-0 w-full h-72 text-[#FDE047]/45"
-          viewBox="0 0 600 240"
-          fill="currentColor"
-          preserveAspectRatio="none"
-        >
-          {/* City Buildings */}
-          <path d="M450 240V120h25v-30h10v30h25v120H450z" />
-          <path d="M510 240V80h30v-20h10v20h30v160H510z" />
-          <path d="M580 240V140h20v100H580z" />
-          {/* Ferris Wheel Silhouette */}
-          <circle
-            cx="480"
-            cy="150"
-            r="55"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="5"
-          />
-          <circle
-            cx="480"
-            cy="150"
-            r="40"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <line
-            x1="480"
-            y1="95"
-            x2="480"
-            y2="205"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <line
-            x1="425"
-            y1="150"
-            x2="535"
-            y2="150"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <line
-            x1="441"
-            y1="111"
-            x2="519"
-            y2="189"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <line
-            x1="441"
-            y1="189"
-            x2="519"
-            y2="111"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          {/* Ferris Wheel A-Frame Base */}
-          <path
-            d="M455 240L480 150L505 240"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="4"
-          />
-          {/* Trees at Bottom Right */}
-          <circle cx="430" cy="225" r="20" fill="currentColor" opacity="0.8" />
-          <circle cx="455" cy="230" r="18" fill="currentColor" opacity="0.8" />
-          <circle cx="530" cy="225" r="22" fill="currentColor" opacity="0.8" />
-          <circle cx="560" cy="230" r="16" fill="currentColor" opacity="0.8" />
-        </svg>
+        {/* Subtle Dark-Theme Green Glow */}
+        <div className="absolute -top-12 -right-12 w-[420px] h-[420px] rounded-full bg-[#7ED321]/8 blur-3xl" />
+        <div className="absolute top-1/2 right-0 w-[300px] h-[300px] rounded-full bg-[#3B82F6]/6 blur-3xl" />
 
         {/* Floating Golden GPS Location Pin on Stand */}
         <div className="absolute bottom-28 right-16 z-10 flex flex-col items-center">
@@ -193,20 +120,20 @@ export const FeaturesSection: React.FC = () => {
           {/* Left Column (6 Cols): Badge, Title, Subtitle, 4 Icons */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             {/* Top Badge Pill */}
-            <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-5">
-              <span className="text-[#4D9900] text-sm"><Star className="w-4 h-4 fill-current" /></span>
+            <div className="hidden lg:inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 text-white font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-5">
+              <span className="text-[#57E600] text-sm"><Star className="w-4 h-4 fill-current" /></span>
               <span>WHY CHOOSE US</span>
             </div>
 
             {/* H2 Title matching Screenshot exactly */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[54px] font-black tracking-tight leading-[1.08] text-[#1E293B] mb-5">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-[1.08] text-white mb-5">
               Smart Features for
               <br />
               <span className="text-[#77FF00]">Modern Commuters</span>
             </h2>
 
             {/* Subtitle paragraph */}
-            <p className="text-base sm:text-lg text-gray-600 font-normal leading-relaxed max-w-lg mb-10">
+            <p className="text-base sm:text-lg text-gray-300 font-normal leading-relaxed max-w-lg mb-10">
               Everything designed to make your daily travel faster, cheaper, and
               safer.
             </p>
@@ -220,10 +147,10 @@ export const FeaturesSection: React.FC = () => {
                   >
                     {item.icon}
                   </div>
-                  <h4 className="text-xs sm:text-sm font-black text-[#1E293B] leading-tight">
+                  <h4 className="text-xs sm:text-sm font-black text-gray-200 leading-tight">
                     {item.title}
                   </h4>
-                  <p className="text-[11px] text-gray-500 font-medium mt-1 leading-snug">
+                  <p className="text-[11px] text-gray-400 font-medium mt-1 leading-snug">
                     {item.subtitle}
                   </p>
                 </div>
@@ -261,10 +188,10 @@ export const FeaturesSection: React.FC = () => {
             {/* 2 White Step Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-7 relative z-10">
               {/* Card 1: Book Ride */}
-              <div className="bg-white rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.1)] transition-all">
+              <div className="bg-white/5 backdrop-blur-md rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-white/10 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.4)] transition-all">
                 <div>
                   {/* Top Yellow Circle Icon */}
-                  <div className="w-16 h-16 rounded-full bg-[#F0FFEA] flex items-center justify-center mb-6 shadow-sm">
+                  <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-6 shadow-sm">
                     {/* Phone & Taxi SVG Illustration */}
                     <svg
                       className="w-8 h-8 text-[#4D9900]"
@@ -294,12 +221,12 @@ export const FeaturesSection: React.FC = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-black text-[#1E293B] mb-2 tracking-tight">
+                  <h3 className="text-xl font-black text-white mb-2 tracking-tight">
                     Book Ride
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-500 font-normal leading-relaxed">
+                  <p className="text-sm text-gray-400 font-normal leading-relaxed">
                     Find nearby rides instantly with just a few taps.
                   </p>
                 </div>
@@ -325,10 +252,10 @@ export const FeaturesSection: React.FC = () => {
               </div>
 
               {/* Card 2: Live Tracking */}
-              <div className="bg-white rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.1)] transition-all sm:mt-6">
+              <div className="bg-white/5 backdrop-blur-md rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-white/10 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.4)] transition-all sm:mt-6">
                 <div>
                   {/* Top Blue Circle Icon */}
-                  <div className="w-16 h-16 rounded-full bg-[#E0F2FE] flex items-center justify-center mb-6 shadow-sm">
+                  <div className="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 shadow-sm">
                     {/* Location Pin SVG Illustration */}
                     <svg
                       className="w-8 h-8 text-[#2563EB]"
@@ -340,12 +267,12 @@ export const FeaturesSection: React.FC = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-black text-[#1E293B] mb-2 tracking-tight">
+                  <h3 className="text-xl font-black text-white mb-2 tracking-tight">
                     Live Tracking
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-500 font-normal leading-relaxed">
+                  <p className="text-sm text-gray-400 font-normal leading-relaxed">
                     Track your ride in real-time and share with your loved ones.
                   </p>
                 </div>

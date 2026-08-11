@@ -3,7 +3,7 @@ import { SupportSection } from "../(landing)/support";
 
 export default function SupportPage() {
   return (
-    <div>
+    <div className="pt-20">
       <SupportSection />
     </div>
   );

@@ -69,7 +69,7 @@ export const RideOptionsSection: React.FC = () => {
   ];
 
   return (
-    <section id="ride-options" className="bg-[#FFFDF5] pt-4 lg:pt-6 pb-6 lg:pb-8 relative">
+    <section id="ride-options" className="pt-4 lg:pt-6 pb-6 lg:pb-8 relative">
       <Container>
         {/* Section Header matching Screenshot exactly */}
         <div className="flex flex-col items-start lg:items-center text-left lg:text-center max-w-2xl mx-auto w-full">
@@ -80,12 +80,12 @@ export const RideOptionsSection: React.FC = () => {
           </div>
 
           {/* H2 Title */}
-          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-[#1E293B] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-white tracking-tight">
             Choose Your Ride Option
           </h2>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-gray-600 mt-2 font-normal">
+          <p className="text-base sm:text-lg text-gray-300 mt-2 font-normal">
             From zipping through traffic on a bike to relaxing in an AC cab, we have got you covered.
           </p>
         </div>
@@ -103,7 +103,7 @@ export const RideOptionsSection: React.FC = () => {
         </div>
 
         {/* 4-Column Feature Strip matching Screenshot exactly */}
-        <div className="bg-white rounded-[32px] border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.04)] p-6 lg:p-8 mt-10 lg:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-white/5 backdrop-blur-md rounded-[32px] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.2)] p-6 lg:p-8 mt-10 lg:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((item, index) => (
             <div
               key={index}
@@ -115,10 +115,10 @@ export const RideOptionsSection: React.FC = () => {
                 {item.icon}
               </div>
               <div>
-                <div className="text-sm font-black text-[#1E293B]">
+                <div className="text-sm font-black text-gray-200">
                   {item.title}
                 </div>
-                <div className="text-xs text-gray-500 font-medium mt-0.5">
+                <div className="text-xs text-gray-400 font-medium mt-0.5">
                   {item.subtitle}
                 </div>
               </div>

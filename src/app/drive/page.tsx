@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function DrivePage() {
   return (
-    <main>
+    <main className="pt-20">
       <DriveSection hideBadge={true} />
     </main>
   );
