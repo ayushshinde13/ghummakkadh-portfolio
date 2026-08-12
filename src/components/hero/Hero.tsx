@@ -51,7 +51,7 @@ export const Hero: React.FC = () => {
         className="absolute bottom-24 left-0 w-full h-56 pointer-events-none z-0 overflow-hidden"
       >
         <svg
-          className="w-full h-full text-[#FDE047]/35"
+          className="w-full h-full text-[#3D4A6B]"
           viewBox="0 0 1440 240"
           fill="currentColor"
           preserveAspectRatio="none"
