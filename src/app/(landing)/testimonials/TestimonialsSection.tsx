@@ -8,7 +8,7 @@ export const TestimonialsSection: React.FC = () => {
   return (
     <section
       id="testimonials"
-      className="relative pt-10 lg:pt-14 pb-20 lg:pb-28 overflow-hidden"
+      className="relative pt-20 md:pt-24 lg:pt-28 pb-20 lg:pb-28 overflow-hidden"
     >
       {/* Top Right Dotted Golden Route & Glowing Yellow GPS Location Pin */}
       <div className="absolute top-10 right-10 w-96 h-40 pointer-events-none hidden lg:block">

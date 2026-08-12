@@ -9,7 +9,7 @@ import {
 
 export const SupportSection: React.FC = () => {
   return (
-    <section className="bg-gradient-to-b from-[#0A0E1A] to-[#0D1220] pt-4 md:pt-12 pb-24 overflow-hidden relative" id="support-features">
+    <section className="bg-gradient-to-b from-[#0A0E1A] to-[#0D1220] pt-24 md:pt-8 pb-24 overflow-hidden relative" id="support-features">
       <Container className="max-w-[1440px] mx-auto px-4 md:px-8">
         
         {/* HERO SECTION */}

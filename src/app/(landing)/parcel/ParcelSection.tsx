@@ -44,7 +44,7 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
             </div>
 
             {/* Top Features */}
-            <div className="flex flex-row flex-nowrap items-center justify-start lg:justify-start gap-4 lg:gap-8 w-full">
+            <div className="flex flex-row flex-nowrap items-center justify-center gap-4 lg:gap-8 w-full">
               <div className="flex flex-col items-center gap-3">
                 <div className="w-16 h-16 bg-green-500/10 rounded-2xl flex items-center justify-center text-[#57E600] shadow-sm border border-green-500/20">
                   {/* Safe & Secure Icon */}
