@@ -60,14 +60,43 @@ export default function TermsAndConditions() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#1E293B] mb-4">6. Limitation of Liability</h2>
+            <h2 className="text-2xl font-bold text-[#1E293B] mb-4">6. Terms for Riders</h2>
+            <p className="mb-3">
+              <strong>Ride Booking:</strong> By booking a ride, riders agree to be at the pickup location at the specified time. Riders must verify the driver's details and vehicle information before entering the vehicle.
+            </p>
+            <p className="mb-3">
+              <strong>Ride Etiquette:</strong> Riders are expected to maintain cleanliness inside the vehicle. Smoking, drinking alcohol, or consuming illegal substances during the ride is strictly prohibited.
+            </p>
+            <p>
+              <strong>Luggage & Passengers:</strong> Riders must adhere to the vehicle's seating and luggage capacity. Drivers reserve the right to refuse the ride if the capacity is exceeded.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-[#1E293B] mb-4">7. Terms for Drivers</h2>
+            <p className="mb-3">
+              <strong>Vehicle Maintenance & Insurance:</strong> Driver partners must ensure their vehicles are in excellent working condition, regularly serviced, and hold valid commercial insurance, registration, and a driving license as per local laws.
+            </p>
+            <p className="mb-3">
+              <strong>Professional Conduct:</strong> Drivers represent the Ghumakkadh brand and must maintain a polite and professional demeanor at all times. Discrimination of any kind against riders is strictly prohibited.
+            </p>
+            <p className="mb-3">
+              <strong>Payouts & Commissions:</strong> Ghumakkadh processes driver earnings daily or weekly, minus the applicable platform commission fees. Earnings are subject to applicable taxes as required by law.
+            </p>
+            <p>
+              <strong>Safety Compliance:</strong> Drivers must not drive under the influence of drugs or alcohol, and must adhere to all traffic rules and regulations.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-[#1E293B] mb-4">8. Limitation of Liability</h2>
             <p>
               While Ghumakkadh takes safety seriously and conducts background checks on driver partners, we act solely as a technology intermediary. We are not liable for any direct, indirect, incidental, or consequential damages arising from your use of the services, including but not limited to lost items, ride delays, or accidents occurring during transit.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#1E293B] mb-4">7. Amendments to Terms</h2>
+            <h2 className="text-2xl font-bold text-[#1E293B] mb-4">9. Amendments to Terms</h2>
             <p>
               We reserve the right to modify or update these Terms and Conditions at any time to reflect changes in our services or legal obligations. Any updates will be posted directly in the Ghumakkadh app and website. Your continued use of the platform after changes have been published constitutes your acceptance of the revised terms.
             </p>

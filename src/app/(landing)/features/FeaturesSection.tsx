@@ -95,23 +95,7 @@ export const FeaturesSection: React.FC = () => {
         <div className="absolute -top-12 -right-12 w-[420px] h-[420px] rounded-full bg-[#7ED321]/8 blur-3xl" />
         <div className="absolute top-1/2 right-0 w-[300px] h-[300px] rounded-full bg-[#3B82F6]/6 blur-3xl" />
 
-        {/* Floating Golden GPS Location Pin on Stand */}
-        <div className="absolute bottom-28 right-16 z-10 flex flex-col items-center">
-          <div className="w-14 h-14 rounded-full bg-[#77FF00] shadow-[0_10px_25px_rgba(234,179,8,0.45)] border-4 border-white flex items-center justify-center text-[#1E293B]">
-            <svg
-              className="w-7 h-7"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-          <div className="w-10 h-3 bg-[#77FF00]/30 rounded-full blur-[2px] mt-1" />
-        </div>
+
       </div>
 
       {/* Main 2-Column Showcase matching Screenshot */}

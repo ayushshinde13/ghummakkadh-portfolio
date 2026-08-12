@@ -37,24 +37,6 @@ export const TestimonialsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Heritage City Skyline Background Silhouette */}
-      <div className="absolute bottom-0 left-0 w-full h-44 pointer-events-none overflow-hidden z-0">
-        <svg
-          className="w-full h-full text-[#FDE047]/35"
-          viewBox="0 0 1200 160"
-          fill="currentColor"
-          preserveAspectRatio="none"
-        >
-          {/* Indian Heritage Domes & Palaces Silhouette */}
-          <path d="M0 160V120h40v-20h20v20h40v40H0z" />
-          <path d="M120 160V90c0-20 20-35 40-35s40 15 40 35v70h-80z" />
-          <path d="M220 160V110h20V85l15-15 15 15v25h20v50H220z" />
-          <path d="M320 160V100c0-15 15-25 30-25s30 10 30 25v60h-60z" />
-          <path d="M900 160V100c0-15 15-25 30-25s30 10 30 25v60h-60z" />
-          <path d="M1000 160V90c0-20 20-35 40-35s40 15 40 35v70h-80z" />
-          <path d="M1100 160V120h30V95l15-15 15 15v25h30v40h-90z" />
-        </svg>
-      </div>
 
       <Container className="relative z-10">
         {/* Section Header matching Screenshot exactly */}

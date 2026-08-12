@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
       {/* MAIN FOOTER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-12">
-          
+
           {/* Column 1: Brand (Takes up 2 columns on lg) */}
           <div className="lg:col-span-2 flex flex-col gap-6">
             <Link href="/" className="flex items-center gap-3">
@@ -71,9 +71,9 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-semibold text-lg">Company</h4>
             <ul className="flex flex-col gap-3">
               <li><Link href="/about" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">About Us</Link></li>
-              <li><Link href="#" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Careers</Link></li>
-              <li><Link href="#" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Contact Us</Link></li>
-              <li><Link href="#" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Our Story</Link></li>
+              <li><Link href="/careers" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Careers</Link></li>
+              <li><Link href="/contact" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Contact Us</Link></li>
+              <li><Link href="/story" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Our Story</Link></li>
             </ul>
           </div>
 
@@ -83,8 +83,8 @@ export const Footer: React.FC = () => {
             <ul className="flex flex-col gap-3">
               <li><Link href="/ride" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Book a Ride</Link></li>
               <li><Link href="/how-it-works" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Ride Options</Link></li>
-              <li><Link href="#" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Safety</Link></li>
-              <li><Link href="#" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Fare Policy</Link></li>
+              <li><Link href="/safety" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Safety</Link></li>
+              <li><Link href="/fare-policy" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Fare Policy</Link></li>
             </ul>
           </div>
 
@@ -93,7 +93,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-semibold text-lg">For Drivers</h4>
             <ul className="flex flex-col gap-3">
               <li><Link href="/drive" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Become a Driver</Link></li>
-              <li><Link href="#" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Driver Benefits</Link></li>
+              <li><Link href="/driver-benefits" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Driver Benefits</Link></li>
               <li><Link href="/support" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Driver Support</Link></li>
               <li><Link href="/drive" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Drive with Us</Link></li>
             </ul>
@@ -104,9 +104,9 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-semibold text-lg">Support</h4>
             <ul className="flex flex-col gap-3">
               <li><Link href="/support" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Help Center</Link></li>
-              <li><Link href="#" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Contact Support</Link></li>
+              <li><Link href="/contact" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Contact Support</Link></li>
               <li><Link href="/terms" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Terms & Conditions</Link></li>
-              <li><Link href="#" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Privacy Policy</Link></li>
+              <li><Link href="/privacy" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -183,11 +183,11 @@ export const Footer: React.FC = () => {
             © 2026 Ghumakkadh. All rights reserved.
           </div>
           <div className="flex items-center gap-3 sm:gap-6 text-zinc-400 text-xs sm:text-sm">
-            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <span className="w-1 h-1 rounded-full bg-zinc-600"></span>
             <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
             <span className="w-1 h-1 rounded-full bg-zinc-600"></span>
-            <Link href="#" className="hover:text-white transition-colors">Cookie Policy</Link>
+            <Link href="/cookie" className="hover:text-white transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>

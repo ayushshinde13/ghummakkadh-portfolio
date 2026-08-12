@@ -45,9 +45,8 @@ export const Navbar: React.FC = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className={`text-sm font-medium transition-colors relative flex flex-col items-center ${
-                  isActive ? "text-white" : "text-[#F5F7FA] hover:text-white"
-                }`}
+                className={`text-sm font-medium transition-colors relative flex flex-col items-center ${isActive ? "text-white" : "text-[#F5F7FA] hover:text-white"
+                  }`}
               >
                 {link.label}
                 {isActive && (
@@ -76,7 +75,7 @@ export const Navbar: React.FC = () => {
           </a>
 
           {/* Hamburger Button for Mobile/Tablet */}
-          <button 
+          <button
             className="lg:hidden p-2 text-gray-200 hover:text-white transition-colors bg-white/10 rounded-full"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"

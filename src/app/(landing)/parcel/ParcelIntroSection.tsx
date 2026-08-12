@@ -21,7 +21,7 @@ export const ParcelIntroSection: React.FC<ParcelIntroSectionProps> = ({ hideBadg
         )}
 
         {/* Mobile Image (Visible only on mobile/tab) */}
-        <div className="flex lg:hidden w-full justify-center relative z-10 mb-4">
+        <div className="flex lg:hidden w-full justify-center relative z-10 my-10">
           <img
             src="/images/parcel_main.png"
             alt="Ghumakkadh Parcel Delivery"

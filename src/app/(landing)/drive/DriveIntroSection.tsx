@@ -21,7 +21,7 @@ export const DriveIntroSection: React.FC<DriveIntroSectionProps> = ({ hideBadge 
         )}
 
         {/* Mobile Image (Visible only on mobile/tab) */}
-        <div className="flex lg:hidden w-full justify-center relative z-10 mb-4">
+        <div className="flex lg:hidden w-full justify-center relative z-10 my-10">
           <img 
             src="/images/ghumakkadh_drive.png" 
             alt="Ghumakkadh Driver" 

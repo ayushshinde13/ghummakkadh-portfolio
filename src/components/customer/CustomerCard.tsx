@@ -8,10 +8,7 @@ interface CustomerCardProps {
 }
 
 export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
-  // Split comment to highlight the specified text with a yellow background matching screenshot
-  const parts = testimonial.highlightedText
-    ? testimonial.comment.split(testimonial.highlightedText)
-    : [testimonial.comment];
+  // Just render the comment normally without highlights
 
   return (
     <div
@@ -33,16 +30,10 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
           </div>
         </div>
 
-        {/* Quote Paragraph with Yellow Highlighted Text */}
+        {/* Quote Paragraph */}
         <p className="text-gray-300 text-[15px] sm:text-base leading-relaxed font-normal my-4">
           &ldquo;
-          {parts[0]}
-          {testimonial.highlightedText && (
-            <span className="bg-[#E0FFCC] font-extrabold px-1 py-0.5 rounded text-[#1E293B]">
-              {testimonial.highlightedText}
-            </span>
-          )}
-          {parts.length > 1 && parts[1]}
+          {testimonial.comment}
           &rdquo;
         </p>
       </div>

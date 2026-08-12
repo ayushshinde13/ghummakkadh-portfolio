@@ -5,7 +5,7 @@ import { RideOptionsSection } from "./(landing)/ride-options";
 import { DriveIntroSection } from "./(landing)/drive";
 import { TestimonialsSection } from "./(landing)/testimonials";
 import { ParcelIntroSection } from "./(landing)/parcel";
-import { FAQ, CTA, Stats } from "@/components/ui";
+import { FAQ, CTA, Stats, AppDownloadSection } from "@/components/ui";
 
 export default function HomePage() {
   return (
@@ -17,7 +17,7 @@ export default function HomePage() {
       <TestimonialsSection />
       <ParcelIntroSection />
       <FAQ />
-      <CTA />
+      <AppDownloadSection />
     </div>
   );
 }

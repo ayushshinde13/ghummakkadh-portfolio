@@ -69,12 +69,12 @@ export const RideOptionsSection: React.FC = () => {
   ];
 
   return (
-    <section id="ride-options" className="pt-4 lg:pt-6 pb-6 lg:pb-8 relative">
+    <section id="ride-options" className="pt-20 lg:pt-32 pb-6 lg:pb-8 relative">
       <Container>
         {/* Section Header matching Screenshot exactly */}
         <div className="flex flex-col items-start lg:items-center text-left lg:text-center max-w-2xl mx-auto w-full">
           {/* Badge Pill */}
-          <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] text-xs font-extrabold px-4 py-1.5 rounded-full shadow-sm mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] text-xs font-extrabold px-4 py-1.5 rounded-full shadow-sm mb-12">
             <span><Users className="w-4 h-4" /></span>
             <span>Ride for Everyone</span>
           </div>
