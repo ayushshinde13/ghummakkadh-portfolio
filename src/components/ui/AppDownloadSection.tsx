@@ -10,7 +10,11 @@ export const AppDownloadSection = () => {
   const apps = [
     {
       id: "ride",
-      title: "Ghumakkadh Ride",
+      title: (
+        <>
+          <span className="text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span> Ride
+        </>
+      ),
       description: "Book cabs, auto, bikes and much more",
       icon: (
         <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-sm">
@@ -26,7 +30,11 @@ export const AppDownloadSection = () => {
     },
     {
       id: "drive",
-      title: "Ghumakkadh Drive",
+      title: (
+        <>
+          <span className="text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span> Drive
+        </>
+      ),
       description: "Register as a driver to take rides, see your earnings and incentives",
       icon: (
         <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-sm">
@@ -84,7 +92,7 @@ export const AppDownloadSection = () => {
             </button>
             
             <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight">
-              Get {activeModal === "ride" ? "Ghumakkadh Ride" : "Ghumakkadh Drive"} app on
+              Get <span className="text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span> {activeModal === "ride" ? "Ride" : "Drive"} app on
             </h3>
             <p className="text-gray-400 text-sm md:text-base mb-8 leading-relaxed">
               Download the app today for a 100% mobile experience. Available on iOS and Android
