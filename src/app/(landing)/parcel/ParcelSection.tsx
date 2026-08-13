@@ -22,8 +22,8 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
             {/* Header */}
             <div>
               <div className="mb-2">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white m-0 tracking-tight">
-                  Ghumakkadh Parcel
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black m-0 tracking-tight">
+                  <span className="text-[#57E600]">Ghumakkadh</span> <span className="text-orange-500">Parcel</span>
                 </h2>
               </div>
               

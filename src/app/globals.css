@@ -5,6 +5,15 @@
 :root {
   --background: #ffffff;
   --foreground: #111827;
+  
+  /* Admin Panel Variables */
+  --admin-primary: #7ED321;
+  --admin-dark: #0A0E1A;
+  --admin-bg-light: #F8FAFC;
+  --admin-card-light: #FFFFFF;
+  --admin-border-light: #E2E8F0;
+  --admin-muted-light: #64748B;
+  --admin-text-dark: #0F172A;
 }
 
 body {

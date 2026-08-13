@@ -28,7 +28,7 @@ export const Navbar: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <span className="text-lg sm:text-2xl font-black tracking-tight leading-none">
-              <span className="text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span>
+              <span className="bg-gradient-to-r from-[#57E600] to-orange-500 text-transparent bg-clip-text">Ghumakkadh</span>
             </span>
             <span className="text-[9px] sm:text-[11px] font-medium text-gray-300 mt-0.5 whitespace-nowrap">
               Chalo. Ghoomo. Khush Raho.

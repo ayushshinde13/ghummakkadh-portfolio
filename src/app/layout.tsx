@@ -3,8 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { defaultMetadata } from "@/config/seo";
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+import { ConditionalLayout } from "@/components/layout/ConditionalLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,9 +29,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[#FEFCE8] text-[#1E293B] selection:bg-[#77FF00] selection:text-[#1E293B]">
         <ThemeProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <ConditionalLayout>{children}</ConditionalLayout>
         </ThemeProvider>
       </body>
     </html>
