@@ -27,8 +27,8 @@ export const Navbar: React.FC = () => {
             <img src="/images/logo.png" alt="Ghumakkadh Logo" className="w-full h-full object-contain" />
           </div>
           <div className="flex flex-col">
-            <span className="text-lg sm:text-2xl font-black tracking-tight text-white leading-none">
-              Ghumakkadh
+            <span className="text-lg sm:text-2xl font-black tracking-tight leading-none">
+              <span className="text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span>
             </span>
             <span className="text-[9px] sm:text-[11px] font-medium text-gray-300 mt-0.5 whitespace-nowrap">
               Chalo. Ghoomo. Khush Raho.

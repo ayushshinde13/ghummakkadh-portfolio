@@ -43,8 +43,8 @@ export const Footer: React.FC = () => {
               <div className="w-10 h-10 flex items-center justify-center shrink-0">
                 <img src="/images/logo.png" alt="Ghumakkadh Logo" className="w-full h-full object-contain" />
               </div>
-              <span className="text-2xl font-bold text-white tracking-wide">
-                Ghumakkadh
+              <span className="text-2xl font-bold tracking-wide">
+                <span className="text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span>
               </span>
             </Link>
             <p className="text-sm text-zinc-400 max-w-sm leading-relaxed">
