@@ -23,7 +23,8 @@ import {
   Menu,
   X,
   User,
-  Car
+  Car,
+  LogOut
 } from "lucide-react";
 
 export const navItems = [
@@ -141,7 +142,7 @@ export default function AdminShell({
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[var(--admin-primary)] rounded-full border border-[#0A0E1A]" />
             </button>
 
-            {/* Avatar Dropdown */}
+            {/* Avatar */}
             <div className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
               <div className="flex flex-col items-end hidden sm:flex">
                 <span className="text-sm font-medium leading-none">
@@ -152,6 +153,12 @@ export default function AdminShell({
                 GA
               </div>
             </div>
+
+            <div className="w-px h-6 bg-white/10 mx-1 hidden sm:block" />
+
+            <Link href="/" className="text-gray-400 hover:text-red-400 transition-colors p-2 rounded-md hover:bg-white/5" title="Logout">
+              <LogOut size={18} />
+            </Link>
           </div>
         </header>
 

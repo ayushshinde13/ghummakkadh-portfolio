@@ -6,6 +6,18 @@ import { Globe, Shield, Key, Bell, Save } from "lucide-react";
 export default function AdminSettings() {
   const [activeTab, setActiveTab] = useState("general");
   const [maintenanceMode, setMaintenanceMode] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [savedText, setSavedText] = useState("Save Changes");
+
+  const handleSave = () => {
+    setIsSaving(true);
+    setSavedText("Saving...");
+    setTimeout(() => {
+      setIsSaving(false);
+      setSavedText("Saved Successfully!");
+      setTimeout(() => setSavedText("Save Changes"), 2000);
+    }, 1000);
+  };
 
   const tabs = [
     { id: "general", label: "General", icon: Globe },
@@ -24,9 +36,15 @@ export default function AdminSettings() {
             Configure global platform behaviors, security policies, API credentials, and notifications.
           </p>
         </div>
-        <button className="inline-flex items-center justify-center h-10 px-4 py-2 rounded-md bg-[var(--admin-primary)] text-[#0A0E1A] text-sm font-bold shadow transition-colors hover:bg-[var(--admin-primary)]/90 gap-2 shrink-0">
-          <Save size={16} />
-          Save Changes
+        <button 
+          onClick={handleSave}
+          disabled={isSaving}
+          className={`inline-flex items-center justify-center h-10 px-4 py-2 rounded-md text-[#0A0E1A] text-sm font-bold shadow transition-colors gap-2 shrink-0 ${
+            isSaving ? "bg-[var(--admin-primary)]/70 cursor-not-allowed" : "bg-[var(--admin-primary)] hover:bg-[var(--admin-primary)]/90"
+          }`}
+        >
+          <Save size={16} className={isSaving ? "animate-pulse" : ""} />
+          {savedText}
         </button>
       </div>
 
