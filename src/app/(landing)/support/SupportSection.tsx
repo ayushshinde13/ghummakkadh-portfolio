@@ -1,49 +1,57 @@
 import React from "react";
 import { Container } from "@/components/common";
-import { 
-  Headphones, MessageCircle, ShieldCheck, 
+import {
+  Headphones, MessageCircle, ShieldCheck,
   MessagesSquare, Mail, Phone, CircleHelp,
   Car, IndianRupee, Clock, MapPin, Package, Smartphone, Leaf,
   Users, Star, Heart
 } from "lucide-react";
 
+const Instagram = ({ className = "" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
 export const SupportSection: React.FC = () => {
   return (
     <section className="bg-gradient-to-b from-[#0A0E1A] to-[#0D1220] pt-24 md:pt-8 pb-24 overflow-hidden relative" id="support-features">
       <Container className="max-w-[1440px] mx-auto px-4 md:px-8">
-        
+
         {/* HERO SECTION */}
         <div className="relative w-full flex flex-col lg:flex-row items-center justify-between mb-16 md:mb-24 mt-2 lg:mt-0 gap-12">
-          
+
           {/* Left Content */}
           <div className="flex-1 w-full z-20 flex flex-col items-center lg:items-start text-center lg:text-left pt-10">
-             <div className="hidden lg:inline-flex items-center gap-2 bg-white/5 border border-white/10 text-white font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-6">
-                <span className="text-[#57E600]"><Headphones className="w-4 h-4" /></span>
-                <span>SUPPORT CENTER</span>
-             </div>
-             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6 tracking-tight">
-                How can we <span className="text-[#57E600]">help you</span> today?
-             </h1>
-             <p className="text-gray-400 text-base md:text-lg mb-8 max-w-xl leading-relaxed">
-                Whether you need help with a recent ride, have questions about our services, or want to partner with us, our 24/7 support team is always here for you.
-             </p>
-             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <button className="bg-[#57E600] text-black font-bold py-3.5 px-8 rounded-full hover:bg-[#4ddb00] transition-colors shadow-[0_5px_20px_rgba(87,230,0,0.3)]">
-                  Chat with us
-                </button>
-             </div>
+            <div className="hidden lg:inline-flex items-center gap-2 bg-white/5 border border-white/10 text-white font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-6">
+              <span className="text-[#57E600]"><Headphones className="w-4 h-4" /></span>
+              <span>SUPPORT CENTER</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6 tracking-tight">
+              How can we <span className="text-[#57E600]">help you</span> today?
+            </h1>
+            <p className="text-gray-400 text-base md:text-lg mb-8 max-w-xl leading-relaxed">
+              Whether you need help with a recent ride, have questions about our services, or want to partner with us, our 24/7 support team is always here for you.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <button className="bg-[#57E600] text-black font-bold py-3.5 px-8 rounded-full hover:bg-[#4ddb00] transition-colors shadow-[0_5px_20px_rgba(87,230,0,0.3)]">
+                Chat with us
+              </button>
+            </div>
           </div>
 
           {/* Right Image in Circle */}
           <div className="flex-1 w-full relative z-10 flex justify-center lg:justify-end pb-2 lg:pr-8">
-            
+
             {/* Support Image */}
             <div className="relative w-full max-w-[600px] flex items-center justify-center">
-               <img 
-                 src="/images/support.png" 
-                 alt="Ghumakkadh Support Representative" 
-                 className="w-full h-auto object-contain"
-               />
+              <img
+                src="/images/support.png"
+                alt="Ghumakkadh Support Representative"
+                className="w-full h-auto object-contain"
+              />
             </div>
 
             {/* Floating Badges */}
@@ -69,13 +77,13 @@ export const SupportSection: React.FC = () => {
                 <span className="font-bold text-white text-[11px] sm:text-[13px] whitespace-pre-line leading-[1.2]">Quick{"\n"}Responses</span>
               </div>
             </div>
-            
+
           </div>
         </div>
 
         {/* SUPPORT OPTIONS & CONTACT CARD */}
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5 mb-16 items-stretch w-full">
-          
+
           {/* Live Chat */}
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-4 sm:p-6 flex flex-col items-center justify-start text-center shadow-[0_15px_40px_rgba(0,0,0,0.2)] h-full">
             <div className="h-10 flex items-center justify-center mb-4 sm:mb-5 text-[#57E600] shrink-0">
@@ -96,7 +104,7 @@ export const SupportSection: React.FC = () => {
             <h4 className="font-bold text-white text-[13px] sm:text-[15px] mb-2">Email Support</h4>
             <p className="text-[11px] sm:text-[12px] text-gray-400 leading-relaxed mb-3">Drop us an email and we'll get back to you.</p>
             <div className="mt-auto pt-3 border-t border-white/10 w-full text-[10px] sm:text-[11px] font-bold text-[#f5a623] break-words">
-              support@ghumakkadh.com<br/>
+              support@hindustaan.in<br />
               <span className="text-gray-500 font-normal">Response in 24 hrs</span>
             </div>
           </div>
@@ -109,8 +117,8 @@ export const SupportSection: React.FC = () => {
             <h4 className="font-bold text-white text-[13px] sm:text-[15px] mb-2">Call Support</h4>
             <p className="text-[11px] sm:text-[12px] text-gray-400 leading-relaxed mb-3">Speak to our team for quick assistance.</p>
             <div className="mt-auto pt-3 border-t border-white/10 w-full text-[10px] sm:text-[11px] font-bold text-[#7363ff]">
-              +91 98765 43210<br/>
-              <span className="text-gray-500 font-normal">9 AM - 8 PM</span>
+              0771- 299 - 4005<br />
+              <span className="text-gray-500 font-normal">9:30 AM - 7:30 PM</span>
             </div>
           </div>
 
@@ -130,7 +138,7 @@ export const SupportSection: React.FC = () => {
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[32px] p-6 lg:p-8 flex flex-col shadow-[0_15px_40px_rgba(0,0,0,0.2)] relative overflow-hidden h-full col-span-2 lg:col-span-2">
             <h3 className="text-xl font-black text-white mb-2 text-center lg:text-left">Reach us anytime</h3>
             <div className="w-12 h-[3px] bg-[#57E600] rounded-full mb-6 lg:mb-8 mx-auto lg:mx-0"></div>
-            
+
             <div className="flex flex-col md:flex-row xl:flex-row gap-6 h-full items-center md:items-start lg:items-start text-center md:text-left">
               {/* Left Contact */}
               <div className="flex flex-col justify-center md:justify-start gap-4 flex-1 z-10 whitespace-nowrap h-full pt-1">
@@ -138,13 +146,13 @@ export const SupportSection: React.FC = () => {
                   <div className="w-9 h-9 bg-[#57E600] rounded-full flex items-center justify-center shrink-0">
                     <Mail className="w-4 h-4 text-white" />
                   </div>
-                  <span className="text-gray-400 font-medium text-[13px]">support@ghumakkadh.com</span>
+                  <span className="text-gray-400 font-medium text-[13px]">support@hindustaan.in</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-9 h-9 bg-[#57E600] rounded-full flex items-center justify-center shrink-0">
                     <Phone className="w-4 h-4 text-white" />
                   </div>
-                  <span className="text-gray-400 font-medium text-[13px]">+91 98765 43210</span>
+                  <span className="text-gray-400 font-medium text-[13px]">0771- 299 - 4005</span>
                 </div>
               </div>
 
@@ -161,7 +169,7 @@ export const SupportSection: React.FC = () => {
                   <span className="font-bold text-white text-[14px]">24/7 Support</span>
                 </div>
                 <p className="text-gray-400 text-[12px] font-medium leading-relaxed max-w-[140px]">
-                  We're here for you,<br/>round the clock.
+                  We're here for you,<br />round the clock.
                 </p>
               </div>
             </div>
@@ -170,7 +178,7 @@ export const SupportSection: React.FC = () => {
 
         {/* 6 FEATURES STRIP */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-8 gap-4 lg:gap-5 w-full mb-16 items-stretch justify-center">
-          
+
           {/* 1. Safe & Secure */}
           <div className="flex flex-col items-center justify-start text-center w-full h-full px-2">
             <div className="h-[90px] flex items-center justify-center mb-4 relative shrink-0">
@@ -182,19 +190,19 @@ export const SupportSection: React.FC = () => {
               </div>
             </div>
             <h4 className="font-bold text-white text-[13px] mb-2">Safe & Secure</h4>
-            <p className="text-[11px] text-gray-400 leading-relaxed">Verified drivers, live tracking<br/>and safety features to<br/>keep you protected.</p>
+            <p className="text-[11px] text-gray-400 leading-relaxed">Verified drivers, live tracking<br />and safety features to<br />keep you protected.</p>
           </div>
 
           {/* 2. Affordable Pricing */}
           <div className="flex flex-col items-center justify-start text-center w-full h-full px-2">
             <div className="h-[90px] flex items-center justify-center mb-4 shrink-0">
               <div className="w-[48px] h-[48px] bg-[#ffba00] rounded-full border-[3px] border-[#ffca33] flex items-center justify-center shadow-inner relative">
-                 <div className="absolute inset-1 border border-[#ffca33] rounded-full opacity-50"></div>
-                 <IndianRupee className="w-5 h-5 text-white z-10" strokeWidth={3} />
+                <div className="absolute inset-1 border border-[#ffca33] rounded-full opacity-50"></div>
+                <IndianRupee className="w-5 h-5 text-white z-10" strokeWidth={3} />
               </div>
             </div>
             <h4 className="font-bold text-white text-[13px] mb-2">Affordable Pricing</h4>
-            <p className="text-[11px] text-gray-400 leading-relaxed">Transparent fares with no<br/>hidden charges. Travel<br/>more, spend less.</p>
+            <p className="text-[11px] text-gray-400 leading-relaxed">Transparent fares with no<br />hidden charges. Travel<br />more, spend less.</p>
           </div>
 
           {/* 3. Quick & Reliable */}
@@ -208,7 +216,7 @@ export const SupportSection: React.FC = () => {
               </div>
             </div>
             <h4 className="font-bold text-white text-[13px] mb-2">Quick & Reliable</h4>
-            <p className="text-[11px] text-gray-400 leading-relaxed">Quick pickups and on-time<br/>drops, every time you<br/>ride or send.</p>
+            <p className="text-[11px] text-gray-400 leading-relaxed">Quick pickups and on-time<br />drops, every time you<br />ride or send.</p>
           </div>
 
           {/* 4. Live Tracking */}
@@ -221,29 +229,29 @@ export const SupportSection: React.FC = () => {
               </div>
             </div>
             <h4 className="font-bold text-white text-[13px] mb-2">Live Tracking</h4>
-            <p className="text-[11px] text-gray-400 leading-relaxed">Track your ride or parcel<br/>in real-time and share<br/>with loved ones.</p>
+            <p className="text-[11px] text-gray-400 leading-relaxed">Track your ride or parcel<br />in real-time and share<br />with loved ones.</p>
           </div>
 
           {/* 5. Parcel Delivery */}
           <div className="flex flex-col items-center justify-start text-center w-full h-full px-2">
             <div className="h-[90px] flex items-center justify-center mb-4 shrink-0">
               <div className="w-[48px] h-[48px] bg-[#d9a362] rounded-md border-t-[8px] border-[#c08d50] flex flex-col justify-center items-center relative shadow-sm">
-                 <div className="w-full h-full absolute inset-0 opacity-10 flex flex-col justify-between p-1">
-                   <div className="w-full h-[1px] bg-black"></div>
-                   <div className="w-full h-[1px] bg-black"></div>
-                 </div>
-                 <div className="flex gap-1 z-10">
-                   <div className="w-3 h-3 bg-[#b58348] rounded-full flex items-center justify-center">
-                     <Leaf className="w-2 h-2 text-[#57E600]" />
-                   </div>
-                   <div className="w-3 h-3 bg-[#b58348] rounded-full flex items-center justify-center">
-                     <Leaf className="w-2 h-2 text-[#57E600]" />
-                   </div>
-                 </div>
+                <div className="w-full h-full absolute inset-0 opacity-10 flex flex-col justify-between p-1">
+                  <div className="w-full h-[1px] bg-black"></div>
+                  <div className="w-full h-[1px] bg-black"></div>
+                </div>
+                <div className="flex gap-1 z-10">
+                  <div className="w-3 h-3 bg-[#b58348] rounded-full flex items-center justify-center">
+                    <Leaf className="w-2 h-2 text-[#57E600]" />
+                  </div>
+                  <div className="w-3 h-3 bg-[#b58348] rounded-full flex items-center justify-center">
+                    <Leaf className="w-2 h-2 text-[#57E600]" />
+                  </div>
+                </div>
               </div>
             </div>
             <h4 className="font-bold text-white text-[13px] mb-2">Parcel Delivery</h4>
-            <p className="text-[11px] text-gray-400 leading-relaxed">Send documents, gifts<br/>or anything with safe<br/>and fast delivery.</p>
+            <p className="text-[11px] text-gray-400 leading-relaxed">Send documents, gifts<br />or anything with safe<br />and fast delivery.</p>
           </div>
 
           {/* 6. Easy to Use */}
@@ -257,7 +265,7 @@ export const SupportSection: React.FC = () => {
               </div>
             </div>
             <h4 className="font-bold text-white text-[13px] mb-2">Easy to Use</h4>
-            <p className="text-[11px] text-gray-400 leading-relaxed">Simple app, smooth<br/>experience. Book rides<br/>or parcels in a few taps.</p>
+            <p className="text-[11px] text-gray-400 leading-relaxed">Simple app, smooth<br />experience. Book rides<br />or parcels in a few taps.</p>
           </div>
 
         </div>
@@ -273,27 +281,27 @@ export const SupportSection: React.FC = () => {
             {/* Booking & Rides */}
             <div className="bg-white/5 border border-white/10 rounded-[24px] p-6 shadow-[0_15px_40px_rgba(0,0,0,0.2)]">
               <h4 className="font-bold text-white mb-3 flex items-center gap-3"><Car className="w-5 h-5 text-[#57E600]" /> Booking & Rides</h4>
-              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">How do I cancel a ride?</strong><br/>You can cancel your ride from the active trip screen without any fee within the first 3 minutes of booking.</p>
+              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">How do I cancel a ride?</strong><br />You can cancel your ride from the active trip screen without any fee within the first 3 minutes of booking.</p>
             </div>
             {/* Payments & Refunds */}
             <div className="bg-white/5 border border-white/10 rounded-[24px] p-6 shadow-[0_15px_40px_rgba(0,0,0,0.2)]">
               <h4 className="font-bold text-white mb-3 flex items-center gap-3"><IndianRupee className="w-5 h-5 text-[#ffba00]" /> Payments & Refunds</h4>
-              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">When will I get my refund?</strong><br/>Refunds for cancelled rides or failed transactions are automatically processed within 3-5 business days to your original payment method.</p>
+              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">When will I get my refund?</strong><br />Refunds for cancelled rides or failed transactions are automatically processed within 3-5 business days to your original payment method.</p>
             </div>
             {/* Driver-Related Issues */}
             <div className="bg-white/5 border border-white/10 rounded-[24px] p-6 shadow-[0_15px_40px_rgba(0,0,0,0.2)]">
               <h4 className="font-bold text-white mb-3 flex items-center gap-3"><Users className="w-5 h-5 text-[#7363ff]" /> Driver-Related Issues</h4>
-              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">Driver asked for extra cash?</strong><br/>Ghumakkadh strictly prohibits offline payments over the estimated fare. Please report such incidents immediately via live chat or email.</p>
+              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">Driver asked for extra cash?</strong><br />Ghumakkadh strictly prohibits offline payments over the estimated fare. Please report such incidents immediately via live chat or email.</p>
             </div>
             {/* Parcel Delivery */}
             <div className="bg-white/5 border border-white/10 rounded-[24px] p-6 shadow-[0_15px_40px_rgba(0,0,0,0.2)]">
               <h4 className="font-bold text-white mb-3 flex items-center gap-3"><Package className="w-5 h-5 text-[#d9a362]" /> Parcel Delivery</h4>
-              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">Is my parcel insured?</strong><br/>Yes, all items sent via Ghumakkadh Parcel are insured up to ₹5,000 for loss or damage during transit.</p>
+              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">Is my parcel insured?</strong><br />Yes, all items sent via Ghumakkadh Parcel are insured up to ₹5,000 for loss or damage during transit.</p>
             </div>
             {/* Account & App Issues */}
             <div className="bg-white/5 border border-white/10 rounded-[24px] p-6 shadow-[0_15px_40px_rgba(0,0,0,0.2)] md:col-span-2">
               <h4 className="font-bold text-white mb-3 flex items-center gap-3"><Smartphone className="w-5 h-5 text-[#57E600]" /> Account & App Issues</h4>
-              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">I can't log in to my account.</strong><br/>Ensure you are using the latest version of the app. If you changed your registered phone number, please contact us via email to securely update your profile details.</p>
+              <p className="text-sm text-gray-400 leading-relaxed"><strong className="text-white">I can't log in to my account.</strong><br />Ensure you are using the latest version of the app. If you changed your registered phone number, please contact us via email to securely update your profile details.</p>
             </div>
           </div>
         </div>
@@ -304,7 +312,7 @@ export const SupportSection: React.FC = () => {
             <h3 className="text-2xl font-black text-white mb-2">Still need help? Send us a message</h3>
             <p className="text-gray-400 font-medium">Fill out the form below and our dedicated support team will get back to you shortly.</p>
           </div>
-          
+
           <form className="flex flex-col gap-5">
             <div className="flex flex-col sm:flex-row gap-5">
               <div className="flex-1">
@@ -316,7 +324,7 @@ export const SupportSection: React.FC = () => {
                 <input type="email" placeholder="john@example.com" className="w-full bg-white/5 border border-white/10 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#57E600] focus:ring-1 focus:ring-[#57E600] transition-colors" />
               </div>
             </div>
-            
+
             <div>
               <label className="block text-white font-bold text-sm mb-2">Subject</label>
               <select defaultValue="" className="w-full bg-white/5 border border-white/10 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#57E600] focus:ring-1 focus:ring-[#57E600] transition-colors appearance-none">
@@ -328,38 +336,29 @@ export const SupportSection: React.FC = () => {
                 <option value="other" className="text-gray-900">Other</option>
               </select>
             </div>
-            
+
             <div>
               <label className="block text-white font-bold text-sm mb-2">Message</label>
               <textarea placeholder="How can we help you?" rows={4} className="w-full bg-white/5 border border-white/10 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#57E600] focus:ring-1 focus:ring-[#57E600] transition-colors resize-none"></textarea>
             </div>
-            
+
             <button type="button" className="bg-[#57E600] hover:bg-[#4ddb00] text-white font-bold py-3.5 px-8 rounded-xl transition-colors mt-2 self-start shadow-sm">
               Send Message
             </button>
           </form>
         </div>
 
-        {/* OFFICE & GRIEVANCE ADDRESS */}
-        <div className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-[32px] p-8 md:p-12 shadow-[0_15px_40px_rgba(0,0,0,0.2)] mb-8 max-w-4xl mx-auto flex flex-col md:flex-row gap-8 justify-between relative overflow-hidden">
+        {/* OFFICE ADDRESS */}
+        <div className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-[32px] p-8 md:p-12 shadow-[0_15px_40px_rgba(0,0,0,0.2)] mb-8 max-w-4xl mx-auto flex flex-col gap-8 items-center text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#77FF00]/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
           
-          <div className="flex-1 z-10">
-            <h4 className="text-lg font-black text-white mb-4 flex items-center gap-3"><MapPin className="w-5 h-5 text-[#57E600]" /> Registered Office</h4>
+          <div className="flex flex-col items-center z-10">
+            <h4 className="text-lg font-black text-white mb-4 flex items-center justify-center gap-3"><MapPin className="w-5 h-5 text-[#57E600]" /> Registered Office</h4>
             <p className="text-gray-400 text-sm leading-relaxed font-medium">
-              Ghumakkadh Mobility Pvt. Ltd.<br />
-              123 Innovation Tech Park, Sector 45<br />
-              Gurugram, Haryana - 122003, India
-            </p>
-          </div>
-          <div className="hidden md:block w-[1px] bg-white/10 z-10"></div>
-          <div className="flex-1 z-10">
-            <h4 className="text-lg font-black text-white mb-4 flex items-center gap-3"><ShieldCheck className="w-5 h-5 text-[#ffba00]" /> Grievance Officer</h4>
-            <p className="text-gray-400 text-sm leading-relaxed font-medium">
-              Name: Mr. Ramesh Kumar<br />
-              Email: grievance@ghumakkadh.com<br />
-              Response Time: Within 24-48 hours<br />
-              <span className="text-gray-500 italic mt-2 block">For formal complaints and escalations only.</span>
+              Hindustaan Innovations Pvt. Ltd.<br />
+              CO: B-41, Sector-8A, Kamal-Vihar,<br />
+              Raipur (C.G.) - 492001<br />
+              Phone: 0771- 299 - 4005
             </p>
           </div>
         </div>
@@ -371,8 +370,8 @@ export const SupportSection: React.FC = () => {
             <a href="#" className="w-12 h-12 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white rounded-full flex items-center justify-center transition-colors border border-white/10 shadow-sm">
               <span className="font-bold text-lg">𝕏</span>
             </a>
-            <a href="#" className="w-12 h-12 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-[#E1306C] rounded-full flex items-center justify-center transition-colors border border-white/10 shadow-sm font-bold">
-              IG
+            <a href="#" className="w-12 h-12 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-[#E1306C] rounded-full flex items-center justify-center transition-colors border border-white/10 shadow-sm">
+              <Instagram className="w-5 h-5" />
             </a>
             <a href="#" className="w-12 h-12 bg-white/5 hover:bg-[#25D366]/20 text-[#25D366] rounded-full flex items-center justify-center transition-colors border border-white/10 shadow-sm">
               <MessageCircle className="w-5 h-5" />
@@ -382,14 +381,14 @@ export const SupportSection: React.FC = () => {
 
         {/* BOTTOM BRAND VALUES */}
         <div className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-[32px] p-8 md:p-12 flex flex-col lg:flex-row justify-between gap-8 lg:gap-4 shadow-[0_15px_40px_rgba(0,0,0,0.2)] mb-8">
-          
+
           <div className="flex flex-col gap-4 flex-1 items-start sm:flex-row sm:items-start lg:pr-4">
             <div className="w-8 h-8 bg-[#57E600] rounded-full flex items-center justify-center shrink-0 mt-1">
               <Users className="w-4 h-4 text-white" fill="currentColor" />
             </div>
             <div>
               <h4 className="font-bold text-white text-[14px] mb-1.5">Community First</h4>
-              <p className="text-[12px] text-gray-400 font-medium leading-relaxed">Building a community that<br/>moves together and grows<br/>together.</p>
+              <p className="text-[12px] text-gray-400 font-medium leading-relaxed">Building a community that<br />moves together and grows<br />together.</p>
             </div>
           </div>
 
@@ -399,7 +398,7 @@ export const SupportSection: React.FC = () => {
             </div>
             <div>
               <h4 className="font-bold text-white text-[14px] mb-1.5">Trusted by Millions</h4>
-              <p className="text-[12px] text-gray-400 font-medium leading-relaxed">Millions of happy commuters<br/>and customers across<br/>India trust us.</p>
+              <p className="text-[12px] text-gray-400 font-medium leading-relaxed">Millions of happy commuters<br />and customers across<br />India trust us.</p>
             </div>
           </div>
 
@@ -409,7 +408,7 @@ export const SupportSection: React.FC = () => {
             </div>
             <div>
               <h4 className="font-bold text-white text-[14px] mb-1.5">Always Improving</h4>
-              <p className="text-[12px] text-gray-400 font-medium leading-relaxed">We keep innovating to bring<br/>you better features and<br/>experiences.</p>
+              <p className="text-[12px] text-gray-400 font-medium leading-relaxed">We keep innovating to bring<br />you better features and<br />experiences.</p>
             </div>
           </div>
 
@@ -419,7 +418,7 @@ export const SupportSection: React.FC = () => {
             </div>
             <div>
               <h4 className="font-bold text-white text-[14px] mb-1.5">Made in India</h4>
-              <p className="text-[12px] text-gray-400 font-medium leading-relaxed">Proudly made for India,<br/>powering movement in<br/>every city and town.</p>
+              <p className="text-[12px] text-gray-400 font-medium leading-relaxed">Proudly made for India,<br />powering movement in<br />every city and town.</p>
             </div>
           </div>
 

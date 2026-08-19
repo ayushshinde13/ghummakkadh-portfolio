@@ -14,8 +14,10 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-[#1E293B] mb-4">We're here to help</h2>
             <p>If you have any questions, feedback, or issues, please reach out to our support team.</p>
             <ul className="mt-4 space-y-2">
-              <li><strong>Email:</strong> support@ghumakkadh.com</li>
-              <li><strong>Phone:</strong> +91 98765 43210</li>
+              <li><strong>Email:</strong> support@hindustaan.in</li>
+              <li><strong>Phone:</strong> 0771- 299 - 4005</li>
+              <li><strong>Website:</strong> <a href="https://hindustaan.in/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">hindustaan.in</a></li>
+              <li><strong>Address:</strong> CO: B-41, Sector-8A, Kamal-Vihar, Raipur (C.G.) - 492001</li>
               <li><strong>Support Hours:</strong> 24/7</li>
             </ul>
           </section>

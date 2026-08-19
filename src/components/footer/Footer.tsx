@@ -71,7 +71,6 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-semibold text-lg">Company</h4>
             <ul className="flex flex-col gap-3">
               <li><Link href="/about" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">About Us</Link></li>
-              <li><Link href="/careers" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Careers</Link></li>
               <li><Link href="/contact" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Contact Us</Link></li>
               <li><Link href="/story" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Our Story</Link></li>
             </ul>
@@ -134,7 +133,7 @@ export const Footer: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-8 w-full">
 
           {/* Left: Hindustaan Innovations Pvt. Ltd. */}
-          <div className="flex items-center gap-3">
+          <a href="https://hindustaan.in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
             {/* 'hi' Logo Custom SVG */}
             <svg className="w-[34px] h-[40px] shrink-0" viewBox="8 0 32 50" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -156,7 +155,7 @@ export const Footer: React.FC = () => {
                 Innovations Pvt. Ltd.
               </span>
             </div>
-          </div>
+          </a>
 
           {/* Right: Built in / Built for Hindustaan */}
           <div className="flex items-center gap-4">
