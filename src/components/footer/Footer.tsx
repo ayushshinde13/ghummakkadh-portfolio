@@ -118,10 +118,10 @@ export const Footer: React.FC = () => {
             <p className="text-zinc-400 text-sm">Book rides faster, track your trip live, and travel with confidence.</p>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
-            <a href="#" className="inline-block flex-shrink-0 opacity-80 hover:opacity-100 hover:scale-105 transition-all cursor-pointer">
+            <a href="#" className="inline-block flex-shrink-0 hover:scale-105 transition-all cursor-pointer">
               <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" className="h-[44px] w-auto" />
             </a>
-            <a href="#" className="inline-block flex-shrink-0 opacity-80 hover:opacity-100 hover:scale-105 transition-all cursor-pointer">
+            <a href="#" className="inline-block flex-shrink-0 hover:scale-105 transition-all cursor-pointer">
               <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" className="h-[44px] w-auto" />
             </a>
           </div>

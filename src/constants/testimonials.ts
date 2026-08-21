@@ -5,7 +5,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Aaray Sharma",
     role: "Daily Commuter",
-    location: "Bangalore, KA",
+    location: "Shankar Nagar, Raipur",
     comment:
       "Ghumakkadh has made my daily office commute effortless and economical! The rides are quick, affordable and super reliable.",
     highlightedText: "effortless and economical!",
@@ -29,7 +29,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Riya Verma",
     role: "Student",
-    location: "New Delhi, DL",
+    location: "NIT Campus, Raipur",
     comment:
       "Quick pickups and verified drivers make it super safe to travel. I use Ghumakkadh every day for college and it never disappoints!",
     highlightedText: "super safe to travel.",
@@ -54,7 +54,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Rohit Mehta",
     role: "Working Professional",
-    location: "Mumbai, MH",
+    location: "Telibandha, Raipur",
     comment:
       "As a business traveler, Ghumakkadh helps me reach meetings on time. Comfortable rides, great service and transparent fares!",
     highlightedText: "on time.",
