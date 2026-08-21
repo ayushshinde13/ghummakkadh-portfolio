@@ -15,7 +15,7 @@ export const DriveIntroSection: React.FC<DriveIntroSectionProps> = ({ hideBadge 
         {!hideBadge && (
           <div className="flex flex-col items-start lg:items-center text-left lg:text-center w-full mb-6 lg:mb-8">
             <div className="inline-flex items-center gap-2 bg-[#F5F9F6] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm border border-green-100/50">
-              <span className="text-base">🚗</span> Driver
+              <img src="/images/mini.png" alt="Mini" className="w-6 h-4 object-contain" /> Driver
             </div>
           </div>
         )}

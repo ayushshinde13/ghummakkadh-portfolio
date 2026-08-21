@@ -8,6 +8,7 @@ import {
   Zap, HeartPulse, Umbrella, CalendarDays, Users, Wrench,
   Menu, Bell, MapPin, Navigation, ChevronRight, Smartphone, Banknote
 } from "lucide-react";
+import { FAQAccordion } from "@/components/ui/FAQAccordion";
 
 interface DriveSectionProps {
   hideBadge?: boolean;
@@ -47,7 +48,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
               
               <div className="flex flex-col gap-2.5 flex-1">
                 <div className="w-10 h-10 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                  <Wallet className="w-5 h-5 text-[#57E600]" />
+                  <Wallet className="w-5 h-5 text-black" />
                 </div>
                 <h4 className="font-black text-white text-[13px]">Great Earnings</h4>
                 <p className="text-[11px] text-gray-400 font-medium leading-snug">Earn more with<br/>better incentives</p>
@@ -55,7 +56,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
 
               <div className="flex flex-col gap-2.5 flex-1">
                 <div className="w-10 h-10 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                  <Clock className="w-5 h-5 text-[#57E600]" />
+                  <Clock className="w-5 h-5 text-black" />
                 </div>
                 <h4 className="font-black text-white text-[13px]">Flexible Hours</h4>
                 <p className="text-[11px] text-gray-400 font-medium leading-snug">Drive on your time,<br/>your way</p>
@@ -63,7 +64,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
 
               <div className="flex flex-col gap-2.5 flex-1">
                 <div className="w-10 h-10 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-5 h-5 text-[#57E600]" />
+                  <ShieldCheck className="w-5 h-5 text-black" />
                 </div>
                 <h4 className="font-black text-white text-[13px]">Safe & Secure</h4>
                 <p className="text-[11px] text-gray-400 font-medium leading-snug">Your safety is our<br/>top priority</p>
@@ -99,7 +100,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
                 <div className="flex gap-4 mb-6 relative z-10">
                   <div className="relative shrink-0">
                     <div className="w-8 h-8 bg-[#F3FCEB] rounded-full flex items-center justify-center">
-                      <UserRound className="w-4 h-4 text-[#57E600]" />
+                      <UserRound className="w-4 h-4 text-black" />
                     </div>
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#57E600] rounded-full border-2 border-transparent flex items-center justify-center">
                       <span className="text-[8px] font-black text-white">1</span>
@@ -115,7 +116,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
                 <div className="flex gap-4 mb-6 relative z-10">
                   <div className="relative shrink-0">
                     <div className="w-8 h-8 bg-[#F3FCEB] rounded-full flex items-center justify-center">
-                      <ShieldCheck className="w-4 h-4 text-[#57E600]" />
+                      <ShieldCheck className="w-4 h-4 text-black" />
                     </div>
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#57E600] rounded-full border-2 border-transparent flex items-center justify-center">
                       <span className="text-[8px] font-black text-white">2</span>
@@ -131,7 +132,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
                 <div className="flex gap-4 mb-8 relative z-10">
                   <div className="relative shrink-0">
                     <div className="w-8 h-8 bg-[#F3FCEB] rounded-full flex items-center justify-center">
-                      <Car className="w-4 h-4 text-[#57E600]" />
+                      <Car className="w-4 h-4 text-black" />
                     </div>
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#57E600] rounded-full border-2 border-transparent flex items-center justify-center">
                       <span className="text-[8px] font-black text-white">3</span>
@@ -160,7 +161,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
             
             <div className="flex items-center gap-4 flex-1">
               <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                <IndianRupee className="w-5 h-5 text-[#162238]" />
+                <IndianRupee className="w-5 h-5 text-black" />
               </div>
               <div>
                 <h4 className="font-black text-white text-[13px] mb-0.5">High Earnings</h4>
@@ -172,7 +173,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
 
             <div className="flex items-center gap-4 flex-1">
               <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                <Gift className="w-5 h-5 text-[#57E600]" />
+                <Gift className="w-5 h-5 text-black" />
               </div>
               <div>
                 <h4 className="font-black text-white text-[13px] mb-0.5">Incentives & Bonuses</h4>
@@ -184,7 +185,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
 
             <div className="flex items-center gap-4 flex-1">
               <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                <Headphones className="w-5 h-5 text-[#57E600]" />
+                <Headphones className="w-5 h-5 text-black" />
               </div>
               <div>
                 <h4 className="font-black text-white text-[13px] mb-0.5">24/7 Support</h4>
@@ -196,7 +197,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
 
             <div className="flex items-center gap-4 flex-1">
               <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-5 h-5 text-[#57E600]" />
+                <ShieldCheck className="w-5 h-5 text-black" />
               </div>
               <div>
                 <h4 className="font-black text-white text-[13px] mb-0.5">Insurance Cover</h4>
@@ -207,8 +208,8 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
             <div className="w-[1px] h-10 bg-white/10 shrink-0 mx-2"></div>
 
             <div className="flex items-center gap-4 flex-1">
-              <div className="w-12 h-12 rounded-full bg-[#57E600] flex items-center justify-center shrink-0">
-                <Star className="w-5 h-5 text-white" fill="currentColor" />
+              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
+                <Star className="w-5 h-5 text-black" fill="currentColor" />
               </div>
               <div>
                 <h4 className="font-black text-white text-[13px] mb-0.5">Grow with Us</h4>
@@ -590,22 +591,15 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
             <div className="w-6 h-[2px] bg-green-200"></div>
           </div>
           
-          <div className="w-full max-w-4xl flex flex-col gap-4">
-            {[
+          <FAQAccordion 
+            className="max-w-4xl"
+            faqs={[
               { q: "How much can I earn as a Ghumakkadh driver?", a: "Earnings depend on your vehicle category, driving hours, and active incentives. Full-time drivers can earn between ₹15,000 to ₹45,000+ per month." },
               { q: "When do I get paid?", a: "We offer weekly payouts directly to your registered bank account. You can also track your daily earnings in real-time through the driver app." },
               { q: "Can I drive part-time?", a: "Absolutely! You are your own boss. Turn on the app when you want to earn and go offline when you're done. There are no mandatory login hours." },
               { q: "How long does the verification process take?", a: "If all your documents are correct and clear, verification is usually completed within 24-48 hours, allowing you to start driving quickly." }
-            ].map((faq, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-                <div className="flex justify-between items-center mb-3">
-                  <h5 className="text-sm md:text-base font-black text-white">{faq.q}</h5>
-                  <ChevronRight className="w-5 h-5 text-[#57E600]" />
-                </div>
-                <p className="text-[13px] text-gray-400 font-medium leading-relaxed">{faq.a}</p>
-              </div>
-            ))}
-          </div>
+            ]}
+          />
         </div>
 
         {/* 8. FINAL CTA BANNER */}

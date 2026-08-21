@@ -88,98 +88,90 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideBadge = false })
 
 
         {/* Middle Section: Stats and Mission */}
-        <div className="flex flex-col lg:flex-row gap-8 items-start w-full">
-          
-          {/* Left Stats Section */}
-          <div className="flex-1 w-full flex flex-col">
-            {/* Section Header */}
-            <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">
-              <div className="w-6 h-[2px] bg-yellow-400"></div>
-              <h3 className="text-xl sm:text-2xl font-black text-white">
-                Ghumakkadh <span className="text-[#57E600]">in Numbers</span>
-              </h3>
-              <div className="w-6 h-[2px] bg-yellow-400"></div>
-            </div>
-
-            {/* Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Stat 1 */}
-              <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
-                  <Users className="w-7 h-7 text-green-600" />
-                </div>
-                <div>
-                  <p className="text-base font-bold text-white mb-1">Happy Commuters</p>
-                  <p className="text-xs text-gray-400 font-medium">Traveling with us every day</p>
-                </div>
-              </div>
-
-              {/* Stat 2 */}
-              <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-yellow-500/10 flex items-center justify-center shrink-0">
-                  <CarFront className="w-7 h-7 text-yellow-600" />
-                </div>
-                <div>
-                  <p className="text-base font-bold text-white mb-1">Verified Drivers</p>
-                  <p className="text-xs text-gray-400 font-medium">Earning and growing with us</p>
-                </div>
-              </div>
-
-              {/* Stat 3 */}
-              <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center shrink-0">
-                  <MapPin className="w-7 h-7 text-purple-600" />
-                </div>
-                <div>
-                  <p className="text-base font-bold text-white mb-1">Cities</p>
-                  <p className="text-xs text-gray-400 font-medium">Across India and expanding</p>
-                </div>
-              </div>
-
-              {/* Stat 4 */}
-              <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-7 h-7 text-green-600" />
-                </div>
-                <div>
-                  <p className="text-base font-bold text-white mb-1">Safety Commitment</p>
-                  <p className="text-xs text-gray-400 font-medium">Your safety is our priority</p>
-                </div>
-              </div>
-            </div>
+        <div className="flex flex-col w-full">
+          {/* Section Header */}
+          <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">
+            <div className="w-6 h-[2px] bg-yellow-400"></div>
+            <h3 className="text-xl sm:text-2xl font-black text-white">
+              Ghumakkadh <span className="text-[#57E600]">in Numbers</span>
+            </h3>
+            <div className="w-6 h-[2px] bg-yellow-400"></div>
           </div>
 
-          {/* Right Mission/Vision Section */}
-          <div className="w-full lg:w-[450px] flex flex-col gap-4">
+          {/* Unified Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            {/* Mission Card */}
-            <div className="bg-[#151B2E] border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)] rounded-3xl p-8 flex gap-4 h-full">
-              <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
-                <Flag className="w-6 h-6 text-green-700" />
+            {/* Stat 1 */}
+            <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-start gap-4 h-full hover:bg-[#1a2238] transition-colors">
+              <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
+                <Users className="w-7 h-7 text-green-600" />
               </div>
-              <div>
-                <h4 className="font-black text-lg text-white mb-2">Our Mission</h4>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium">
+              <div className="pt-1">
+                <p className="text-base font-bold text-white mb-1">Happy Commuters</p>
+                <p className="text-xs text-gray-400 font-medium leading-relaxed">Traveling with us every day</p>
+              </div>
+            </div>
+
+            {/* Stat 2 */}
+            <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-start gap-4 h-full hover:bg-[#1a2238] transition-colors">
+              <div className="w-14 h-14 rounded-full bg-yellow-500/10 flex items-center justify-center shrink-0">
+                <CarFront className="w-7 h-7 text-yellow-600" />
+              </div>
+              <div className="pt-1">
+                <p className="text-base font-bold text-white mb-1">Verified Drivers</p>
+                <p className="text-xs text-gray-400 font-medium leading-relaxed">Earning and growing with us</p>
+              </div>
+            </div>
+
+            {/* Stat 3 */}
+            <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-start gap-4 h-full hover:bg-[#1a2238] transition-colors">
+              <div className="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center shrink-0">
+                <MapPin className="w-7 h-7 text-purple-600" />
+              </div>
+              <div className="pt-1">
+                <p className="text-base font-bold text-white mb-1">Cities</p>
+                <p className="text-xs text-gray-400 font-medium leading-relaxed">Across India and expanding</p>
+              </div>
+            </div>
+
+            {/* Stat 4 */}
+            <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-start gap-4 h-full hover:bg-[#1a2238] transition-colors">
+              <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-7 h-7 text-green-600" />
+              </div>
+              <div className="pt-1">
+                <p className="text-base font-bold text-white mb-1">Safety Commitment</p>
+                <p className="text-xs text-gray-400 font-medium leading-relaxed">Your safety is our priority</p>
+              </div>
+            </div>
+
+            {/* Mission */}
+            <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-start gap-4 h-full hover:bg-[#1a2238] transition-colors">
+              <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
+                <Flag className="w-7 h-7 text-green-600" />
+              </div>
+              <div className="pt-1">
+                <p className="text-base font-bold text-white mb-1">Our Mission</p>
+                <p className="text-xs text-gray-400 font-medium leading-relaxed">
                   To make everyday travel joyful, affordable and accessible for millions of Indians while creating opportunities for our driver partners.
                 </p>
               </div>
             </div>
 
-            {/* Vision Card */}
-            <div className="bg-[#151B2E] border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)] rounded-3xl p-8 flex gap-4 h-full">
-              <div className="w-12 h-12 rounded-full bg-yellow-500/10 flex items-center justify-center shrink-0">
-                <Users className="w-6 h-6 text-yellow-600" />
+            {/* Vision */}
+            <div className="bg-[#151B2E] rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10 flex items-start gap-4 h-full hover:bg-[#1a2238] transition-colors">
+              <div className="w-14 h-14 rounded-full bg-yellow-500/10 flex items-center justify-center shrink-0">
+                <Users className="w-7 h-7 text-yellow-600" />
               </div>
-              <div>
-                <h4 className="font-black text-lg text-white mb-2">Our Vision</h4>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium">
+              <div className="pt-1">
+                <p className="text-base font-bold text-white mb-1">Our Vision</p>
+                <p className="text-xs text-gray-400 font-medium leading-relaxed">
                   To build the most loved and trusted mobility platform that empowers communities and shapes the future of movement in India.
                 </p>
               </div>
             </div>
 
           </div>
-
         </div>
 
       </Container>
