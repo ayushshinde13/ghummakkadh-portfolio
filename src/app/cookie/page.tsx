@@ -1,22 +1,30 @@
 import React from 'react';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
 export default function CookiePolicyPage() {
   return (
-    <main className="min-h-screen bg-[#F8FAFC] text-[#1E293B] pt-24 pb-32">
-      <div className="max-w-4xl mx-auto px-4 md:px-8">
+    <main className="min-h-screen bg-[#0A0E1A] pt-32 pb-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
+        {/* Back Button */}
+        <Link 
+          href="/" 
+          className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-8 group"
+        >
+          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+          <span>Back to Home</span>
+        </Link>
+
         {/* Header */}
-        <div className="mb-12 border-b border-gray-200 pb-8">
-          <h1 className="text-[40px] md:text-5xl font-black text-[#1E293B] tracking-tight mb-4">
-            Cookie & Tracking Technologies Policy
-          </h1>
-          <p className="text-gray-500 font-medium">
-            Last updated: August 2026
-          </p>
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-black text-white mb-4">Cookie & Tracking Technologies Policy</h1>
+          <p className="text-zinc-400 text-lg">Last updated: August 2026</p>
         </div>
-        
+
         {/* Content */}
-        <div className="space-y-6 text-[15px] text-[#64748B] leading-relaxed bg-white p-8 md:p-10 rounded-[28px] shadow-sm border border-gray-100/80">
+        <div className="bg-white rounded-3xl p-8 md:p-12 text-zinc-600 space-y-8 shadow-xl">
+
           
           <p>
             Ghumakkadh's Rider and Partner apps do not use traditional browser cookies. Instead, we use similar technologies — such as device identifiers, local app storage, and software development kits (SDKs) — to keep the app running smoothly, remember your preferences, and understand how the app is used.
@@ -50,6 +58,7 @@ export default function CookiePolicyPage() {
             If you have questions about how tracking technologies are used in the app, contact us at <a href="mailto:support@hindustaan.in" className="text-green-600 hover:underline">support@hindustaan.in</a>.
           </p>
 
+        
         </div>
       </div>
     </main>
