@@ -107,6 +107,7 @@ export const Footer: React.FC = () => {
               <li><Link href="/privacy" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Privacy Policy</Link></li>
               <li><Link href="/cookie" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Cookie Policy</Link></li>
               <li><Link href="/shipping" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Parcel Shipping Policy</Link></li>
+              <li><Link href="/delete-account" className="text-zinc-400 hover:text-[#77FF00] transition-colors text-sm">Delete Account</Link></li>
             </ul>
           </div>
 
