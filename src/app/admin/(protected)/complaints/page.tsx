@@ -1,19 +1,49 @@
 "use client";
 
-import React, { useState } from "react";
-import { Search, MessageSquare, CheckCircle, Clock, FileText, ChevronRight, X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Search, MessageSquare, CheckCircle, Clock, FileText, ChevronRight, X, Send } from "lucide-react";
+import { api } from "@/lib/api";
 
 export default function ComplaintsPage() {
-  const [complaints, setComplaints] = useState([
-    { id: "CMP-0042", raisedBy: "Customer", raisedByName: "Priya Sharma", against: "Ramesh Kumar (Driver)", category: "Rude Behavior", description: "Driver was very rude during the ride and refused to turn on the AC.", status: "Open", date: "12 Aug 2026" },
-    { id: "CMP-0041", raisedBy: "Driver", raisedByName: "Suresh Singh", against: "Amit Verma (Customer)", category: "Payment Issue", description: "Customer refused to pay the surge amount.", status: "In Progress", date: "10 Aug 2026" },
-    { id: "CMP-0040", raisedBy: "Customer", raisedByName: "Sneha Gupta", against: "Vijay Yadav (Driver)", category: "Unsafe Driving", description: "Driver was overspeeding constantly.", status: "Resolved", date: "05 Aug 2026" },
-  ]);
+  const [complaints, setComplaints] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedComplaint, setSelectedComplaint] = useState<any>(null);
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [complaintDetails, setComplaintDetails] = useState<any>(null);
+  const [isDetailsLoading, setIsDetailsLoading] = useState(false);
+  const [replyText, setReplyText] = useState("");
+
+  const fetchComplaints = async () => {
+    try {
+      setIsLoading(true);
+      const res = await api.get("/admin/complaints");
+      const fetchedComplaints = res.data?.complaints || [];
+      const formatted = fetchedComplaints.map((c: any) => ({
+        id: c.id,
+        raisedBy: c.complainant?.roles?.[0] || "User",
+        raisedByName: c.complainant?.name || "Unknown",
+        against: c.tripId ? `Trip #${c.tripId}` : "N/A",
+        category: c.category || "General",
+        description: c.subject || c.lastMessage || "No description provided.",
+        status: c.status === "RESOLVED" ? "Resolved" : (c.status === "IN_PROGRESS" ? "In Progress" : "Open"),
+        date: new Date(c.createdAt).toLocaleDateString(),
+        raw: c,
+      }));
+      setComplaints(formatted);
+    } catch (error) {
+      console.error("Failed to fetch complaints", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchComplaints();
+  }, []);
 
   const filteredComplaints = complaints.filter(c => {
     const query = searchQuery.toLowerCase();
@@ -22,8 +52,48 @@ export default function ComplaintsPage() {
     return matchesSearch && matchesStatus;
   });
 
-  const handleResolve = (id: string) => {
-    setComplaints(prev => prev.map(c => c.id === id ? { ...c, status: "Resolved" } : c));
+  const handleResolve = async (id: string) => {
+    try {
+      await api.put(`/admin/complaints/${id}/resolve`, { resolution: "Resolved via admin dashboard." });
+      fetchComplaints();
+    } catch (error) {
+      console.error("Failed to resolve complaint", error);
+      alert("Failed to resolve complaint");
+    }
+  };
+
+  const fetchComplaintDetails = async (id: string) => {
+    try {
+      setIsDetailsLoading(true);
+      const res = await api.get(`/admin/complaints/${id}`);
+      setComplaintDetails(res.data);
+    } catch (error) {
+      console.error("Failed to fetch complaint details", error);
+    } finally {
+      setIsDetailsLoading(false);
+    }
+  };
+
+  const handleOpenModal = (row: any) => {
+    setSelectedComplaint(row);
+    setIsModalOpen(true);
+    fetchComplaintDetails(row.id);
+  };
+
+  const handleSendReply = async () => {
+    if (selectedComplaint && replyText.trim()) {
+      try {
+        await api.post(`/admin/complaints/${selectedComplaint.id}/messages`, {
+          message: replyText,
+        });
+        setReplyText("");
+        fetchComplaintDetails(selectedComplaint.id);
+        fetchComplaints();
+      } catch (error) {
+        console.error("Failed to send reply", error);
+        alert("Failed to send reply");
+      }
+    }
   };
 
   return (
@@ -135,7 +205,7 @@ export default function ComplaintsPage() {
                         </button>
                       )}
                       <button 
-                        onClick={() => { setSelectedComplaint(row); setIsModalOpen(true); }}
+                        onClick={() => handleOpenModal(row)}
                         className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-medium transition-colors shrink-0"
                       >
                         <FileText size={14} className="text-gray-400" />
@@ -219,6 +289,47 @@ export default function ComplaintsPage() {
                   {selectedComplaint.status}
                 </span>
               </div>
+              <div>
+                <div className="text-sm font-medium text-gray-400 mb-2">Message History</div>
+                <div className="bg-[#111827] border border-white/10 rounded-xl p-4 max-h-48 overflow-y-auto flex flex-col gap-3">
+                  {isDetailsLoading ? (
+                    <div className="text-gray-500 text-sm">Loading messages...</div>
+                  ) : complaintDetails?.ticket?.messages?.length > 0 ? (
+                    complaintDetails.ticket.messages.map((msg: any) => (
+                      <div key={msg.id} className={`flex flex-col ${msg.senderRole === 'ADMIN' ? 'items-end' : 'items-start'}`}>
+                        <div className={`px-3 py-2 rounded-lg text-sm max-w-[80%] ${msg.senderRole === 'ADMIN' ? 'bg-[var(--admin-primary)]/10 text-[var(--admin-primary)]' : 'bg-white/10 text-white'}`}>
+                          {msg.message}
+                        </div>
+                        <div className="text-xs text-gray-500 mt-1">{new Date(msg.createdAt).toLocaleString()}</div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-gray-500 text-sm">No messages yet.</div>
+                  )}
+                </div>
+              </div>
+
+              {selectedComplaint.status !== "Resolved" && (
+                <div>
+                  <div className="text-sm font-medium text-gray-400 mb-2">Reply</div>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={replyText}
+                      onChange={(e) => setReplyText(e.target.value)}
+                      placeholder="Type your response..."
+                      className="flex-1 h-10 bg-[#111827] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-lg px-3 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+                    />
+                    <button 
+                      onClick={handleSendReply}
+                      disabled={!replyText.trim()}
+                      className="h-10 px-4 rounded-lg bg-[var(--admin-primary)] text-[#0A0E1A] font-bold hover:bg-[#66E000] disabled:opacity-50 transition-colors text-sm flex items-center justify-center"
+                    >
+                      <Send size={16} />
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
             
             <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">

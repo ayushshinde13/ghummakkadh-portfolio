@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, MapPin, Package, CheckCircle, XCircle, Clock, SlidersHorizontal, Eye, X, Navigation } from "lucide-react";
+import { api } from "@/lib/api";
 
-type ParcelType = "Document" | "Small Package" | "Large Package";
+type ParcelType = "Document" | "Small Package" | "Large Package" | string;
 type ParcelStatus = "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
 
 interface ParcelData {
@@ -27,64 +28,41 @@ export default function ParcelMonitoringPage() {
   const [typeFilter, setTypeFilter] = useState("all");
   const [cityFilter, setCityFilter] = useState("all");
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [parcels, setParcels] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Mock Data
-  const mockParcels: ParcelData[] = [
-    { 
-      id: "PKG-84729", 
-      sender: "Priya Sharma", 
-      receiver: "Rahul Verma", 
-      receiverPhone: "+91 9876543210", 
-      driver: "Ramesh Kumar", 
-      pickup: "Marine Drive, Raipur", 
-      drop: "City Center Mall, Raipur", 
-      type: "Small Package", 
-      status: "In Transit", 
-      fare: "₹85", 
-      bookedAt: "15 mins ago" 
-    },
-    { 
-      id: "PKG-84728", 
-      sender: "Amit Verma", 
-      receiver: "Aakash Singh", 
-      receiverPhone: "+91 9123456789", 
-      driver: "Suresh Singh", 
-      pickup: "Bhilai Steel Plant", 
-      drop: "Supela Market", 
-      type: "Document", 
-      status: "Delivered", 
-      fare: "₹45", 
-      bookedAt: "1 hr ago" 
-    },
-    { 
-      id: "PKG-84727", 
-      sender: "Sneha Gupta", 
-      receiver: "Karan Johar", 
-      receiverPhone: "+91 9988776655", 
-      driver: "Vijay Yadav", 
-      pickup: "Naya Raipur", 
-      drop: "Airport", 
-      type: "Large Package", 
-      status: "Picked Up", 
-      fare: "₹150", 
-      bookedAt: "30 mins ago" 
-    },
-    { 
-      id: "PKG-84726", 
-      sender: "Rahul Jain", 
-      receiver: "Mohit Agarwal", 
-      receiverPhone: "+91 9811223344", 
-      driver: "Mohan Lal", 
-      pickup: "Railway Station", 
-      drop: "Telibandha", 
-      type: "Small Package", 
-      status: "Cancelled", 
-      fare: "₹0", 
-      bookedAt: "3 hrs ago" 
-    },
-  ];
+  useEffect(() => {
+    const fetchParcels = async () => {
+      try {
+        setIsLoading(true);
+        // Using trip type PARCEL/DELIVERY or similar
+        const res = await api.get("/admin/trips?type=PARCEL");
+        const fetchedTrips = res.data?.trips || [];
+        const formatted = fetchedTrips.map((p: any) => ({
+          id: p.id,
+          sender: p.rider?.name || "Unknown",
+          receiver: p.parcelInfo?.receiverName || "Unknown",
+          receiverPhone: "N/A", // Not exposed in list projection
+          driver: p.driver?.name || "Unassigned",
+          pickup: p.pickupAddress,
+          drop: p.dropAddress,
+          type: p.parcelInfo?.packageSize || "Small Package",
+          status: p.status === "COMPLETED" ? "Delivered" : (p.status === "CANCELLED" ? "Cancelled" : (p.status === "ON_THE_WAY" || p.status === "ARRIVED" ? "Picked Up" : "In Transit")),
+          fare: p.payment?.amount ? `₹${p.payment.amount}` : (p.fareEstimate ? `₹${p.fareEstimate}` : "N/A"),
+          bookedAt: new Date(p.requestedAt).toLocaleString(),
+          raw: p
+        }));
+        setParcels(formatted);
+      } catch (error) {
+        console.error("Failed to fetch parcels", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchParcels();
+  }, []);
 
-  const filteredParcels = mockParcels.filter(parcel => {
+  const filteredParcels = parcels.filter(parcel => {
     const matchesSearch = parcel.id.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           parcel.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           parcel.receiver.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -281,13 +259,10 @@ export default function ParcelMonitoringPage() {
                       <button className="p-1.5 rounded-md hover:bg-white/10 text-gray-400 transition-colors" title="View Details">
                         <Eye size={16} />
                       </button>
-                      <button 
-                        onClick={() => setSelectedMapParcel(row.id)}
-                        className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-medium transition-colors shrink-0"
-                      >
+                      <span className="inline-flex items-center justify-center h-8 px-3 rounded-md bg-white/5 border border-white/10 text-gray-400 text-xs font-medium cursor-not-allowed shrink-0" title="Live tracking not available for this state">
                         <MapPin size={14} className="text-[var(--admin-primary)]" />
                         Map
-                      </button>
+                      </span>
                     </div>
                   </td>
                 </tr>

@@ -1,19 +1,68 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Siren, PhoneCall, ShieldAlert, CheckCircle, Search, MapPin, X, FileText } from "lucide-react";
+import { api } from "@/lib/api";
+import io from "socket.io-client";
 
 export default function SOSPage() {
-  const [alerts, setAlerts] = useState([
-    { id: "SOS-590", tripId: "TRP-84729", triggeredBy: "Customer", name: "Priya Sharma", location: "Marine Drive, Raipur", time: "Just now", status: "Active" },
-    { id: "SOS-589", tripId: "TRP-84610", triggeredBy: "Driver", name: "Ramesh Kumar", location: "Highway 43, Bhilai", time: "2 hrs ago", status: "Resolved" },
-    { id: "SOS-588", tripId: "TRP-84592", triggeredBy: "Customer", name: "Sneha Gupta", location: "City Center, Bilaspur", time: "1 day ago", status: "Resolved" },
-  ]);
+  const [alerts, setAlerts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedReport, setSelectedReport] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reportDetails, setReportDetails] = useState<any>(null);
+  const [isDetailsLoading, setIsDetailsLoading] = useState(false);
+
+  const fetchAlerts = async () => {
+    try {
+      setIsLoading(true);
+      const res = await api.get("/admin/sos/alerts");
+      const fetchedAlerts = res.data?.alerts || [];
+      const formatted = fetchedAlerts.map((a: any) => ({
+        id: a.id,
+        tripId: a.tripId ? `Trip #${a.tripId}` : "N/A",
+        triggeredBy: a.triggeredUser?.roles?.[0] || "User",
+        name: a.triggeredUser?.name || "Unknown",
+        location: a.trip?.pickupAddress || `${a.lat}, ${a.lng}`,
+        time: new Date(a.createdAt).toLocaleString(),
+        status: a.status === "TRIGGERED" ? "Active" : (a.status === "ACKNOWLEDGED" ? "Acknowledged" : "Resolved"),
+        raw: a,
+      }));
+      setAlerts(formatted);
+    } catch (error) {
+      console.error("Failed to fetch SOS alerts", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAlerts();
+    
+    // Connect to WebSocket for real-time SOS alerts
+    const socket = io("http://localhost:8000", { withCredentials: true });
+    
+    socket.on("SOS_ALERT_TRIGGERED", (payload) => {
+      console.log("CRITICAL: SOS ALERT TRIGGERED", payload);
+      alert(`🚨 NEW SOS ALERT TRIGGERED 🚨\nTrip: ${payload.tripId}`);
+      fetchAlerts();
+    });
+
+    socket.on("SOS_ALERT_ACKNOWLEDGED", (payload) => {
+      fetchAlerts();
+    });
+    
+    socket.on("SOS_ALERT_RESOLVED", (payload) => {
+      fetchAlerts();
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const filteredAlerts = alerts.filter(a => {
     const query = searchQuery.toLowerCase();
@@ -22,8 +71,43 @@ export default function SOSPage() {
     return matchesSearch && matchesStatus;
   });
 
-  const handleResolve = (id: string) => {
-    setAlerts(prev => prev.map(a => a.id === id ? { ...a, status: "Resolved" } : a));
+  const handleResolve = async (id: string) => {
+    try {
+      await api.put(`/admin/sos/alerts/${id}/resolve`, { status: "RESOLVED", notes: "Resolved by admin." });
+      setIsModalOpen(false);
+      fetchAlerts();
+    } catch (error) {
+      console.error("Failed to resolve SOS alert", error);
+      alert("Failed to resolve SOS alert");
+    }
+  };
+
+  const handleAcknowledge = async (id: string) => {
+    try {
+      await api.put(`/admin/sos/alerts/${id}/acknowledge`, {});
+      fetchAlerts();
+    } catch (error) {
+      console.error("Failed to acknowledge SOS alert", error);
+      alert("Failed to acknowledge SOS alert");
+    }
+  };
+
+  const fetchAlertDetails = async (id: string) => {
+    try {
+      setIsDetailsLoading(true);
+      const res = await api.get(`/admin/sos/alerts/${id}`);
+      setReportDetails(res.data);
+    } catch (error) {
+      console.error("Failed to fetch SOS details", error);
+    } finally {
+      setIsDetailsLoading(false);
+    }
+  };
+
+  const handleOpenModal = (row: any) => {
+    setSelectedReport(row);
+    setIsModalOpen(true);
+    fetchAlertDetails(row.id);
   };
 
   const activeAlertsCount = alerts.filter(a => a.status === "Active").length;
@@ -141,51 +225,42 @@ export default function SOSPage() {
                   </td>
                   <td className="px-4 py-4">
                     {row.status === "Active" && (
-                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium border border-red-500/30 bg-red-500/20 text-red-500 shadow-[0_0_10px_rgba(239,68,68,0.2)]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
-                        {row.status}
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border border-red-500/20 bg-red-500/10 text-red-500 animate-pulse">
+                        <Siren size={12} />
+                        Active
+                      </span>
+                    )}
+                    {row.status === "Acknowledged" && (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border border-amber-500/20 bg-amber-500/10 text-amber-500">
+                        <ShieldAlert size={12} />
+                        Acknowledged
                       </span>
                     )}
                     {row.status === "Resolved" && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border border-green-500/20 bg-green-500/10 text-green-500">
-                        {row.status}
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border border-green-500/20 bg-green-500/10 text-[var(--admin-primary)]">
+                        <CheckCircle size={12} />
+                        Resolved
                       </span>
                     )}
                   </td>
                   <td className="px-4 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      {row.status === "Active" ? (
-                        <>
-                          <button 
-                            onClick={() => alert(`Calling ${row.name}...`)}
-                            className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-white text-[#0A0E1A] text-xs font-bold shadow hover:bg-gray-200 shrink-0 transition-colors"
-                          >
-                            <PhoneCall size={14} />
-                            Call
-                          </button>
-                          <button 
-                            onClick={() => alert(`Dispatching emergency services to ${row.location}...`)}
-                            className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-red-600 text-white text-xs font-bold shadow hover:bg-red-700 shrink-0 transition-colors"
-                          >
-                            <ShieldAlert size={14} />
-                            Dispatch
-                          </button>
-                          <button 
-                            onClick={() => handleResolve(row.id)}
-                            className="p-1.5 rounded-md hover:bg-white/10 text-gray-400 hover:text-green-500 transition-colors ml-2" 
-                            title="Mark Resolved"
-                          >
-                            <CheckCircle size={18} />
-                          </button>
-                        </>
-                      ) : (
+                      {row.status === "Active" && (
                         <button 
-                          onClick={() => { setSelectedReport(row); setIsModalOpen(true); }}
-                          className="text-xs font-medium text-gray-500 hover:text-white transition-colors"
+                          onClick={() => handleAcknowledge(row.id)}
+                          className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-amber-500 text-black text-xs font-bold shadow transition-colors hover:bg-amber-600 shrink-0 mr-2"
                         >
-                          View Report
+                          <ShieldAlert size={14} />
+                          Acknowledge
                         </button>
                       )}
+                      <button 
+                        onClick={() => handleOpenModal(row)}
+                        className="p-1.5 rounded-md hover:bg-white/10 text-gray-400 transition-colors ml-2" 
+                        title="View Incident Report"
+                      >
+                        <FileText size={18} />
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -224,7 +299,7 @@ export default function SOSPage() {
               <div className="flex justify-between items-center pb-4 border-b border-white/10">
                 <div>
                   <div className="text-sm text-gray-400">Triggered By</div>
-                  <div className="text-lg font-bold text-white">{selectedReport.name} ({selectedReport.triggeredBy})</div>
+                  <div className="text-lg font-bold text-white">{selectedReport.name}</div>
                 </div>
                 <div className="text-right">
                   <div className="text-sm text-gray-400">SOS ID</div>
@@ -240,33 +315,62 @@ export default function SOSPage() {
                     <span>{selectedReport.location}</span>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <div className="text-sm text-gray-400">Time of Incident</div>
-                    <div className="text-sm font-medium text-white">{selectedReport.time}</div>
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-400">Associated Trip</div>
-                    <div className="text-sm font-mono text-[var(--admin-primary)]">{selectedReport.tripId}</div>
-                  </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-400">Current Status</span>
+                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold border ${
+                    selectedReport.status === "Active" ? "bg-red-500/20 text-red-500 border-red-500/30 animate-pulse" :
+                    selectedReport.status === "Acknowledged" ? "bg-amber-500/20 text-amber-500 border-amber-500/30" :
+                    "bg-green-500/20 text-[var(--admin-primary)] border-green-500/30"
+                  }`}>
+                    {selectedReport.status === "Active" && <Siren size={14} />}
+                    {selectedReport.status === "Acknowledged" && <ShieldAlert size={14} />}
+                    {selectedReport.status === "Resolved" && <CheckCircle size={14} />}
+                    {selectedReport.status.toUpperCase()}
+                  </span>
                 </div>
               </div>
 
-              <div className="flex justify-between items-center">
-                <div className="text-sm text-gray-400">Final Status</div>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border border-green-500/20 bg-green-500/10 text-green-500">
-                  {selectedReport.status}
-                </span>
-              </div>
+              {isDetailsLoading && (
+                <div className="text-center text-sm text-gray-400 py-4">Loading dossier...</div>
+              )}
+              {reportDetails && reportDetails.trip && (
+                <div className="rounded-xl border border-white/10 overflow-hidden bg-white/5">
+                  <div className="p-3 bg-white/5 border-b border-white/10 text-sm font-semibold text-white">Trip Involvement</div>
+                  <div className="p-4 flex flex-col gap-2 text-sm text-gray-300">
+                    <p><span className="text-gray-500">Rider:</span> {reportDetails.trip.rider?.name}</p>
+                    <p><span className="text-gray-500">Driver:</span> {reportDetails.trip.driver?.name || "N/A"}</p>
+                    <p><span className="text-gray-500">Status:</span> {reportDetails.trip.status}</p>
+                  </div>
+                </div>
+              )}
             </div>
             
-            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end">
+            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="px-6 py-2 rounded-md bg-white/10 text-white font-medium hover:bg-white/20 transition-colors text-sm"
+                className="px-4 py-2 rounded-md hover:bg-white/10 text-gray-300 font-medium transition-colors text-sm"
               >
-                Close Report
+                Close
               </button>
+              {selectedReport.status === "Active" && (
+                <button 
+                  onClick={() => handleAcknowledge(selectedReport.id)}
+                  className="px-4 py-2 rounded-md bg-amber-500 text-black font-bold hover:bg-amber-600 transition-colors text-sm flex items-center gap-1.5"
+                >
+                  <ShieldAlert size={16} />
+                  Acknowledge Alert
+                </button>
+              )}
+              {(selectedReport.status === "Active" || selectedReport.status === "Acknowledged") && (
+                <button 
+                  onClick={() => handleResolve(selectedReport.id)}
+                  className="px-4 py-2 rounded-md bg-green-500 text-black font-bold hover:bg-green-600 transition-colors text-sm flex items-center gap-1.5"
+                >
+                  <CheckCircle size={16} />
+                  Mark as Resolved
+                </button>
+              )}
             </div>
           </div>
         </div>

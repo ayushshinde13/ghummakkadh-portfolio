@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, Map, SlidersHorizontal, MapPin, Activity, CheckCircle, XCircle, Clock, X, Navigation } from "lucide-react";
+import { api } from "@/lib/api";
 
 type TripStatus = "Ongoing" | "Completed" | "Cancelled";
 
@@ -22,15 +23,45 @@ export default function TripMonitoringPage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
 
-  // Mock Data
-  const mockTrips: TripData[] = [
-    { id: "TRP-84729", customer: "Priya Sharma", driver: "Ramesh Kumar", pickup: "Marine Drive, Raipur", drop: "City Center Mall, Raipur", status: "Ongoing", fare: "Est. ₹120", startedAt: "10 mins ago" },
-    { id: "TRP-84728", customer: "Amit Verma", driver: "Suresh Singh", pickup: "Bhilai Steel Plant", drop: "Supela Market", status: "Completed", fare: "₹85", startedAt: "1 hr ago" },
-    { id: "TRP-84727", customer: "Sneha Gupta", driver: "Vijay Yadav", pickup: "Naya Raipur", drop: "Airport", status: "Ongoing", fare: "Est. ₹350", startedAt: "25 mins ago" },
-    { id: "TRP-84726", customer: "Rahul Jain", driver: "Mohan Lal", pickup: "Railway Station", drop: "Telibandha", status: "Cancelled", fare: "₹0", startedAt: "3 hrs ago" },
-  ];
+  const [trips, setTrips] = useState<any[]>([]);
+  const [stats, setStats] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const filteredTrips = mockTrips.filter(trip => {
+  useEffect(() => {
+    const fetchTripsAndStats = async () => {
+      try {
+        setIsLoading(true);
+        const [tripsRes, statsRes] = await Promise.all([
+          api.get("/admin/trips"),
+          api.get("/admin/trips/stats")
+        ]);
+        
+        const fetchedTrips = tripsRes.data?.trips || [];
+        const formatted = fetchedTrips.map((t: any) => ({
+          id: t.id,
+          customer: t.rider?.name || "Unknown",
+          driver: t.driver?.name || "Unassigned",
+          pickup: t.pickupAddress,
+          drop: t.dropAddress,
+          status: t.status === "COMPLETED" ? "Completed" : (t.status === "CANCELLED" ? "Cancelled" : "Ongoing"),
+          fare: t.payment?.amount ? `₹${t.payment.amount}` : (t.fareEstimate ? `Est. ₹${t.fareEstimate}` : "N/A"),
+          startedAt: new Date(t.requestedAt).toLocaleString(),
+          raw: t
+        }));
+        
+        setTrips(formatted);
+        setStats(statsRes.data);
+      } catch (error) {
+        console.error("Failed to fetch trips", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchTripsAndStats();
+  }, []);
+
+  const filteredTrips = trips.filter(trip => {
     const matchesSearch = trip.id.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           trip.customer.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           trip.driver.toLowerCase().includes(searchQuery.toLowerCase());
@@ -62,7 +93,7 @@ export default function TripMonitoringPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Active Trips</span>
             <div className="p-2 rounded-md bg-[var(--admin-primary)]/10"><Activity size={16} className="text-[var(--admin-primary)]" /></div>
           </div>
-          <span className="text-3xl font-bold text-white">42</span>
+          <span className="text-3xl font-bold text-white">{stats?.activeOngoing || 0}</span>
         </div>
         
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
@@ -70,7 +101,7 @@ export default function TripMonitoringPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Completed Today</span>
             <div className="p-2 rounded-md bg-green-500/10"><CheckCircle size={16} className="text-green-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-green-500">894</span>
+          <span className="text-3xl font-bold text-green-500">{stats?.completedToday || 0}</span>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
@@ -78,7 +109,7 @@ export default function TripMonitoringPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Cancelled Today</span>
             <div className="p-2 rounded-md bg-red-500/10"><XCircle size={16} className="text-red-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-red-500">23</span>
+          <span className="text-3xl font-bold text-red-500">{stats?.cancelledToday || 0}</span>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
@@ -86,7 +117,7 @@ export default function TripMonitoringPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Avg Trip Time</span>
             <div className="p-2 rounded-md bg-white/5"><Clock size={16} className="text-gray-400" /></div>
           </div>
-          <span className="text-3xl font-bold text-white">18 mins</span>
+          <span className="text-3xl font-bold text-white">{stats?.avgTripDurationMins || 0} mins</span>
         </div>
       </div>
 

@@ -1,18 +1,51 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, IndianRupee, Clock, AlertCircle, CheckCircle, ChevronRight, X, FileText } from "lucide-react";
+import { api } from "@/lib/api";
 
 export default function PayoutsPage() {
-  const [payouts, setPayouts] = useState([
-    { id: "PAY-992", driver: "Ramesh Kumar", totalEarnings: "₹12,450", pending: "₹2,100", lastPayout: "10 Aug 2026", status: "Pending" },
-    { id: "PAY-991", driver: "Suresh Singh", totalEarnings: "₹8,900", pending: "₹0", lastPayout: "12 Aug 2026", status: "Paid" },
-    { id: "PAY-990", driver: "Amit Verma", totalEarnings: "₹15,200", pending: "₹4,500", lastPayout: "01 Aug 2026", status: "Failed" },
-  ]);
+  const [payouts, setPayouts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedPayout, setSelectedPayout] = useState<any>(null);
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [processModalOpen, setProcessModalOpen] = useState(false);
+  const [rejectModalOpen, setRejectModalOpen] = useState(false);
+  
+  const [referenceNumber, setReferenceNumber] = useState("");
+  const [rejectionReason, setRejectionReason] = useState("");
+  const [actionLoading, setActionLoading] = useState(false);
+
+  const fetchPayouts = async () => {
+    try {
+      setIsLoading(true);
+      const res = await api.get("/admin/payouts");
+      const fetchedPayouts = res.data?.payouts || [];
+      
+      const formatted = fetchedPayouts.map((p: any) => ({
+        id: p.id,
+        driver: p.driver?.name || "Unknown",
+        totalEarnings: `₹${p.amount}`, 
+        pending: p.status === "PENDING" ? `₹${p.amount}` : "₹0",
+        lastPayout: new Date(p.createdAt).toLocaleDateString(),
+        status: p.status === "PROCESSED" ? "Paid" : (p.status === "REJECTED" ? "Failed" : "Pending"),
+        raw: p, // keep raw data for modal
+      }));
+      setPayouts(formatted);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPayouts();
+  }, []);
 
   const filteredPayouts = payouts.filter(payout => {
     const matchesSearch = payout.driver.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -21,13 +54,36 @@ export default function PayoutsPage() {
     return matchesSearch && matchesStatus;
   });
 
-  const handlePay = (id: string) => {
-    setPayouts(prev => prev.map(p => {
-      if (p.id === id) {
-        return { ...p, status: "Paid", pending: "₹0", lastPayout: "Just now" };
-      }
-      return p;
-    }));
+  const handleProcessSubmit = async () => {
+    if (!selectedPayout || !referenceNumber) return;
+    try {
+      setActionLoading(true);
+      await api.put(`/admin/payouts/${selectedPayout.id}/process`, { referenceNumber });
+      setProcessModalOpen(false);
+      setReferenceNumber("");
+      fetchPayouts();
+    } catch (err) {
+      console.error("Failed to process payout", err);
+      alert("Failed to process payout");
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleRejectSubmit = async () => {
+    if (!selectedPayout || !rejectionReason) return;
+    try {
+      setActionLoading(true);
+      await api.put(`/admin/payouts/${selectedPayout.id}/reject`, { rejectionReason });
+      setRejectModalOpen(false);
+      setRejectionReason("");
+      fetchPayouts();
+    } catch (err) {
+      console.error("Failed to reject payout", err);
+      alert("Failed to reject payout");
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   return (
@@ -148,21 +204,21 @@ export default function PayoutsPage() {
                   <td className="px-4 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
                       {row.status === "Pending" && (
-                        <button 
-                          onClick={() => handlePay(row.id)}
-                          className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-[var(--admin-primary)] text-[#0A0E1A] text-xs font-bold shadow transition-colors hover:bg-[var(--admin-primary)]/90 shrink-0"
-                        >
-                          <IndianRupee size={12} />
-                          Pay Now
-                        </button>
-                      )}
-                      {row.status === "Failed" && (
-                        <button 
-                          onClick={() => handlePay(row.id)}
-                          className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-red-500 text-white text-xs font-bold shadow transition-colors hover:bg-red-600 shrink-0"
-                        >
-                          Retry
-                        </button>
+                        <>
+                          <button 
+                            onClick={() => { setSelectedPayout(row); setProcessModalOpen(true); }}
+                            className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-[var(--admin-primary)] text-[#0A0E1A] text-xs font-bold shadow transition-colors hover:bg-[var(--admin-primary)]/90 shrink-0"
+                          >
+                            <IndianRupee size={12} />
+                            Process
+                          </button>
+                          <button 
+                            onClick={() => { setSelectedPayout(row); setRejectModalOpen(true); }}
+                            className="inline-flex items-center justify-center h-8 px-3 rounded-md bg-red-500/10 text-red-500 hover:bg-red-500/20 text-xs font-bold transition-colors shrink-0"
+                          >
+                            Reject
+                          </button>
+                        </>
                       )}
                       <button 
                         onClick={() => { setSelectedPayout(row); setIsModalOpen(true); }}
@@ -254,6 +310,80 @@ export default function PayoutsPage() {
                 className="px-6 py-2 rounded-md bg-white/10 text-white font-medium hover:bg-white/20 transition-colors text-sm"
               >
                 Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Process Payout Modal */}
+      {processModalOpen && selectedPayout && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-md bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="p-6 bg-[#05070A] flex flex-col space-y-4">
+              <h3 className="text-xl font-bold text-white mb-2">Process Payout</h3>
+              <p className="text-sm text-gray-400">
+                Enter the UTR or Bank Reference Number to confirm the transfer of <strong>{selectedPayout.pending}</strong> to <strong>{selectedPayout.driver}</strong>.
+              </p>
+              <input
+                type="text"
+                placeholder="UTR / Reference Number"
+                value={referenceNumber}
+                onChange={(e) => setReferenceNumber(e.target.value)}
+                className="w-full h-10 bg-[#0A0E1A] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-md px-3 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+              />
+            </div>
+            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">
+              <button 
+                onClick={() => setProcessModalOpen(false)}
+                className="px-4 py-2 rounded-md bg-white/10 text-white font-medium hover:bg-white/20 transition-colors text-sm"
+                disabled={actionLoading}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleProcessSubmit}
+                disabled={!referenceNumber || actionLoading}
+                className="px-4 py-2 rounded-md bg-[var(--admin-primary)] text-[#0A0E1A] font-bold hover:bg-[var(--admin-primary)]/90 transition-colors text-sm disabled:opacity-50"
+              >
+                {actionLoading ? "Processing..." : "Confirm Payout"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reject Payout Modal */}
+      {rejectModalOpen && selectedPayout && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-md bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="p-6 bg-[#05070A] flex flex-col space-y-4">
+              <h3 className="text-xl font-bold text-white mb-2">Reject Payout</h3>
+              <p className="text-sm text-gray-400">
+                Provide a reason for rejecting this payout. The funds will be refunded to the driver's wallet.
+              </p>
+              <input
+                type="text"
+                placeholder="Rejection Reason"
+                value={rejectionReason}
+                onChange={(e) => setRejectionReason(e.target.value)}
+                className="w-full h-10 bg-[#0A0E1A] border border-white/10 focus:border-red-500/50 rounded-md px-3 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+              />
+            </div>
+            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">
+              <button 
+                onClick={() => setRejectModalOpen(false)}
+                className="px-4 py-2 rounded-md bg-white/10 text-white font-medium hover:bg-white/20 transition-colors text-sm"
+                disabled={actionLoading}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleRejectSubmit}
+                disabled={!rejectionReason || actionLoading}
+                className="px-4 py-2 rounded-md bg-red-500 text-white font-bold hover:bg-red-600 transition-colors text-sm disabled:opacity-50"
+              >
+                {actionLoading ? "Rejecting..." : "Confirm Rejection"}
               </button>
             </div>
           </div>

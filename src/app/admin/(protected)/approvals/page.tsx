@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { api } from "@/lib/api";
 import { 
   FileText, Clock, CheckCircle, XCircle, Search, 
   SlidersHorizontal, ChevronDown, ChevronUp, MoreHorizontal,
@@ -29,60 +30,126 @@ export default function ApprovalsPage() {
   const [selectedViewDetailsId, setSelectedViewDetailsId] = useState<string | null>(null);
   const [selectedContactUserId, setSelectedContactUserId] = useState<string | null>(null);
 
-  // Mock Data
-  const initialData: Application[] = [
-    {
-      id: "usr-492a-8b1c-3f9d",
-      name: "Ramesh Kumar",
-      phone: "+91 9876543210",
-      city: "Raipur",
-      appliedOn: "12 Aug 2026, 14:30",
-      verification: "Verified",
-      approval: "Approved",
-      role: "Driver",
-      vehicle: "Maruti Swift Dzire"
-    },
-    {
-      id: "usr-183d-9f4c-2a7e",
-      name: "Priya Sharma",
-      phone: "+91 9123456789",
-      city: "Bhilai",
-      appliedOn: "13 Aug 2026, 09:15",
-      verification: "Pending",
-      approval: "Pending",
-      role: "Rider"
-    },
-    {
-      id: "usr-771b-3c2d-9a8f",
-      name: "Amit Verma",
-      phone: "+91 9988776655",
-      city: "Bilaspur",
-      appliedOn: "11 Aug 2026, 11:45",
-      verification: "Rejected",
-      approval: "Rejected",
-      role: "Driver",
-      vehicle: "Bajaj RE Auto"
-    },
-    {
-      id: "usr-554c-1d8e-7b6a",
-      name: "Sneha Gupta",
-      phone: "+91 9811223344",
-      city: "Raipur",
-      appliedOn: "13 Aug 2026, 10:20",
-      verification: "Verified",
-      approval: "Pending",
-      role: "Rider"
+  const [dossier, setDossier] = useState<any>(null);
+  const [isDossierLoading, setIsDossierLoading] = useState(false);
+
+  useEffect(() => {
+    if (selectedViewDetailsId) {
+      const app = data.find(u => u.id === selectedViewDetailsId);
+      if (app?.role === "Driver") {
+        fetchDossier(selectedViewDetailsId);
+      }
+    } else {
+      setDossier(null);
     }
-  ];
+  }, [selectedViewDetailsId]);
 
-  const [data, setData] = useState<Application[]>(initialData);
-
-  const handleApprove = (id: string) => {
-    setData(prev => prev.map(item => item.id === id ? { ...item, approval: "Approved", verification: "Verified" } : item));
+  const fetchDossier = async (driverId: string) => {
+    try {
+      setIsDossierLoading(true);
+      const res = await api.get(`/admin/approve/drivers/${driverId}`);
+      setDossier(res.data);
+    } catch (error) {
+      console.error("Failed to fetch driver dossier", error);
+    } finally {
+      setIsDossierLoading(false);
+    }
   };
 
-  const handleReject = (id: string) => {
-    setData(prev => prev.map(item => item.id === id ? { ...item, approval: "Rejected", verification: "Rejected" } : item));
+  const handleDocumentReview = async (documentId: string, status: "APPROVED" | "REJECTED") => {
+    try {
+      const payload: any = { status };
+      if (status === "REJECTED") {
+        const reason = prompt("Enter rejection reason:");
+        if (!reason) return; 
+        payload.rejectReason = reason;
+      }
+      await api.put(`/admin/approve/documents/${documentId}/review`, payload);
+      if (selectedViewDetailsId) fetchDossier(selectedViewDetailsId);
+    } catch (error: any) {
+      console.error("Failed to review document", error);
+      alert(error.message || "Failed to review document");
+    }
+  };
+
+  const [data, setData] = useState<Application[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchDrivers = async () => {
+    try {
+      setIsLoading(true);
+      
+      const [driversRes, ridersRes] = await Promise.all([
+        api.get("/admin/approve/drivers"),
+        api.get("/admin/users?role=RIDER")
+      ]);
+
+      const drivers = driversRes.data?.drivers || [];
+      const riders = ridersRes.data?.users || [];
+      
+      const formattedDrivers: Application[] = drivers.map((d: any) => ({
+        id: d.id,
+        name: d.user?.name || "Unknown",
+        phone: d.user?.phone || "Unknown",
+        city: "Unknown", 
+        appliedOn: new Date(d.createdAt).toLocaleString(),
+        verification: d.isVerified ? "Verified" : "Pending",
+        approval: d.isVerified ? "Approved" : "Pending",
+        role: "Driver",
+        vehicle: d.vehicles?.[0]?.vehicleType?.name || "None"
+      }));
+
+      const formattedRiders: Application[] = riders.map((r: any) => ({
+        id: r.id,
+        name: r.name || "Unknown",
+        phone: r.phone || "Unknown",
+        city: "Unknown",
+        appliedOn: new Date(r.createdAt).toLocaleString(),
+        verification: r.isPhoneVerified ? "Verified" : "Pending",
+        approval: r.status === "ACTIVE" ? "Approved" : (r.status === "SUSPENDED" || r.status === "BLOCKED" ? "Rejected" : "Pending"),
+        role: "Rider",
+      }));
+
+      setData([...formattedDrivers, ...formattedRiders]);
+    } catch (error) {
+      console.error("Failed to fetch applications:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDrivers();
+  }, []);
+
+  const handleApprove = async (id: string) => {
+    try {
+      const app = data.find(item => item.id === id);
+      if (app?.role === "Driver") {
+        await api.put(`/admin/approve/drivers/${id}/verify`, { isVerified: true });
+      } else if (app?.role === "Rider") {
+        await api.put(`/admin/users/${id}/status`, { status: "ACTIVE", reason: "Approved via dashboard" });
+      }
+      fetchDrivers(); 
+    } catch (error: any) {
+      console.error("Approval failed", error);
+      alert(error.message || "Failed to approve. Make sure all mandatory documents are approved first.");
+    }
+  };
+
+  const handleReject = async (id: string) => {
+    try {
+      const app = data.find(item => item.id === id);
+      if (app?.role === "Driver") {
+        await api.put(`/admin/approve/drivers/${id}/verify`, { isVerified: false });
+      } else if (app?.role === "Rider") {
+        await api.put(`/admin/users/${id}/status`, { status: "SUSPENDED", reason: "Rejected via dashboard" });
+      }
+      fetchDrivers();
+    } catch (error) {
+      console.error("Rejection failed", error);
+      alert("Failed to reject");
+    }
   };
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -460,6 +527,62 @@ export default function ApprovalsPage() {
                   <span className="text-white text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.appliedOn}</span>
                 </div>
               </div>
+
+              {/* Dossier Section for Drivers */}
+              {data.find(u => u.id === selectedViewDetailsId)?.role === "Driver" && (
+                <div className="w-full mt-4 bg-[#111827] rounded-xl border border-white/5 p-4">
+                  <h5 className="text-white font-bold mb-3 flex items-center justify-between">
+                    Driver Dossier & Documents
+                    {isDossierLoading && <span className="text-xs text-gray-400 font-normal">Loading...</span>}
+                  </h5>
+                  
+                  {dossier && dossier.documents && dossier.documents.length > 0 ? (
+                    <div className="space-y-3">
+                      {dossier.documents.map((doc: any) => (
+                        <div key={doc.id} className="p-3 bg-white/5 rounded-lg border border-white/5 flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
+                          <div>
+                            <div className="text-sm font-medium text-white">{doc.type}</div>
+                            <div className="text-xs text-gray-400 mt-0.5 break-all">
+                              <a href={doc.fileUrl} target="_blank" rel="noreferrer" className="text-[var(--admin-primary)] hover:underline">View File</a>
+                            </div>
+                            {doc.rejectReason && (
+                              <div className="text-xs text-red-400 mt-1">Reason: {doc.rejectReason}</div>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2 shrink-0">
+                            {doc.status === "APPROVED" && (
+                              <span className="px-2 py-1 rounded text-xs bg-green-500/10 text-green-500 border border-green-500/20">Approved</span>
+                            )}
+                            {doc.status === "REJECTED" && (
+                              <span className="px-2 py-1 rounded text-xs bg-red-500/10 text-red-500 border border-red-500/20">Rejected</span>
+                            )}
+                            {(doc.status === "PENDING" || doc.status === "REJECTED") && (
+                              <button 
+                                onClick={() => handleDocumentReview(doc.id, "APPROVED")}
+                                className="px-2 py-1 rounded text-xs bg-[var(--admin-primary)]/10 text-[var(--admin-primary)] hover:bg-[var(--admin-primary)]/20 transition-colors"
+                              >
+                                Approve
+                              </button>
+                            )}
+                            {(doc.status === "PENDING" || doc.status === "APPROVED") && (
+                              <button 
+                                onClick={() => handleDocumentReview(doc.id, "REJECTED")}
+                                className="px-2 py-1 rounded text-xs bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
+                              >
+                                Reject
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-sm text-gray-500 py-4 text-center">
+                      {isDossierLoading ? "Fetching documents..." : "No documents found."}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
             
             <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">

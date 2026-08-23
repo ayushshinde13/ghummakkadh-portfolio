@@ -1,21 +1,49 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, Ticket, MessageCircle, XCircle, Clock, CheckCircle, X, Send } from "lucide-react";
+import { api } from "@/lib/api";
 
 export default function SupportTicketsPage() {
-  const [tickets, setTickets] = useState([
-    { id: "TKT-9021", user: "Priya Sharma", subject: "App crashing on payment screen", priority: "High", status: "Open", createdOn: "Just now", assignedTo: "Unassigned" },
-    { id: "TKT-9020", user: "Ramesh Kumar", subject: "How to update vehicle RC?", priority: "Medium", status: "In Progress", createdOn: "2 hrs ago", assignedTo: "Support Team A" },
-    { id: "TKT-9019", user: "Sneha Gupta", subject: "Referral bonus not received", priority: "Low", status: "Closed", createdOn: "1 day ago", assignedTo: "Support Team B" },
-  ]);
+  const [tickets, setTickets] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
+  
   const [selectedTicket, setSelectedTicket] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [replyText, setReplyText] = useState("");
+  const [ticketDetails, setTicketDetails] = useState<any>(null);
+  const [isDetailsLoading, setIsDetailsLoading] = useState(false);
+
+  const fetchTickets = async () => {
+    try {
+      setIsLoading(true);
+      const res = await api.get("/admin/support/tickets");
+      const fetchedTickets = res.data?.tickets || [];
+      const formatted = fetchedTickets.map((t: any) => ({
+        id: t.id,
+        user: t.user?.name || "Unknown",
+        subject: t.subject,
+        priority: t.priority,
+        status: t.status === "RESOLVED" ? "Closed" : (t.status === "IN_PROGRESS" ? "In Progress" : "Open"),
+        createdOn: new Date(t.createdAt).toLocaleString(),
+        assignedTo: t.assignedAdmin?.name || "Unassigned",
+        raw: t,
+      }));
+      setTickets(formatted);
+    } catch (error) {
+      console.error("Failed to fetch tickets", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTickets();
+  }, []);
 
   const filteredTickets = tickets.filter(t => {
     const query = searchQuery.toLowerCase();
@@ -25,16 +53,48 @@ export default function SupportTicketsPage() {
     return matchesSearch && matchesPriority && matchesStatus;
   });
 
-  const handleCloseTicket = (id: string) => {
-    setTickets(prev => prev.map(t => t.id === id ? { ...t, status: "Closed" } : t));
+  const handleCloseTicket = async (id: string) => {
+    try {
+      await api.put(`/admin/support/tickets/${id}/resolve`, { resolution: "Closed via admin dashboard." });
+      fetchTickets();
+    } catch (error) {
+      console.error("Failed to resolve ticket", error);
+      alert("Failed to resolve ticket");
+    }
   };
 
-  const handleSendReply = () => {
+  const fetchTicketDetails = async (id: string) => {
+    try {
+      setIsDetailsLoading(true);
+      const res = await api.get(`/admin/support/tickets/${id}`);
+      setTicketDetails(res.data);
+    } catch (error) {
+      console.error("Failed to fetch ticket details", error);
+    } finally {
+      setIsDetailsLoading(false);
+    }
+  };
+
+  const handleOpenModal = (row: any) => {
+    setSelectedTicket(row);
+    setIsModalOpen(true);
+    fetchTicketDetails(row.id);
+  };
+
+  const handleSendReply = async () => {
     if (selectedTicket && replyText.trim()) {
-      alert(`Reply sent to ${selectedTicket.user}!`);
-      setTickets(prev => prev.map(t => t.id === selectedTicket.id ? { ...t, status: t.status === "Open" ? "In Progress" : t.status } : t));
-      setReplyText("");
-      setIsModalOpen(false);
+      try {
+        await api.post(`/admin/support/tickets/${selectedTicket.id}/messages`, {
+          message: replyText,
+        });
+        setReplyText("");
+        // Refresh messages
+        fetchTicketDetails(selectedTicket.id);
+        fetchTickets();
+      } catch (error) {
+        console.error("Failed to send reply", error);
+        alert("Failed to send reply");
+      }
     }
   };
 
@@ -181,7 +241,7 @@ export default function SupportTicketsPage() {
                   <td className="px-4 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button 
-                        onClick={() => { setSelectedTicket(row); setIsModalOpen(true); }}
+                        onClick={() => handleOpenModal(row)}
                         className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-medium transition-colors shrink-0"
                       >
                         <MessageCircle size={14} className="text-gray-400" />
@@ -248,12 +308,32 @@ export default function SupportTicketsPage() {
               </div>
 
               <div>
+                <div className="text-sm font-medium text-gray-400 mb-2">Message History</div>
+                <div className="bg-[#111827] border border-white/10 rounded-xl p-4 max-h-48 overflow-y-auto flex flex-col gap-3">
+                  {isDetailsLoading ? (
+                    <div className="text-gray-500 text-sm">Loading messages...</div>
+                  ) : ticketDetails?.ticket?.messages?.length > 0 ? (
+                    ticketDetails.ticket.messages.map((msg: any) => (
+                      <div key={msg.id} className={`flex flex-col ${msg.senderRole === 'ADMIN' ? 'items-end' : 'items-start'}`}>
+                        <div className={`px-3 py-2 rounded-lg text-sm max-w-[80%] ${msg.senderRole === 'ADMIN' ? 'bg-[var(--admin-primary)]/10 text-[var(--admin-primary)]' : 'bg-white/10 text-white'}`}>
+                          {msg.message}
+                        </div>
+                        <div className="text-xs text-gray-500 mt-1">{new Date(msg.createdAt).toLocaleString()}</div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-gray-500 text-sm">No messages yet.</div>
+                  )}
+                </div>
+              </div>
+
+              <div>
                 <div className="text-sm font-medium text-gray-400 mb-2">Your Reply</div>
                 <textarea
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
                   placeholder="Type your response to the user here..."
-                  className="w-full h-32 bg-[#111827] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-xl p-4 text-sm text-white placeholder:text-gray-500 outline-none transition-all resize-none"
+                  className="w-full h-24 bg-[#111827] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-xl p-4 text-sm text-white placeholder:text-gray-500 outline-none transition-all resize-none"
                 />
               </div>
             </div>

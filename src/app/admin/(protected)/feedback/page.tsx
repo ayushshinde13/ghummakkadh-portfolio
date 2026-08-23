@@ -1,18 +1,54 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Star, Search, Filter } from "lucide-react";
+import { api } from "@/lib/api";
 
 export default function FeedbackPage() {
-  const feedbacks = [
-    { id: "FDB-990", user: "Priya Sharma", role: "Customer", rating: 5, comment: "Excellent service! The driver was very polite and on time.", date: "Just now" },
-    { id: "FDB-989", user: "Ramesh Kumar", role: "Driver", rating: 4, comment: "App works great, but the map navigation could be a bit more accurate.", date: "2 hrs ago" },
-    { id: "FDB-988", user: "Amit Verma", role: "Customer", rating: 2, comment: "Driver was late and the car wasn't very clean.", date: "1 day ago" },
-    { id: "FDB-987", user: "Sneha Gupta", role: "Customer", rating: 5, comment: "Very affordable and safe feeling.", date: "2 days ago" },
-  ];
+  const [feedbacks, setFeedbacks] = useState<any[]>([]);
+  const [stats, setStats] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const averageRating = 4.3;
-  const totalReviews = 1248;
+  useEffect(() => {
+    const fetchFeedbackData = async () => {
+      try {
+        setIsLoading(true);
+        const [feedbackRes, statsRes] = await Promise.all([
+          api.get("/admin/feedback"),
+          api.get("/admin/feedback/analytics")
+        ]);
+        
+        const fetchedFeedbacks = feedbackRes.data?.items || feedbackRes.data?.data?.items || feedbackRes.data?.feedback || [];
+        // Support multiple backend return structures if needed
+        const items = fetchedFeedbacks.length === 0 && feedbackRes.data?.items ? feedbackRes.data.items : 
+                      (feedbackRes.data?.data?.items ? feedbackRes.data.data.items : feedbackRes.data);
+                      
+        const finalItems = Array.isArray(items) ? items : (items?.items || []);
+        
+        const formatted = finalItems.map((f: any) => ({
+          id: f.id,
+          user: f.user?.name || "Anonymous",
+          role: f.userRole || "Customer",
+          rating: f.rating || 5,
+          comment: f.feedback || f.subject,
+          date: new Date(f.createdAt).toLocaleString(),
+          raw: f
+        }));
+        
+        setFeedbacks(formatted);
+        setStats(statsRes.data);
+      } catch (error) {
+        console.error("Failed to fetch feedback", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchFeedbackData();
+  }, []);
+
+  const averageRating = stats?.averageRating || 0;
+  const totalReviews = stats?.totalCount || 0;
 
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");

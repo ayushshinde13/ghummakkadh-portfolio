@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { api } from "@/lib/api";
 import { Search, SlidersHorizontal, ChevronDown, Eye, Ban, ShieldOff, X, User } from "lucide-react";
 
 type Role = "Rider" | "Driver";
@@ -21,20 +22,59 @@ export default function UserManagementPage() {
   const [activeTab, setActiveTab] = useState<"riders" | "drivers">("riders");
   const [selectedUserModal, setSelectedUserModal] = useState<string | null>(null);
 
-  // Mock Data
-  const [data, setData] = useState<UserData[]>([
-    { id: "usr-001", name: "Ramesh Kumar", phone: "+91 9876543210", email: "ramesh@example.com", role: "Driver", city: "Raipur", status: "Active", joinedOn: "12 Aug 2026" },
-    { id: "usr-002", name: "Priya Sharma", phone: "+91 9123456789", email: "priya@example.com", role: "Rider", city: "Bhilai", status: "Active", joinedOn: "10 Aug 2026" },
-    { id: "usr-003", name: "Amit Verma", phone: "+91 9988776655", email: "amit@example.com", role: "Driver", city: "Bilaspur", status: "Suspended", joinedOn: "05 Aug 2026" },
-    { id: "usr-004", name: "Sneha Gupta", phone: "+91 9811223344", email: "sneha@example.com", role: "Rider", city: "Raipur", status: "Banned", joinedOn: "01 Aug 2026" },
-  ]);
+  const [data, setData] = useState<UserData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSuspend = (id: string) => {
-    setData(prev => prev.map(u => u.id === id ? { ...u, status: "Suspended" } : u));
+  const fetchUsers = async () => {
+    try {
+      setIsLoading(true);
+      const [ridersRes, driversRes] = await Promise.all([
+        api.get("/admin/users?role=RIDER"),
+        api.get("/admin/users?role=DRIVER")
+      ]);
+
+      const formatUser = (u: any, role: Role): UserData => ({
+        id: u.id,
+        name: u.name || "Unknown",
+        phone: u.phone || "Unknown",
+        email: u.email || "Unknown",
+        role,
+        city: "Unknown",
+        status: u.status === "BLOCKED" ? "Banned" : (u.status === "SUSPENDED" ? "Suspended" : "Active"),
+        joinedOn: new Date(u.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }),
+      });
+
+      const riders = (ridersRes.data?.users || []).map((u: any) => formatUser(u, "Rider"));
+      const drivers = (driversRes.data?.users || []).map((u: any) => formatUser(u, "Driver"));
+
+      setData([...riders, ...drivers]);
+    } catch (error) {
+      console.error("Failed to fetch users", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const handleSuspend = async (id: string) => {
+    try {
+      await api.put(`/admin/users/${id}/status`, { status: "SUSPENDED", reason: "Suspended via dashboard" });
+      fetchUsers();
+    } catch (error) {
+      console.error("Failed to suspend", error);
+    }
   };
   
-  const handleBan = (id: string) => {
-    setData(prev => prev.map(u => u.id === id ? { ...u, status: "Banned" } : u));
+  const handleBan = async (id: string) => {
+    try {
+      await api.put(`/admin/users/${id}/status`, { status: "BLOCKED", reason: "Banned via dashboard" });
+      fetchUsers();
+    } catch (error) {
+      console.error("Failed to ban", error);
+    }
   };
 
   const [searchQuery, setSearchQuery] = useState("");
