@@ -147,16 +147,7 @@ export default function AdminLogin() {
                 <label className="text-sm font-medium text-gray-200">
                   Password
                 </label>
-                <button 
-                  type="button" 
-                  onClick={() => {
-                    setIsResetMode(true);
-                    setError("");
-                  }}
-                  className="text-xs text-[#7ED321] hover:text-[#8AE02D] hover:underline transition-colors"
-                >
-                  Forgot password?
-                </button>
+
               </div>
               <input
                 type="password"

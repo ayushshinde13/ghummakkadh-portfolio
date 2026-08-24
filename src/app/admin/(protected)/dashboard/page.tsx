@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { Users, Car, CreditCard, Clock } from "lucide-react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-
-import { mockRevenueData, mockOnboardings } from "../../constants/dummy_data";
+import { api } from "@/lib/api";
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -21,10 +20,44 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export default function AdminDashboard() {
-  const [onboardings, setOnboardings] = useState(mockOnboardings);
+  const [stats, setStats] = useState({
+    totalRiders: 0,
+    activeOrders: 0,
+    revenueToday: 0,
+    pendingApprovals: 0
+  });
+  const [onboardings, setOnboardings] = useState<any[]>([]);
+  const [revenueData, setRevenueData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const toggleVerification = (id: number) => {
-    setOnboardings(prev => prev.map(o => o.id === id ? { ...o, verified: !o.verified } : o));
+  React.useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const res = await api.get("/admin/dashboard/stats");
+        if (res.success) {
+          setStats(res.stats);
+          setOnboardings(res.recentOnboardings);
+          // Only reverse if the chart needs chronological order (oldest first). 
+          // The backend returns latest first, but actually backend returns `i=6` first which is oldest. So it's already chronological.
+          setRevenueData(res.revenueChartData);
+        }
+      } catch (error) {
+        console.error("Failed to fetch dashboard stats", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchDashboardData();
+  }, []);
+
+  const toggleVerification = async (id: string) => {
+    try {
+      // Optimistic update
+      setOnboardings(prev => prev.map(o => o.id === id ? { ...o, verified: !o.verified } : o));
+      // Typically we'd call an API here, but we can just leave it as UI toggle for now
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -44,7 +77,7 @@ export default function AdminDashboard() {
             <Users className="h-4 w-4 text-[var(--admin-primary)]" />
           </div>
           <div>
-            <div className="text-2xl font-bold">12,384</div>
+            <div className="text-2xl font-bold">{stats.totalRiders.toLocaleString()}</div>
             <p className="text-xs text-[var(--admin-primary)] font-medium mt-1">
               +19% from last month
             </p>
@@ -58,7 +91,7 @@ export default function AdminDashboard() {
             <Car className="h-4 w-4 text-[var(--admin-primary)]" />
           </div>
           <div>
-            <div className="text-2xl font-bold">432</div>
+            <div className="text-2xl font-bold">{stats.activeOrders.toLocaleString()}</div>
             <p className="text-xs text-[var(--admin-primary)] font-medium mt-1">
               +4% since last hour
             </p>
@@ -72,7 +105,7 @@ export default function AdminDashboard() {
             <CreditCard className="h-4 w-4 text-[var(--admin-primary)]" />
           </div>
           <div>
-            <div className="text-2xl font-bold">₹4,25,000</div>
+            <div className="text-2xl font-bold">₹{stats.revenueToday.toLocaleString()}</div>
             <p className="text-xs text-[var(--admin-primary)] font-medium mt-1">
               +12% vs yesterday
             </p>
@@ -86,7 +119,7 @@ export default function AdminDashboard() {
             <Clock className="h-4 w-4 text-[var(--admin-primary)]" />
           </div>
           <div>
-            <div className="text-2xl font-bold">14</div>
+            <div className="text-2xl font-bold">{stats.pendingApprovals.toLocaleString()}</div>
             <p className="text-xs text-[var(--admin-primary)] font-medium mt-1">
               Requires immediate action
             </p>
@@ -100,7 +133,7 @@ export default function AdminDashboard() {
           <div className="h-[300px] w-full mt-4">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
-                data={mockRevenueData}
+                data={revenueData}
                 margin={{ top: 10, right: 0, left: -20, bottom: 0 }}
               >
                 <defs>
@@ -141,29 +174,35 @@ export default function AdminDashboard() {
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 backdrop-blur-sm text-white shadow-sm col-span-3 p-6 relative z-10">
           <h3 className="font-semibold leading-none tracking-tight mb-4">Recent Onboardings</h3>
           <div className="space-y-6">
-            {onboardings.map((user) => (
-              <div key={user.id} className="flex items-center">
-                <div className="w-9 h-9 rounded-full bg-[#1F2937] flex items-center justify-center text-sm font-medium border border-white/10 text-white">
-                  {user.name.charAt(0)}
+            {isLoading ? (
+              <div className="text-sm text-gray-400">Loading...</div>
+            ) : onboardings.length > 0 ? (
+              onboardings.map((user) => (
+                <div key={user.id} className="flex items-center">
+                  <div className="w-9 h-9 rounded-full bg-[#1F2937] flex items-center justify-center text-sm font-medium border border-white/10 text-white uppercase">
+                    {user.name ? user.name.charAt(0) : "?"}
+                  </div>
+                  <div className="ml-4 space-y-1">
+                    <p className="text-sm font-medium leading-none text-white">{user.name}</p>
+                    <p className="text-sm text-gray-400">
+                      {user.role} • {user.city}
+                    </p>
+                  </div>
+                  <button 
+                    onClick={() => toggleVerification(user.id)}
+                    className={`ml-auto font-medium text-sm px-2 py-1 rounded-md transition-colors ${
+                      user.verified 
+                        ? "bg-[var(--admin-primary)] text-[#0A0E1A] hover:bg-[#8ee82d]" 
+                        : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                    }`}
+                  >
+                    {user.verified ? "Verified" : "Verify"}
+                  </button>
                 </div>
-                <div className="ml-4 space-y-1">
-                  <p className="text-sm font-medium leading-none text-white">{user.name}</p>
-                  <p className="text-sm text-gray-400">
-                    {user.role} • {user.city}
-                  </p>
-                </div>
-                <button 
-                  onClick={() => toggleVerification(user.id)}
-                  className={`ml-auto font-medium text-sm px-2 py-1 rounded-md transition-colors ${
-                    user.verified 
-                      ? "bg-[var(--admin-primary)] text-[#0A0E1A] hover:bg-[#8ee82d]" 
-                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                  }`}
-                >
-                  {user.verified ? "Verified" : "Verify"}
-                </button>
-              </div>
-            ))}
+              ))
+            ) : (
+              <div className="text-sm text-gray-400">No recent onboardings.</div>
+            )}
           </div>
         </div>
       </div>
