@@ -4,18 +4,7 @@ import React, { useState } from "react";
 import { Users, Car, CreditCard, Clock } from "lucide-react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-const mockRevenueData = [
-  { date: "Jul 15", revenue: 210000 }, { date: "Jul 16", revenue: 235000 }, { date: "Jul 17", revenue: 280000 },
-  { date: "Jul 18", revenue: 250000 }, { date: "Jul 19", revenue: 310000 }, { date: "Jul 20", revenue: 290000 },
-  { date: "Jul 21", revenue: 330000 }, { date: "Jul 22", revenue: 345000 }, { date: "Jul 23", revenue: 320000 },
-  { date: "Jul 24", revenue: 380000 }, { date: "Jul 25", revenue: 410000 }, { date: "Jul 26", revenue: 390000 },
-  { date: "Jul 27", revenue: 430000 }, { date: "Jul 28", revenue: 450000 }, { date: "Jul 29", revenue: 420000 },
-  { date: "Jul 30", revenue: 480000 }, { date: "Jul 31", revenue: 510000 }, { date: "Aug 1", revenue: 490000 },
-  { date: "Aug 2", revenue: 530000 }, { date: "Aug 3", revenue: 560000 }, { date: "Aug 4", revenue: 540000 },
-  { date: "Aug 5", revenue: 590000 }, { date: "Aug 6", revenue: 610000 }, { date: "Aug 7", revenue: 580000 },
-  { date: "Aug 8", revenue: 620000 }, { date: "Aug 9", revenue: 650000 }, { date: "Aug 10", revenue: 630000 },
-  { date: "Aug 11", revenue: 680000 }, { date: "Aug 12", revenue: 710000 }, { date: "Aug 13", revenue: 750000 },
-];
+import { mockRevenueData, mockOnboardings } from "../../constants/dummy_data";
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -32,12 +21,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export default function AdminDashboard() {
-  const [onboardings, setOnboardings] = useState([
-    { id: 1, name: "Ramesh Kumar", role: "Auto Driver", city: "Raipur", verified: true },
-    { id: 2, name: "Priya Sharma", role: "Customer", city: "Bhilai", verified: false },
-    { id: 3, name: "Amit Verma", role: "E-Rickshaw", city: "Bilaspur", verified: true },
-    { id: 4, name: "Sneha Gupta", role: "Customer", city: "Raipur", verified: false },
-  ]);
+  const [onboardings, setOnboardings] = useState(mockOnboardings);
 
   const toggleVerification = (id: number) => {
     setOnboardings(prev => prev.map(o => o.id === id ? { ...o, verified: !o.verified } : o));

@@ -83,6 +83,10 @@ export default function ParcelMonitoringPage() {
     return matchesSearch && matchesStatus && matchesType && matchesCity;
   });
 
+  const activeCount = parcels.filter(p => p.status === "Picked Up" || p.status === "In Transit").length;
+  const deliveredCount = parcels.filter(p => p.status === "Delivered").length;
+  const cancelledCount = parcels.filter(p => p.status === "Cancelled").length;
+
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 font-sans min-h-full">
       {/* Page Header */}
@@ -107,7 +111,7 @@ export default function ParcelMonitoringPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Active Deliveries</span>
             <div className="p-2 rounded-md bg-[var(--admin-primary)]/10"><Package size={16} className="text-[var(--admin-primary)]" /></div>
           </div>
-          <span className="text-3xl font-bold text-white">28</span>
+          <span className="text-3xl font-bold text-white">{activeCount}</span>
         </div>
         
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
@@ -115,7 +119,7 @@ export default function ParcelMonitoringPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Delivered Today</span>
             <div className="p-2 rounded-md bg-green-500/10"><CheckCircle size={16} className="text-green-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-green-500">142</span>
+          <span className="text-3xl font-bold text-green-500">{deliveredCount}</span>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
@@ -123,7 +127,7 @@ export default function ParcelMonitoringPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Cancelled Today</span>
             <div className="p-2 rounded-md bg-red-500/10"><XCircle size={16} className="text-red-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-red-500">4</span>
+          <span className="text-3xl font-bold text-red-500">{cancelledCount}</span>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
@@ -131,7 +135,7 @@ export default function ParcelMonitoringPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Avg Delivery Time</span>
             <div className="p-2 rounded-md bg-white/5"><Clock size={16} className="text-gray-400" /></div>
           </div>
-          <span className="text-3xl font-bold text-white">35 mins</span>
+          <span className="text-3xl font-bold text-white">0 mins</span>
         </div>
       </div>
 

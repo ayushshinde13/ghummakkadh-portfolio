@@ -3,12 +3,10 @@
 import React, { useState } from "react";
 import { Search, Plus, Percent, MoreHorizontal, Edit2, Ban, X, Save } from "lucide-react";
 
+import { mockPromotions } from "../../constants/dummy_data";
+
 export default function PromotionsPage() {
-  const [promotions, setPromotions] = useState([
-    { id: "PRM-001", code: "WELCOME50", type: "Percentage", value: "50%", limit: 1000, used: 842, validFrom: "01 Aug 2026", validTo: "31 Aug 2026", status: "Active" },
-    { id: "PRM-002", code: "FLAT100", type: "Flat", value: "₹100", limit: 500, used: 124, validFrom: "10 Aug 2026", validTo: "15 Aug 2026", status: "Active" },
-    { id: "PRM-003", code: "MONSOON20", type: "Percentage", value: "20%", limit: 5000, used: 5000, validFrom: "01 Jul 2026", validTo: "31 Jul 2026", status: "Expired" },
-  ]);
+  const [promotions, setPromotions] = useState(mockPromotions);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [isModalOpen, setIsModalOpen] = useState(false);

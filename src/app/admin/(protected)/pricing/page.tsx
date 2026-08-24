@@ -1,18 +1,64 @@
 "use client";
 
-import React, { useState } from "react";
-import { IndianRupee, Save, MapPin, Zap, Clock, Route, Edit2, X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { IndianRupee, Save, MapPin, Zap, Clock, Route, Edit2, X, Loader2 } from "lucide-react";
 
 export default function PricingPage() {
   const [editingCity, setEditingCity] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [cityOverrides, setCityOverrides] = useState([
-    { id: 1, city: "Raipur", baseFare: "₹50", perKm: "₹12", surgeCap: "1.5x" },
-    { id: 2, city: "Bhilai", baseFare: "₹45", perKm: "₹11", surgeCap: "1.2x" },
-    { id: 3, city: "Bilaspur", baseFare: "₹40", perKm: "₹10", surgeCap: "1.2x" },
-    { id: 4, city: "Korba", baseFare: "₹40", perKm: "₹10", surgeCap: "1.0x" },
-  ]);
+  const [cityOverrides, setCityOverrides] = useState<any[]>([]);
+  const [globalDefaults, setGlobalDefaults] = useState({
+    baseFare: 40,
+    perKmRate: 10,
+    perMinRate: 1.5,
+    surgeMultiplier: 1.2
+  });
+
+  useEffect(() => {
+    const fetchPricingData = async () => {
+      try {
+        const headers = { "Authorization": `Bearer ${localStorage.getItem("accessToken")}` };
+        
+        const [rulesRes, vehicleRes] = await Promise.all([
+          fetch("http://localhost:8000/api/admin/pricing/fare-rules", { headers }),
+          fetch("http://localhost:8000/api/admin/pricing", { headers })
+        ]);
+        
+        const rulesJson = await rulesRes.json();
+        const vehicleJson = await vehicleRes.json();
+        
+        if (rulesJson.success) {
+          const formatted = rulesJson.data.map((rule: any) => ({
+            id: rule.id,
+            city: rule.cityName,
+            vehicle: rule.vehicleTypeName,
+            baseFare: `₹${rule.baseFare}`,
+            perKm: `₹${rule.perKmRate}`,
+            surgeCap: "N/A",
+            raw: rule
+          }));
+          setCityOverrides(formatted);
+        }
+        
+        if (vehicleJson.success && vehicleJson.data.length > 0) {
+          const firstVehicle = vehicleJson.data[0];
+          setGlobalDefaults({
+            baseFare: firstVehicle.baseFare,
+            perKmRate: firstVehicle.perKmRate,
+            perMinRate: firstVehicle.perMinRate,
+            surgeMultiplier: firstVehicle.surgeMultiplier
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch pricing data", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchPricingData();
+  }, []);
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,7 +110,7 @@ export default function PricingPage() {
               <span className="font-semibold text-gray-300">Base Fare</span>
             </div>
             <div className="flex items-end gap-2 mt-2">
-              <span className="text-3xl font-bold text-white">₹40</span>
+              <span className="text-3xl font-bold text-white">₹{globalDefaults.baseFare}</span>
               <span className="text-sm text-gray-500 mb-1">flat</span>
             </div>
           </div>
@@ -75,7 +121,7 @@ export default function PricingPage() {
               <span className="font-semibold text-gray-300">Per KM Rate</span>
             </div>
             <div className="flex items-end gap-2 mt-2">
-              <span className="text-3xl font-bold text-white">₹10</span>
+              <span className="text-3xl font-bold text-white">₹{globalDefaults.perKmRate}</span>
               <span className="text-sm text-gray-500 mb-1">/ km</span>
             </div>
           </div>
@@ -86,7 +132,7 @@ export default function PricingPage() {
               <span className="font-semibold text-gray-300">Per Minute</span>
             </div>
             <div className="flex items-end gap-2 mt-2">
-              <span className="text-3xl font-bold text-white">₹1.5</span>
+              <span className="text-3xl font-bold text-white">₹{globalDefaults.perMinRate}</span>
               <span className="text-sm text-gray-500 mb-1">/ min</span>
             </div>
           </div>
@@ -97,7 +143,7 @@ export default function PricingPage() {
               <span className="font-semibold text-gray-300">Surge Multiplier</span>
             </div>
             <div className="flex items-end gap-2 mt-2">
-              <span className="text-3xl font-bold text-amber-500">1.2x</span>
+              <span className="text-3xl font-bold text-amber-500">{globalDefaults.surgeMultiplier}x</span>
               <span className="text-sm text-gray-500 mb-1">current max</span>
             </div>
           </div>
@@ -124,24 +170,38 @@ export default function PricingPage() {
             <thead className="bg-white/5 text-gray-400 border-b border-white/10">
               <tr>
                 <th className="px-6 py-3 font-medium">City</th>
+                <th className="px-6 py-3 font-medium">Vehicle</th>
                 <th className="px-6 py-3 font-medium">Base Fare</th>
                 <th className="px-6 py-3 font-medium">Per KM Rate</th>
-                <th className="px-6 py-3 font-medium">Surge Cap</th>
                 <th className="px-6 py-3 font-medium text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {cityOverrides.map((row) => (
-                <tr key={row.id} className="hover:bg-white/5 transition-colors">
-                  <td className="px-6 py-4 font-medium text-white">{row.city}</td>
-                  <td className="px-6 py-4 text-gray-300">{row.baseFare}</td>
-                  <td className="px-6 py-4 text-gray-300">{row.perKm}</td>
-                  <td className="px-6 py-4">
-                    <span className="px-2 py-1 bg-amber-500/10 text-amber-500 border border-amber-500/20 rounded text-xs font-semibold">
-                      {row.surgeCap}
-                    </span>
+              {isLoading ? (
+                <tr>
+                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                    <Loader2 className="animate-spin w-6 h-6 mx-auto mb-2" />
+                    Fetching fare rules...
                   </td>
-                  <td className="px-6 py-4 text-right">
+                </tr>
+              ) : cityOverrides.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                    No city fare overrides found
+                  </td>
+                </tr>
+              ) : (
+                cityOverrides.map((row) => (
+                  <tr key={row.id} className="hover:bg-white/5 transition-colors">
+                    <td className="px-6 py-4 font-medium text-white">{row.city}</td>
+                    <td className="px-6 py-4 text-gray-300">
+                      <span className="px-2 py-1 bg-white/10 text-white rounded text-xs font-semibold">
+                        {row.vehicle}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-gray-300">{row.baseFare}</td>
+                    <td className="px-6 py-4 text-gray-300">{row.perKm}</td>
+                    <td className="px-6 py-4 text-right">
                     <button 
                       onClick={() => { setEditingCity(row); setIsModalOpen(true); }}
                       className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-medium transition-colors"
@@ -151,7 +211,8 @@ export default function PricingPage() {
                     </button>
                   </td>
                 </tr>
-              ))}
+                ))
+              )}
             </tbody>
           </table>
         </div>

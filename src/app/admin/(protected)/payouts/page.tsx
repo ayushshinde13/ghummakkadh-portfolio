@@ -86,6 +86,10 @@ export default function PayoutsPage() {
     }
   };
 
+  const totalPaidCount = payouts.filter(p => p.status === "Paid").reduce((acc, p) => acc + (p.raw.amount || 0), 0);
+  const pendingAmount = payouts.filter(p => p.status === "Pending").reduce((acc, p) => acc + (p.raw.amount || 0), 0);
+  const failedCount = payouts.filter(p => p.status === "Failed").length;
+
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 font-sans min-h-full">
       {/* Page Header */}
@@ -110,7 +114,7 @@ export default function PayoutsPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Total Paid (This Month)</span>
             <div className="p-2 rounded-md bg-[var(--admin-primary)]/10"><CheckCircle size={16} className="text-[var(--admin-primary)]" /></div>
           </div>
-          <span className="text-3xl font-bold text-white">₹1.42L</span>
+          <span className="text-3xl font-bold text-white">₹{totalPaidCount.toLocaleString()}</span>
         </div>
         
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
@@ -118,7 +122,7 @@ export default function PayoutsPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Pending Amount</span>
             <div className="p-2 rounded-md bg-amber-500/10"><Clock size={16} className="text-amber-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-amber-500">₹45,200</span>
+          <span className="text-3xl font-bold text-amber-500">₹{pendingAmount.toLocaleString()}</span>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
@@ -126,7 +130,7 @@ export default function PayoutsPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Failed Payouts</span>
             <div className="p-2 rounded-md bg-red-500/10"><AlertCircle size={16} className="text-red-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-red-500">3</span>
+          <span className="text-3xl font-bold text-red-500">{failedCount}</span>
         </div>
       </div>
 

@@ -234,7 +234,7 @@ export default function ApprovalsPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Total Applications</span>
             <div className="p-2 rounded-md bg-white/5"><FileText size={16} className="text-gray-400" /></div>
           </div>
-          <span className="text-3xl font-bold text-white">1,284</span>
+          <span className="text-3xl font-bold text-white">{data.length}</span>
         </div>
         
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2">
@@ -242,7 +242,7 @@ export default function ApprovalsPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Pending Review</span>
             <div className="p-2 rounded-md bg-amber-500/10"><Clock size={16} className="text-amber-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-amber-500">42</span>
+          <span className="text-3xl font-bold text-amber-500">{data.filter(d => d.approval === "Pending").length}</span>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2">
@@ -250,7 +250,7 @@ export default function ApprovalsPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Approved</span>
             <div className="p-2 rounded-md bg-[var(--admin-primary)]/10"><CheckCircle size={16} className="text-[var(--admin-primary)]" /></div>
           </div>
-          <span className="text-3xl font-bold text-[var(--admin-primary)]">1,104</span>
+          <span className="text-3xl font-bold text-[var(--admin-primary)]">{data.filter(d => d.approval === "Approved").length}</span>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2">
@@ -258,7 +258,7 @@ export default function ApprovalsPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Rejected</span>
             <div className="p-2 rounded-md bg-red-500/10"><XCircle size={16} className="text-red-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-red-500">138</span>
+          <span className="text-3xl font-bold text-red-500">{data.filter(d => d.approval === "Rejected").length}</span>
         </div>
       </div>
 

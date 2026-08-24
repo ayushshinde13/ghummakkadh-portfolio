@@ -18,12 +18,7 @@ export default function FeedbackPage() {
           api.get("/admin/feedback/analytics")
         ]);
         
-        const fetchedFeedbacks = feedbackRes.data?.items || feedbackRes.data?.data?.items || feedbackRes.data?.feedback || [];
-        // Support multiple backend return structures if needed
-        const items = fetchedFeedbacks.length === 0 && feedbackRes.data?.items ? feedbackRes.data.items : 
-                      (feedbackRes.data?.data?.items ? feedbackRes.data.data.items : feedbackRes.data);
-                      
-        const finalItems = Array.isArray(items) ? items : (items?.items || []);
+        const finalItems = feedbackRes.data?.feedback || feedbackRes.data?.items || [];
         
         const formatted = finalItems.map((f: any) => ({
           id: f.id,
@@ -47,8 +42,8 @@ export default function FeedbackPage() {
     fetchFeedbackData();
   }, []);
 
-  const averageRating = stats?.averageRating || 0;
-  const totalReviews = stats?.totalCount || 0;
+  const averageRating = stats?.ratingMetrics?.averageRating || 0;
+  const totalReviews = stats?.totalFeedbackCount || 0;
 
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");

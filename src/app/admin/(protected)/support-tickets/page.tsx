@@ -98,6 +98,10 @@ export default function SupportTicketsPage() {
     }
   };
 
+  const openTicketsCount = tickets.filter(t => t.status === "Open").length;
+  const inProgressCount = tickets.filter(t => t.status === "In Progress").length;
+  const closedCount = tickets.filter(t => t.status === "Closed").length;
+
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 font-sans min-h-full">
       {/* Page Header */}
@@ -122,7 +126,7 @@ export default function SupportTicketsPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Open Tickets</span>
             <div className="p-2 rounded-md bg-red-500/10"><Ticket size={16} className="text-red-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-red-500">24</span>
+          <span className="text-3xl font-bold text-red-500">{openTicketsCount}</span>
         </div>
         
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
@@ -130,15 +134,15 @@ export default function SupportTicketsPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">In Progress</span>
             <div className="p-2 rounded-md bg-amber-500/10"><Clock size={16} className="text-amber-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-amber-500">18</span>
+          <span className="text-3xl font-bold text-amber-500">{inProgressCount}</span>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Closed Today</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Closed Tickets</span>
             <div className="p-2 rounded-md bg-green-500/10"><CheckCircle size={16} className="text-green-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-green-500">56</span>
+          <span className="text-3xl font-bold text-green-500">{closedCount}</span>
         </div>
       </div>
 

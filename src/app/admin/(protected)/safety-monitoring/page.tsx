@@ -3,12 +3,10 @@
 import React, { useState } from "react";
 import { Search, ShieldAlert, AlertTriangle, AlertCircle, Eye, ShieldCheck, X } from "lucide-react";
 
+import { mockSafetyEvents } from "../../constants/dummy_data";
+
 export default function SafetyMonitoringPage() {
-  const [events, setEvents] = useState([
-    { id: "EVT-1049", tripId: "TRP-84729", driver: "Ramesh Kumar", customer: "Priya Sharma", type: "Speeding (>80km/h)", severity: "High", time: "10 mins ago", status: "Unreviewed" },
-    { id: "EVT-1048", tripId: "TRP-84720", driver: "Suresh Singh", customer: "Amit Verma", type: "Route Deviation", severity: "Medium", time: "45 mins ago", status: "Unreviewed" },
-    { id: "EVT-1047", tripId: "TRP-84715", driver: "Vijay Yadav", customer: "Sneha Gupta", type: "Long Stop (>10m)", severity: "Low", time: "2 hrs ago", status: "Reviewed" },
-  ]);
+  const [events, setEvents] = useState(mockSafetyEvents);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [severityFilter, setSeverityFilter] = useState("all");
