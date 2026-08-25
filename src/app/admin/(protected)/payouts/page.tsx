@@ -95,13 +95,13 @@ export default function PayoutsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-gray-500 mb-2">
+          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
             <span>Admin</span>
-            <span className="mx-2 text-white/20">/</span>
+            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
             <span className="text-gray-200">Payouts</span>
           </nav>
-          <h2 className="text-3xl font-bold tracking-tight text-white">Driver Payouts</h2>
-          <p className="text-gray-400 mt-1">
+          <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Driver Payouts</h2>
+          <p className="text-[var(--admin-muted)] mt-1">
             Manage settlements, review driver earnings, and process pending payments.
           </p>
         </div>
@@ -109,25 +109,25 @@ export default function PayoutsPage() {
 
       {/* Stat Cards */}
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Total Paid (This Month)</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Total Paid (This Month)</span>
             <div className="p-2 rounded-md bg-[var(--admin-primary)]/10"><CheckCircle size={16} className="text-[var(--admin-primary)]" /></div>
           </div>
-          <span className="text-3xl font-bold text-white">₹{totalPaidCount.toLocaleString()}</span>
+          <span className="text-3xl font-bold text-[var(--admin-text)]">₹{totalPaidCount.toLocaleString()}</span>
         </div>
         
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Pending Amount</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Pending Amount</span>
             <div className="p-2 rounded-md bg-amber-500/10"><Clock size={16} className="text-amber-500" /></div>
           </div>
           <span className="text-3xl font-bold text-amber-500">₹{pendingAmount.toLocaleString()}</span>
         </div>
 
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Failed Payouts</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Failed Payouts</span>
             <div className="p-2 rounded-md bg-red-500/10"><AlertCircle size={16} className="text-red-500" /></div>
           </div>
           <span className="text-3xl font-bold text-red-500">{failedCount}</span>
@@ -135,24 +135,24 @@ export default function PayoutsPage() {
       </div>
 
       {/* Main Table Section */}
-      <div className="rounded-xl border border-white/10 bg-[#111827]/50 shadow-sm overflow-hidden flex flex-col">
+      <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] shadow-sm overflow-hidden flex flex-col">
         {/* Filter Row */}
-        <div className="p-4 border-b border-white/10 bg-white/5 flex flex-wrap gap-4 items-center">
+        <div className="p-4 border-b border-[var(--admin-border)] bg-[var(--admin-border)] flex flex-wrap gap-4 items-center">
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--admin-muted)]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search driver name or ID..."
-              className="w-full h-9 bg-[#0A0E1A] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+              className="w-full h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
             />
           </div>
           
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-[var(--admin-primary)]/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
           >
             <option value="all">Status: All</option>
             <option value="pending">Pending</option>
@@ -164,7 +164,7 @@ export default function PayoutsPage() {
         {/* Data Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
-            <thead className="bg-white/5 text-gray-400 border-b border-white/10">
+            <thead className="bg-[var(--admin-border)] text-[var(--admin-muted)] border-b border-[var(--admin-border)]">
               <tr>
                 <th className="px-4 py-3 font-medium">Driver</th>
                 <th className="px-4 py-3 font-medium">Total Earnings</th>
@@ -176,18 +176,18 @@ export default function PayoutsPage() {
             </thead>
             <tbody className="divide-y divide-white/10">
               {filteredPayouts.map((row) => (
-                <tr key={row.id} className="hover:bg-white/5 transition-colors group">
+                <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
                   <td className="px-4 py-4">
-                    <div className="font-medium text-white">{row.driver}</div>
-                    <div className="text-xs text-gray-500 font-mono mt-0.5">{row.id}</div>
+                    <div className="font-medium text-[var(--admin-text)]">{row.driver}</div>
+                    <div className="text-xs text-[var(--admin-muted)] font-mono mt-0.5">{row.id}</div>
                   </td>
-                  <td className="px-4 py-4 text-gray-300">{row.totalEarnings}</td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.totalEarnings}</td>
                   <td className="px-4 py-4">
-                    <span className={`font-semibold ${row.pending !== "₹0" ? "text-amber-400" : "text-gray-400"}`}>
+                    <span className={`font-semibold ${row.pending !== "₹0" ? "text-amber-400" : "text-[var(--admin-muted)]"}`}>
                       {row.pending}
                     </span>
                   </td>
-                  <td className="px-4 py-4 text-gray-400">{row.lastPayout}</td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.lastPayout}</td>
                   <td className="px-4 py-4">
                     {row.status === "Paid" && (
                       <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border border-green-500/20 bg-green-500/10 text-[var(--admin-primary)]">
@@ -226,7 +226,7 @@ export default function PayoutsPage() {
                       )}
                       <button 
                         onClick={() => { setSelectedPayout(row); setIsModalOpen(true); }}
-                        className="p-1.5 rounded-md hover:bg-white/10 text-gray-400 transition-colors ml-2" 
+                        className="p-1.5 rounded-md hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors ml-2" 
                         title="View Details"
                       >
                         <ChevronRight size={16} />
@@ -238,7 +238,7 @@ export default function PayoutsPage() {
               
               {filteredPayouts.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="px-4 py-12 text-center text-gray-500">
+                  <td colSpan={6} className="px-4 py-12 text-center text-[var(--admin-muted)]">
                     No payouts found matching your search.
                   </td>
                 </tr>
@@ -251,51 +251,51 @@ export default function PayoutsPage() {
       {/* View Details Modal */}
       {isModalOpen && selectedPayout && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-white/5 shrink-0">
-              <h3 className="text-white font-bold tracking-tight flex items-center gap-2">
+          <div className="w-full max-w-md bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-border)] shrink-0">
+              <h3 className="text-[var(--admin-text)] font-bold tracking-tight flex items-center gap-2">
                 <FileText size={18} className="text-[var(--admin-primary)]" />
                 Payout Details
               </h3>
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="p-2 rounded-full hover:bg-white/10 text-gray-400 transition-colors"
+                className="p-2 rounded-full hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors"
               >
                 <X size={20} />
               </button>
             </div>
             
-            <div className="p-6 bg-[#05070A] flex flex-col space-y-4">
-              <div className="flex justify-between items-center pb-4 border-b border-white/10">
+            <div className="p-6 bg-[var(--admin-background)] flex flex-col space-y-4">
+              <div className="flex justify-between items-center pb-4 border-b border-[var(--admin-border)]">
                 <div>
-                  <div className="text-sm text-gray-400">Driver Name</div>
-                  <div className="text-lg font-bold text-white">{selectedPayout.driver}</div>
+                  <div className="text-sm text-[var(--admin-muted)]">Driver Name</div>
+                  <div className="text-lg font-bold text-[var(--admin-text)]">{selectedPayout.driver}</div>
                 </div>
                 <div className="text-right">
-                  <div className="text-sm text-gray-400">Payout ID</div>
+                  <div className="text-sm text-[var(--admin-muted)]">Payout ID</div>
                   <div className="text-sm font-mono text-[var(--admin-primary)]">{selectedPayout.id}</div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 pb-4 border-b border-white/10">
+              <div className="grid grid-cols-2 gap-4 pb-4 border-b border-[var(--admin-border)]">
                 <div>
-                  <div className="text-sm text-gray-400">Total Earnings</div>
-                  <div className="text-xl font-bold text-white">{selectedPayout.totalEarnings}</div>
+                  <div className="text-sm text-[var(--admin-muted)]">Total Earnings</div>
+                  <div className="text-xl font-bold text-[var(--admin-text)]">{selectedPayout.totalEarnings}</div>
                 </div>
                 <div>
-                  <div className="text-sm text-gray-400">Pending Amount</div>
-                  <div className={`text-xl font-bold ${selectedPayout.pending !== "₹0" ? "text-amber-400" : "text-gray-400"}`}>
+                  <div className="text-sm text-[var(--admin-muted)]">Pending Amount</div>
+                  <div className={`text-xl font-bold ${selectedPayout.pending !== "₹0" ? "text-amber-400" : "text-[var(--admin-muted)]"}`}>
                     {selectedPayout.pending}
                   </div>
                 </div>
               </div>
 
               <div className="flex justify-between items-center">
-                <div className="text-sm text-gray-400">Last Payout</div>
-                <div className="text-sm text-white">{selectedPayout.lastPayout}</div>
+                <div className="text-sm text-[var(--admin-muted)]">Last Payout</div>
+                <div className="text-sm text-[var(--admin-text)]">{selectedPayout.lastPayout}</div>
               </div>
               <div className="flex justify-between items-center">
-                <div className="text-sm text-gray-400">Status</div>
+                <div className="text-sm text-[var(--admin-muted)]">Status</div>
                 <div>
                   <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${
                     selectedPayout.status === "Paid" ? "border-green-500/20 bg-green-500/10 text-[var(--admin-primary)]" :
@@ -308,10 +308,10 @@ export default function PayoutsPage() {
               </div>
             </div>
             
-            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end">
+            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)] flex justify-end">
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="px-6 py-2 rounded-md bg-white/10 text-white font-medium hover:bg-white/20 transition-colors text-sm"
+                className="px-6 py-2 rounded-md bg-white/10 text-[var(--admin-text)] font-medium hover:bg-white/20 transition-colors text-sm"
               >
                 Close
               </button>
@@ -323,10 +323,10 @@ export default function PayoutsPage() {
       {/* Process Payout Modal */}
       {processModalOpen && selectedPayout && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="p-6 bg-[#05070A] flex flex-col space-y-4">
-              <h3 className="text-xl font-bold text-white mb-2">Process Payout</h3>
-              <p className="text-sm text-gray-400">
+          <div className="w-full max-w-md bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="p-6 bg-[var(--admin-background)] flex flex-col space-y-4">
+              <h3 className="text-xl font-bold text-[var(--admin-text)] mb-2">Process Payout</h3>
+              <p className="text-sm text-[var(--admin-muted)]">
                 Enter the UTR or Bank Reference Number to confirm the transfer of <strong>{selectedPayout.pending}</strong> to <strong>{selectedPayout.driver}</strong>.
               </p>
               <input
@@ -334,13 +334,13 @@ export default function PayoutsPage() {
                 placeholder="UTR / Reference Number"
                 value={referenceNumber}
                 onChange={(e) => setReferenceNumber(e.target.value)}
-                className="w-full h-10 bg-[#0A0E1A] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-md px-3 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+                className="w-full h-10 bg-[var(--admin-background)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-md px-3 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
               />
             </div>
-            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">
+            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)] flex justify-end gap-3">
               <button 
                 onClick={() => setProcessModalOpen(false)}
-                className="px-4 py-2 rounded-md bg-white/10 text-white font-medium hover:bg-white/20 transition-colors text-sm"
+                className="px-4 py-2 rounded-md bg-white/10 text-[var(--admin-text)] font-medium hover:bg-white/20 transition-colors text-sm"
                 disabled={actionLoading}
               >
                 Cancel
@@ -360,10 +360,10 @@ export default function PayoutsPage() {
       {/* Reject Payout Modal */}
       {rejectModalOpen && selectedPayout && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="p-6 bg-[#05070A] flex flex-col space-y-4">
-              <h3 className="text-xl font-bold text-white mb-2">Reject Payout</h3>
-              <p className="text-sm text-gray-400">
+          <div className="w-full max-w-md bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="p-6 bg-[var(--admin-background)] flex flex-col space-y-4">
+              <h3 className="text-xl font-bold text-[var(--admin-text)] mb-2">Reject Payout</h3>
+              <p className="text-sm text-[var(--admin-muted)]">
                 Provide a reason for rejecting this payout. The funds will be refunded to the driver's wallet.
               </p>
               <input
@@ -371,13 +371,13 @@ export default function PayoutsPage() {
                 placeholder="Rejection Reason"
                 value={rejectionReason}
                 onChange={(e) => setRejectionReason(e.target.value)}
-                className="w-full h-10 bg-[#0A0E1A] border border-white/10 focus:border-red-500/50 rounded-md px-3 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+                className="w-full h-10 bg-[var(--admin-background)] border border-[var(--admin-border)] focus:border-red-500/50 rounded-md px-3 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
               />
             </div>
-            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">
+            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)] flex justify-end gap-3">
               <button 
                 onClick={() => setRejectModalOpen(false)}
-                className="px-4 py-2 rounded-md bg-white/10 text-white font-medium hover:bg-white/20 transition-colors text-sm"
+                className="px-4 py-2 rounded-md bg-white/10 text-[var(--admin-text)] font-medium hover:bg-white/20 transition-colors text-sm"
                 disabled={actionLoading}
               >
                 Cancel
@@ -385,7 +385,7 @@ export default function PayoutsPage() {
               <button 
                 onClick={handleRejectSubmit}
                 disabled={!rejectionReason || actionLoading}
-                className="px-4 py-2 rounded-md bg-red-500 text-white font-bold hover:bg-red-600 transition-colors text-sm disabled:opacity-50"
+                className="px-4 py-2 rounded-md bg-red-500 text-[var(--admin-text)] font-bold hover:bg-red-600 transition-colors text-sm disabled:opacity-50"
               >
                 {actionLoading ? "Rejecting..." : "Confirm Rejection"}
               </button>

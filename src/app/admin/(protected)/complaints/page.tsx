@@ -101,37 +101,37 @@ export default function ComplaintsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-gray-500 mb-2">
+          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
             <span>Admin</span>
-            <span className="mx-2 text-white/20">/</span>
+            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
             <span className="text-gray-200">Complaints</span>
           </nav>
-          <h2 className="text-3xl font-bold tracking-tight text-white">Disputes & Complaints</h2>
-          <p className="text-gray-400 mt-1">
+          <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Disputes & Complaints</h2>
+          <p className="text-[var(--admin-muted)] mt-1">
             Review and resolve issues raised by customers and drivers.
           </p>
         </div>
       </div>
 
       {/* Main Table Section */}
-      <div className="rounded-xl border border-white/10 bg-[#111827]/50 shadow-sm overflow-hidden flex flex-col">
+      <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] shadow-sm overflow-hidden flex flex-col">
         {/* Filter Row */}
-        <div className="p-4 border-b border-white/10 bg-white/5 flex flex-wrap gap-4 items-center">
+        <div className="p-4 border-b border-[var(--admin-border)] bg-[var(--admin-border)] flex flex-wrap gap-4 items-center">
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--admin-muted)]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by ID or name..."
-              className="w-full h-9 bg-[#0A0E1A] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+              className="w-full h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
             />
           </div>
           
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-[var(--admin-primary)]/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
           >
             <option value="all">Status: All</option>
             <option value="open">Open</option>
@@ -143,7 +143,7 @@ export default function ComplaintsPage() {
         {/* Data Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
-            <thead className="bg-white/5 text-gray-400 border-b border-white/10">
+            <thead className="bg-[var(--admin-border)] text-[var(--admin-muted)] border-b border-[var(--admin-border)]">
               <tr>
                 <th className="px-4 py-3 font-medium">Complaint ID</th>
                 <th className="px-4 py-3 font-medium">Raised By</th>
@@ -155,10 +155,10 @@ export default function ComplaintsPage() {
             </thead>
             <tbody className="divide-y divide-white/10">
               {filteredComplaints.map((row) => (
-                <tr key={row.id} className="hover:bg-white/5 transition-colors group">
+                <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
                   <td className="px-4 py-4">
-                    <div className="font-medium text-white">{row.id}</div>
-                    <div className="text-xs text-gray-500 mt-0.5">{row.date}</div>
+                    <div className="font-medium text-[var(--admin-text)]">{row.id}</div>
+                    <div className="text-xs text-[var(--admin-muted)] mt-0.5">{row.date}</div>
                   </td>
                   <td className="px-4 py-4">
                     <div className="flex flex-col">
@@ -166,11 +166,11 @@ export default function ComplaintsPage() {
                       <span className="text-xs text-[var(--admin-primary)]">{row.raisedBy}</span>
                     </div>
                   </td>
-                  <td className="px-4 py-4 text-gray-300">{row.against}</td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.against}</td>
                   <td className="px-4 py-4">
                     <div className="flex flex-col gap-0.5 max-w-xs">
                       <span className="font-semibold text-gray-200">{row.category}</span>
-                      <span className="text-xs text-gray-500 line-clamp-1">{row.description}</span>
+                      <span className="text-xs text-[var(--admin-muted)] line-clamp-1">{row.description}</span>
                     </div>
                   </td>
                   <td className="px-4 py-4">
@@ -198,7 +198,7 @@ export default function ComplaintsPage() {
                       {row.status !== "Resolved" && (
                         <button 
                           onClick={() => handleResolve(row.id)}
-                          className="p-1.5 rounded-md hover:bg-green-500/20 text-gray-400 hover:text-green-500 transition-colors" 
+                          className="p-1.5 rounded-md hover:bg-green-500/20 text-[var(--admin-muted)] hover:text-green-500 transition-colors" 
                           title="Mark Resolved"
                         >
                           <CheckCircle size={16} />
@@ -206,9 +206,9 @@ export default function ComplaintsPage() {
                       )}
                       <button 
                         onClick={() => handleOpenModal(row)}
-                        className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-medium transition-colors shrink-0"
+                        className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-[var(--admin-border)] border border-[var(--admin-border)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] text-xs font-medium transition-colors shrink-0"
                       >
-                        <FileText size={14} className="text-gray-400" />
+                        <FileText size={14} className="text-[var(--admin-muted)]" />
                         View
                       </button>
                     </div>
@@ -218,7 +218,7 @@ export default function ComplaintsPage() {
               
               {filteredComplaints.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="px-4 py-12 text-center text-gray-500">
+                  <td colSpan={6} className="px-4 py-12 text-center text-[var(--admin-muted)]">
                     No complaints found matching your criteria.
                   </td>
                 </tr>
@@ -231,53 +231,53 @@ export default function ComplaintsPage() {
       {/* View Complaint Modal */}
       {isModalOpen && selectedComplaint && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-lg bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-white/5 shrink-0">
-              <h3 className="text-white font-bold tracking-tight flex items-center gap-2">
+          <div className="w-full max-w-lg bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-border)] shrink-0">
+              <h3 className="text-[var(--admin-text)] font-bold tracking-tight flex items-center gap-2">
                 <FileText size={18} className="text-[var(--admin-primary)]" />
                 Complaint Details
               </h3>
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="p-2 rounded-full hover:bg-white/10 text-gray-400 transition-colors"
+                className="p-2 rounded-full hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors"
               >
                 <X size={20} />
               </button>
             </div>
             
-            <div className="p-6 bg-[#05070A] flex flex-col space-y-6">
-              <div className="flex justify-between items-start pb-4 border-b border-white/10">
+            <div className="p-6 bg-[var(--admin-background)] flex flex-col space-y-6">
+              <div className="flex justify-between items-start pb-4 border-b border-[var(--admin-border)]">
                 <div>
-                  <div className="text-sm text-gray-400">Raised By</div>
-                  <div className="text-lg font-bold text-white">{selectedComplaint.raisedByName} <span className="text-sm font-normal text-gray-400">({selectedComplaint.raisedBy})</span></div>
+                  <div className="text-sm text-[var(--admin-muted)]">Raised By</div>
+                  <div className="text-lg font-bold text-[var(--admin-text)]">{selectedComplaint.raisedByName} <span className="text-sm font-normal text-[var(--admin-muted)]">({selectedComplaint.raisedBy})</span></div>
                 </div>
                 <div className="text-right">
-                  <div className="text-sm text-gray-400">Complaint ID</div>
+                  <div className="text-sm text-[var(--admin-muted)]">Complaint ID</div>
                   <div className="text-sm font-mono text-[var(--admin-primary)]">{selectedComplaint.id}</div>
-                  <div className="text-xs text-gray-500 mt-1">{selectedComplaint.date}</div>
+                  <div className="text-xs text-[var(--admin-muted)] mt-1">{selectedComplaint.date}</div>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl border border-white/10 bg-white/5">
-                  <div className="text-xs text-gray-400 mb-1">Against</div>
-                  <div className="text-sm font-medium text-white">{selectedComplaint.against}</div>
+                <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-border)]">
+                  <div className="text-xs text-[var(--admin-muted)] mb-1">Against</div>
+                  <div className="text-sm font-medium text-[var(--admin-text)]">{selectedComplaint.against}</div>
                 </div>
-                <div className="p-4 rounded-xl border border-white/10 bg-white/5">
-                  <div className="text-xs text-gray-400 mb-1">Category</div>
-                  <div className="text-sm font-medium text-white">{selectedComplaint.category}</div>
+                <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-border)]">
+                  <div className="text-xs text-[var(--admin-muted)] mb-1">Category</div>
+                  <div className="text-sm font-medium text-[var(--admin-text)]">{selectedComplaint.category}</div>
                 </div>
               </div>
 
               <div>
-                <div className="text-sm font-medium text-gray-400 mb-2">Description</div>
-                <div className="p-4 rounded-xl border border-white/10 bg-[#111827] text-sm text-gray-300 leading-relaxed">
+                <div className="text-sm font-medium text-[var(--admin-muted)] mb-2">Description</div>
+                <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-sm text-[var(--admin-muted)] leading-relaxed">
                   {selectedComplaint.description}
                 </div>
               </div>
 
               <div className="flex justify-between items-center pt-2">
-                <div className="text-sm text-gray-400">Current Status</div>
+                <div className="text-sm text-[var(--admin-muted)]">Current Status</div>
                 <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border ${
                     selectedComplaint.status === "Open" ? "border-red-500/20 bg-red-500/10 text-red-500" :
                     selectedComplaint.status === "In Progress" ? "border-amber-500/20 bg-amber-500/10 text-amber-500" :
@@ -290,35 +290,35 @@ export default function ComplaintsPage() {
                 </span>
               </div>
               <div>
-                <div className="text-sm font-medium text-gray-400 mb-2">Message History</div>
-                <div className="bg-[#111827] border border-white/10 rounded-xl p-4 max-h-48 overflow-y-auto flex flex-col gap-3">
+                <div className="text-sm font-medium text-[var(--admin-muted)] mb-2">Message History</div>
+                <div className="bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-xl p-4 max-h-48 overflow-y-auto flex flex-col gap-3">
                   {isDetailsLoading ? (
-                    <div className="text-gray-500 text-sm">Loading messages...</div>
+                    <div className="text-[var(--admin-muted)] text-sm">Loading messages...</div>
                   ) : complaintDetails?.ticket?.messages?.length > 0 ? (
                     complaintDetails.ticket.messages.map((msg: any) => (
                       <div key={msg.id} className={`flex flex-col ${msg.senderRole === 'ADMIN' ? 'items-end' : 'items-start'}`}>
-                        <div className={`px-3 py-2 rounded-lg text-sm max-w-[80%] ${msg.senderRole === 'ADMIN' ? 'bg-[var(--admin-primary)]/10 text-[var(--admin-primary)]' : 'bg-white/10 text-white'}`}>
+                        <div className={`px-3 py-2 rounded-lg text-sm max-w-[80%] ${msg.senderRole === 'ADMIN' ? 'bg-[var(--admin-primary)]/10 text-[var(--admin-primary)]' : 'bg-white/10 text-[var(--admin-text)]'}`}>
                           {msg.message}
                         </div>
-                        <div className="text-xs text-gray-500 mt-1">{new Date(msg.createdAt).toLocaleString()}</div>
+                        <div className="text-xs text-[var(--admin-muted)] mt-1">{new Date(msg.createdAt).toLocaleString()}</div>
                       </div>
                     ))
                   ) : (
-                    <div className="text-gray-500 text-sm">No messages yet.</div>
+                    <div className="text-[var(--admin-muted)] text-sm">No messages yet.</div>
                   )}
                 </div>
               </div>
 
               {selectedComplaint.status !== "Resolved" && (
                 <div>
-                  <div className="text-sm font-medium text-gray-400 mb-2">Reply</div>
+                  <div className="text-sm font-medium text-[var(--admin-muted)] mb-2">Reply</div>
                   <div className="flex gap-2">
                     <input
                       type="text"
                       value={replyText}
                       onChange={(e) => setReplyText(e.target.value)}
                       placeholder="Type your response..."
-                      className="flex-1 h-10 bg-[#111827] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-lg px-3 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+                      className="flex-1 h-10 bg-[var(--admin-card)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-lg px-3 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
                     />
                     <button 
                       onClick={handleSendReply}
@@ -332,10 +332,10 @@ export default function ComplaintsPage() {
               )}
             </div>
             
-            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">
+            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)] flex justify-end gap-3">
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 rounded-md hover:bg-white/10 text-gray-300 font-medium transition-colors text-sm"
+                className="px-4 py-2 rounded-md hover:bg-[var(--admin-border)] text-[var(--admin-muted)] font-medium transition-colors text-sm"
               >
                 Close
               </button>

@@ -183,7 +183,7 @@ export default function ApprovalsPage() {
       case "Rejected":
         return "bg-red-500/10 text-red-500 border-red-500/20";
       default:
-        return "bg-gray-500/10 text-gray-400 border-gray-500/20";
+        return "bg-gray-500/10 text-[var(--admin-muted)] border-gray-500/20";
     }
   };
 
@@ -192,25 +192,25 @@ export default function ApprovalsPage() {
       {/* 1. Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-gray-500 mb-2">
+          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
             <span>Admin</span>
-            <span className="mx-2 text-white/20">/</span>
+            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
             <span className="text-gray-200">Approvals</span>
           </nav>
-          <h2 className="text-3xl font-bold tracking-tight text-white">Driver & Rider Registrations</h2>
-          <p className="text-gray-400 mt-1">
+          <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Driver & Rider Registrations</h2>
+          <p className="text-[var(--admin-muted)] mt-1">
             Review and manage driver and rider onboarding applications.
           </p>
         </div>
         
         {/* Pill-style Tabs */}
-        <div className="inline-flex items-center rounded-full border border-white/10 bg-[#111827]/50 p-1">
+        <div className="inline-flex items-center rounded-full border border-[var(--admin-border)] bg-[var(--admin-card)] p-1">
           <button 
             onClick={() => { setActiveTab("customers"); setCurrentPage(1); }}
             className={`py-3 px-4 rounded-full font-medium text-sm transition-colors ${
               activeTab === "customers"
-                ? "bg-[#0A0E1A] text-white shadow-sm"
-                : "text-gray-400 hover:text-white"
+                ? "bg-[var(--admin-background)] text-[var(--admin-text)] shadow-sm"
+                : "text-[var(--admin-muted)] hover:text-[var(--admin-text)]"
             }`}
           >
             Customers (Riders)
@@ -219,8 +219,8 @@ export default function ApprovalsPage() {
             onClick={() => { setActiveTab("drivers"); setCurrentPage(1); }}
             className={`py-3 px-4 rounded-full font-medium text-sm transition-colors ${
               activeTab === "drivers"
-                ? "bg-[#0A0E1A] text-white shadow-sm"
-                : "text-gray-400 hover:text-white"
+                ? "bg-[var(--admin-background)] text-[var(--admin-text)] shadow-sm"
+                : "text-[var(--admin-muted)] hover:text-[var(--admin-text)]"
             }`}
           >          Drivers
           </button>
@@ -229,33 +229,33 @@ export default function ApprovalsPage() {
 
       {/* 2. Stat Cards Row */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Total Applications</span>
-            <div className="p-2 rounded-md bg-white/5"><FileText size={16} className="text-gray-400" /></div>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Total Applications</span>
+            <div className="p-2 rounded-md bg-[var(--admin-border)]"><FileText size={16} className="text-[var(--admin-muted)]" /></div>
           </div>
-          <span className="text-3xl font-bold text-white">{data.length}</span>
+          <span className="text-3xl font-bold text-[var(--admin-text)]">{data.length}</span>
         </div>
         
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Pending Review</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Pending Review</span>
             <div className="p-2 rounded-md bg-amber-500/10"><Clock size={16} className="text-amber-500" /></div>
           </div>
           <span className="text-3xl font-bold text-amber-500">{data.filter(d => d.approval === "Pending").length}</span>
         </div>
 
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Approved</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Approved</span>
             <div className="p-2 rounded-md bg-[var(--admin-primary)]/10"><CheckCircle size={16} className="text-[var(--admin-primary)]" /></div>
           </div>
           <span className="text-3xl font-bold text-[var(--admin-primary)]">{data.filter(d => d.approval === "Approved").length}</span>
         </div>
 
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Rejected</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Rejected</span>
             <div className="p-2 rounded-md bg-red-500/10"><XCircle size={16} className="text-red-500" /></div>
           </div>
           <span className="text-3xl font-bold text-red-500">{data.filter(d => d.approval === "Rejected").length}</span>
@@ -263,30 +263,30 @@ export default function ApprovalsPage() {
       </div>
 
       {/* 3. All Applications Section */}
-      <div className="rounded-xl border border-white/10 bg-[#111827]/50 shadow-sm overflow-hidden flex flex-col">
+      <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] shadow-sm overflow-hidden flex flex-col">
         {/* Card Header */}
-        <div className="p-6 border-b border-white/10 flex items-center justify-between">
-          <h3 className="text-lg font-bold text-white tracking-tight">All Applications</h3>
-          <span className="text-sm font-medium text-gray-400">{filteredData.length} results</span>
+        <div className="p-6 border-b border-[var(--admin-border)] flex items-center justify-between">
+          <h3 className="text-lg font-bold text-[var(--admin-text)] tracking-tight">All Applications</h3>
+          <span className="text-sm font-medium text-[var(--admin-muted)]">{filteredData.length} results</span>
         </div>
 
         {/* Filter Row */}
-        <div className="p-4 border-b border-white/10 bg-white/5 flex flex-wrap gap-4 items-center">
+        <div className="p-4 border-b border-[var(--admin-border)] bg-[var(--admin-border)] flex flex-wrap gap-4 items-center">
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--admin-muted)]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search customer or driver..."
-              className="w-full h-9 bg-[#0A0E1A] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+              className="w-full h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
             />
           </div>
           
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-[var(--admin-primary)]/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
           >
             <option value="all">Status: All</option>
             <option value="pending">Pending</option>
@@ -297,7 +297,7 @@ export default function ApprovalsPage() {
           <select 
             value={cityFilter}
             onChange={(e) => setCityFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-[var(--admin-primary)]/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
           >
             <option value="all">City: All</option>
             <option value="raipur">Raipur</option>
@@ -308,7 +308,7 @@ export default function ApprovalsPage() {
           <select 
             value={verificationFilter}
             onChange={(e) => setVerificationFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-[var(--admin-primary)]/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
           >
             <option value="all">Verification: All</option>
             <option value="verified">Verified</option>
@@ -317,12 +317,12 @@ export default function ApprovalsPage() {
           </select>
 
           <div className="flex items-center gap-2">
-            <input type="date" className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none [color-scheme:dark]" />
-            <span className="text-gray-500 text-sm">to</span>
-            <input type="date" className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none [color-scheme:dark]" />
+            <input type="date" className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none [color-scheme:dark]" />
+            <span className="text-[var(--admin-muted)] text-sm">to</span>
+            <input type="date" className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none [color-scheme:dark]" />
           </div>
 
-          <button className="ml-auto flex items-center gap-2 h-9 px-3 rounded-md border border-white/10 bg-white/5 text-sm font-medium text-white hover:bg-white/10 transition-colors">
+          <button className="ml-auto flex items-center gap-2 h-9 px-3 rounded-md border border-[var(--admin-border)] bg-[var(--admin-border)] text-sm font-medium text-[var(--admin-text)] hover:bg-[var(--admin-border)] transition-colors">
             <SlidersHorizontal size={14} />
             Columns
           </button>
@@ -331,32 +331,32 @@ export default function ApprovalsPage() {
         {/* Data Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
-            <thead className="bg-white/5 text-gray-400 border-b border-white/10">
+            <thead className="bg-[var(--admin-border)] text-[var(--admin-muted)] border-b border-[var(--admin-border)]">
               <tr>
                 <th className="px-4 py-3 w-10">
-                  <input type="checkbox" className="rounded border-white/20 bg-[#0A0E1A] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]" />
+                  <input type="checkbox" className="rounded border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]" />
                 </th>
-                <th className="px-4 py-3 font-medium cursor-pointer hover:text-white">
+                <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
                   <div className="flex items-center gap-1">Name <ChevronDown size={14} /></div>
                 </th>
-                <th className="px-4 py-3 font-medium cursor-pointer hover:text-white">
+                <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
                   <div className="flex items-center gap-1">Role <ChevronDown size={14} /></div>
                 </th>
-                <th className="px-4 py-3 font-medium cursor-pointer hover:text-white">
+                <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
                   <div className="flex items-center gap-1">City <ChevronDown size={14} /></div>
                 </th>
                 {activeTab === "drivers" && (
-                  <th className="px-4 py-3 font-medium cursor-pointer hover:text-white">
+                  <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
                     <div className="flex items-center gap-1">Vehicle <ChevronDown size={14} /></div>
                   </th>
                 )}
-                <th className="px-4 py-3 font-medium cursor-pointer hover:text-white">
+                <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
                   <div className="flex items-center gap-1">Applied On <ChevronDown size={14} /></div>
                 </th>
-                <th className="px-4 py-3 font-medium cursor-pointer hover:text-white">
+                <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
                   <div className="flex items-center gap-1">Verification <ChevronDown size={14} /></div>
                 </th>
-                <th className="px-4 py-3 font-medium cursor-pointer hover:text-white">
+                <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
                   <div className="flex items-center gap-1">Approval <ChevronDown size={14} /></div>
                 </th>
                 <th className="px-4 py-3 font-medium text-right">Actions</th>
@@ -364,20 +364,20 @@ export default function ApprovalsPage() {
             </thead>
             <tbody className="divide-y divide-white/10">
               {paginatedData.map((row) => (
-                <tr key={row.id} className="hover:bg-white/5 transition-colors group">
+                <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
                   <td className="px-4 py-4">
-                    <input type="checkbox" className="rounded border-white/20 bg-[#0A0E1A] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]" />
+                    <input type="checkbox" className="rounded border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]" />
                   </td>
                   <td className="px-4 py-4">
-                    <div className="font-medium text-white">{row.name}</div>
-                    <div className="text-xs text-gray-500 mt-0.5 font-mono">{row.id}</div>
+                    <div className="font-medium text-[var(--admin-text)]">{row.name}</div>
+                    <div className="text-xs text-[var(--admin-muted)] mt-0.5 font-mono">{row.id}</div>
                   </td>
-                  <td className="px-4 py-4 text-gray-300">{row.role}</td>
-                  <td className="px-4 py-4 text-gray-300">{row.city}</td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.role}</td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.city}</td>
                   {activeTab === "drivers" && (
-                    <td className="px-4 py-4 text-gray-300">{row.vehicle}</td>
+                    <td className="px-4 py-4 text-[var(--admin-muted)]">{row.vehicle}</td>
                   )}
-                  <td className="px-4 py-4 text-gray-300">{row.appliedOn}</td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.appliedOn}</td>
                   <td className="px-4 py-4">
                     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${getBadgeColors(row.verification)}`}>
                       {row.verification}
@@ -413,7 +413,7 @@ export default function ApprovalsPage() {
                       <div className="relative">
                         <button 
                           onClick={() => setOpenMenuId(openMenuId === row.id ? null : row.id)}
-                          className="p-1.5 rounded-md hover:bg-white/10 text-gray-400 transition-colors ml-2" 
+                          className="p-1.5 rounded-md hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors ml-2" 
                           title="More Actions"
                         >
                           <MoreHorizontal size={18} />
@@ -422,16 +422,16 @@ export default function ApprovalsPage() {
                         {openMenuId === row.id && (
                           <>
                             <div className="fixed inset-0 z-30" onClick={() => setOpenMenuId(null)}></div>
-                            <div className="absolute right-0 top-full mt-1 w-32 bg-[#1A1A1A] border border-white/10 rounded-md shadow-lg z-40 py-1 overflow-hidden animate-in fade-in zoom-in-95">
+                            <div className="absolute right-0 top-full mt-1 w-32 bg-[#1A1A1A] border border-[var(--admin-border)] rounded-md shadow-lg z-40 py-1 overflow-hidden animate-in fade-in zoom-in-95">
                               <button 
                                 onClick={() => { setOpenMenuId(null); setSelectedViewDetailsId(row.id); }}
-                                className="w-full text-left px-3 py-1.5 text-xs text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
+                                className="w-full text-left px-3 py-1.5 text-xs text-[var(--admin-muted)] hover:bg-[var(--admin-border)] hover:text-[var(--admin-text)] transition-colors"
                               >
                                 View Details
                               </button>
                               <button 
                                 onClick={() => { setOpenMenuId(null); setSelectedContactUserId(row.id); }}
-                                className="w-full text-left px-3 py-1.5 text-xs text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
+                                className="w-full text-left px-3 py-1.5 text-xs text-[var(--admin-muted)] hover:bg-[var(--admin-border)] hover:text-[var(--admin-text)] transition-colors"
                               >
                                 Contact User
                               </button>
@@ -446,7 +446,7 @@ export default function ApprovalsPage() {
               
               {filteredData.length === 0 && (
                 <tr>
-                  <td colSpan={10} className="px-4 py-12 text-center text-gray-500">
+                  <td colSpan={10} className="px-4 py-12 text-center text-[var(--admin-muted)]">
                     No applications found matching your criteria.
                   </td>
                 </tr>
@@ -456,20 +456,20 @@ export default function ApprovalsPage() {
         </div>
         
         {/* Pagination Placeholder */}
-        <div className="p-4 border-t border-white/10 bg-white/5 flex items-center justify-between text-sm text-gray-400">
+        <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)] flex items-center justify-between text-sm text-[var(--admin-muted)]">
           <span>Showing {(currentPage - 1) * itemsPerPage + (paginatedData.length > 0 ? 1 : 0)} to {(currentPage - 1) * itemsPerPage + paginatedData.length} of {filteredData.length} entries</span>
           <div className="flex items-center gap-2">
             <button 
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="px-3 py-1.5 rounded-md border border-white/10 bg-[#0A0E1A] hover:bg-white/10 disabled:opacity-50 disabled:hover:bg-[#0A0E1A] transition-colors"
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] disabled:opacity-50 disabled:hover:bg-[var(--admin-background)] transition-colors"
             >
               Previous
             </button>
             <button 
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages || totalPages === 0}
-              className="px-3 py-1.5 rounded-md border border-white/10 bg-[#0A0E1A] hover:bg-white/10 disabled:opacity-50 disabled:hover:bg-[#0A0E1A] transition-colors"
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] disabled:opacity-50 disabled:hover:bg-[var(--admin-background)] transition-colors"
             >
               Next
             </button>
@@ -481,68 +481,68 @@ export default function ApprovalsPage() {
       {/* View Details Modal Overlay */}
       {selectedViewDetailsId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-lg bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-white/5 shrink-0">
-              <h3 className="text-white font-bold tracking-tight">Application Details</h3>
+          <div className="w-full max-w-lg bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-border)] shrink-0">
+              <h3 className="text-[var(--admin-text)] font-bold tracking-tight">Application Details</h3>
               <button 
                 onClick={() => setSelectedViewDetailsId(null)}
-                className="p-2 rounded-full hover:bg-white/10 text-gray-400 transition-colors"
+                className="p-2 rounded-full hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors"
               >
                 <X size={20} />
               </button>
             </div>
             
-            <div className="p-6 bg-[#05070A] flex flex-col items-center">
+            <div className="p-6 bg-[var(--admin-background)] flex flex-col items-center">
               <div className="w-24 h-24 bg-[var(--admin-primary)]/10 rounded-full flex items-center justify-center mb-6">
                 <FileText size={40} className="text-[var(--admin-primary)]" />
               </div>
-              <h4 className="text-xl font-bold text-white mb-1">
+              <h4 className="text-xl font-bold text-[var(--admin-text)] mb-1">
                 {data.find(u => u.id === selectedViewDetailsId)?.name}
               </h4>
-              <p className="text-sm text-gray-400 mb-6">
+              <p className="text-sm text-[var(--admin-muted)] mb-6">
                 ID: {selectedViewDetailsId}
               </p>
 
-              <div className="w-full bg-[#111827] rounded-xl border border-white/5 p-4 space-y-3">
+              <div className="w-full bg-[var(--admin-card)] rounded-xl border border-[var(--admin-border)] p-4 space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-400 text-sm">Role</span>
-                  <span className="text-white text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.role}</span>
+                  <span className="text-[var(--admin-muted)] text-sm">Role</span>
+                  <span className="text-[var(--admin-text)] text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.role}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400 text-sm">City</span>
-                  <span className="text-white text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.city}</span>
+                  <span className="text-[var(--admin-muted)] text-sm">City</span>
+                  <span className="text-[var(--admin-text)] text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.city}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400 text-sm">Phone</span>
-                  <span className="text-white text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.phone}</span>
+                  <span className="text-[var(--admin-muted)] text-sm">Phone</span>
+                  <span className="text-[var(--admin-text)] text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.phone}</span>
                 </div>
                 {data.find(u => u.id === selectedViewDetailsId)?.vehicle && (
                   <div className="flex justify-between">
-                    <span className="text-gray-400 text-sm">Vehicle</span>
-                    <span className="text-white text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.vehicle}</span>
+                    <span className="text-[var(--admin-muted)] text-sm">Vehicle</span>
+                    <span className="text-[var(--admin-text)] text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.vehicle}</span>
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <span className="text-gray-400 text-sm">Applied On</span>
-                  <span className="text-white text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.appliedOn}</span>
+                  <span className="text-[var(--admin-muted)] text-sm">Applied On</span>
+                  <span className="text-[var(--admin-text)] text-sm font-medium">{data.find(u => u.id === selectedViewDetailsId)?.appliedOn}</span>
                 </div>
               </div>
 
               {/* Dossier Section for Drivers */}
               {data.find(u => u.id === selectedViewDetailsId)?.role === "Driver" && (
-                <div className="w-full mt-4 bg-[#111827] rounded-xl border border-white/5 p-4">
-                  <h5 className="text-white font-bold mb-3 flex items-center justify-between">
+                <div className="w-full mt-4 bg-[var(--admin-card)] rounded-xl border border-[var(--admin-border)] p-4">
+                  <h5 className="text-[var(--admin-text)] font-bold mb-3 flex items-center justify-between">
                     Driver Dossier & Documents
-                    {isDossierLoading && <span className="text-xs text-gray-400 font-normal">Loading...</span>}
+                    {isDossierLoading && <span className="text-xs text-[var(--admin-muted)] font-normal">Loading...</span>}
                   </h5>
                   
                   {dossier && dossier.documents && dossier.documents.length > 0 ? (
                     <div className="space-y-3">
                       {dossier.documents.map((doc: any) => (
-                        <div key={doc.id} className="p-3 bg-white/5 rounded-lg border border-white/5 flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
+                        <div key={doc.id} className="p-3 bg-[var(--admin-border)] rounded-lg border border-[var(--admin-border)] flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
                           <div>
-                            <div className="text-sm font-medium text-white">{doc.type}</div>
-                            <div className="text-xs text-gray-400 mt-0.5 break-all">
+                            <div className="text-sm font-medium text-[var(--admin-text)]">{doc.type}</div>
+                            <div className="text-xs text-[var(--admin-muted)] mt-0.5 break-all">
                               <a href={doc.fileUrl} target="_blank" rel="noreferrer" className="text-[var(--admin-primary)] hover:underline">View File</a>
                             </div>
                             {doc.rejectReason && (
@@ -577,7 +577,7 @@ export default function ApprovalsPage() {
                       ))}
                     </div>
                   ) : (
-                    <div className="text-sm text-gray-500 py-4 text-center">
+                    <div className="text-sm text-[var(--admin-muted)] py-4 text-center">
                       {isDossierLoading ? "Fetching documents..." : "No documents found."}
                     </div>
                   )}
@@ -585,10 +585,10 @@ export default function ApprovalsPage() {
               )}
             </div>
             
-            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">
+            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)] flex justify-end gap-3">
               <button 
                 onClick={() => setSelectedViewDetailsId(null)}
-                className="px-4 py-2 rounded-md hover:bg-white/10 text-gray-300 font-medium transition-colors text-sm"
+                className="px-4 py-2 rounded-md hover:bg-[var(--admin-border)] text-[var(--admin-muted)] font-medium transition-colors text-sm"
               >
                 Close
               </button>
@@ -600,27 +600,27 @@ export default function ApprovalsPage() {
       {/* Contact User Modal Overlay */}
       {selectedContactUserId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-white/5 shrink-0">
-              <h3 className="text-white font-bold tracking-tight">Contact User</h3>
+          <div className="w-full max-w-md bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-border)] shrink-0">
+              <h3 className="text-[var(--admin-text)] font-bold tracking-tight">Contact User</h3>
               <button 
                 onClick={() => setSelectedContactUserId(null)}
-                className="p-2 rounded-full hover:bg-white/10 text-gray-400 transition-colors"
+                className="p-2 rounded-full hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors"
               >
                 <X size={20} />
               </button>
             </div>
             
-            <div className="p-6 bg-[#05070A] flex flex-col">
+            <div className="p-6 bg-[var(--admin-background)] flex flex-col">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center shrink-0">
                   <User size={24} className="text-blue-500" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-white leading-none">
+                  <h4 className="text-lg font-bold text-[var(--admin-text)] leading-none">
                     {data.find(u => u.id === selectedContactUserId)?.name}
                   </h4>
-                  <span className="text-sm text-gray-400 mt-1 block">
+                  <span className="text-sm text-[var(--admin-muted)] mt-1 block">
                     {data.find(u => u.id === selectedContactUserId)?.phone}
                   </span>
                 </div>
@@ -628,10 +628,10 @@ export default function ApprovalsPage() {
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-1.5">Send a Message (Mock)</label>
+                  <label className="block text-sm font-medium text-[var(--admin-muted)] mb-1.5">Send a Message (Mock)</label>
                   <textarea 
                     rows={4}
-                    className="w-full bg-[#111827] border border-white/10 rounded-lg p-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[var(--admin-primary)]/50 focus:ring-1 focus:ring-[var(--admin-primary)]/30 transition-all resize-none"
+                    className="w-full bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-lg p-3 text-sm text-[var(--admin-text)] placeholder:text-gray-600 focus:outline-none focus:border-[var(--admin-primary)]/50 focus:ring-1 focus:ring-[var(--admin-primary)]/30 transition-all resize-none"
                     placeholder="Type your message here..."
                   ></textarea>
                 </div>
