@@ -14,6 +14,26 @@
   --admin-border-light: #E2E8F0;
   --admin-muted-light: #64748B;
   --admin-text-dark: #0F172A;
+
+  /* Theme Dynamic CSS Variables (Dark theme by default) */
+  --admin-background: #0A0E1A;
+  --admin-card: rgba(17, 24, 39, 0.5);
+  --admin-border: rgba(255, 255, 255, 0.1);
+  --admin-text: #ffffff;
+  --admin-muted: #9CA3AF;
+  --admin-sidebar-bg: #0A0A0A;
+  --admin-topbar-bg: #0A0E1A;
+}
+
+.light {
+  /* Theme Dynamic CSS Variables (Light theme overrides) */
+  --admin-background: #F8FAFC;
+  --admin-card: #FFFFFF;
+  --admin-border: #E2E8F0;
+  --admin-text: #0F172A;
+  --admin-muted: #64748B;
+  --admin-sidebar-bg: #FFFFFF;
+  --admin-topbar-bg: #FFFFFF;
 }
 
 body {

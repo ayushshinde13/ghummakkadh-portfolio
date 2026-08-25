@@ -107,13 +107,13 @@ export default function SupportTicketsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-gray-500 mb-2">
+          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
             <span>Admin</span>
-            <span className="mx-2 text-white/20">/</span>
+            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
             <span className="text-gray-200">Support Tickets</span>
           </nav>
-          <h2 className="text-3xl font-bold tracking-tight text-white">Support Tickets</h2>
-          <p className="text-gray-400 mt-1">
+          <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Support Tickets</h2>
+          <p className="text-[var(--admin-muted)] mt-1">
             Manage and respond to user technical issues and general inquiries.
           </p>
         </div>
@@ -121,25 +121,25 @@ export default function SupportTicketsPage() {
 
       {/* Stat Cards */}
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Open Tickets</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Open Tickets</span>
             <div className="p-2 rounded-md bg-red-500/10"><Ticket size={16} className="text-red-500" /></div>
           </div>
           <span className="text-3xl font-bold text-red-500">{openTicketsCount}</span>
         </div>
         
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">In Progress</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">In Progress</span>
             <div className="p-2 rounded-md bg-amber-500/10"><Clock size={16} className="text-amber-500" /></div>
           </div>
           <span className="text-3xl font-bold text-amber-500">{inProgressCount}</span>
         </div>
 
-        <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 flex flex-col gap-2 shadow-sm">
+        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Closed Tickets</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Closed Tickets</span>
             <div className="p-2 rounded-md bg-green-500/10"><CheckCircle size={16} className="text-green-500" /></div>
           </div>
           <span className="text-3xl font-bold text-green-500">{closedCount}</span>
@@ -147,24 +147,24 @@ export default function SupportTicketsPage() {
       </div>
 
       {/* Main Table Section */}
-      <div className="rounded-xl border border-white/10 bg-[#111827]/50 shadow-sm overflow-hidden flex flex-col">
+      <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] shadow-sm overflow-hidden flex flex-col">
         {/* Filter Row */}
-        <div className="p-4 border-b border-white/10 bg-white/5 flex flex-wrap gap-4 items-center">
+        <div className="p-4 border-b border-[var(--admin-border)] bg-[var(--admin-border)] flex flex-wrap gap-4 items-center">
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--admin-muted)]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search tickets by ID, user, or subject..."
-              className="w-full h-9 bg-[#0A0E1A] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+              className="w-full h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
             />
           </div>
           
           <select 
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-[var(--admin-primary)]/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
           >
             <option value="all">Priority: All</option>
             <option value="high">High</option>
@@ -175,7 +175,7 @@ export default function SupportTicketsPage() {
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-[var(--admin-primary)]/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
           >
             <option value="all">Status: All</option>
             <option value="open">Open</option>
@@ -187,7 +187,7 @@ export default function SupportTicketsPage() {
         {/* Data Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
-            <thead className="bg-white/5 text-gray-400 border-b border-white/10">
+            <thead className="bg-[var(--admin-border)] text-[var(--admin-muted)] border-b border-[var(--admin-border)]">
               <tr>
                 <th className="px-4 py-3 font-medium">Ticket ID</th>
                 <th className="px-4 py-3 font-medium">User</th>
@@ -200,13 +200,13 @@ export default function SupportTicketsPage() {
             </thead>
             <tbody className="divide-y divide-white/10">
               {filteredTickets.map((row) => (
-                <tr key={row.id} className="hover:bg-white/5 transition-colors group">
+                <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
                   <td className="px-4 py-4">
-                    <div className="font-medium text-white">{row.id}</div>
-                    <div className="text-xs text-gray-500 mt-0.5">{row.createdOn}</div>
+                    <div className="font-medium text-[var(--admin-text)]">{row.id}</div>
+                    <div className="text-xs text-[var(--admin-muted)] mt-0.5">{row.createdOn}</div>
                   </td>
                   <td className="px-4 py-4 font-medium text-gray-200">{row.user}</td>
-                  <td className="px-4 py-4 text-gray-300">{row.subject}</td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.subject}</td>
                   <td className="px-4 py-4">
                     {row.priority === "High" && (
                       <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border border-red-500/20 bg-red-500/10 text-red-500">
@@ -236,25 +236,25 @@ export default function SupportTicketsPage() {
                       </span>
                     )}
                     {row.status === "Closed" && (
-                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium border border-gray-500/30 bg-gray-500/10 text-gray-400">
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium border border-gray-500/30 bg-gray-500/10 text-[var(--admin-muted)]">
                         {row.status}
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-4 text-gray-400">{row.assignedTo}</td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.assignedTo}</td>
                   <td className="px-4 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button 
                         onClick={() => handleOpenModal(row)}
-                        className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-medium transition-colors shrink-0"
+                        className="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-md bg-[var(--admin-border)] border border-[var(--admin-border)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] text-xs font-medium transition-colors shrink-0"
                       >
-                        <MessageCircle size={14} className="text-gray-400" />
+                        <MessageCircle size={14} className="text-[var(--admin-muted)]" />
                         Reply
                       </button>
                       {row.status !== "Closed" && (
                         <button 
                           onClick={() => handleCloseTicket(row.id)}
-                          className="p-1.5 rounded-md hover:bg-red-500/20 text-gray-400 hover:text-red-500 transition-colors ml-1" 
+                          className="p-1.5 rounded-md hover:bg-red-500/20 text-[var(--admin-muted)] hover:text-red-500 transition-colors ml-1" 
                           title="Close Ticket"
                         >
                           <XCircle size={18} />
@@ -267,7 +267,7 @@ export default function SupportTicketsPage() {
               
               {filteredTickets.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-4 py-12 text-center text-gray-500">
+                  <td colSpan={7} className="px-4 py-12 text-center text-[var(--admin-muted)]">
                     No tickets found matching your criteria.
                   </td>
                 </tr>
@@ -280,72 +280,72 @@ export default function SupportTicketsPage() {
       {/* Reply Modal */}
       {isModalOpen && selectedTicket && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-lg bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-white/5 shrink-0">
-              <h3 className="text-white font-bold tracking-tight flex items-center gap-2">
+          <div className="w-full max-w-lg bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-border)] shrink-0">
+              <h3 className="text-[var(--admin-text)] font-bold tracking-tight flex items-center gap-2">
                 <Ticket size={18} className="text-[var(--admin-primary)]" />
                 Ticket: {selectedTicket.id}
               </h3>
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="p-2 rounded-full hover:bg-white/10 text-gray-400 transition-colors"
+                className="p-2 rounded-full hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors"
               >
                 <X size={20} />
               </button>
             </div>
             
-            <div className="p-6 bg-[#05070A] flex flex-col space-y-6">
+            <div className="p-6 bg-[var(--admin-background)] flex flex-col space-y-6">
               <div>
-                <div className="text-sm text-gray-400 mb-1">Subject</div>
-                <div className="text-lg font-bold text-white">{selectedTicket.subject}</div>
+                <div className="text-sm text-[var(--admin-muted)] mb-1">Subject</div>
+                <div className="text-lg font-bold text-[var(--admin-text)]">{selectedTicket.subject}</div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl border border-white/10 bg-white/5">
-                  <div className="text-xs text-gray-400 mb-1">User</div>
-                  <div className="text-sm font-medium text-white">{selectedTicket.user}</div>
+                <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-border)]">
+                  <div className="text-xs text-[var(--admin-muted)] mb-1">User</div>
+                  <div className="text-sm font-medium text-[var(--admin-text)]">{selectedTicket.user}</div>
                 </div>
-                <div className="p-4 rounded-xl border border-white/10 bg-white/5">
-                  <div className="text-xs text-gray-400 mb-1">Status</div>
-                  <div className="text-sm font-medium text-white">{selectedTicket.status}</div>
+                <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-border)]">
+                  <div className="text-xs text-[var(--admin-muted)] mb-1">Status</div>
+                  <div className="text-sm font-medium text-[var(--admin-text)]">{selectedTicket.status}</div>
                 </div>
               </div>
 
               <div>
-                <div className="text-sm font-medium text-gray-400 mb-2">Message History</div>
-                <div className="bg-[#111827] border border-white/10 rounded-xl p-4 max-h-48 overflow-y-auto flex flex-col gap-3">
+                <div className="text-sm font-medium text-[var(--admin-muted)] mb-2">Message History</div>
+                <div className="bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-xl p-4 max-h-48 overflow-y-auto flex flex-col gap-3">
                   {isDetailsLoading ? (
-                    <div className="text-gray-500 text-sm">Loading messages...</div>
+                    <div className="text-[var(--admin-muted)] text-sm">Loading messages...</div>
                   ) : ticketDetails?.ticket?.messages?.length > 0 ? (
                     ticketDetails.ticket.messages.map((msg: any) => (
                       <div key={msg.id} className={`flex flex-col ${msg.senderRole === 'ADMIN' ? 'items-end' : 'items-start'}`}>
-                        <div className={`px-3 py-2 rounded-lg text-sm max-w-[80%] ${msg.senderRole === 'ADMIN' ? 'bg-[var(--admin-primary)]/10 text-[var(--admin-primary)]' : 'bg-white/10 text-white'}`}>
+                        <div className={`px-3 py-2 rounded-lg text-sm max-w-[80%] ${msg.senderRole === 'ADMIN' ? 'bg-[var(--admin-primary)]/10 text-[var(--admin-primary)]' : 'bg-white/10 text-[var(--admin-text)]'}`}>
                           {msg.message}
                         </div>
-                        <div className="text-xs text-gray-500 mt-1">{new Date(msg.createdAt).toLocaleString()}</div>
+                        <div className="text-xs text-[var(--admin-muted)] mt-1">{new Date(msg.createdAt).toLocaleString()}</div>
                       </div>
                     ))
                   ) : (
-                    <div className="text-gray-500 text-sm">No messages yet.</div>
+                    <div className="text-[var(--admin-muted)] text-sm">No messages yet.</div>
                   )}
                 </div>
               </div>
 
               <div>
-                <div className="text-sm font-medium text-gray-400 mb-2">Your Reply</div>
+                <div className="text-sm font-medium text-[var(--admin-muted)] mb-2">Your Reply</div>
                 <textarea
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
                   placeholder="Type your response to the user here..."
-                  className="w-full h-24 bg-[#111827] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-xl p-4 text-sm text-white placeholder:text-gray-500 outline-none transition-all resize-none"
+                  className="w-full h-24 bg-[var(--admin-card)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-xl p-4 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all resize-none"
                 />
               </div>
             </div>
             
-            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">
+            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)] flex justify-end gap-3">
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 rounded-md hover:bg-white/10 text-gray-300 font-medium transition-colors text-sm"
+                className="px-4 py-2 rounded-md hover:bg-[var(--admin-border)] text-[var(--admin-muted)] font-medium transition-colors text-sm"
               >
                 Cancel
               </button>

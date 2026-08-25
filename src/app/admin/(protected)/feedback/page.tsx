@@ -72,51 +72,51 @@ export default function FeedbackPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-gray-500 mb-2">
+          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
             <span>Admin</span>
-            <span className="mx-2 text-white/20">/</span>
+            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
             <span className="text-gray-200">Feedback</span>
           </nav>
-          <h2 className="text-3xl font-bold tracking-tight text-white">User Feedback & Ratings</h2>
-          <p className="text-gray-400 mt-1">
+          <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">User Feedback & Ratings</h2>
+          <p className="text-[var(--admin-muted)] mt-1">
             Review feedback from customers and drivers to improve service quality.
           </p>
         </div>
       </div>
 
       {/* Prominent Stat Card */}
-      <div className="rounded-xl border border-white/10 bg-[#111827]/50 p-6 shadow-sm flex items-center gap-6">
-        <div className="flex flex-col items-center justify-center h-24 w-24 rounded-full border-4 border-[var(--admin-primary)] bg-white/5 shrink-0">
-          <span className="text-3xl font-bold text-white">{averageRating}</span>
+      <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 shadow-sm flex items-center gap-6">
+        <div className="flex flex-col items-center justify-center h-24 w-24 rounded-full border-4 border-[var(--admin-primary)] bg-[var(--admin-border)] shrink-0">
+          <span className="text-3xl font-bold text-[var(--admin-text)]">{averageRating}</span>
         </div>
         <div>
-          <h3 className="text-lg font-bold text-white mb-1">Average Platform Rating</h3>
+          <h3 className="text-lg font-bold text-[var(--admin-text)] mb-1">Average Platform Rating</h3>
           <div className="flex items-center gap-1 mb-2">
             {renderStars(Math.round(averageRating))}
           </div>
-          <p className="text-sm text-gray-400">Based on {totalReviews.toLocaleString()} reviews in the last 30 days.</p>
+          <p className="text-sm text-[var(--admin-muted)]">Based on {totalReviews.toLocaleString()} reviews in the last 30 days.</p>
         </div>
       </div>
 
       {/* Main Section */}
-      <div className="rounded-xl border border-white/10 bg-[#111827]/50 shadow-sm overflow-hidden flex flex-col">
+      <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] shadow-sm overflow-hidden flex flex-col">
         {/* Filter Row */}
-        <div className="p-4 border-b border-white/10 bg-white/5 flex flex-wrap gap-4 items-center">
+        <div className="p-4 border-b border-[var(--admin-border)] bg-[var(--admin-border)] flex flex-wrap gap-4 items-center">
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--admin-muted)]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search reviews by user name..."
-              className="w-full h-9 bg-[#0A0E1A] border border-white/10 focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+              className="w-full h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
             />
           </div>
           
           <select 
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-[var(--admin-primary)]/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
           >
             <option value="all">Role: All</option>
             <option value="customer">Customer</option>
@@ -126,7 +126,7 @@ export default function FeedbackPage() {
           <select 
             value={ratingFilter}
             onChange={(e) => setRatingFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-[var(--admin-primary)]/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
           >
             <option value="all">Rating: All</option>
             <option value="5">5 Stars</option>
@@ -140,26 +140,26 @@ export default function FeedbackPage() {
         {/* Feedback List */}
         <div className="divide-y divide-white/10">
           {filteredFeedbacks.length === 0 ? (
-            <div className="p-12 text-center text-gray-500">
+            <div className="p-12 text-center text-[var(--admin-muted)]">
               No reviews found matching your criteria.
             </div>
           ) : (
             filteredFeedbacks.map((item) => (
-              <div key={item.id} className="p-6 hover:bg-white/5 transition-colors">
+              <div key={item.id} className="p-6 hover:bg-[var(--admin-border)] transition-colors">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-3 mb-1">
-                      <h4 className="font-semibold text-white">{item.user}</h4>
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-medium border border-gray-500/20 bg-gray-500/10 text-gray-400">
+                      <h4 className="font-semibold text-[var(--admin-text)]">{item.user}</h4>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-medium border border-gray-500/20 bg-gray-500/10 text-[var(--admin-muted)]">
                         {item.role}
                       </span>
                     </div>
                     <div className="flex items-center gap-1 mb-3">
                       {renderStars(item.rating)}
                     </div>
-                    <p className="text-gray-300 text-sm leading-relaxed">"{item.comment}"</p>
+                    <p className="text-[var(--admin-muted)] text-sm leading-relaxed">"{item.comment}"</p>
                   </div>
-                  <span className="text-xs text-gray-500 shrink-0">{item.date}</span>
+                  <span className="text-xs text-[var(--admin-muted)] shrink-0">{item.date}</span>
                 </div>
               </div>
             ))

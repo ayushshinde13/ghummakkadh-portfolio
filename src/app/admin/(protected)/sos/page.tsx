@@ -117,18 +117,18 @@ export default function SOSPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-gray-500 mb-2">
+          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
             <span>Admin</span>
-            <span className="mx-2 text-white/20">/</span>
+            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
             <span className="text-gray-200">Safety (SOS)</span>
           </nav>
           <div className="flex items-center gap-3">
-            <h2 className="text-3xl font-bold tracking-tight text-white">Emergency SOS Alerts</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Emergency SOS Alerts</h2>
             {activeAlertsCount > 0 && (
               <span className="flex h-3 w-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)] animate-pulse" />
             )}
           </div>
-          <p className="text-gray-400 mt-1">
+          <p className="text-[var(--admin-muted)] mt-1">
             Immediate attention required for active panic button triggers.
           </p>
         </div>
@@ -138,17 +138,17 @@ export default function SOSPage() {
       <div className={`rounded-xl border p-6 flex items-center justify-between shadow-sm transition-all ${
         activeAlertsCount > 0 
           ? "bg-red-500/10 border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.1)]" 
-          : "bg-[#111827]/50 border-white/10"
+          : "bg-[var(--admin-card)] border-[var(--admin-border)]"
       }`}>
         <div className="flex items-center gap-4">
-          <div className={`p-3 rounded-full ${activeAlertsCount > 0 ? "bg-red-500/20 text-red-500" : "bg-white/5 text-gray-400"}`}>
+          <div className={`p-3 rounded-full ${activeAlertsCount > 0 ? "bg-red-500/20 text-red-500" : "bg-[var(--admin-border)] text-[var(--admin-muted)]"}`}>
             <Siren size={32} className={activeAlertsCount > 0 ? "animate-pulse" : ""} />
           </div>
           <div>
-            <h3 className={`text-sm font-semibold uppercase tracking-wider ${activeAlertsCount > 0 ? "text-red-400" : "text-gray-400"}`}>
+            <h3 className={`text-sm font-semibold uppercase tracking-wider ${activeAlertsCount > 0 ? "text-red-400" : "text-[var(--admin-muted)]"}`}>
               Active SOS Alerts
             </h3>
-            <span className={`text-4xl font-bold ${activeAlertsCount > 0 ? "text-red-500" : "text-white"}`}>
+            <span className={`text-4xl font-bold ${activeAlertsCount > 0 ? "text-red-500" : "text-[var(--admin-text)]"}`}>
               {activeAlertsCount}
             </span>
           </div>
@@ -163,24 +163,24 @@ export default function SOSPage() {
       </div>
 
       {/* Main Table Section */}
-      <div className="rounded-xl border border-white/10 bg-[#111827]/50 shadow-sm overflow-hidden flex flex-col">
+      <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] shadow-sm overflow-hidden flex flex-col">
         {/* Filter Row */}
-        <div className="p-4 border-b border-white/10 bg-white/5 flex flex-wrap gap-4 items-center">
+        <div className="p-4 border-b border-[var(--admin-border)] bg-[var(--admin-border)] flex flex-wrap gap-4 items-center">
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--admin-muted)]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search alerts by ID or name..."
-              className="w-full h-9 bg-[#0A0E1A] border border-white/10 focus:border-red-500/50 rounded-md pl-9 pr-4 text-sm text-white placeholder:text-gray-500 outline-none transition-all"
+              className="w-full h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] focus:border-red-500/50 rounded-md pl-9 pr-4 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
             />
           </div>
           
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="h-9 bg-[#0A0E1A] border border-white/10 rounded-md px-3 text-sm text-gray-300 outline-none focus:border-red-500/50"
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-red-500/50"
           >
             <option value="all">Status: All</option>
             <option value="active">Active</option>
@@ -191,7 +191,7 @@ export default function SOSPage() {
         {/* Data Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
-            <thead className="bg-white/5 text-gray-400 border-b border-white/10">
+            <thead className="bg-[var(--admin-border)] text-[var(--admin-muted)] border-b border-[var(--admin-border)]">
               <tr>
                 <th className="px-4 py-3 font-medium">SOS ID / Trip</th>
                 <th className="px-4 py-3 font-medium">Triggered By</th>
@@ -203,24 +203,24 @@ export default function SOSPage() {
             </thead>
             <tbody className="divide-y divide-white/10">
               {filteredAlerts.map((row) => (
-                <tr key={row.id} className={`transition-colors group ${row.status === "Active" ? "bg-red-500/5 hover:bg-red-500/10" : "hover:bg-white/5"}`}>
+                <tr key={row.id} className={`transition-colors group ${row.status === "Active" ? "bg-red-500/5 hover:bg-red-500/10" : "hover:bg-[var(--admin-border)]"}`}>
                   <td className="px-4 py-4">
-                    <div className={`font-medium ${row.status === "Active" ? "text-red-400" : "text-white"}`}>{row.id}</div>
-                    <div className="text-xs text-gray-500 font-mono mt-0.5 cursor-pointer hover:underline">{row.tripId}</div>
+                    <div className={`font-medium ${row.status === "Active" ? "text-red-400" : "text-[var(--admin-text)]"}`}>{row.id}</div>
+                    <div className="text-xs text-[var(--admin-muted)] font-mono mt-0.5 cursor-pointer hover:underline">{row.tripId}</div>
                   </td>
                   <td className="px-4 py-4">
                     <div className="flex flex-col">
                       <span className="font-semibold text-gray-200">{row.name}</span>
-                      <span className="text-xs text-gray-500">{row.triggeredBy}</span>
+                      <span className="text-xs text-[var(--admin-muted)]">{row.triggeredBy}</span>
                     </div>
                   </td>
                   <td className="px-4 py-4">
-                    <div className="flex items-center gap-1.5 text-gray-300">
-                      <MapPin size={14} className="text-gray-500 shrink-0" />
+                    <div className="flex items-center gap-1.5 text-[var(--admin-muted)]">
+                      <MapPin size={14} className="text-[var(--admin-muted)] shrink-0" />
                       <span className="line-clamp-1">{row.location}</span>
                     </div>
                   </td>
-                  <td className={`px-4 py-4 font-medium ${row.status === "Active" ? "text-red-400" : "text-gray-400"}`}>
+                  <td className={`px-4 py-4 font-medium ${row.status === "Active" ? "text-red-400" : "text-[var(--admin-muted)]"}`}>
                     {row.time}
                   </td>
                   <td className="px-4 py-4">
@@ -256,7 +256,7 @@ export default function SOSPage() {
                       )}
                       <button 
                         onClick={() => handleOpenModal(row)}
-                        className="p-1.5 rounded-md hover:bg-white/10 text-gray-400 transition-colors ml-2" 
+                        className="p-1.5 rounded-md hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors ml-2" 
                         title="View Incident Report"
                       >
                         <FileText size={18} />
@@ -268,7 +268,7 @@ export default function SOSPage() {
               
               {filteredAlerts.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="px-4 py-12 text-center text-gray-500">
+                  <td colSpan={6} className="px-4 py-12 text-center text-[var(--admin-muted)]">
                     No SOS alerts found matching your criteria.
                   </td>
                 </tr>
@@ -281,43 +281,43 @@ export default function SOSPage() {
       {/* View Report Modal */}
       {isModalOpen && selectedReport && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md bg-[#0A0E1A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-white/5 shrink-0">
-              <h3 className="text-white font-bold tracking-tight flex items-center gap-2">
-                <FileText size={18} className="text-gray-400" />
+          <div className="w-full max-w-md bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-border)] shrink-0">
+              <h3 className="text-[var(--admin-text)] font-bold tracking-tight flex items-center gap-2">
+                <FileText size={18} className="text-[var(--admin-muted)]" />
                 Incident Report
               </h3>
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="p-2 rounded-full hover:bg-white/10 text-gray-400 transition-colors"
+                className="p-2 rounded-full hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors"
               >
                 <X size={20} />
               </button>
             </div>
             
-            <div className="p-6 bg-[#05070A] flex flex-col space-y-4">
-              <div className="flex justify-between items-center pb-4 border-b border-white/10">
+            <div className="p-6 bg-[var(--admin-background)] flex flex-col space-y-4">
+              <div className="flex justify-between items-center pb-4 border-b border-[var(--admin-border)]">
                 <div>
-                  <div className="text-sm text-gray-400">Triggered By</div>
-                  <div className="text-lg font-bold text-white">{selectedReport.name}</div>
+                  <div className="text-sm text-[var(--admin-muted)]">Triggered By</div>
+                  <div className="text-lg font-bold text-[var(--admin-text)]">{selectedReport.name}</div>
                 </div>
                 <div className="text-right">
-                  <div className="text-sm text-gray-400">SOS ID</div>
+                  <div className="text-sm text-[var(--admin-muted)]">SOS ID</div>
                   <div className="text-sm font-mono text-[var(--admin-primary)]">{selectedReport.id}</div>
                 </div>
               </div>
 
-              <div className="space-y-4 pb-4 border-b border-white/10">
+              <div className="space-y-4 pb-4 border-b border-[var(--admin-border)]">
                 <div>
-                  <div className="text-sm text-gray-400 mb-1">Incident Location</div>
-                  <div className="flex items-center gap-2 text-white">
+                  <div className="text-sm text-[var(--admin-muted)] mb-1">Incident Location</div>
+                  <div className="flex items-center gap-2 text-[var(--admin-text)]">
                     <MapPin size={16} className="text-red-500" />
                     <span>{selectedReport.location}</span>
                   </div>
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-400">Current Status</span>
+                  <span className="text-[var(--admin-muted)]">Current Status</span>
                   <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold border ${
                     selectedReport.status === "Active" ? "bg-red-500/20 text-red-500 border-red-500/30 animate-pulse" :
                     selectedReport.status === "Acknowledged" ? "bg-amber-500/20 text-amber-500 border-amber-500/30" :
@@ -332,24 +332,24 @@ export default function SOSPage() {
               </div>
 
               {isDetailsLoading && (
-                <div className="text-center text-sm text-gray-400 py-4">Loading dossier...</div>
+                <div className="text-center text-sm text-[var(--admin-muted)] py-4">Loading dossier...</div>
               )}
               {reportDetails && reportDetails.trip && (
-                <div className="rounded-xl border border-white/10 overflow-hidden bg-white/5">
-                  <div className="p-3 bg-white/5 border-b border-white/10 text-sm font-semibold text-white">Trip Involvement</div>
-                  <div className="p-4 flex flex-col gap-2 text-sm text-gray-300">
-                    <p><span className="text-gray-500">Rider:</span> {reportDetails.trip.rider?.name}</p>
-                    <p><span className="text-gray-500">Driver:</span> {reportDetails.trip.driver?.name || "N/A"}</p>
-                    <p><span className="text-gray-500">Status:</span> {reportDetails.trip.status}</p>
+                <div className="rounded-xl border border-[var(--admin-border)] overflow-hidden bg-[var(--admin-border)]">
+                  <div className="p-3 bg-[var(--admin-border)] border-b border-[var(--admin-border)] text-sm font-semibold text-[var(--admin-text)]">Trip Involvement</div>
+                  <div className="p-4 flex flex-col gap-2 text-sm text-[var(--admin-muted)]">
+                    <p><span className="text-[var(--admin-muted)]">Rider:</span> {reportDetails.trip.rider?.name}</p>
+                    <p><span className="text-[var(--admin-muted)]">Driver:</span> {reportDetails.trip.driver?.name || "N/A"}</p>
+                    <p><span className="text-[var(--admin-muted)]">Status:</span> {reportDetails.trip.status}</p>
                   </div>
                 </div>
               )}
             </div>
             
-            <div className="p-4 border-t border-white/10 bg-white/5 flex justify-end gap-3">
+            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)] flex justify-end gap-3">
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 rounded-md hover:bg-white/10 text-gray-300 font-medium transition-colors text-sm"
+                className="px-4 py-2 rounded-md hover:bg-[var(--admin-border)] text-[var(--admin-muted)] font-medium transition-colors text-sm"
               >
                 Close
               </button>

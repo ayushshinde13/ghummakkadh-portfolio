@@ -31,8 +31,8 @@ export default function AdminSettings() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-white">System Settings</h2>
-          <p className="text-gray-400 mt-1">
+          <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">System Settings</h2>
+          <p className="text-[var(--admin-muted)] mt-1">
             Configure global platform behaviors, security policies, API credentials, and notifications.
           </p>
         </div>
@@ -49,7 +49,7 @@ export default function AdminSettings() {
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-white/10 flex gap-6 overflow-x-auto custom-scrollbar pb-[-1px]">
+      <div className="border-b border-[var(--admin-border)] flex gap-6 overflow-x-auto custom-scrollbar pb-[-1px]">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -60,7 +60,7 @@ export default function AdminSettings() {
               className={`flex items-center gap-2 pb-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${
                 isActive
                   ? "border-[var(--admin-primary)] text-[var(--admin-primary)]"
-                  : "border-transparent text-gray-500 hover:text-white"
+                  : "border-transparent text-[var(--admin-muted)] hover:text-[var(--admin-text)]"
               }`}
             >
               <Icon size={16} />
@@ -74,10 +74,10 @@ export default function AdminSettings() {
       {activeTab === "general" && (
         <div className="space-y-6">
           {/* Platform Identity Card */}
-          <div className="rounded-xl border border-white/10 bg-[#111827]/50 backdrop-blur-sm shadow-sm">
+          <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] backdrop-blur-sm shadow-sm">
             <div className="flex flex-col space-y-1.5 p-6 pb-4">
-              <h3 className="font-semibold leading-none tracking-tight text-lg text-white">Platform Identity</h3>
-              <p className="text-sm text-gray-400">
+              <h3 className="font-semibold leading-none tracking-tight text-lg text-[var(--admin-text)]">Platform Identity</h3>
+              <p className="text-sm text-[var(--admin-muted)]">
                 Basic platform branding and contact endpoints.
               </p>
             </div>
@@ -92,7 +92,7 @@ export default function AdminSettings() {
                   <input
                     type="text"
                     defaultValue="Ghumakkadh"
-                    className="flex h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--admin-primary)]/40 focus:border-[var(--admin-primary)] transition-colors"
+                    className="flex h-10 w-full rounded-md border border-[var(--admin-border)] bg-[var(--admin-border)] px-3 py-2 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--admin-primary)]/40 focus:border-[var(--admin-primary)] transition-colors"
                   />
                 </div>
                 <div className="space-y-2">
@@ -102,7 +102,7 @@ export default function AdminSettings() {
                   <input
                     type="email"
                     defaultValue="support@ghumakkadh.com"
-                    className="flex h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--admin-primary)]/40 focus:border-[var(--admin-primary)] transition-colors"
+                    className="flex h-10 w-full rounded-md border border-[var(--admin-border)] bg-[var(--admin-border)] px-3 py-2 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--admin-primary)]/40 focus:border-[var(--admin-primary)] transition-colors"
                   />
                 </div>
                 <div className="space-y-2">
@@ -112,7 +112,7 @@ export default function AdminSettings() {
                   <input
                     type="tel"
                     defaultValue="+91 12345 67890"
-                    className="flex h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--admin-primary)]/40 focus:border-[var(--admin-primary)] transition-colors"
+                    className="flex h-10 w-full rounded-md border border-[var(--admin-border)] bg-[var(--admin-border)] px-3 py-2 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--admin-primary)]/40 focus:border-[var(--admin-primary)] transition-colors"
                   />
                 </div>
                 <div className="space-y-2">
@@ -122,7 +122,7 @@ export default function AdminSettings() {
                   <input
                     type="text"
                     defaultValue="INR (₹)"
-                    className="flex h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--admin-primary)]/40 focus:border-[var(--admin-primary)] transition-colors"
+                    className="flex h-10 w-full rounded-md border border-[var(--admin-border)] bg-[var(--admin-border)] px-3 py-2 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--admin-primary)]/40 focus:border-[var(--admin-primary)] transition-colors"
                   />
                 </div>
               </div>
@@ -131,12 +131,12 @@ export default function AdminSettings() {
               <div className="h-px w-full bg-white/10" />
 
               {/* Maintenance Mode Row */}
-              <div className="flex flex-row items-center justify-between rounded-lg border border-white/10 p-4 bg-white/5">
+              <div className="flex flex-row items-center justify-between rounded-lg border border-[var(--admin-border)] p-4 bg-[var(--admin-border)]">
                 <div className="space-y-0.5">
-                  <label className="text-base font-semibold text-white">
+                  <label className="text-base font-semibold text-[var(--admin-text)]">
                     Maintenance Mode
                   </label>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-[var(--admin-muted)]">
                     Disable public access to the application for upgrades.
                   </p>
                 </div>
@@ -148,7 +148,7 @@ export default function AdminSettings() {
                   aria-checked={maintenanceMode}
                   onClick={() => setMaintenanceMode(!maintenanceMode)}
                   className={`peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0E1A] ${
-                    maintenanceMode ? "bg-[var(--admin-primary)]" : "bg-gray-700"
+                    maintenanceMode ? "bg-[var(--admin-primary)]" : "bg-[var(--admin-border)]"
                   }`}
                 >
                   <span
@@ -165,8 +165,8 @@ export default function AdminSettings() {
 
       {/* Placeholders for other tabs */}
       {activeTab !== "general" && (
-        <div className="rounded-xl border border-dashed border-white/10 h-64 flex items-center justify-center">
-          <p className="text-gray-500">
+        <div className="rounded-xl border border-dashed border-[var(--admin-border)] h-64 flex items-center justify-center">
+          <p className="text-[var(--admin-muted)]">
             This settings page is currently under construction.
           </p>
         </div>
