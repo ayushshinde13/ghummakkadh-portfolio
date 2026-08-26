@@ -26,7 +26,9 @@ import {
   User,
   Car,
   LogOut,
-  Megaphone
+  Megaphone,
+  Cpu,
+  HeartPulse
 } from "lucide-react";
 
 export const navItems = [
@@ -44,6 +46,8 @@ export const navItems = [
   { name: "Support Tickets", href: "/admin/support-tickets", icon: Ticket },
   { name: "Feedback", href: "/admin/feedback", icon: Star },
   { name: "Push Notifications", href: "/admin/push-notifications", icon: Megaphone },
+  { name: "Job Monitoring", href: "/admin/job-monitoring", icon: Cpu },
+  { name: "System Health", href: "/admin/health-monitoring", icon: HeartPulse },
 ];
 
 export default function AdminShell({

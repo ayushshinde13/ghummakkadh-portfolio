@@ -134,7 +134,7 @@ export const Footer: React.FC = () => {
       <div className="w-full bg-[#09090B] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-8 w-full">
 
-          {/* Left: Hindustaan Innovations Pvt. Ltd. */}
+          {/* Left: Hindustaan Innovations Private Limited */}
           <a href="https://hindustaan.in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
             {/* 'hi' Logo Custom SVG */}
             <svg className="w-[34px] h-[40px] shrink-0" viewBox="8 0 32 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -154,7 +154,7 @@ export const Footer: React.FC = () => {
                 Hindustaan
               </span>
               <span className="text-[13px] text-zinc-400 font-medium">
-                Innovations Pvt. Ltd.
+                Innovations Private Limited
               </span>
             </div>
           </a>

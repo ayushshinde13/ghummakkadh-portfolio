@@ -6,7 +6,7 @@ export const api = {
    */
   async fetch(endpoint: string, options: RequestInit = {}) {
     const url = `${API_BASE_URL}${endpoint}`;
-    
+
     const config: RequestInit = {
       ...options,
       headers: {
@@ -14,7 +14,7 @@ export const api = {
         ...options.headers,
       },
       // This is crucial: it sends and receives httpOnly cookies (like accessToken)
-      credentials: "include", 
+      credentials: "include",
     };
 
     const response = await fetch(url, config);
