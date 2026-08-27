@@ -51,16 +51,16 @@ export const Footer: React.FC = () => {
               Your trusted travel partner for bike, auto, and cab rides across India.
             </p>
             <div className="flex items-center gap-4 mt-2">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-[#77FF00] hover:bg-white/10 transition-colors border border-white/5">
+              <a href="https://www.facebook.com/profile.php?id=61590521631778" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-[#77FF00] hover:bg-white/10 transition-colors border border-white/5">
                 <Facebook size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-[#77FF00] hover:bg-white/10 transition-colors border border-white/5">
+              <a href="https://x.com/Hindustaan_in" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-[#77FF00] hover:bg-white/10 transition-colors border border-white/5">
                 <Twitter size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-[#77FF00] hover:bg-white/10 transition-colors border border-white/5">
+              <a href="https://www.instagram.com/hindustaan_in?igsi=MXRzMDZpcnB4dWJsaA==" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-[#77FF00] hover:bg-white/10 transition-colors border border-white/5">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-[#77FF00] hover:bg-white/10 transition-colors border border-white/5">
+              <a href="https://www.linkedin.com/company/hindustaaninnovations" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-[#77FF00] hover:bg-white/10 transition-colors border border-white/5">
                 <Linkedin size={18} />
               </a>
             </div>
@@ -123,7 +123,7 @@ export const Footer: React.FC = () => {
             <a href="#" className="inline-block flex-shrink-0 hover:scale-105 transition-all cursor-pointer">
               <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" className="h-[44px] w-auto" />
             </a>
-            <a href="#" className="inline-block flex-shrink-0 hover:scale-105 transition-all cursor-pointer">
+            <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh" target="_blank" rel="noopener noreferrer" className="inline-block flex-shrink-0 hover:scale-105 transition-all cursor-pointer">
               <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" className="h-[44px] w-auto" />
             </a>
           </div>

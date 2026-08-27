@@ -145,10 +145,10 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
                 </div>
               </div>
 
-              <button className="w-full bg-[#57E600] hover:bg-[#4ddb00] text-white font-bold text-sm py-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
+              <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh.partner" target="_blank" rel="noopener noreferrer" className="w-full bg-[#57E600] hover:bg-[#4ddb00] text-white font-bold text-sm py-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
                 <span>Become a driver</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
 
             </div>
           </div>
@@ -625,10 +625,10 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
             <button className="bg-white/10 hover:bg-white/20 text-white font-bold text-sm px-8 py-4 rounded-xl transition-colors border border-white/10">
               Need Help?
             </button>
-            <button className="bg-[#57E600] hover:bg-[#4ddb00] text-black font-black text-sm px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg">
+            <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh.partner" target="_blank" rel="noopener noreferrer" className="bg-[#57E600] hover:bg-[#4ddb00] text-black font-black text-sm px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg">
               <span>Become a Driver</span>
               <ArrowRight className="w-5 h-5" />
-            </button>
+            </a>
           </div>
 
         </div>

@@ -113,7 +113,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
             </svg>
           </div>
 
-          <a href="#book" className="shrink-0 bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-[15px] px-7 py-3.5 rounded-xl shadow-sm transition-all z-10 relative">
+          <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-[15px] px-7 py-3.5 rounded-xl shadow-sm transition-all z-10 relative">
             Book Your Ride →
           </a>
         </div>

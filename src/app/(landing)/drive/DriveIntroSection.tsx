@@ -61,9 +61,9 @@ export const DriveIntroSection: React.FC<DriveIntroSectionProps> = ({ hideBadge 
             </ul>
 
             <div className="mt-4">
-              <Link href="/drive" className="inline-block bg-[#57E600] hover:bg-green-600 text-[#1E293B] font-bold py-3.5 px-8 rounded-xl transition-colors shadow-md">
+              <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh.partner" target="_blank" rel="noopener noreferrer" className="inline-block bg-[#57E600] hover:bg-green-600 text-[#1E293B] font-bold py-3.5 px-8 rounded-xl transition-colors shadow-md">
                 Sign Up to Drive
-              </Link>
+              </a>
             </div>
           </div>
 

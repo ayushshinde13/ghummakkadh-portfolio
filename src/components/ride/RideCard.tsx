@@ -36,7 +36,7 @@ export const RideCard: React.FC<RideCardProps> = ({
     <div className="bg-white/5 backdrop-blur-md rounded-[32px] border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.2)] p-6 sm:p-7 relative overflow-hidden flex items-center justify-between group hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-300 min-h-[210px]">
 
       {/* Left Side: Vehicle PNG Image matching Screenshot */}
-      <div className="relative z-10 w-40 sm:w-44 lg:w-48 h-32 sm:h-36 flex items-center justify-center shrink-0 -ml-2">
+      <div className="relative z-10 w-28 sm:w-36 md:w-28 lg:w-36 xl:w-48 h-20 sm:h-28 md:h-24 lg:h-32 xl:h-36 flex items-center justify-center shrink-0 -ml-2">
         <img
           src={theme.imageSrc}
           alt={`Ghumakkadh ${type}`}
@@ -53,7 +53,7 @@ export const RideCard: React.FC<RideCardProps> = ({
               {type}
             </h3>
           </div>
-          <p className="text-xs sm:text-sm text-gray-400 font-normal leading-relaxed max-w-[150px]">
+          <p className="text-xs sm:text-sm text-gray-400 font-normal leading-relaxed">
             {tagline}
           </p>
         </div>

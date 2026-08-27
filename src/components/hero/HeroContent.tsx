@@ -42,7 +42,9 @@ export const HeroContent: React.FC = () => {
       {/* CTA Buttons Row - Match Image 2 */}
       <div className="flex flex-wrap items-center gap-3 pt-1">
         <a
-          href="#book"
+          href="https://play.google.com/store/apps/details?id=com.ghumakkadh"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-sm sm:text-base px-6 py-3 rounded-full shadow-md transition-colors"
         >
           <span>Book a Ride</span>

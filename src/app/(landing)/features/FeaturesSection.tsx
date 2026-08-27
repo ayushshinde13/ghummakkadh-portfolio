@@ -236,7 +236,7 @@ export const FeaturesSection: React.FC = () => {
               </div>
 
               {/* Card 2: Live Tracking */}
-              <div className="bg-white/5 backdrop-blur-md rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-white/10 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.4)] transition-all sm:mt-6">
+              <div className="bg-white/5 backdrop-blur-md rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-white/10 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.4)] transition-all">
                 <div>
                   {/* Top Blue Circle Icon */}
                   <div className="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 shadow-sm">

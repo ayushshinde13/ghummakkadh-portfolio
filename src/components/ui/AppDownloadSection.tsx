@@ -26,7 +26,7 @@ export const AppDownloadSection = () => {
         </div>
       ),
       iosLink: "https://apps.apple.com/app/ghumakkadh-rider/id123456789",
-      androidLink: "https://play.google.com/store/apps/details?id=com.ghumakkadh.rider"
+      androidLink: "https://play.google.com/store/apps/details?id=com.ghumakkadh"
     },
     {
       id: "drive",
@@ -48,7 +48,7 @@ export const AppDownloadSection = () => {
         </div>
       ),
       iosLink: "https://apps.apple.com/app/ghumakkadh-driver/id123456789",
-      androidLink: "https://play.google.com/store/apps/details?id=com.ghumakkadh.driver"
+      androidLink: "https://play.google.com/store/apps/details?id=com.ghumakkadh.partner"
     }
   ];
 
