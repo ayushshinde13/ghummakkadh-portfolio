@@ -367,10 +367,10 @@ export const SupportSection: React.FC = () => {
         <div className="w-full flex flex-col items-center py-10 relative z-20 mb-8">
           <h3 className="text-xl font-black text-white mb-6">Connect with our Community</h3>
           <div className="flex gap-4">
-            <a href="#" className="w-12 h-12 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white rounded-full flex items-center justify-center transition-colors border border-white/10 shadow-sm">
+            <a href="https://x.com/Hindustaan_in" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white rounded-full flex items-center justify-center transition-colors border border-white/10 shadow-sm">
               <span className="font-bold text-lg">𝕏</span>
             </a>
-            <a href="#" className="w-12 h-12 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-[#E1306C] rounded-full flex items-center justify-center transition-colors border border-white/10 shadow-sm">
+            <a href="https://www.instagram.com/hindustaan_in?igsi=MXRzMDZpcnB4dWJsaA==" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-[#E1306C] rounded-full flex items-center justify-center transition-colors border border-white/10 shadow-sm">
               <Instagram className="w-5 h-5" />
             </a>
             <a href="#" className="w-12 h-12 bg-white/5 hover:bg-[#25D366]/20 text-[#25D366] rounded-full flex items-center justify-center transition-colors border border-white/10 shadow-sm">
