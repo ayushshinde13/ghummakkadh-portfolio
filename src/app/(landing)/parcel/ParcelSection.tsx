@@ -247,15 +247,13 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {[
-              { type: "Documents", icon: <FileText className="w-8 h-8 text-blue-400" />, weight: "Up to 1 kg", price: "₹40 - ₹80", vehicle: "Bike" },
-              { type: "Small Package", icon: <Package className="w-8 h-8 text-green-400" />, weight: "Up to 5 kg", price: "₹60 - ₹120", vehicle: "Bike / Auto" },
-              { type: "Medium Package", icon: <Box className="w-8 h-8 text-yellow-400" />, weight: "Up to 15 kg", price: "₹100 - ₹250", vehicle: "Auto" },
-              { type: "Large Package", icon: <Truck className="w-8 h-8 text-red-400" />, weight: "Up to 50 kg", price: "₹250 - ₹500+", vehicle: "Mini Truck" }
+              { type: "Documents", icon: <img src="/images/document.png" alt="Documents" className="w-24 h-24 object-contain mb-2" />, weight: "Up to 1 kg", price: "₹40 - ₹80", vehicle: "Bike" },
+              { type: "Small Package", icon: <img src="/images/small_parcel.png" alt="Small Package" className="w-24 h-24 object-contain mb-2" />, weight: "Up to 5 kg", price: "₹60 - ₹120", vehicle: "Bike / Auto" },
+              { type: "Medium Package", icon: <img src="/images/midium_parcel.png" alt="Medium Package" className="w-24 h-24 object-contain mb-2" />, weight: "Up to 15 kg", price: "₹100 - ₹250", vehicle: "Auto" },
+              { type: "Large Package", icon: <img src="/images/large_parcel.png" alt="Large Package" className="w-24 h-24 object-contain mb-2" />, weight: "Up to 50 kg", price: "₹250 - ₹500+", vehicle: "Mini Truck" }
             ].map((cat, i) => (
               <div key={i} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 lg:p-8 flex flex-col items-center text-center shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:-translate-y-1 transition-all duration-300">
-                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 shadow-inner">
-                  {cat.icon}
-                </div>
+                {cat.icon}
                 <h4 className="text-lg font-black text-white mb-4">{cat.type}</h4>
                 <div className="w-full space-y-3 pt-4 border-t border-white/10 text-left">
                   <div className="flex justify-between items-center">
@@ -482,10 +480,10 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
           </div>
 
           <div className="z-10 w-full md:w-auto shrink-0 flex flex-col sm:flex-row gap-4">
-            <button className="bg-[#57E600] hover:bg-[#4ddb00] text-black font-black text-sm px-10 py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg w-full sm:w-auto">
+            <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh" target="_blank" rel="noopener noreferrer" className="bg-[#57E600] hover:bg-[#4ddb00] text-black font-black text-sm px-10 py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg w-full sm:w-auto">
               <span>Book Now</span>
               <ArrowRight className="w-5 h-5" />
-            </button>
+            </a>
           </div>
 
         </div>

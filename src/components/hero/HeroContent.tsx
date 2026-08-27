@@ -63,7 +63,9 @@ export const HeroContent: React.FC = () => {
           </svg>
         </a>
         <a
-          href="#driver"
+          href="https://play.google.com/store/apps/details?id=com.ghumakkadh.partner"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-[#1E293B] font-semibold text-sm sm:text-base px-6 py-3 rounded-full shadow-sm transition-colors"
         >
           {/* User Icon */}
