@@ -135,7 +135,7 @@ export const Footer: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-8 w-full">
 
           {/* Left: Hindustaan Innovations Private Limited */}
-          <a href="https://hindustaan.in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
+          <a href="https://hindustaan.in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity cursor-pointer">
             {/* Hindustaan Logo Image */}
             <img src="/images/hindustaan.png" alt="Hindustaan Logo" style={{width: '44px', height: '80px'}} className="shrink-0 object-contain" />
             <div className="flex flex-col leading-[1.2]">
