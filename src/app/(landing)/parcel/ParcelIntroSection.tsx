@@ -45,13 +45,13 @@ export const ParcelIntroSection: React.FC<ParcelIntroSectionProps> = ({ hideBadg
 
             <ul className="flex flex-col gap-3 mt-2">
               <li className="flex items-center gap-3 text-gray-300 font-medium">
-                <div className="w-6 h-6 rounded-full bg-[#57E600] text-white flex items-center justify-center shrink-0">
+                <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                 </div>
                 Live tracking at every step
               </li>
               <li className="flex items-center gap-3 text-gray-300 font-medium">
-                <div className="w-6 h-6 rounded-full bg-[#57E600] text-white flex items-center justify-center shrink-0">
+                <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                 </div>
                 Affordable pricing with zero hidden fees
@@ -59,7 +59,7 @@ export const ParcelIntroSection: React.FC<ParcelIntroSectionProps> = ({ hideBadg
             </ul>
 
             <div className="mt-4">
-              <Link href="/parcel" className="inline-block bg-[#57E600] hover:bg-green-600 text-[#1E293B] font-bold py-3.5 px-8 rounded-xl transition-colors shadow-md">
+              <Link href="/parcel" className="inline-block bg-[#4eb902] hover:bg-[#3d9400] text-[#1E293B] font-bold py-3.5 px-8 rounded-xl transition-colors shadow-md">
                 Learn More About Parcel
               </Link>
             </div>
@@ -79,3 +79,4 @@ export const ParcelIntroSection: React.FC<ParcelIntroSectionProps> = ({ hideBadg
     </section>
   );
 };
+

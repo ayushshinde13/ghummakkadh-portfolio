@@ -49,3 +49,4 @@ export const CitySkyline: React.FC<{ className?: string }> = ({ className = "" }
     </div>
   );
 };
+

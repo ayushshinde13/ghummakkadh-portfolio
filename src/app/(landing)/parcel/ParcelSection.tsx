@@ -80,7 +80,7 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
             {/* Banner */}
             {!hideBadge && (
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-lg font-semibold text-sm mb-4">
-                <span className="w-4 h-4 bg-[#57E600] rounded-sm"></span>
+                <span className="w-4 h-4 bg-[#4eb902] rounded-sm"></span>
                 Parcel Delivery
               </div>
             )}
@@ -104,7 +104,7 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
               {/* Step 1 */}
               <div className="flex flex-col items-center text-center lg:w-1/4">
                 <div className="w-14 h-14 lg:w-16 lg:h-16 bg-white/5 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-[#57E600] mb-3 relative shadow-sm">
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#57E600] rounded-full text-white text-xs flex items-center justify-center font-bold">1</div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#4eb902] rounded-full text-white text-xs flex items-center justify-center font-bold">1</div>
                   <svg className="w-7 h-7 lg:w-8 lg:h-8 text-[#57E600]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>
@@ -141,7 +141,7 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
               {/* Step 4 */}
               <div className="flex flex-col items-center text-center lg:w-1/4 shrink-0">
                 <div className="w-14 h-14 lg:w-16 lg:h-16 bg-white/5 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-[#57E600] mb-3 relative shadow-sm">
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#57E600] rounded-full text-white text-xs flex items-center justify-center font-bold">4</div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#4eb902] rounded-full text-white text-xs flex items-center justify-center font-bold">4</div>
                   <svg className="w-7 h-7 lg:w-8 lg:h-8 text-[#57E600]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -157,7 +157,7 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
                 <h4 className="text-lg font-bold text-white mb-1">Business or Personal? We've got you covered.</h4>
                 <p className="text-sm text-gray-400">From bulk corporate deliveries to sending a forgotten key to a friend, our fleet is ready to handle all your parcel needs.</p>
               </div>
-              <button className="shrink-0 bg-[#57E600] hover:bg-green-600 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition-colors shadow-sm">
+              <button className="shrink-0 bg-[#4eb902] hover:bg-[#3d9400] text-white font-bold py-2.5 px-6 rounded-xl text-sm transition-colors shadow-sm">
                 Get Started
               </button>
             </div>
@@ -281,7 +281,7 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
             <p className="text-gray-400 font-medium leading-relaxed mb-8">
               We charge strictly based on distance and parcel weight. Get an instant estimate before you book, so you always know what you're paying.
             </p>
-            <button className="bg-[#57E600] hover:bg-[#4ddb00] text-black font-black text-sm px-6 py-3 rounded-full transition-colors shadow-sm">
+            <button className="bg-[#4eb902] hover:bg-[#3d9400] text-black font-black text-sm px-6 py-3 rounded-full transition-colors shadow-sm">
               Calculate Exact Fare
             </button>
           </div>
@@ -464,13 +464,13 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
         <div className="w-full bg-gradient-to-r from-[#0A0E1A] to-[#151B2E] rounded-[32px] p-8 md:p-12 mt-12 mb-8 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 z-20">
           
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-            <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#57E600]/10 rounded-full blur-3xl"></div>
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#4eb902]/10 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl"></div>
           </div>
 
           <div className="z-10 w-full md:w-auto text-center md:text-left flex-1">
-            <div className="inline-flex items-center gap-2 bg-[#57E600]/20 text-[#57E600] font-bold text-[11px] px-3 py-1.5 rounded-full mb-4 border border-[#57E600]/30">
-              <span className="w-2 h-2 rounded-full bg-[#57E600]"></span>
+            <div className="inline-flex items-center gap-2 bg-[#4eb902]/20 text-[#57E600] font-bold text-[11px] px-3 py-1.5 rounded-full mb-4 border border-[#57E600]/30">
+              <span className="w-2 h-2 rounded-full bg-[#4eb902]"></span>
               Fast & Reliable
             </div>
             <h3 className="text-3xl md:text-4xl font-black text-white mb-4">Ready to send a parcel?</h3>
@@ -480,7 +480,7 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
           </div>
 
           <div className="z-10 w-full md:w-auto shrink-0 flex flex-col sm:flex-row gap-4">
-            <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh" target="_blank" rel="noopener noreferrer" className="bg-[#57E600] hover:bg-[#4ddb00] text-black font-black text-sm px-10 py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg w-full sm:w-auto">
+            <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh" target="_blank" rel="noopener noreferrer" className="bg-[#4eb902] hover:bg-[#3d9400] text-black font-black text-sm px-10 py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg w-full sm:w-auto">
               <span>Book Now</span>
               <ArrowRight className="w-5 h-5" />
             </a>
@@ -492,3 +492,4 @@ export const ParcelSection: React.FC<ParcelSectionProps> = ({ hideBadge = false 
     </Section>
   );
 };
+

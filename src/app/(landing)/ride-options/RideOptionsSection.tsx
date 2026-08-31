@@ -129,3 +129,4 @@ export const RideOptionsSection: React.FC = () => {
     </section>
   );
 };
+

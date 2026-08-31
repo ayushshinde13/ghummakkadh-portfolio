@@ -55,3 +55,4 @@ export const getDelay = (time: number): Transition => ({
   delay: time,
   ease: EASING.easeOut,
 });
+

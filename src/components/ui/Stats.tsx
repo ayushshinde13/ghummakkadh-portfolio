@@ -10,7 +10,7 @@ export const Stats: React.FC = () => {
   ];
 
   return (
-    <Section className="bg-[#77FF00] py-16 border-y-4 border-[#FF7700]">
+    <Section className="bg-[#4eb902] py-16 border-y-4 border-[#FF7700]">
       <Container className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         {stats.map((stat) => (
           <div
@@ -29,3 +29,4 @@ export const Stats: React.FC = () => {
     </Section>
   );
 };
+

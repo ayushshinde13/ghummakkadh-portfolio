@@ -178,3 +178,4 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideBadge = false })
     </section>
   );
 };
+

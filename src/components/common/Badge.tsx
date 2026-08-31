@@ -14,7 +14,7 @@ export const Badge: React.FC<BadgeProps> = ({
   className,
 }) => {
   const variantStyles = {
-    primary: "bg-[#77FF00]/20 text-white border border-[#77FF00]",
+    primary: "bg-[#4eb902]/20 text-white border border-[#77FF00]",
     secondary: "bg-[#FF7700]/20 text-[#CC5F00] border border-[#FF7700]/50",
     success: "bg-green-100 text-green-800 border border-green-300",
   };
@@ -32,3 +32,5 @@ export const Badge: React.FC<BadgeProps> = ({
     </span>
   );
 };
+
+

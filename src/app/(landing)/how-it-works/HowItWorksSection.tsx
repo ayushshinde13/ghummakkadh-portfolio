@@ -66,7 +66,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
                 transition={{ duration: 0.8, delay: index * 0.3, ease: "easeOut" }}
               >
                 {/* Number Circle */}
-                <div className="absolute -top-[16px] left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-[#77FF00] text-white font-bold text-[15px] flex items-center justify-center shadow-md z-20">
+                <div className="absolute -top-[16px] left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-[#4eb902] text-white font-bold text-[15px] flex items-center justify-center shadow-md z-20">
                   {step.num}
                 </div>
 
@@ -113,7 +113,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
             </svg>
           </div>
 
-          <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-[15px] px-7 py-3.5 rounded-xl shadow-sm transition-all z-10 relative">
+          <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-[#4eb902] hover:bg-[#3d9400] text-[#1E293B] font-bold text-[15px] px-7 py-3.5 rounded-xl shadow-sm transition-all z-10 relative">
             Book Your Ride →
           </a>
         </div>
@@ -122,7 +122,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 bg-white/5 backdrop-blur-md rounded-3xl p-6 shadow-[0_15px_40px_rgba(0,0,0,0.2)] border border-white/10 max-w-6xl mx-auto">
           {/* Feature 1 */}
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-[#F5FFF0] text-black flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
@@ -134,7 +134,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
           </div>
           {/* Feature 2 */}
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-[#F5FFF0] text-black flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
               </svg>
@@ -146,7 +146,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
           </div>
           {/* Feature 3 */}
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-[#F5FFF0] text-black flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
@@ -158,7 +158,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
           </div>
           {/* Feature 4 */}
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-[#F5FFF0] text-black flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
               </svg>
@@ -173,3 +173,4 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
     </section>
   );
 };
+

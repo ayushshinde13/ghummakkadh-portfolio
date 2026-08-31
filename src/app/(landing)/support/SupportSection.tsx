@@ -36,7 +36,7 @@ export const SupportSection: React.FC = () => {
               Whether you need help with a recent ride, have questions about our services, or want to partner with us, our 24/7 support team is always here for you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <button className="bg-[#57E600] text-black font-bold py-3.5 px-8 rounded-full hover:bg-[#4ddb00] transition-colors shadow-[0_5px_20px_rgba(87,230,0,0.3)]">
+              <button className="bg-[#4eb902] text-black font-bold py-3.5 px-8 rounded-full hover:bg-[#3d9400] transition-colors shadow-[0_5px_20px_rgba(87,230,0,0.3)]">
                 Chat with us
               </button>
             </div>
@@ -137,19 +137,19 @@ export const SupportSection: React.FC = () => {
           {/* Reach us anytime (Right) */}
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[32px] p-6 lg:p-8 flex flex-col shadow-[0_15px_40px_rgba(0,0,0,0.2)] relative overflow-hidden h-full col-span-2 lg:col-span-2">
             <h3 className="text-xl font-black text-white mb-2 text-center lg:text-left">Reach us anytime</h3>
-            <div className="w-12 h-[3px] bg-[#57E600] rounded-full mb-6 lg:mb-8 mx-auto lg:mx-0"></div>
+            <div className="w-12 h-[3px] bg-[#4eb902] rounded-full mb-6 lg:mb-8 mx-auto lg:mx-0"></div>
 
             <div className="flex flex-col md:flex-row xl:flex-row gap-6 h-full items-center md:items-start lg:items-start text-center md:text-left">
               {/* Left Contact */}
               <div className="flex flex-col justify-center md:justify-start gap-4 flex-1 z-10 whitespace-nowrap h-full pt-1">
                 <div className="flex items-center gap-4">
-                  <div className="w-9 h-9 bg-[#57E600] rounded-full flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 bg-[#4eb902] rounded-full flex items-center justify-center shrink-0">
                     <Mail className="w-4 h-4 text-white" />
                   </div>
                   <span className="text-gray-400 font-medium text-[13px]">support@hindustaan.in</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="w-9 h-9 bg-[#57E600] rounded-full flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 bg-[#4eb902] rounded-full flex items-center justify-center shrink-0">
                     <Phone className="w-4 h-4 text-white" />
                   </div>
                   <span className="text-gray-400 font-medium text-[13px]">0771- 299 - 4005</span>
@@ -184,7 +184,7 @@ export const SupportSection: React.FC = () => {
             <div className="h-[90px] flex items-center justify-center mb-4 relative shrink-0">
               <div className="w-[80px] h-[40px] bg-white/10 border-2 border-white/20 rounded-lg flex items-center justify-center relative shadow-sm mt-4">
                 <Car className="w-8 h-8 text-white" />
-                <div className="absolute -bottom-3 -right-3 bg-[#57E600] rounded-md p-1.5 border-2 border-white shadow-sm">
+                <div className="absolute -bottom-3 -right-3 bg-[#4eb902] rounded-md p-1.5 border-2 border-white shadow-sm">
                   <ShieldCheck className="w-4 h-4 text-white" />
                 </div>
               </div>
@@ -342,7 +342,7 @@ export const SupportSection: React.FC = () => {
               <textarea placeholder="How can we help you?" rows={4} className="w-full bg-white/5 border border-white/10 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#57E600] focus:ring-1 focus:ring-[#57E600] transition-colors resize-none"></textarea>
             </div>
 
-            <button type="button" className="bg-[#57E600] hover:bg-[#4ddb00] text-white font-bold py-3.5 px-8 rounded-xl transition-colors mt-2 self-start shadow-sm">
+            <button type="button" className="bg-[#4eb902] hover:bg-[#3d9400] text-white font-bold py-3.5 px-8 rounded-xl transition-colors mt-2 self-start shadow-sm">
               Send Message
             </button>
           </form>
@@ -350,7 +350,7 @@ export const SupportSection: React.FC = () => {
 
         {/* OFFICE ADDRESS */}
         <div className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-[32px] p-8 md:p-12 shadow-[0_15px_40px_rgba(0,0,0,0.2)] mb-8 max-w-4xl mx-auto flex flex-col gap-8 items-center text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#77FF00]/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#4eb902]/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
 
           <div className="flex flex-col items-center z-10">
             <h4 className="text-lg font-black text-white mb-4 flex items-center justify-center gap-3"><MapPin className="w-5 h-5 text-[#57E600]" /> Registered Office</h4>
@@ -383,7 +383,7 @@ export const SupportSection: React.FC = () => {
         <div className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-[32px] p-8 md:p-12 flex flex-col lg:flex-row justify-between gap-8 lg:gap-4 shadow-[0_15px_40px_rgba(0,0,0,0.2)] mb-8">
 
           <div className="flex flex-col gap-4 flex-1 items-start sm:flex-row sm:items-start lg:pr-4">
-            <div className="w-8 h-8 bg-[#57E600] rounded-full flex items-center justify-center shrink-0 mt-1">
+            <div className="w-8 h-8 bg-[#4eb902] rounded-full flex items-center justify-center shrink-0 mt-1">
               <Users className="w-4 h-4 text-white" fill="currentColor" />
             </div>
             <div>
@@ -393,7 +393,7 @@ export const SupportSection: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-4 flex-1 items-start sm:flex-row sm:items-start lg:pr-4">
-            <div className="w-8 h-8 bg-[#57E600] rounded-full flex items-center justify-center shrink-0 mt-1">
+            <div className="w-8 h-8 bg-[#4eb902] rounded-full flex items-center justify-center shrink-0 mt-1">
               <ShieldCheck className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -403,7 +403,7 @@ export const SupportSection: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-4 flex-1 items-start sm:flex-row sm:items-start lg:pr-4">
-            <div className="w-8 h-8 bg-[#57E600] rounded-full flex items-center justify-center shrink-0 mt-1">
+            <div className="w-8 h-8 bg-[#4eb902] rounded-full flex items-center justify-center shrink-0 mt-1">
               <Star className="w-4 h-4 text-white" fill="currentColor" />
             </div>
             <div>
@@ -413,7 +413,7 @@ export const SupportSection: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-4 flex-1 items-start sm:flex-row sm:items-start">
-            <div className="w-8 h-8 bg-[#57E600] rounded-full flex items-center justify-center shrink-0 mt-1">
+            <div className="w-8 h-8 bg-[#4eb902] rounded-full flex items-center justify-center shrink-0 mt-1">
               <Heart className="w-4 h-4 text-white" fill="currentColor" />
             </div>
             <div>
@@ -428,3 +428,4 @@ export const SupportSection: React.FC = () => {
     </section>
   );
 };
+

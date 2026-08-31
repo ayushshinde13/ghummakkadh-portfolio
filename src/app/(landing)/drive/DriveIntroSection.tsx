@@ -33,7 +33,7 @@ export const DriveIntroSection: React.FC<DriveIntroSectionProps> = ({ hideBadge 
           
           {/* Background Decorative Elements */}
           <div className="absolute top-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl opacity-50 -z-10 -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#77FF00]/10 rounded-full blur-2xl opacity-60 -z-10 translate-x-1/2 translate-y-1/2"></div>
+          <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#4eb902]/10 rounded-full blur-2xl opacity-60 -z-10 translate-x-1/2 translate-y-1/2"></div>
 
           {/* Left Text Content */}
           <div className="w-full lg:w-[55%] flex flex-col gap-6 z-10">
@@ -47,13 +47,13 @@ export const DriveIntroSection: React.FC<DriveIntroSectionProps> = ({ hideBadge 
             
             <ul className="flex flex-col gap-3 mt-2">
               <li className="flex items-center gap-3 text-gray-300 font-medium">
-                <div className="w-6 h-6 rounded-full bg-[#57E600] text-white flex items-center justify-center shrink-0">
+                <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                 </div>
                 Daily and instant payouts directly to your account
               </li>
               <li className="flex items-center gap-3 text-gray-300 font-medium">
-                <div className="w-6 h-6 rounded-full bg-[#57E600] text-white flex items-center justify-center shrink-0">
+                <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                 </div>
                 Flexible hours—work whenever you want
@@ -61,7 +61,7 @@ export const DriveIntroSection: React.FC<DriveIntroSectionProps> = ({ hideBadge 
             </ul>
 
             <div className="mt-4">
-              <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh.partner" target="_blank" rel="noopener noreferrer" className="inline-block bg-[#57E600] hover:bg-green-600 text-[#1E293B] font-bold py-3.5 px-8 rounded-xl transition-colors shadow-md">
+              <a href="https://play.google.com/store/apps/details?id=com.ghumakkadh.partner" target="_blank" rel="noopener noreferrer" className="inline-block bg-[#4eb902] hover:bg-[#3d9400] text-white font-bold py-3.5 px-8 rounded-xl transition-colors shadow-md">
                 Sign Up to Drive
               </a>
             </div>
@@ -81,3 +81,5 @@ export const DriveIntroSection: React.FC<DriveIntroSectionProps> = ({ hideBadge 
     </section>
   );
 };
+
+

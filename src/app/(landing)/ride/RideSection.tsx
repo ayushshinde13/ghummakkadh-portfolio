@@ -121,7 +121,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
                 4 Seater <Users className="w-3 h-3 text-gray-500" />
               </p>
 
-              <button className="w-full bg-[#57E600] hover:bg-green-500 text-[#1E293B] font-bold text-sm py-3.5 rounded-xl transition-colors shadow-sm mt-auto">
+              <button className="w-full bg-[#4eb902] hover:bg-[#3d9400] text-[#1E293B] font-bold text-sm py-3.5 rounded-xl transition-colors shadow-sm mt-auto">
                 Book Now
               </button>
             </div>
@@ -134,7 +134,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
                 4 Seater <Users className="w-3 h-3 text-gray-500" />
               </p>
 
-              <button className="w-full bg-[#57E600] hover:bg-green-500 text-[#1E293B] font-bold text-sm py-3.5 rounded-xl transition-colors shadow-sm mt-auto">
+              <button className="w-full bg-[#4eb902] hover:bg-[#3d9400] text-[#1E293B] font-bold text-sm py-3.5 rounded-xl transition-colors shadow-sm mt-auto">
                 Book Now
               </button>
             </div>
@@ -147,7 +147,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
                 3 Seater <Users className="w-3 h-3 text-gray-500" />
               </p>
 
-              <button className="w-full bg-[#57E600] hover:bg-green-500 text-[#1E293B] font-bold text-sm py-3.5 rounded-xl transition-colors shadow-sm mt-auto">
+              <button className="w-full bg-[#4eb902] hover:bg-[#3d9400] text-[#1E293B] font-bold text-sm py-3.5 rounded-xl transition-colors shadow-sm mt-auto">
                 Book Now
               </button>
             </div>
@@ -160,7 +160,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
                 1 Seater <Users className="w-3 h-3 text-gray-500" />
               </p>
 
-              <button className="w-full bg-[#57E600] hover:bg-green-500 text-[#1E293B] font-bold text-sm py-3.5 rounded-xl transition-colors shadow-sm mt-auto">
+              <button className="w-full bg-[#4eb902] hover:bg-[#3d9400] text-[#1E293B] font-bold text-sm py-3.5 rounded-xl transition-colors shadow-sm mt-auto">
                 Book Now
               </button>
             </div>
@@ -227,7 +227,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
             {/* Step 1 */}
             <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-start gap-5 text-center lg:text-left relative">
               <div className="relative shrink-0">
-                <div className="w-6 h-6 rounded-full bg-[#57E600] text-white font-black text-[11px] flex items-center justify-center absolute -top-1.5 -left-1.5 z-10 border-2 border-white shadow-sm">1</div>
+                <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white font-black text-[11px] flex items-center justify-center absolute -top-1.5 -left-1.5 z-10 border-2 border-white shadow-sm">1</div>
                 <div className="w-16 h-16 bg-white/5 backdrop-blur-md rounded-full flex items-center justify-center relative z-0 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10">
                   <MapPin className="w-7 h-7 text-[#57E600]" />
                 </div>
@@ -243,7 +243,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
             {/* Step 2 */}
             <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-start gap-5 text-center lg:text-left relative">
               <div className="relative shrink-0">
-                <div className="w-6 h-6 rounded-full bg-[#57E600] text-white font-black text-[11px] flex items-center justify-center absolute -top-1.5 -left-1.5 z-10 border-2 border-white shadow-sm">2</div>
+                <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white font-black text-[11px] flex items-center justify-center absolute -top-1.5 -left-1.5 z-10 border-2 border-white shadow-sm">2</div>
                 <div className="w-16 h-16 bg-white/5 backdrop-blur-md rounded-full flex items-center justify-center relative z-0 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10">
                   <Car className="w-7 h-7 text-[#57E600]" />
                 </div>
@@ -259,7 +259,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
             {/* Step 3 */}
             <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-start gap-5 text-center lg:text-left relative">
               <div className="relative shrink-0">
-                <div className="w-6 h-6 rounded-full bg-[#57E600] text-white font-black text-[11px] flex items-center justify-center absolute -top-1.5 -left-1.5 z-10 border-2 border-white shadow-sm">3</div>
+                <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white font-black text-[11px] flex items-center justify-center absolute -top-1.5 -left-1.5 z-10 border-2 border-white shadow-sm">3</div>
                 <div className="w-16 h-16 bg-white/5 backdrop-blur-md rounded-full flex items-center justify-center relative z-0 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10">
                   <Users className="w-7 h-7 text-[#57E600]" />
                 </div>
@@ -275,7 +275,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
             {/* Step 4 */}
             <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-start gap-5 text-center lg:text-left">
               <div className="relative shrink-0">
-                <div className="w-6 h-6 rounded-full bg-[#57E600] text-white font-black text-[11px] flex items-center justify-center absolute -top-1.5 -left-1.5 z-10 border-2 border-white shadow-sm">4</div>
+                <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white font-black text-[11px] flex items-center justify-center absolute -top-1.5 -left-1.5 z-10 border-2 border-white shadow-sm">4</div>
                 <div className="w-16 h-16 bg-white/5 backdrop-blur-md rounded-full flex items-center justify-center relative z-0 shadow-[0_4px_20px_rgba(0,0,0,0.2)] border border-white/10">
                   <Wallet className="w-7 h-7 text-[#57E600]" />
                 </div>
@@ -349,3 +349,4 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
     </section>
   );
 };
+

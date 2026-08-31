@@ -136,35 +136,24 @@ export const Footer: React.FC = () => {
 
           {/* Left: Hindustaan Innovations Private Limited */}
           <a href="https://hindustaan.in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
-            {/* 'hi' Logo Custom SVG */}
-            <svg className="w-[34px] h-[40px] shrink-0" viewBox="8 0 32 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="hiShadow" x1="25" y1="17" x2="35" y2="35" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#000000" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              <rect x="8" y="12" width="6" height="33" fill="#d4d4d8" />
-              <path d="M13 28 C 18 22, 23 23, 26 26 V 45 H 20.5 V 29 C 18.5 26.5, 16 27, 13 30 Z" fill="#d4d4d8" />
-              <path d="M25 17 C 36 17, 36 28, 32 36 C 34 28, 30 22, 24 22 Z" fill="url(#hiShadow)" />
-              <circle cx="25.5" cy="17" r="4.5" fill="#d4d4d8" />
-            </svg>
+            {/* Hindustaan Logo Image */}
+            <img src="/images/hindustaan.png" alt="Hindustaan Logo" style={{width: '44px', height: '80px'}} className="shrink-0 object-contain" />
             <div className="flex flex-col leading-[1.2]">
-              <span className="text-[22px] font-semibold text-white">
+              <span style={{fontSize: '30px', lineHeight: '30px', display: 'block', textAlign: 'right'}} className="font-semibold text-[#d4d4d8] whitespace-nowrap">
                 Hindustaan
               </span>
-              <span className="text-[13px] text-zinc-400 font-medium">
-                Innovations Private Limited
+              <span style={{fontSize: '17px', lineHeight: '17px', marginTop: '6px', display: 'block', textAlign: 'right'}} className="text-[#71717a] font-normal whitespace-nowrap">
+                Innovations Pvt. Ltd.
               </span>
             </div>
           </a>
 
           {/* Right: Built in / Built for Hindustaan */}
           <div className="flex items-center gap-4">
-            <span className="text-[42px] font-medium text-zinc-400 leading-none pb-1">
+            <span style={{fontSize: '58px', lineHeight: '1'}} className="font-medium text-zinc-400 pb-1">
               #
             </span>
-            <div className="flex flex-col text-[16px] leading-[1.3] text-zinc-400 font-medium">
+            <div className="flex flex-col leading-[1.3] text-zinc-400 font-medium" style={{fontSize: '22px'}}>
               <span>
                 Built in <span className="font-bold text-white">Hindustaan</span>
               </span>

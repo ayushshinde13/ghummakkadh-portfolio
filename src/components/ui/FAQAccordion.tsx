@@ -42,3 +42,4 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({ faqs, className }) =
     </div>
   );
 };
+

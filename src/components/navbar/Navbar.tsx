@@ -50,7 +50,7 @@ export const Navbar: React.FC = () => {
               >
                 {link.label}
                 {isActive && (
-                  <div className="absolute -bottom-2 w-[40px] h-[3px] bg-[#57E600] rounded-full"></div>
+                  <div className="absolute -bottom-2 w-[40px] h-[3px] bg-[#4eb902] rounded-full"></div>
                 )}
               </a>
             );
@@ -71,7 +71,7 @@ export const Navbar: React.FC = () => {
             href="https://play.google.com/store/apps/details?id=com.ghumakkadh"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full shadow-[0_4px_14px_rgba(119,255,0,0.3)] hover:shadow-[0_6px_20px_rgba(119,255,0,0.4)] transition-all"
+            className="inline-flex items-center gap-2 bg-[#4eb902] hover:bg-[#3d9400] text-white font-bold text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full shadow-[0_4px_14px_rgba(78,185,2,0.4)] hover:shadow-[0_6px_20px_rgba(78,185,2,0.5)] transition-all"
           >
             <span><Smartphone className="w-3 h-3 sm:w-4 sm:h-4" /></span>
             <span className="hidden sm:inline">Get the app</span>
@@ -107,3 +107,4 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
+

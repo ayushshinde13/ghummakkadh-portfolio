@@ -45,7 +45,7 @@ export const HeroContent: React.FC = () => {
           href="https://play.google.com/store/apps/details?id=com.ghumakkadh"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-[#77FF00] hover:bg-[#66E000] text-[#1E293B] font-bold text-sm sm:text-base px-6 py-3 rounded-full shadow-md transition-colors"
+          className="inline-flex items-center gap-2 bg-[#4eb902] hover:bg-[#3d9400] text-[#1E293B] font-bold text-sm sm:text-base px-6 py-3 rounded-full shadow-md transition-colors"
         >
           <span>Book a Ride</span>
           <svg
@@ -131,3 +131,4 @@ export const HeroContent: React.FC = () => {
     </div>
   );
 };
+

@@ -97,3 +97,4 @@ export const HeroImage: React.FC<{ className?: string }> = ({ className }) => {
     </div>
   );
 };
+

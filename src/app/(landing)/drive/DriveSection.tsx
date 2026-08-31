@@ -26,7 +26,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
           <div className="flex-1 w-full max-w-[420px] flex flex-col items-start text-left z-20 xl:shrink-0 xl:pt-4">
             {/* Badge */}
             {!hideBadge && (
-              <div className="inline-flex items-center gap-2 bg-[#F3FCEB] text-green-700 font-bold text-[11px] px-3 py-1.5 rounded-full mb-6 border border-green-100">
+              <div className="inline-flex items-center gap-2 bg-[#4eb902] text-green-700 font-bold text-[11px] px-3 py-1.5 rounded-full mb-6 border border-green-100">
                 <span className="w-2 h-2 rounded-full bg-green-500"></span>
                 Drive with Ghumakkadh
               </div>
@@ -47,24 +47,24 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
             <div className="flex flex-row gap-3 sm:gap-5 mb-8 w-full justify-start">
               
               <div className="flex flex-col gap-2.5 flex-1">
-                <div className="w-10 h-10 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                  <Wallet className="w-5 h-5 text-black" />
+                <div className="w-10 h-10 rounded-full bg-[#4eb902] flex items-center justify-center shrink-0">
+                  <Wallet className="w-5 h-5 text-white" />
                 </div>
                 <h4 className="font-black text-white text-[13px]">Great Earnings</h4>
                 <p className="text-[11px] text-gray-400 font-medium leading-snug">Earn more with<br/>better incentives</p>
               </div>
 
               <div className="flex flex-col gap-2.5 flex-1">
-                <div className="w-10 h-10 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                  <Clock className="w-5 h-5 text-black" />
+                <div className="w-10 h-10 rounded-full bg-[#4eb902] flex items-center justify-center shrink-0">
+                  <Clock className="w-5 h-5 text-white" />
                 </div>
                 <h4 className="font-black text-white text-[13px]">Flexible Hours</h4>
                 <p className="text-[11px] text-gray-400 font-medium leading-snug">Drive on your time,<br/>your way</p>
               </div>
 
               <div className="flex flex-col gap-2.5 flex-1">
-                <div className="w-10 h-10 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-5 h-5 text-black" />
+                <div className="w-10 h-10 rounded-full bg-[#4eb902] flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-5 h-5 text-white" />
                 </div>
                 <h4 className="font-black text-white text-[13px]">Safe & Secure</h4>
                 <p className="text-[11px] text-gray-400 font-medium leading-snug">Your safety is our<br/>top priority</p>
@@ -99,8 +99,8 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
                 {/* Step 1 */}
                 <div className="flex gap-4 mb-6 relative z-10">
                   <div className="relative shrink-0">
-                    <div className="w-8 h-8 bg-[#F3FCEB] rounded-full flex items-center justify-center">
-                      <UserRound className="w-4 h-4 text-black" />
+                    <div className="w-8 h-8 bg-[#4eb902] rounded-full flex items-center justify-center">
+                      <UserRound className="w-4 h-4 text-white" />
                     </div>
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#57E600] rounded-full border-2 border-transparent flex items-center justify-center">
                       <span className="text-[8px] font-black text-white">1</span>
@@ -115,8 +115,8 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
                 {/* Step 2 */}
                 <div className="flex gap-4 mb-6 relative z-10">
                   <div className="relative shrink-0">
-                    <div className="w-8 h-8 bg-[#F3FCEB] rounded-full flex items-center justify-center">
-                      <ShieldCheck className="w-4 h-4 text-black" />
+                    <div className="w-8 h-8 bg-[#4eb902] rounded-full flex items-center justify-center">
+                      <ShieldCheck className="w-4 h-4 text-white" />
                     </div>
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#57E600] rounded-full border-2 border-transparent flex items-center justify-center">
                       <span className="text-[8px] font-black text-white">2</span>
@@ -131,8 +131,8 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
                 {/* Step 3 */}
                 <div className="flex gap-4 mb-8 relative z-10">
                   <div className="relative shrink-0">
-                    <div className="w-8 h-8 bg-[#F3FCEB] rounded-full flex items-center justify-center">
-                      <Car className="w-4 h-4 text-black" />
+                    <div className="w-8 h-8 bg-[#4eb902] rounded-full flex items-center justify-center">
+                      <Car className="w-4 h-4 text-white" />
                     </div>
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#57E600] rounded-full border-2 border-transparent flex items-center justify-center">
                       <span className="text-[8px] font-black text-white">3</span>
@@ -160,8 +160,8 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
           <div className="flex items-center min-w-[900px] xl:min-w-0 justify-between gap-4">
             
             <div className="flex items-center gap-4 flex-1">
-              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                <IndianRupee className="w-5 h-5 text-black" />
+              <div className="w-12 h-12 rounded-full bg-[#4eb902] flex items-center justify-center shrink-0">
+                <IndianRupee className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h4 className="font-black text-white text-[13px] mb-0.5">High Earnings</h4>
@@ -172,8 +172,8 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
             <div className="w-[1px] h-10 bg-white/10 shrink-0 mx-2"></div>
 
             <div className="flex items-center gap-4 flex-1">
-              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                <Gift className="w-5 h-5 text-black" />
+              <div className="w-12 h-12 rounded-full bg-[#4eb902] flex items-center justify-center shrink-0">
+                <Gift className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h4 className="font-black text-white text-[13px] mb-0.5">Incentives & Bonuses</h4>
@@ -184,8 +184,8 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
             <div className="w-[1px] h-10 bg-white/10 shrink-0 mx-2"></div>
 
             <div className="flex items-center gap-4 flex-1">
-              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                <Headphones className="w-5 h-5 text-black" />
+              <div className="w-12 h-12 rounded-full bg-[#4eb902] flex items-center justify-center shrink-0">
+                <Headphones className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h4 className="font-black text-white text-[13px] mb-0.5">24/7 Support</h4>
@@ -196,8 +196,8 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
             <div className="w-[1px] h-10 bg-white/10 shrink-0 mx-2"></div>
 
             <div className="flex items-center gap-4 flex-1">
-              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-5 h-5 text-black" />
+              <div className="w-12 h-12 rounded-full bg-[#4eb902] flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h4 className="font-black text-white text-[13px] mb-0.5">Insurance Cover</h4>
@@ -208,7 +208,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
             <div className="w-[1px] h-10 bg-white/10 shrink-0 mx-2"></div>
 
             <div className="flex items-center gap-4 flex-1">
-              <div className="w-12 h-12 rounded-full bg-[#F3FCEB] flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-full bg-[#4eb902] flex items-center justify-center shrink-0">
                 <Star className="w-5 h-5 text-black" fill="currentColor" />
               </div>
               <div>
@@ -235,7 +235,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30">
-                    <Banknote className="w-4 h-4 text-[#57E600]" />
+                    <Banknote className="w-4 h-4 text-[#57E600] fill-[#4eb902]" />
                   </div>
                   <div>
                     <span className="text-white font-bold text-sm block">Base Fare + Distance</span>
@@ -448,7 +448,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
         {/* 6. DRIVER APP FEATURES SECTION */}
         <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-12 pb-24 relative z-20">
           <div className="flex-1 w-full flex flex-col items-start max-w-lg">
-            <div className="inline-flex items-center gap-2 bg-[#F3FCEB] text-green-700 font-bold text-[11px] px-3 py-1.5 rounded-full mb-6 border border-green-100">
+            <div className="inline-flex items-center gap-2 bg-[#4ddb00] text-[#1a4d00] font-bold text-[11px] px-3 py-1.5 rounded-full mb-6 border border-green-300">
               <Smartphone className="w-4 h-4" />
               Built for Drivers
             </div>
@@ -472,7 +472,7 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
               </div>
               <div className="flex gap-4">
                 <div className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
-                  <TrendingUp className="w-5 h-5 text-[#57E600]" />
+                  <TrendingUp className="w-5 h-5 text-[#57E600] fill-[#4eb902]" />
                 </div>
                 <div>
                   <h4 className="text-white font-bold mb-1">Real-time Earnings</h4>
@@ -637,3 +637,5 @@ export const DriveSection: React.FC<DriveSectionProps> = ({ hideBadge = false })
     </section>
   );
 };
+
+

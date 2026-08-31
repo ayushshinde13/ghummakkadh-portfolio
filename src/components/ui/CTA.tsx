@@ -24,3 +24,4 @@ export const CTA: React.FC = () => {
     </Section>
   );
 };
+

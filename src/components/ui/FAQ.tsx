@@ -46,3 +46,4 @@ export const FAQ: React.FC = () => {
     </Section>
   );
 };
+

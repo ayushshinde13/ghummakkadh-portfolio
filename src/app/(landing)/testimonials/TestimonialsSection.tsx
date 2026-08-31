@@ -26,7 +26,7 @@ export const TestimonialsSection: React.FC = () => {
           />
         </svg>
         {/* Glowing GPS Pin matching Screenshot */}
-        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#77FF00] shadow-[0_8px_20px_rgba(234,179,8,0.45)] border-4 border-white flex items-center justify-center text-[#1E293B]">
+        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#4eb902] shadow-[0_8px_20px_rgba(234,179,8,0.45)] border-4 border-white flex items-center justify-center text-[#1E293B]">
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"
@@ -72,3 +72,4 @@ export const TestimonialsSection: React.FC = () => {
     </section>
   );
 };
+

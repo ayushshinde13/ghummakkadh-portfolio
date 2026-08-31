@@ -217,7 +217,7 @@ export const FeaturesSection: React.FC = () => {
 
                 {/* Bottom-Right Circle Arrow Button (Yellow) */}
                 <div className="flex justify-end mt-6">
-                  <div className="w-11 h-11 rounded-full bg-[#77FF00] text-[#1E293B] flex items-center justify-center font-bold text-lg shadow-sm group-hover:bg-[#66E000] transition-colors">
+                  <div className="w-11 h-11 rounded-full bg-[#4eb902] text-[#1E293B] flex items-center justify-center font-bold text-lg shadow-sm group-hover:bg-[#3d9400] transition-colors">
                     <svg
                       className="w-5 h-5"
                       fill="none"
@@ -287,3 +287,4 @@ export const FeaturesSection: React.FC = () => {
     </section>
   );
 };
+

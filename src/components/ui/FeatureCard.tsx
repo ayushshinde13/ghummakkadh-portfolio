@@ -13,3 +13,4 @@ export const FeatureCard: React.FC<{ feature: Feature }> = ({ feature }) => {
     </Card>
   );
 };
+
