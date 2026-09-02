@@ -16,15 +16,11 @@ interface Message {
 }
 
 export function FloatingChat() {
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "https://apighumkkad.allindiahub.com";
+  
   const [isOpen, setIsOpen] = useState(false);
   
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      role: "assistant",
-      content: "Hello! Welcome to Ghumakkadh. How can I help you today?",
-    }
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
@@ -51,13 +47,13 @@ export function FloatingChat() {
   useEffect(() => {
     const initChat = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/chat/test-tokens");
+        const res = await fetch(`${BACKEND_URL}/api/chat/test-tokens`);
         const data = await res.json();
         if (data.success) {
           const riderToken = data.riderToken;
           setToken(riderToken);
 
-          const newSocket = io("http://localhost:8000", {
+          const newSocket = io(BACKEND_URL, {
             auth: { token: riderToken },
           });
 
@@ -68,7 +64,7 @@ export function FloatingChat() {
             if (msgData.audioUrl) {
               const url = msgData.audioUrl.startsWith("http") 
                 ? msgData.audioUrl 
-                : `http://localhost:8000${msgData.audioUrl}`;
+                : `${BACKEND_URL}${msgData.audioUrl}`;
               const audio = new Audio(url);
               audio.play().catch(e => console.error("Audio play failed:", e));
             }
@@ -141,7 +137,7 @@ export function FloatingChat() {
     if (!inputValue.trim()) return;
     
     if (!socket) {
-      alert("Cannot send message: Not connected to the AI server. Please make sure the backend is running on port 8000.");
+      alert("Cannot send message: Not connected to the AI server. Please make sure the backend is running.");
       return;
     }
 
