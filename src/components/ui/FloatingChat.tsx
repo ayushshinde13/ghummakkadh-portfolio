@@ -106,6 +106,18 @@ export function FloatingChat() {
             }
           });
 
+          newSocket.on("confirm_result", (res) => {
+            setIsLoading(false);
+            const statusText = res.ok 
+              ? "✅ Action successfully completed!" 
+              : "❌ Failed to complete action. " + (res.error || "");
+            
+            setMessages((prev) => [
+              ...prev,
+              { id: Date.now().toString(), role: "assistant", content: statusText }
+            ]);
+          });
+
           newSocket.on("error", (err) => {
             console.error("Socket Error:", err);
             setIsLoading(false);
@@ -126,7 +138,12 @@ export function FloatingChat() {
   }, []);
 
   const handleSendText = () => {
-    if (!inputValue.trim() || !socket) return;
+    if (!inputValue.trim()) return;
+    
+    if (!socket) {
+      alert("Cannot send message: Not connected to the AI server. Please make sure the backend is running on port 8000.");
+      return;
+    }
 
     setMessages((prev) => [
       ...prev,
@@ -146,7 +163,7 @@ export function FloatingChat() {
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
+      const mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
       mediaRecorderRef.current = mediaRecorder;
       audioChunksRef.current = [];
 
@@ -158,6 +175,7 @@ export function FloatingChat() {
 
       mediaRecorder.onstop = () => {
         const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        console.log("Recording stopped. Audio blob size:", audioBlob.size);
         if (socket && audioBlob.size > 0) {
           setIsLoading(true);
           socket.emit("message", {
@@ -165,16 +183,19 @@ export function FloatingChat() {
             payload: audioBlob,
             voiceMode: true 
           });
+        } else {
+          console.warn("Socket not connected or audio blob is empty");
         }
         // Stop all tracks to release mic
         stream.getTracks().forEach(track => track.stop());
       };
 
-      mediaRecorder.start();
+      // Pass a timeslice to ensure data chunks are aggressively collected
+      mediaRecorder.start(250);
       setIsRecording(true);
     } catch (err) {
       console.error("Mic access denied or error:", err);
-      alert("Microphone access is required to use voice features.");
+      alert("Microphone access is required or device not found.");
     }
   };
 
@@ -230,6 +251,7 @@ export function FloatingChat() {
                     src="/images/ghumakkadh_chat_ai.png"
                     alt="Ghumakkadh AI"
                     fill
+                    priority
                     className="object-contain rounded-full"
                   />
                   <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#77FF00] border-[1.5px] border-[#1E293B] rounded-full z-10"></div>
@@ -262,6 +284,7 @@ export function FloatingChat() {
                         src="/images/ghumakkadh_chat_ai.png"
                         alt="AI Avatar"
                         fill
+                        priority
                         className="object-contain rounded-full"
                       />
                     </div>
@@ -323,7 +346,7 @@ export function FloatingChat() {
               {isLoading && (
                 <div className="flex gap-3">
                   <div className="w-8 h-8 flex-shrink-0 relative bg-white rounded-full border border-gray-100 p-0.5 mt-0.5 shadow-sm">
-                    <Image src="/images/ghumakkadh_chat_ai.png" alt="AI Avatar" fill className="object-contain rounded-full" />
+                    <Image src="/images/ghumakkadh_chat_ai.png" alt="AI Avatar" fill priority className="object-contain rounded-full" />
                   </div>
                   <div className="bg-[#F4F4F5] px-4 py-3 rounded-2xl rounded-tl-sm border border-gray-50 shadow-sm flex items-center gap-1.5 h-[46px]">
                     <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
@@ -403,7 +426,7 @@ export function FloatingChat() {
             className="absolute bottom-0 right-0 w-28 h-28 shadow-2xl focus:outline-none group flex items-center justify-center"
           >
             <div className="relative w-full h-full">
-               <Image src="/images/ghumakkadh_chat_ai.png" alt="Chat" fill className="object-contain" />
+               <Image src="/images/ghumakkadh_chat_ai.png" alt="Chat" fill priority className="object-contain" />
             </div>
             <span className="absolute top-0 right-0 flex h-4 w-4">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#77FF00] opacity-75"></span>
