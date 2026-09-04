@@ -13,14 +13,14 @@ export const HeroContent: React.FC = () => {
       </div>
 
       {/* Main H1 Headline - Compact for 1-screen fit without scroll */}
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.06] text-white">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.06] text-slate-900 dark:text-white transition-colors">
         Ride Smarter.
         <br />
-        <span className="text-[#77FF00] relative inline-block">
+        <span className="text-[#3b9e02] dark:text-[#77FF00] relative inline-block">
           Travel Faster.
           {/* Subtle Golden Underline Brush Stroke */}
           <svg
-            className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#77FF00]"
+            className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#4eb902] dark:text-[#77FF00]"
             viewBox="0 0 240 12"
             fill="none"
           >
@@ -35,7 +35,7 @@ export const HeroContent: React.FC = () => {
       </h1>
 
       {/* Description paragraph - Match Image 2 */}
-      <p className="text-sm sm:text-base text-gray-300 font-normal leading-relaxed max-w-lg">
+      <p className="text-sm sm:text-base text-slate-700 dark:text-gray-300 font-normal leading-relaxed max-w-lg transition-colors">
         Book rides in seconds with transparent fares, OTP-verified drivers and live GPS tracking.
       </p>
 
@@ -66,11 +66,11 @@ export const HeroContent: React.FC = () => {
           href="https://play.google.com/store/apps/details?id=com.ghumakkadh.partner"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-[#1E293B] font-semibold text-sm sm:text-base px-6 py-3 rounded-full shadow-sm transition-colors"
+          className="inline-flex items-center gap-2 bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 hover:bg-gray-50 dark:hover:bg-white/15 text-[#1E293B] dark:text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-full shadow-sm transition-colors"
         >
           {/* User Icon */}
           <svg
-            className="w-4 h-4 text-gray-600"
+            className="w-4 h-4 text-gray-600 dark:text-gray-300"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -87,20 +87,20 @@ export const HeroContent: React.FC = () => {
       </div>
 
       {/* Stats Row with Yellow Square Icons and Vertical Dividers - Match Image 2 */}
-      <div className="flex flex-wrap items-center gap-5 sm:gap-7 pt-5 mt-2 border-t border-white/20 w-full">
+      <div className="flex flex-wrap items-center gap-5 sm:gap-7 pt-5 mt-2 border-t border-slate-300/80 dark:border-white/20 w-full transition-colors">
         {/* Stat 1: Rating */}
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-[#F0FFEA] flex items-center justify-center text-[#4D9900] shrink-0 font-bold text-base">
             <Star className="w-5 h-5 fill-current" />
           </div>
           <div>
-            <div className="text-[14px] sm:text-[15px] font-bold text-gray-200">
+            <div className="text-[14px] sm:text-[15px] font-bold text-slate-800 dark:text-gray-200 transition-colors">
               App Rating
             </div>
           </div>
         </div>
 
-        <div className="h-8 w-[1px] bg-white/20 hidden sm:block" />
+        <div className="h-8 w-[1px] bg-slate-300 dark:bg-white/20 hidden sm:block transition-colors" />
 
         {/* Stat 2: Rides Completed */}
         <div className="flex items-center gap-2.5">
@@ -108,13 +108,13 @@ export const HeroContent: React.FC = () => {
             <Bike className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[14px] sm:text-[15px] font-bold text-gray-200">
+            <div className="text-[14px] sm:text-[15px] font-bold text-slate-800 dark:text-gray-200 transition-colors">
               Rides Completed
             </div>
           </div>
         </div>
 
-        <div className="h-8 w-[1px] bg-white/20 hidden sm:block" />
+        <div className="h-8 w-[1px] bg-slate-300 dark:bg-white/20 hidden sm:block transition-colors" />
 
         {/* Stat 3: Verified Drivers */}
         <div className="flex items-center gap-2.5">
@@ -122,7 +122,7 @@ export const HeroContent: React.FC = () => {
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[14px] sm:text-[15px] font-bold text-gray-200">
+            <div className="text-[14px] sm:text-[15px] font-bold text-slate-800 dark:text-gray-200 transition-colors">
               Verified Drivers
             </div>
           </div>

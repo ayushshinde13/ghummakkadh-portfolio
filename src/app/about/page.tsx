@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="pt-20 bg-[#0A0E1A] min-h-screen text-white">
+    <main className="pt-20 bg-slate-50 dark:bg-[#0A0E1A] min-h-screen text-slate-900 dark:text-white transition-colors duration-300">
       <AboutSection hideBadge={true} />
       <div className="mt-20 lg:mt-32 pb-20">
         <ParcelIntroSection hideBadge={true} />

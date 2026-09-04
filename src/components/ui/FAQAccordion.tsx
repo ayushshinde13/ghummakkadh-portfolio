@@ -24,16 +24,16 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({ faqs, className }) =
         return (
           <div 
             key={index} 
-            className="bg-[#1A2138] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-white/20 transition-all duration-300"
+            className="bg-white dark:bg-[#1A2138] border border-slate-200/80 dark:border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300 shadow-sm dark:shadow-none"
             onClick={() => setOpenIndex(isOpen ? null : index)}
           >
             <div className="flex justify-between items-center p-6">
-              <h5 className="text-sm md:text-base font-black text-white">{faq.q}</h5>
-              <ChevronRight className={cn("w-5 h-5 text-[#57E600] transition-transform duration-300 shrink-0 ml-4", isOpen ? "rotate-90" : "")} />
+              <h5 className="text-sm md:text-base font-black text-slate-900 dark:text-white transition-colors">{faq.q}</h5>
+              <ChevronRight className={cn("w-5 h-5 text-[#4eb902] dark:text-[#57E600] transition-transform duration-300 shrink-0 ml-4", isOpen ? "rotate-90" : "")} />
             </div>
             <div className={cn("grid transition-all duration-300", isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
               <div className="overflow-hidden">
-                <p className="text-[13px] text-gray-400 font-medium leading-relaxed px-6 pb-6 pt-0">{faq.a}</p>
+                <p className="text-[13px] text-slate-600 dark:text-gray-400 font-medium leading-relaxed px-6 pb-6 pt-0 transition-colors">{faq.a}</p>
               </div>
             </div>
           </div>

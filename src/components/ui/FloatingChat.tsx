@@ -237,20 +237,21 @@ export function FloatingChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-0 right-0 w-[360px] h-[600px] bg-white rounded-xl shadow-[0_5px_40px_rgba(0,0,0,0.15)] flex flex-col overflow-hidden border border-gray-100 origin-bottom-right"
+            className="absolute bottom-0 right-0 w-[360px] h-[600px] bg-white dark:bg-[#0F1626] rounded-xl shadow-[0_5px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_5px_40px_rgba(0,0,0,0.6)] flex flex-col overflow-hidden border border-gray-100 dark:border-white/10 origin-bottom-right transition-colors"
           >
             {/* Chat Header */}
-            <div className="bg-[#1E293B] p-4 flex items-center justify-between z-10 relative">
+            <div className="bg-[#1E293B] dark:bg-[#0A0E1A] p-4 flex items-center justify-between z-10 relative border-b border-transparent dark:border-white/10">
               <div className="flex items-center gap-3">
-                <div className="relative w-11 h-11 flex-shrink-0 bg-white rounded-full p-[2px] shadow-sm">
+                <div className="relative w-20 h-20 flex-shrink-0 bg-white rounded-full p-1 shadow-md">
                    <Image
-                    src="/images/ghumakkadh_chat_ai.png"
+                    src="/images/Hello Chat Bot.svg"
                     alt="Ghumakkadh AI"
                     fill
                     priority
-                    className="object-contain rounded-full"
+                    unoptimized
+                    className="object-contain"
                   />
-                  <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#77FF00] border-[1.5px] border-[#1E293B] rounded-full z-10"></div>
+                  <div className="absolute bottom-1 right-1 w-4 h-4 bg-[#77FF00] border-[2px] border-[#1E293B] rounded-full z-10"></div>
                 </div>
                 <div className="flex flex-col justify-center">
                   <h3 className="font-bold text-white text-[16px] leading-tight tracking-wide">Ghumakkadh AI</h3>
@@ -270,18 +271,19 @@ export function FloatingChat() {
             </div>
 
             {/* Chat Body */}
-            <div className="flex-1 p-4 bg-white flex flex-col gap-4 overflow-y-auto pb-4 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+            <div className="flex-1 p-4 bg-white dark:bg-[#0F1626] flex flex-col gap-4 overflow-y-auto pb-4 scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-white/10 scrollbar-track-transparent">
               
               {messages.map((msg) => (
                 <div key={msg.id} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
                   {msg.role === 'assistant' && (
-                    <div className="w-8 h-8 flex-shrink-0 relative bg-white rounded-full border border-gray-100 p-0.5 mt-0.5 shadow-sm">
+                    <div className="w-12 h-12 flex-shrink-0 relative bg-white rounded-full border border-gray-100 p-1 mt-0.5 shadow-sm">
                       <Image
-                        src="/images/ghumakkadh_chat_ai.png"
+                        src="/images/Hello Chat Bot.svg"
                         alt="AI Avatar"
                         fill
                         priority
-                        className="object-contain rounded-full"
+                        unoptimized
+                        className="object-contain"
                       />
                     </div>
                   )}
@@ -292,8 +294,8 @@ export function FloatingChat() {
                       <div 
                         className={`px-4 py-3 text-[15px] shadow-sm whitespace-pre-wrap leading-relaxed ${
                           msg.role === 'user' 
-                            ? 'bg-[#1E293B] text-white rounded-2xl rounded-tr-sm' 
-                            : 'bg-[#F4F4F5] text-[#1E293B] rounded-2xl rounded-tl-sm border border-gray-50'
+                            ? 'bg-[#1E293B] dark:bg-[#57E600] text-white dark:text-slate-900 font-medium rounded-2xl rounded-tr-sm' 
+                            : 'bg-[#F4F4F5] dark:bg-[#1A2337] text-[#1E293B] dark:text-zinc-100 rounded-2xl rounded-tl-sm border border-gray-50 dark:border-white/5'
                         }`}
                       >
                         {parseBoldText(msg.content)}
@@ -341,8 +343,8 @@ export function FloatingChat() {
 
               {isLoading && (
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 flex-shrink-0 relative bg-white rounded-full border border-gray-100 p-0.5 mt-0.5 shadow-sm">
-                    <Image src="/images/ghumakkadh_chat_ai.png" alt="AI Avatar" fill priority className="object-contain rounded-full" />
+                  <div className="w-12 h-12 flex-shrink-0 relative bg-white rounded-full border border-gray-100 p-1 mt-0.5 shadow-sm">
+                    <Image src="/images/Hello Chat Bot.svg" alt="AI Avatar" fill priority unoptimized className="object-contain" />
                   </div>
                   <div className="bg-[#F4F4F5] px-4 py-3 rounded-2xl rounded-tl-sm border border-gray-50 shadow-sm flex items-center gap-1.5 h-[46px]">
                     <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
@@ -356,10 +358,10 @@ export function FloatingChat() {
             </div>
 
             {/* Footer Area */}
-            <div className="bg-white border-t border-gray-100 flex flex-col relative z-20 pb-2">
+            <div className="bg-white dark:bg-[#0F1626] border-t border-gray-100 dark:border-white/10 flex flex-col relative z-20 pb-2">
               {/* Input section */}
               <div className="p-4 pb-2">
-                <div className={`flex items-center gap-2 border rounded-full px-5 py-3 bg-white transition-all shadow-sm border-gray-300 focus-within:border-[#1E293B] focus-within:ring-2 focus-within:ring-[#77FF00]/30`}>
+                <div className={`flex items-center gap-2 border rounded-full px-5 py-3 bg-white dark:bg-[#131B2E] transition-all shadow-sm border-gray-300 dark:border-white/15 focus-within:border-[#1E293B] dark:focus-within:border-[#77FF00] focus-within:ring-2 focus-within:ring-[#77FF00]/30`}>
                   <input 
                     type="text" 
                     value={inputValue}
@@ -367,9 +369,9 @@ export function FloatingChat() {
                     onKeyDown={handleKeyDown}
                     disabled={isLoading}
                     placeholder={"Ask me anything..."}
-                    className="flex-1 text-[15px] bg-transparent focus:outline-none text-[#1E293B] placeholder-gray-400"
+                    className="flex-1 text-[15px] bg-transparent focus:outline-none text-[#1E293B] dark:text-white placeholder-gray-400 dark:placeholder-zinc-400"
                   />
-                  <div className="flex items-center gap-0.5 text-[#1E293B]">
+                  <div className="flex items-center gap-0.5 text-[#1E293B] dark:text-zinc-200">
                     <button 
                       onClick={toggleRecording}
                       className={`transition-all p-2 rounded-full flex items-center justify-center ${isRecording ? 'bg-red-500 text-white animate-pulse' : 'text-[#1E293B] hover:bg-gray-100'}`} 
@@ -419,12 +421,12 @@ export function FloatingChat() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="absolute bottom-0 right-0 w-28 h-28 shadow-2xl focus:outline-none group flex items-center justify-center"
+            className="absolute bottom-0 right-0 w-40 h-40 drop-shadow-2xl focus:outline-none group flex items-center justify-center"
           >
             <div className="relative w-full h-full">
-               <Image src="/images/ghumakkadh_chat_ai.png" alt="Chat" fill priority className="object-contain" />
+               <Image src="/images/Hello Chat Bot.svg" alt="Chat" fill priority unoptimized className="object-contain" />
             </div>
-            <span className="absolute top-0 right-0 flex h-4 w-4">
+            <span className="absolute top-2 right-2 flex h-4 w-4">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#77FF00] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-4 w-4 bg-[#77FF00] border-2 border-white"></span>
             </span>

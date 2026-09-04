@@ -13,8 +13,8 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
   return (
     <div
       className={cn(
-        "bg-white/5 backdrop-blur-md rounded-[32px] p-7 lg:p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-300 min-h-[380px]",
-        "border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:border-[#FBBF24] hover:shadow-[0_20px_55px_rgba(251,191,36,0.3)] hover:-translate-y-1 hover:z-10"
+        "bg-white dark:bg-white/5 backdrop-blur-md rounded-[32px] p-7 lg:p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-300 min-h-[380px]",
+        "border border-slate-200/80 dark:border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:border-[#FBBF24] hover:shadow-[0_20px_55px_rgba(251,191,36,0.2)] hover:-translate-y-1 hover:z-10"
       )}
     >
       <div>
@@ -31,7 +31,7 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
         </div>
 
         {/* Quote Paragraph */}
-        <p className="text-gray-300 text-[15px] sm:text-base leading-relaxed font-normal my-4">
+        <p className="text-slate-700 dark:text-gray-300 text-[15px] sm:text-base leading-relaxed font-normal my-4 transition-colors">
           &ldquo;
           {testimonial.comment}
           &rdquo;
@@ -61,7 +61,7 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
           <div className="flex-1 min-w-0">
             {/* Name + Blue Verified Badge */}
             <div className="flex items-center gap-1.5">
-              <h4 className="text-base font-black text-white truncate">
+              <h4 className="text-base font-black text-slate-900 dark:text-white truncate transition-colors">
                 {testimonial.name}
               </h4>
               <svg
@@ -78,12 +78,12 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
             </div>
 
             {/* Role */}
-            <div className="text-xs text-gray-400 font-medium">
+            <div className="text-xs text-slate-500 dark:text-gray-400 font-medium transition-colors">
               {testimonial.role}
             </div>
 
             {/* Location */}
-            <div className="text-xs text-gray-400 font-medium flex items-center gap-1 mt-0.5">
+            <div className="text-xs text-slate-500 dark:text-gray-400 font-medium flex items-center gap-1 mt-0.5 transition-colors">
               <span><MapPin className="w-3 h-3" /></span>
               <span>{testimonial.location}</span>
             </div>
@@ -91,7 +91,7 @@ export const CustomerCard: React.FC<CustomerCardProps> = ({ testimonial }) => {
         </div>
 
         {/* Bottom Tags Pills Row */}
-        <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-white/20">
+        <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-slate-200 dark:border-white/20 transition-colors">
           {testimonial.tags.map((tag, i) => {
             const IconComponent = tag.icon;
             return (

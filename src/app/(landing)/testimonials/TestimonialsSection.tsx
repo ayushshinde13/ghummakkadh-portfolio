@@ -48,13 +48,13 @@ export const TestimonialsSection: React.FC = () => {
           </div>
 
           {/* H2 Headline */}
-          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight transition-colors">
             Loved by Commuters{" "}
-            <span className="text-[#77FF00]">Across India</span>
+            <span className="text-[#3b9e02] dark:text-[#77FF00]">Across India</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-gray-300 font-normal mt-2">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-gray-300 font-normal mt-2 transition-colors">
             See what our daily riders and partners have to say about Ghumakkadh.
           </p>
         </div>

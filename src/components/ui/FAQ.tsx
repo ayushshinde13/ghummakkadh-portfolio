@@ -24,18 +24,18 @@ export const FAQ: React.FC = () => {
             return (
               <Card 
                 key={faq.question} 
-                className="flex flex-col !bg-white/5 !backdrop-blur-md !border-white/10 border-2 hover:border-[#FBBF24] hover:shadow-[0_20px_55px_rgba(251,191,36,0.3)] transition-all duration-300 relative cursor-pointer !p-0 overflow-hidden"
+                className="flex flex-col !bg-white dark:!bg-white/5 !backdrop-blur-md !border-slate-200/80 dark:!border-white/10 border-2 hover:border-[#FBBF24] hover:shadow-[0_20px_55px_rgba(251,191,36,0.2)] transition-all duration-300 relative cursor-pointer !p-0 overflow-hidden shadow-sm dark:shadow-none"
                 onClick={() => setOpenIndex(isOpen ? null : index)}
               >
                 <div className="flex items-center justify-between p-6">
-                  <Heading level={4} className="text-white !mb-0 text-base sm:text-lg">
+                  <Heading level={4} className="text-slate-900 dark:text-white !mb-0 text-base sm:text-lg transition-colors">
                     {faq.question}
                   </Heading>
                   <ChevronDown className={cn("w-5 h-5 text-gray-400 transition-transform duration-300 shrink-0 ml-4", isOpen && "rotate-180")} />
                 </div>
                 <div className={cn("grid transition-all duration-300", isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
                   <div className="overflow-hidden">
-                    <p className="text-sm text-gray-400 px-6 pb-6 leading-relaxed">{faq.answer}</p>
+                    <p className="text-sm text-slate-600 dark:text-gray-400 px-6 pb-6 leading-relaxed transition-colors">{faq.answer}</p>
                   </div>
                 </div>
               </Card>

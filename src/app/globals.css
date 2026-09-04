@@ -1,11 +1,22 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 @import "../styles/utilities.css";
 @import "../styles/animations.css";
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
-  --foreground: #111827;
+  --foreground: #0f172a;
   
+  /* Global Design Tokens for Light Mode */
+  --site-bg: #f8fafc;
+  --site-surface: #ffffff;
+  --site-card: #ffffff;
+  --site-border: #e2e8f0;
+  --site-text: #0f172a;
+  --site-text-muted: #64748b;
+  --site-primary: #57E600;
+
   /* Admin Panel Variables */
   --admin-primary: #7ED321;
   --admin-dark: #0A0E1A;
@@ -15,18 +26,7 @@
   --admin-muted-light: #64748B;
   --admin-text-dark: #0F172A;
 
-  /* Theme Dynamic CSS Variables (Dark theme by default) */
-  --admin-background: #0A0E1A;
-  --admin-card: rgba(17, 24, 39, 0.5);
-  --admin-border: rgba(255, 255, 255, 0.1);
-  --admin-text: #ffffff;
-  --admin-muted: #9CA3AF;
-  --admin-sidebar-bg: #0A0A0A;
-  --admin-topbar-bg: #0A0E1A;
-}
-
-.light {
-  /* Theme Dynamic CSS Variables (Light theme overrides) */
+  /* Admin Theme Dynamic CSS Variables */
   --admin-background: #F8FAFC;
   --admin-card: #FFFFFF;
   --admin-border: #E2E8F0;
@@ -36,7 +36,53 @@
   --admin-topbar-bg: #FFFFFF;
 }
 
+.dark {
+  color-scheme: dark;
+  --background: #0a0e1a;
+  --foreground: #f8fafc;
+
+  /* Global Design Tokens for Dark / Night Mode */
+  --site-bg: #0a0e1a;
+  --site-surface: #0f1626;
+  --site-card: #131b2e;
+  --site-border: rgba(255, 255, 255, 0.1);
+  --site-text: #ffffff;
+  --site-text-muted: #94a3b8;
+  --site-primary: #57E600;
+
+  /* Admin Dynamic Overrides for Dark Mode */
+  --admin-background: #0A0E1A;
+  --admin-card: rgba(17, 24, 39, 0.5);
+  --admin-border: rgba(255, 255, 255, 0.1);
+  --admin-text: #ffffff;
+  --admin-muted: #9CA3AF;
+  --admin-sidebar-bg: #0A0A0A;
+  --admin-topbar-bg: #0A0E1A;
+}
+
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Policy & Legal Document Theming */
+.policy-card {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.dark .policy-card h2,
+.dark .policy-card strong {
+  color: #ffffff;
+}
+.dark .policy-card p,
+.dark .policy-card li {
+  color: #d4d4d8;
+}
+.dark .policy-card .bg-slate-50 {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }

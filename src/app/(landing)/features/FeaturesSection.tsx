@@ -75,10 +75,10 @@ export const FeaturesSection: React.FC = () => {
   return (
     <section
       id="features"
-      className="bg-gradient-to-b from-[#0A0E1A] to-[#0D1220] relative pt-6 lg:pt-10 pb-4 lg:pb-6 overflow-hidden"
+      className="bg-slate-50 dark:bg-gradient-to-b dark:from-[#0A0E1A] dark:to-[#0D1220] relative pt-6 lg:pt-10 pb-4 lg:pb-6 overflow-hidden transition-colors duration-300"
     >
       {/* Background Subtle Dotted Matrix & City Skyline with Ferris Wheel on the Right */}
-      <div className="absolute top-10 left-1/3 w-64 h-32 opacity-30 pointer-events-none">
+      <div className="absolute top-10 left-1/3 w-64 h-32 opacity-20 dark:opacity-30 pointer-events-none">
         <div
           className="w-full h-full"
           style={{
@@ -104,20 +104,20 @@ export const FeaturesSection: React.FC = () => {
           {/* Left Column (6 Cols): Badge, Title, Subtitle, 4 Icons */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             {/* Top Badge Pill */}
-            <div className="hidden lg:inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 text-white font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-5">
-              <span className="text-[#57E600] text-sm"><Star className="w-4 h-4 fill-current" /></span>
+            <div className="hidden lg:inline-flex items-center gap-2 bg-slate-200/80 dark:bg-white/5 backdrop-blur-md border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-5 transition-colors">
+              <span className="text-[#4eb902] dark:text-[#57E600] text-sm"><Star className="w-4 h-4 fill-current" /></span>
               <span>WHY CHOOSE US</span>
             </div>
 
             {/* H2 Title matching Screenshot exactly */}
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-[1.08] text-white mb-5">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-[1.08] text-slate-900 dark:text-white mb-5 transition-colors">
               Smart Features for
               <br />
-              <span className="text-[#77FF00]">Modern Commuters</span>
+              <span className="text-[#3b9e02] dark:text-[#77FF00]">Modern Commuters</span>
             </h2>
 
             {/* Subtitle paragraph */}
-            <p className="text-base sm:text-lg text-gray-300 font-normal leading-relaxed max-w-lg mb-10">
+            <p className="text-base sm:text-lg text-slate-600 dark:text-gray-300 font-normal leading-relaxed max-w-lg mb-10 transition-colors">
               Everything designed to make your daily travel faster, cheaper, and
               safer.
             </p>
@@ -131,10 +131,10 @@ export const FeaturesSection: React.FC = () => {
                   >
                     {item.icon}
                   </div>
-                  <h4 className="text-xs sm:text-sm font-black text-gray-200 leading-tight">
+                  <h4 className="text-xs sm:text-sm font-black text-slate-800 dark:text-gray-200 leading-tight transition-colors">
                     {item.title}
                   </h4>
-                  <p className="text-[11px] text-gray-400 font-medium mt-1 leading-snug">
+                  <p className="text-[11px] text-slate-500 dark:text-gray-400 font-medium mt-1 leading-snug transition-colors">
                     {item.subtitle}
                   </p>
                 </div>
@@ -172,7 +172,7 @@ export const FeaturesSection: React.FC = () => {
             {/* 2 White Step Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-7 relative z-10">
               {/* Card 1: Book Ride */}
-              <div className="bg-white/5 backdrop-blur-md rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-white/10 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.4)] transition-all">
+              <div className="bg-white dark:bg-white/5 backdrop-blur-md rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.4)] transition-all">
                 <div>
                   {/* Top Yellow Circle Icon */}
                   <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-6 shadow-sm">
@@ -205,12 +205,12 @@ export const FeaturesSection: React.FC = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-black text-white mb-2 tracking-tight">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight transition-colors">
                     Book Ride
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-400 font-normal leading-relaxed">
+                  <p className="text-sm text-slate-600 dark:text-gray-400 font-normal leading-relaxed transition-colors">
                     Find nearby rides instantly with just a few taps.
                   </p>
                 </div>
@@ -236,7 +236,7 @@ export const FeaturesSection: React.FC = () => {
               </div>
 
               {/* Card 2: Live Tracking */}
-              <div className="bg-white/5 backdrop-blur-md rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-white/10 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.4)] transition-all">
+              <div className="bg-white dark:bg-white/5 backdrop-blur-md rounded-[36px] p-7 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between min-h-[310px] relative overflow-hidden group hover:shadow-[0_25px_60px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.4)] transition-all">
                 <div>
                   {/* Top Blue Circle Icon */}
                   <div className="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 shadow-sm">
@@ -251,12 +251,12 @@ export const FeaturesSection: React.FC = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-black text-white mb-2 tracking-tight">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight transition-colors">
                     Live Tracking
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-400 font-normal leading-relaxed">
+                  <p className="text-sm text-slate-600 dark:text-gray-400 font-normal leading-relaxed transition-colors">
                     Track your ride in real-time and share with your loved ones.
                   </p>
                 </div>

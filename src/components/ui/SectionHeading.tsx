@@ -23,10 +23,10 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       } ${className}`}
     >
       {badge && <Badge variant="primary">{badge}</Badge>}
-      <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-white tracking-tight">
+      <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight transition-colors">
         {title}
       </h2>
-      {subtitle && <p className="text-gray-300 text-base">{subtitle}</p>}
+      {subtitle && <p className="text-slate-600 dark:text-gray-300 text-base transition-colors">{subtitle}</p>}
     </div>
   );
 };

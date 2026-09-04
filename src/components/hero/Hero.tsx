@@ -28,21 +28,23 @@ export const Hero: React.FC = () => {
   const skylineX = useTransform(scrollY, [scrollStart, scrollEnd], [0, 150]);
 
   return (
-    <section className="relative pt-4 lg:pt-6 pb-0 overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-between bg-gradient-to-b from-[#0a0e1a] via-[#2a2140] to-[#4a3a2a]">
+    <section className="relative pt-4 lg:pt-6 pb-0 overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-between bg-gradient-to-b from-[#F0FDF4] via-[#FEF3C7]/40 to-[#FFEDD5] dark:from-[#0a0e1a] dark:via-[#2a2140] dark:to-[#4a3a2a] transition-colors duration-500">
       {/* Dark Night Sky Background Effects */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Soft radial blue glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[120px] rounded-full" />
+        {/* Soft radial glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-400/10 dark:bg-blue-600/10 blur-[120px] rounded-full transition-colors" />
         
-        {/* Scattered Stars */}
-        <div className="absolute top-[15%] left-[20%] w-1 h-1 bg-white/60 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-        <div className="absolute top-[25%] left-[80%] w-1.5 h-1.5 bg-blue-100/50 rounded-full blur-[1px]" />
-        <div className="absolute top-[10%] left-[60%] w-0.5 h-0.5 bg-white/80 rounded-full" />
-        <div className="absolute top-[45%] left-[10%] w-1 h-1 bg-white/40 rounded-full" />
-        <div className="absolute top-[35%] left-[85%] w-0.5 h-0.5 bg-blue-200/60 rounded-full" />
-        <div className="absolute top-[20%] left-[35%] w-1.5 h-1.5 bg-white/30 rounded-full blur-[1px]" />
-        <div className="absolute top-[55%] left-[70%] w-1 h-1 bg-white/50 rounded-full" />
-        <div className="absolute top-[8%] left-[45%] w-1 h-1 bg-blue-100/70 rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]" />
+        {/* Scattered Stars (Night Mode Only) */}
+        <div className="opacity-0 dark:opacity-100 transition-opacity duration-500">
+          <div className="absolute top-[15%] left-[20%] w-1 h-1 bg-white/60 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+          <div className="absolute top-[25%] left-[80%] w-1.5 h-1.5 bg-blue-100/50 rounded-full blur-[1px]" />
+          <div className="absolute top-[10%] left-[60%] w-0.5 h-0.5 bg-white/80 rounded-full" />
+          <div className="absolute top-[45%] left-[10%] w-1 h-1 bg-white/40 rounded-full" />
+          <div className="absolute top-[35%] left-[85%] w-0.5 h-0.5 bg-blue-200/60 rounded-full" />
+          <div className="absolute top-[20%] left-[35%] w-1.5 h-1.5 bg-white/30 rounded-full blur-[1px]" />
+          <div className="absolute top-[55%] left-[70%] w-1 h-1 bg-white/50 rounded-full" />
+          <div className="absolute top-[8%] left-[45%] w-1 h-1 bg-blue-100/70 rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]" />
+        </div>
       </div>
 
       {/* Golden City Skyline, Skyscraper & Bridge Silhouette with Parallax */}
@@ -51,7 +53,7 @@ export const Hero: React.FC = () => {
         className="absolute bottom-24 left-0 w-full h-56 pointer-events-none z-0 overflow-hidden"
       >
         <svg
-          className="w-full h-full text-[#3D4A6B]"
+          className="w-full h-full text-slate-400/80 dark:text-[#3D4A6B] transition-colors"
           viewBox="0 0 1440 240"
           fill="currentColor"
           preserveAspectRatio="none"
@@ -94,7 +96,7 @@ export const Hero: React.FC = () => {
           {/* Center Dashed Yellow Highway Lane Markings (Parallax scroll velocity) */}
           <motion.div
             style={{ x: roadX }}
-            className="w-full border-t-4 border-dashed border-yellow-400/90"
+            className="absolute top-1/2 -mt-0.5 -left-[200%] w-[500%] border-t-4 border-dashed border-yellow-400/90 pointer-events-none"
           />
           {/* Bottom White Edge Stripe */}
           <div className="absolute bottom-2 left-0 w-full h-1.5 bg-white/60" />

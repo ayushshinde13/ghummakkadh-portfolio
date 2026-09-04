@@ -9,7 +9,7 @@ import { FAQ, CTA, Stats, AppDownloadSection } from "@/components/ui";
 
 export default function HomePage() {
   return (
-    <div className="bg-gradient-to-b from-[#050B1A] to-[#0B1830] text-white min-h-screen pt-20">
+    <div className="bg-[#F8FAFC] dark:bg-gradient-to-b dark:from-[#050B1A] dark:to-[#0B1830] text-slate-900 dark:text-white min-h-screen pt-20 transition-colors duration-300">
       <Hero />
       <FeaturesSection />
       <RideOptionsSection />

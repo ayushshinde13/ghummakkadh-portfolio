@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  transpilePackages: ["recharts", "@reduxjs/toolkit"],
 };
 
 export default nextConfig;

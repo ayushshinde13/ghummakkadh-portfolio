@@ -37,15 +37,15 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
   ];
 
   return (
-    <section id="how-it-works" className="bg-gradient-to-b from-[#0A0E1A] to-[#0D1220] pt-6 pb-16 md:pt-10 md:pb-24 overflow-hidden">
+    <section id="how-it-works" className="bg-gradient-to-b from-slate-50 to-slate-100 dark:from-[#0A0E1A] dark:to-[#0D1220] pt-6 pb-16 md:pt-10 md:pb-24 overflow-hidden transition-colors duration-300">
       <Container className="max-w-[1400px] mx-auto px-4 md:px-8">
         {/* Header */}
         <div className="flex flex-col items-start lg:items-center text-left lg:text-center mb-16 lg:mb-20 w-full">
 
-          <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-black text-white tracking-tight mb-3">
-            Your Journey in <span className="text-[#77FF00]">4 Simple Steps</span>
+          <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-black text-slate-900 dark:text-white tracking-tight mb-3 transition-colors">
+            Your Journey in <span className="text-[#3b9e02] dark:text-[#77FF00]">4 Simple Steps</span>
           </h2>
-          <p className="text-sm sm:text-base text-gray-400 font-medium">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-gray-400 font-medium transition-colors">
             From booking to destination — we make every ride smooth, safe & reliable.
           </p>
         </div>
@@ -71,7 +71,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
                 </div>
 
                 {/* Card Container */}
-                <div className="bg-white/5 backdrop-blur-md rounded-[28px] p-6 border-2 border-white/10 hover:border-[#FBBF24] hover:shadow-[0_20px_55px_rgba(251,191,36,0.2)] hover:-translate-y-1 hover:z-10 transition-all duration-300 flex flex-col items-center justify-start h-full shadow-[0_15px_40px_rgba(0,0,0,0.2)] pt-12 relative">
+                <div className="bg-white dark:bg-white/5 backdrop-blur-md rounded-[28px] p-6 border-2 border-slate-200/80 dark:border-white/10 hover:border-[#FBBF24] hover:shadow-[0_20px_55px_rgba(251,191,36,0.2)] hover:-translate-y-1 hover:z-10 transition-all duration-300 flex flex-col items-center justify-start h-full shadow-[0_15px_40px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] pt-12 relative">
                   <div className="h-40 sm:h-48 w-full flex items-center justify-center mb-6 relative rounded-xl px-2">
                     <img
                       src={step.img}
@@ -80,10 +80,10 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
                     />
                   </div>
 
-                  <h3 className="text-[17px] font-black text-white mb-2.5 text-center">
+                  <h3 className="text-[17px] font-black text-slate-900 dark:text-white mb-2.5 text-center transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-[12px] text-gray-400 font-medium text-center leading-relaxed px-1">
+                  <p className="text-[12px] text-slate-600 dark:text-gray-400 font-medium text-center leading-relaxed px-1 transition-colors">
                     {step.desc}
                   </p>
                 </div>
@@ -93,14 +93,14 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ hideBadge 
         </div>
 
         {/* CTA Banner */}
-        <div className="bg-white/5 backdrop-blur-md rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 mb-8 max-w-6xl mx-auto border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.2)]">
+        <div className="bg-white dark:bg-white/5 backdrop-blur-md rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 mb-8 max-w-6xl mx-auto border border-slate-200/80 dark:border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] transition-all">
           <div className="flex items-center gap-6 z-10 relative">
             <div className="w-20 h-20 shrink-0 flex items-center justify-center">
               <img src="/images/hero_img.png" alt="Scooter" className="w-full h-full object-contain" />
             </div>
             <div>
-              <h3 className="text-xl md:text-[22px] font-black text-white mb-1">Ready to ride?</h3>
-              <p className="text-gray-400 font-medium text-[13px] md:text-sm">Ghumakkadh ke saath har safar easy, safe aur affordable.</p>
+              <h3 className="text-xl md:text-[22px] font-black text-slate-900 dark:text-white mb-1 transition-colors">Ready to ride?</h3>
+              <p className="text-slate-600 dark:text-gray-400 font-medium text-[13px] md:text-sm transition-colors">Ghumakkadh ke saath har safar easy, safe aur affordable.</p>
             </div>
           </div>
 

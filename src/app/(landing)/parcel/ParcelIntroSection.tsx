@@ -14,7 +14,7 @@ export const ParcelIntroSection: React.FC<ParcelIntroSectionProps> = ({ hideBadg
         {/* Section Header */}
         {!hideBadge && (
           <div className="flex flex-col items-start lg:items-center text-left lg:text-center w-full mb-6 lg:mb-8 mt-8 lg:mt-12">
-            <div className="inline-flex items-center gap-2 bg-[#F5F9F6] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm border border-green-100/50">
+            <div className="inline-flex items-center gap-2 bg-[#F5F9F6] dark:bg-white/5 text-[#1E293B] dark:text-white font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm border border-green-100/50 dark:border-white/10 transition-colors">
               <span className="text-base">📦</span> Ghumakkadh Parcel
             </div>
           </div>
@@ -29,28 +29,26 @@ export const ParcelIntroSection: React.FC<ParcelIntroSectionProps> = ({ hideBadg
           />
         </div>
 
-        <div className="bg-[#151B2E] rounded-[32px] p-6 lg:p-10 border border-white/10 flex flex-col lg:flex-row items-center justify-between gap-8 relative shadow-[0_15px_40px_rgba(0,0,0,0.2)] overflow-hidden">
-
-
+        <div className="bg-white dark:bg-[#151B2E] rounded-[32px] p-6 lg:p-10 border border-slate-200/80 dark:border-white/10 flex flex-col lg:flex-row items-center justify-between gap-8 relative shadow-[0_15px_40px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] overflow-hidden transition-all">
 
           {/* Left Text Content */}
           <div className="w-full lg:w-[55%] flex flex-col gap-6 z-10">
-            <h2 className="text-2xl sm:text-3xl lg:text-3xl font-black text-white m-0 leading-tight tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-3xl font-black text-slate-900 dark:text-white m-0 leading-tight tracking-tight transition-colors">
               Your Parcels, Delivered with Care
             </h2>
 
-            <p className="text-gray-400 text-base leading-relaxed max-w-lg">
+            <p className="text-slate-600 dark:text-gray-400 text-base leading-relaxed max-w-lg transition-colors">
               Whether it's urgent documents for work or a surprise gift for a loved one, our dedicated parcel fleet ensures your items arrive safely, on time, and at unbeatable rates.
             </p>
 
             <ul className="flex flex-col gap-3 mt-2">
-              <li className="flex items-center gap-3 text-gray-300 font-medium">
+              <li className="flex items-center gap-3 text-slate-700 dark:text-gray-300 font-medium transition-colors">
                 <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                 </div>
                 Live tracking at every step
               </li>
-              <li className="flex items-center gap-3 text-gray-300 font-medium">
+              <li className="flex items-center gap-3 text-slate-700 dark:text-gray-300 font-medium transition-colors">
                 <div className="w-6 h-6 rounded-full bg-[#4eb902] text-white flex items-center justify-center shrink-0">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                 </div>
