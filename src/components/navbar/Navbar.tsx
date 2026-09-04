@@ -67,8 +67,8 @@ export const Navbar: React.FC = () => {
           <button
             onClick={toggleTheme}
             className="p-2 sm:p-2.5 rounded-full border border-slate-200 dark:border-white/20 bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-yellow-400 hover:bg-slate-200 dark:hover:bg-white/10 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-sm"
-            aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Night Mode"}
-            title={theme === "dark" ? "Switch to Light Mode" : "Switch to Night Mode"}
+            aria-label={mounted ? (theme === "dark" ? "Switch to Light Mode" : "Switch to Night Mode") : "Toggle theme"}
+            title={mounted ? (theme === "dark" ? "Switch to Light Mode" : "Switch to Night Mode") : "Toggle theme"}
           >
             {mounted ? (
               theme === "dark" ? (
