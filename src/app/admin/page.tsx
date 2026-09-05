@@ -27,14 +27,20 @@ export default function AdminLogin() {
       });
 
       // Check if the logged-in user is actually an ADMIN
-      const user = response.data?.user;
+      const resultData = response.data || response;
+      const user = resultData.user || resultData.data?.user;
+      const accessToken = resultData.tokens?.accessToken || resultData.data?.tokens?.accessToken;
+
       if (user && (!user.roles || !user.roles.includes("ADMIN"))) {
         throw new Error("Unauthorized: Access restricted to Administrators only.");
       }
 
-      // Store user details in localStorage
+      // Store user and token details in localStorage
       if (user) {
         localStorage.setItem("admin_user", JSON.stringify(user));
+      }
+      if (accessToken) {
+        localStorage.setItem("admin_access_token", accessToken);
       }
 
       // Set the client-side cookie hint for ProtectedRoute
