@@ -43,7 +43,8 @@ export default function SOSPage() {
     fetchAlerts();
     
     // Connect to WebSocket for real-time SOS alerts
-    const socket = io("http://localhost:8000", { withCredentials: true });
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "https://apighumkkad.allindiahub.com";
+    const socket = io(backendUrl, { withCredentials: true });
     
     socket.on("SOS_ALERT_TRIGGERED", (payload) => {
       console.log("CRITICAL: SOS ALERT TRIGGERED", payload);
