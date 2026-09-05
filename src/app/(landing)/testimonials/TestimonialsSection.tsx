@@ -42,9 +42,9 @@ export const TestimonialsSection: React.FC = () => {
         {/* Section Header matching Screenshot exactly */}
         <div className="flex flex-col items-start lg:items-center text-left lg:text-center max-w-2xl lg:mx-auto w-full">
           {/* Yellow Badge Pill */}
-          <div className="inline-flex items-center gap-2 bg-[#F0FFEA] text-[#1E293B] font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-6">
-            <span><Heart className="w-4 h-4 fill-yellow-400 text-yellow-400" /></span>
-            <span>Testimonials</span>
+          <div className="inline-flex items-center gap-2.5 sm:gap-3 bg-[#F5F9F6] dark:bg-white/10 text-[#1E293B] dark:text-white font-bold sm:font-extrabold text-sm sm:text-lg px-5 py-2 sm:px-6 sm:py-2.5 rounded-full shadow-sm border border-green-200/80 dark:border-white/20 transition-all hover:scale-105 cursor-pointer mb-6">
+            <span><Heart className="w-5 sm:w-6 h-5 sm:h-6 fill-yellow-400 text-yellow-400" /></span>
+            <span className="tracking-wide">Testimonials</span>
           </div>
 
           {/* H2 Headline */}

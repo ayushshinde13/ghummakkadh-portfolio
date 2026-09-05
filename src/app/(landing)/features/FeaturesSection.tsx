@@ -104,9 +104,9 @@ export const FeaturesSection: React.FC = () => {
           {/* Left Column (6 Cols): Badge, Title, Subtitle, 4 Icons */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             {/* Top Badge Pill */}
-            <div className="hidden lg:inline-flex items-center gap-2 bg-slate-200/80 dark:bg-white/5 backdrop-blur-md border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white font-extrabold text-xs px-4 py-1.5 rounded-full shadow-sm mb-5 transition-colors">
-              <span className="text-[#4eb902] dark:text-[#57E600] text-sm"><Star className="w-4 h-4 fill-current" /></span>
-              <span>WHY CHOOSE US</span>
+            <div className="hidden lg:inline-flex items-center gap-2.5 sm:gap-3 bg-[#F5F9F6] dark:bg-white/10 text-[#1E293B] dark:text-white font-bold sm:font-extrabold text-sm sm:text-lg px-5 py-2 sm:px-6 sm:py-2.5 rounded-full shadow-sm border border-green-200/80 dark:border-white/20 transition-all hover:scale-105 cursor-pointer mb-5">
+              <span className="text-[#4eb902] dark:text-[#57E600]"><Star className="w-5 sm:w-6 h-5 sm:h-6 fill-current" /></span>
+              <span className="tracking-wide">Why Choose Us</span>
             </div>
 
             {/* H2 Title matching Screenshot exactly */}

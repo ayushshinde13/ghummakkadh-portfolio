@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { Container, Section, Card, Heading } from "@/components/common";
 import { FAQS } from "@/constants/faqs";
-import { SectionHeading } from "./SectionHeading";
-import { ChevronDown } from "lucide-react";
+import { HelpCircle, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 export const FAQ: React.FC = () => {
@@ -13,11 +12,18 @@ export const FAQ: React.FC = () => {
   return (
     <Section id="faq" className="bg-transparent">
       <Container>
-        <SectionHeading
-          badge="FAQ"
-          title="Frequently Asked Questions"
-          subtitle="Everything you need to know about booking rides with Ghumakkadh"
-        />
+        <div className="flex flex-col items-start lg:items-center text-left lg:text-center max-w-2xl mx-auto w-full mb-12">
+          <div className="inline-flex items-center gap-2.5 sm:gap-3 bg-[#F5F9F6] dark:bg-white/10 text-[#1E293B] dark:text-white font-bold sm:font-extrabold text-sm sm:text-lg px-5 py-2 sm:px-6 sm:py-2.5 rounded-full shadow-sm border border-green-200/80 dark:border-white/20 transition-all hover:scale-105 cursor-pointer mb-4">
+            <HelpCircle className="w-5 sm:w-6 h-5 sm:h-6 text-[#3b9e02] dark:text-[#57E600]" />
+            <span className="tracking-wide">FAQ</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight transition-colors mb-3">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-slate-600 dark:text-gray-300 text-base transition-colors">
+            Everything you need to know about booking rides with Ghumakkadh
+          </p>
+        </div>
         <div className="flex flex-col gap-4 max-w-3xl mx-auto">
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;

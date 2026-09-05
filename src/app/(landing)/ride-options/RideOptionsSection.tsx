@@ -74,9 +74,9 @@ export const RideOptionsSection: React.FC = () => {
         {/* Section Header matching Screenshot exactly */}
         <div className="flex flex-col items-start lg:items-center text-left lg:text-center max-w-2xl mx-auto w-full">
           {/* Badge Pill */}
-          <div className="inline-flex items-center gap-2 bg-[#F0FFEA] dark:bg-white/5 border border-transparent dark:border-white/10 text-[#1E293B] dark:text-white text-xs font-extrabold px-4 py-1.5 rounded-full shadow-sm mb-12 transition-colors">
-            <span className="text-[#3b9e02] dark:text-[#57E600]"><Users className="w-4 h-4" /></span>
-            <span>Ride for Everyone</span>
+          <div className="inline-flex items-center gap-2.5 sm:gap-3 bg-[#F5F9F6] dark:bg-white/10 text-[#1E293B] dark:text-white font-bold sm:font-extrabold text-sm sm:text-lg px-5 py-2 sm:px-6 sm:py-2.5 rounded-full shadow-sm border border-green-200/80 dark:border-white/20 transition-all hover:scale-105 cursor-pointer mb-12">
+            <span className="text-[#3b9e02] dark:text-[#57E600]"><Users className="w-5 sm:w-6 h-5 sm:h-6" /></span>
+            <span className="tracking-wide">Ride for Everyone</span>
           </div>
 
           {/* H2 Title */}

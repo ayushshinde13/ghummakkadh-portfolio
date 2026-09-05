@@ -6,12 +6,11 @@ export const CompanyBehindSection: React.FC = () => {
     <section className="w-full bg-[#FAF7F2] dark:bg-[#0B0F19] pt-4 pb-16 md:pt-6 md:pb-24 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* Top Header Badge */}
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <span className="h-[1px] w-6 bg-slate-300 dark:bg-gray-700"></span>
-          <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500 dark:text-gray-400">
-            BUILT BY
-          </span>
-          <span className="h-[1px] w-6 bg-slate-300 dark:bg-gray-700"></span>
+        <div className="flex items-center justify-center mb-6">
+          <div className="inline-flex items-center gap-2.5 sm:gap-3 bg-[#F5F9F6] dark:bg-white/10 text-[#1E293B] dark:text-white font-bold sm:font-extrabold text-sm sm:text-lg px-5 py-2 sm:px-6 sm:py-2.5 rounded-full shadow-sm border border-green-200/80 dark:border-white/20 transition-all hover:scale-105 cursor-pointer">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#4eb902] dark:bg-[#57E600]"></span>
+            <span className="tracking-wide">Built By</span>
+          </div>
         </div>
 
         {/* Section Heading */}

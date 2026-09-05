@@ -25,9 +25,9 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
 
             {/* Hero Badge */}
             {!hideBadge && (
-              <div className="inline-flex items-center gap-2 bg-green-100 dark:bg-[#F0FFEA] text-green-800 dark:text-green-700 font-bold text-[11px] px-3 py-1.5 rounded-full mb-6 uppercase tracking-wide">
-                <Car className="w-3.5 h-3.5" />
-                <span>Ride with Ghumakkadh</span>
+              <div className="inline-flex items-center gap-2.5 sm:gap-3 bg-[#F5F9F6] dark:bg-white/10 text-[#1E293B] dark:text-white font-bold sm:font-extrabold text-sm sm:text-lg px-5 py-2 sm:px-6 sm:py-2.5 rounded-full shadow-sm border border-green-200/80 dark:border-white/20 transition-all hover:scale-105 cursor-pointer mb-6">
+                <Car className="w-5 sm:w-6 h-5 sm:h-6 text-[#4eb902] dark:text-[#57E600]" />
+                <span className="tracking-wide">Ride with Ghumakkadh</span>
               </div>
             )}
 
@@ -81,7 +81,7 @@ export const RideSection: React.FC<RideSectionProps> = ({ hideBadge = false }) =
             </div>
 
             {/* Coupon Card */}
-            <div className="w-full max-w-[480px] mt-4 mx-auto xl:mx-0">
+            <div className="w-full max-w-[380px] sm:max-w-[410px] mt-4 mx-auto xl:mx-0">
               <img src="/images/Rider_img2.png" alt="Get 50% off on your first 2 rides!" className="w-full h-auto object-contain rounded-2xl shadow-sm" />
             </div>
           </div>
