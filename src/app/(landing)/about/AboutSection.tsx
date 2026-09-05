@@ -8,7 +8,7 @@ interface AboutSectionProps {
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ hideBadge = false }) => {
   return (
-    <section id="about" className="bg-slate-50 dark:bg-gradient-to-b dark:from-[#0A0E1A] dark:to-[#0D1220] text-slate-900 dark:text-white pt-6 md:pt-16 pb-20 overflow-hidden relative transition-colors duration-300">
+    <section id="about" className="bg-slate-50 dark:bg-gradient-to-b dark:from-[#0A0E1A] dark:to-[#0D1220] text-slate-900 dark:text-white pt-6 md:pt-16 pb-6 overflow-hidden relative transition-colors duration-300">
       <Container className="max-w-[1400px] mx-auto px-4 md:px-8">
         
         {/* Top Hero Section */}

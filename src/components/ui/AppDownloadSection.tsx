@@ -17,13 +17,11 @@ export const AppDownloadSection = () => {
       ),
       description: "Book cabs, auto, bikes and much more",
       icon: (
-        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-sm">
-          {/* Simple custom steering/wheel icon for Ride */}
-          <svg className="w-8 h-8 text-[#77FF00]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-             <circle cx="12" cy="12" r="10" />
-             <circle cx="12" cy="12" r="4" fill="currentColor" />
-          </svg>
-        </div>
+        <img
+          src="/images/ghum-icon.png"
+          alt="Ghumakkadh Ride Icon"
+          className="w-20 sm:w-24 h-20 sm:h-24 mb-6 object-contain"
+        />
       ),
       iosLink: "https://apps.apple.com/app/ghumakkadh-rider/id123456789",
       androidLink: "https://play.google.com/store/apps/details?id=com.ghumakkadh"
@@ -32,20 +30,16 @@ export const AppDownloadSection = () => {
       id: "drive",
       title: (
         <>
-          <span className="text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span> Drive
+          <span className="text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span> Partner
         </>
       ),
-      description: "Register as a driver to take rides, see your earnings and incentives",
+      description: "Register as a partner to take rides, see your earnings and incentives",
       icon: (
-        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-sm">
-           {/* Simple custom key/driver icon for Drive */}
-           <svg className="w-8 h-8 text-[#2563EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-             <circle cx="8" cy="15" r="4" />
-             <line x1="10.85" y1="12.15" x2="19" y2="4" />
-             <line x1="18" y1="5" x2="20" y2="7" />
-             <line x1="15" y1="8" x2="17" y2="10" />
-           </svg>
-        </div>
+        <img
+          src="/images/partner-logo.png"
+          alt="Ghumakkadh Partner Icon"
+          className="w-24 sm:w-28 h-24 sm:h-28 mb-6 object-contain"
+        />
       ),
       iosLink: "https://apps.apple.com/app/ghumakkadh-driver/id123456789",
       androidLink: "https://play.google.com/store/apps/details?id=com.ghumakkadh.partner"
@@ -92,7 +86,7 @@ export const AppDownloadSection = () => {
             </button>
             
             <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">
-              Get <span className="text-[#3b9e02] dark:text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span> {activeModal === "ride" ? "Ride" : "Drive"} app on
+              Get <span className="text-[#3b9e02] dark:text-[#77FF00]">Ghuma</span><span className="text-[#FF7700]">kkadh</span> {activeModal === "ride" ? "Ride" : "Partner"} app on
             </h3>
             <p className="text-slate-600 dark:text-gray-400 text-sm md:text-base mb-8 leading-relaxed transition-colors">
               Download the app today for a 100% mobile experience. Available on iOS and Android

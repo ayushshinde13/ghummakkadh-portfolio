@@ -164,18 +164,20 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* BOTTOM LEGAL BAR */}
-      <div className="w-full bg-[#080B12] py-5 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div className="text-zinc-400 text-xs sm:text-sm text-center lg:text-left">
-            © 2026 Ghumakkadh. All rights reserved.
-          </div>
-          <div className="flex items-center gap-3 sm:gap-6 text-zinc-400 text-xs sm:text-sm">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <span className="w-1 h-1 rounded-full bg-zinc-600"></span>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
-            <span className="w-1 h-1 rounded-full bg-zinc-600"></span>
-            <Link href="/shipping" className="hover:text-white transition-colors">Parcel Shipping Policy</Link>
+      {/* Copyright & Legal Entity */}
+      <div className="w-full bg-[#09090B] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="py-6 grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+            <p className="text-gray-500 text-xs sm:text-[13px] text-center md:text-left">
+              © 2026 Ghumakkadh. All Rights Reserved.
+            </p>
+            <p className="text-gray-500 text-xs sm:text-[13px] text-center">
+              Powered by{" "}
+              <span className="text-gray-400 font-medium">Hindustaan Innovations Private Limited.</span>
+            </p>
+            <p className="text-gray-500 text-xs sm:text-[13px] text-center md:text-right">
+              Raipur, Chhattisgarh – 492001, India
+            </p>
           </div>
         </div>
       </div>
