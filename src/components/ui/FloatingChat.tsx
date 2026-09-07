@@ -25,11 +25,8 @@ export function FloatingChat() {
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   
-  // Socket & Voice state
+  // Socket state
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [isRecording, setIsRecording] = useState(false);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const audioChunksRef = useRef<BlobPart[]>([]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -154,60 +151,6 @@ export function FloatingChat() {
 
     setInputValue("");
     setIsLoading(true);
-  };
-
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
-      mediaRecorderRef.current = mediaRecorder;
-      audioChunksRef.current = [];
-
-      mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          audioChunksRef.current.push(event.data);
-        }
-      };
-
-      mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        console.log("Recording stopped. Audio blob size:", audioBlob.size);
-        if (socket && audioBlob.size > 0) {
-          setIsLoading(true);
-          socket.emit("message", {
-            type: "audio",
-            payload: audioBlob,
-            voiceMode: true 
-          });
-        } else {
-          console.warn("Socket not connected or audio blob is empty");
-        }
-        // Stop all tracks to release mic
-        stream.getTracks().forEach(track => track.stop());
-      };
-
-      // Pass a timeslice to ensure data chunks are aggressively collected
-      mediaRecorder.start(250);
-      setIsRecording(true);
-    } catch (err) {
-      console.error("Mic access denied or error:", err);
-      alert("Microphone access is required or device not found.");
-    }
-  };
-
-  const stopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-    }
-  };
-
-  const toggleRecording = () => {
-    if (isRecording) {
-      stopRecording();
-    } else {
-      startRecording();
-    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -373,26 +316,9 @@ export function FloatingChat() {
                   />
                   <div className="flex items-center gap-0.5 text-[#1E293B] dark:text-zinc-200">
                     <button 
-                      onClick={toggleRecording}
-                      className={`transition-all p-2 rounded-full flex items-center justify-center ${isRecording ? 'bg-red-500 text-white animate-pulse' : 'text-[#1E293B] hover:bg-gray-100'}`} 
-                      title={isRecording ? "Stop Recording" : "Use Voice"}
-                    >
-                      {isRecording ? (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                          <rect x="6" y="6" width="12" height="12" rx="2" />
-                        </svg>
-                      ) : (
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                          <line x1="12" x2="12" y1="19" y2="22"/>
-                        </svg>
-                      )}
-                    </button>
-                    <button 
                       onClick={handleSendText}
                       disabled={!inputValue.trim() || isLoading}
-                      className={`transition-all flex items-center justify-center p-2 rounded-full ${(!inputValue.trim() && !isRecording) ? 'cursor-not-allowed text-gray-400' : 'text-[#1E293B] hover:scale-110 active:scale-95 hover:text-[#77FF00]'}`}
+                      className={`transition-all flex items-center justify-center p-2 rounded-full ${!inputValue.trim() ? 'cursor-not-allowed text-gray-400' : 'text-[#1E293B] hover:scale-110 active:scale-95 hover:text-[#77FF00]'}`}
                       title="Send Message"
                     >
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="-ml-0.5">
