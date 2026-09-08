@@ -112,6 +112,11 @@ export default function SystemHealthMonitoringPage() {
   // Filters for Failed Endpoint Logs
   const [statusFilter, setStatusFilter] = useState<"all" | "5xx" | "4xx">("all");
   const [searchLogTerm, setSearchLogTerm] = useState("");
+  const [logsPage, setLogsPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const totalLogPages = Math.ceil(errorLogs.length / itemsPerPage);
+  const paginatedLogs = errorLogs.slice((logsPage - 1) * itemsPerPage, logsPage * itemsPerPage);
 
   // Modals
   const [selectedService, setSelectedService] = useState<ServiceHealth | null>(null);
@@ -195,6 +200,10 @@ export default function SystemHealthMonitoringPage() {
     fetchErrorLogs();
   }, [fetchHealth, fetchErrorLogs]);
 
+  useEffect(() => {
+    setLogsPage(1);
+  }, [statusFilter, searchLogTerm]);
+
   // Auto-refresh interval (15s)
   useEffect(() => {
     if (!autoRefresh) return;
@@ -270,11 +279,6 @@ export default function SystemHealthMonitoringPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">System Health</span>
-          </nav>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)] flex items-center gap-2">
             <HeartPulse className="text-[var(--admin-primary)]" size={28} />
             API & System Health
@@ -575,8 +579,8 @@ export default function SystemHealthMonitoringPage() {
                         </td>
                       </tr>
                     ) : (
-                      errorLogs.map((log) => (
-                        <tr key={log.id} className="hover:bg-[var(--admin-border)]/50 transition-colors group">
+                      paginatedLogs.map((log, idx) => (
+                        <tr key={`${log.id}-${idx}`} className="hover:bg-[var(--admin-border)]/50 transition-colors group">
                           <td className="px-4 py-3.5">
                             <div className="flex items-center gap-2">
                               {getMethodBadge(log.method)}
@@ -619,6 +623,32 @@ export default function SystemHealthMonitoringPage() {
                     )}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Pagination Footer */}
+              <div className="p-4 border-t border-[var(--admin-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--admin-muted)]">
+                <div>
+                  Showing {errorLogs.length > 0 ? (logsPage - 1) * itemsPerPage + 1 : 0} to {Math.min(logsPage * itemsPerPage, errorLogs.length)} of {errorLogs.length} entries
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setLogsPage(prev => Math.max(prev - 1, 1))}
+                    disabled={logsPage === 1 || errorLogs.length === 0}
+                    className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Previous
+                  </button>
+                  <span className="font-medium text-[var(--admin-text)]">
+                    Page {errorLogs.length > 0 ? logsPage : 0} of {totalLogPages || 1}
+                  </span>
+                  <button
+                    onClick={() => setLogsPage(prev => Math.min(prev + 1, totalLogPages))}
+                    disabled={logsPage === totalLogPages || errorLogs.length === 0}
+                    className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             </div>
           </div>

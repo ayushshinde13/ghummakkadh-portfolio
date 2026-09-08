@@ -245,6 +245,17 @@ export default function PushNotificationsPage() {
   const [templateSearch, setTemplateSearch] = useState<string>("");
   const [showTemplateDrawer, setShowTemplateDrawer] = useState(false);
 
+  // Pagination states
+  const [historyPage, setHistoryPage] = useState(1);
+  const [schedulesPage, setSchedulesPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const totalHistoryPages = Math.ceil(history.length / itemsPerPage);
+  const paginatedHistory = history.slice((historyPage - 1) * itemsPerPage, historyPage * itemsPerPage);
+
+  const totalSchedulesPages = Math.ceil(schedules.length / itemsPerPage);
+  const paginatedSchedules = schedules.slice((schedulesPage - 1) * itemsPerPage, schedulesPage * itemsPerPage);
+
   const fetchHistory = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -395,11 +406,6 @@ export default function PushNotificationsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">Push Notifications</span>
-          </nav>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Push Notifications</h2>
           <p className="text-[var(--admin-muted)] mt-1">
             Broadcast targeted notifications, use audience-specific templates, or set automated recurring schedules.
@@ -506,8 +512,8 @@ export default function PushNotificationsPage() {
                     </td>
                   </tr>
                 ) : (
-                  history.map((row) => (
-                    <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
+                  paginatedHistory.map((row, idx) => (
+                    <tr key={`${row.id}-${idx}`} className="hover:bg-[var(--admin-border)] transition-colors group">
                       <td className="px-4 py-4">
                         <div className="flex flex-col">
                           <span className="font-semibold text-[var(--admin-text)]">{row.title}</span>
@@ -546,6 +552,32 @@ export default function PushNotificationsPage() {
               </tbody>
             </table>
           </div>
+
+          {/* History Pagination Footer */}
+          <div className="p-4 border-t border-[var(--admin-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--admin-muted)]">
+            <div>
+              Showing {history.length > 0 ? (historyPage - 1) * itemsPerPage + 1 : 0} to {Math.min(historyPage * itemsPerPage, history.length)} of {history.length} entries
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setHistoryPage(prev => Math.max(prev - 1, 1))}
+                disabled={historyPage === 1 || history.length === 0}
+                className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                Previous
+              </button>
+              <span className="font-medium text-[var(--admin-text)]">
+                Page {history.length > 0 ? historyPage : 0} of {totalHistoryPages || 1}
+              </span>
+              <button
+                onClick={() => setHistoryPage(prev => Math.min(prev + 1, totalHistoryPages))}
+                disabled={historyPage === totalHistoryPages || history.length === 0}
+                className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                Next
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -582,8 +614,8 @@ export default function PushNotificationsPage() {
                     </td>
                   </tr>
                 ) : (
-                  schedules.map((row) => (
-                    <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
+                  paginatedSchedules.map((row, idx) => (
+                    <tr key={`${row.id}-${idx}`} className="hover:bg-[var(--admin-border)] transition-colors group">
                       <td className="px-4 py-4">
                         <div className="flex flex-col">
                           <span className="font-semibold text-[var(--admin-text)]">{row.title}</span>
@@ -647,6 +679,32 @@ export default function PushNotificationsPage() {
                 )}
               </tbody>
             </table>
+          </div>
+
+          {/* Schedules Pagination Footer */}
+          <div className="p-4 border-t border-[var(--admin-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--admin-muted)]">
+            <div>
+              Showing {schedules.length > 0 ? (schedulesPage - 1) * itemsPerPage + 1 : 0} to {Math.min(schedulesPage * itemsPerPage, schedules.length)} of {schedules.length} entries
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setSchedulesPage(prev => Math.max(prev - 1, 1))}
+                disabled={schedulesPage === 1 || schedules.length === 0}
+                className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                Previous
+              </button>
+              <span className="font-medium text-[var(--admin-text)]">
+                Page {schedules.length > 0 ? schedulesPage : 0} of {totalSchedulesPages || 1}
+              </span>
+              <button
+                onClick={() => setSchedulesPage(prev => Math.min(prev + 1, totalSchedulesPages))}
+                disabled={schedulesPage === totalSchedulesPages || schedules.length === 0}
+                className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       )}

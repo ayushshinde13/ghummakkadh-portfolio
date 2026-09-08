@@ -31,8 +31,14 @@ export default function PromotionsPage() {
     }
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(promotions.length / itemsPerPage);
+  const paginatedPromotions = promotions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
   useEffect(() => {
     fetchPromotions();
+    setCurrentPage(1);
   }, [searchQuery, statusFilter]);
 
   const handleDisable = async (id: string) => {
@@ -104,11 +110,6 @@ export default function PromotionsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">Promotions</span>
-          </nav>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Promotions & Campaigns</h2>
           <p className="text-[var(--admin-muted)] mt-1">
             Manage discount codes, track usage, and create new marketing campaigns.
@@ -177,8 +178,8 @@ export default function PromotionsPage() {
                   </td>
                 </tr>
               ) : (
-                promotions.map((row) => (
-                  <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
+                paginatedPromotions.map((row, idx) => (
+                  <tr key={`${row.id}-${idx}`} className="hover:bg-[var(--admin-border)] transition-colors group">
                     <td className="px-4 py-4">
                       <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-[var(--admin-border)] border border-[var(--admin-border)] font-mono text-sm text-[var(--admin-primary)] font-bold tracking-wider">
                         <Percent size={14} className="text-[var(--admin-muted)]" />
@@ -247,6 +248,32 @@ export default function PromotionsPage() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Pagination Footer */}
+        <div className="p-4 border-t border-[var(--admin-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--admin-muted)]">
+          <div>
+            Showing {promotions.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0} to {Math.min(currentPage * itemsPerPage, promotions.length)} of {promotions.length} entries
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1 || promotions.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Previous
+            </button>
+            <span className="font-medium text-[var(--admin-text)]">
+              Page {promotions.length > 0 ? currentPage : 0} of {totalPages || 1}
+            </span>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages || promotions.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 

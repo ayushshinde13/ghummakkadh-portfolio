@@ -45,17 +45,29 @@ export default function SupportTicketsPage() {
     fetchTickets();
   }, []);
 
-  const filteredTickets = tickets.filter(t => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const filteredTickets = tickets.filter(ticket => {
     const query = searchQuery.toLowerCase();
-    const matchesSearch = t.id.toLowerCase().includes(query) || t.user.toLowerCase().includes(query) || t.subject.toLowerCase().includes(query);
-    const matchesPriority = priorityFilter === "all" || t.priority.toLowerCase() === priorityFilter;
-    const matchesStatus = statusFilter === "all" || (statusFilter === "in_progress" ? t.status === "In Progress" : t.status.toLowerCase() === statusFilter);
+    const matchesSearch = ticket.id.toLowerCase().includes(query) || 
+                          ticket.user.toLowerCase().includes(query) || 
+                          ticket.subject.toLowerCase().includes(query);
+    const matchesPriority = priorityFilter === "all" || ticket.priority.toLowerCase() === priorityFilter;
+    const matchesStatus = statusFilter === "all" || (statusFilter === "in_progress" ? ticket.status === "In Progress" : ticket.status.toLowerCase() === statusFilter);
     return matchesSearch && matchesPriority && matchesStatus;
   });
 
+  const totalPages = Math.ceil(filteredTickets.length / itemsPerPage);
+  const paginatedTickets = filteredTickets.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, statusFilter, priorityFilter]);
+
   const handleCloseTicket = async (id: string) => {
     try {
-      await api.put(`/admin/support/tickets/${id}/resolve`, { resolution: "Closed via admin dashboard." });
+      await api.put(`/admin/support/tickets/${id}/close`);
       fetchTickets();
     } catch (error) {
       console.error("Failed to resolve ticket", error);
@@ -107,11 +119,6 @@ export default function SupportTicketsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">Support Tickets</span>
-          </nav>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Support Tickets</h2>
           <p className="text-[var(--admin-muted)] mt-1">
             Manage and respond to user technical issues and general inquiries.
@@ -199,8 +206,8 @@ export default function SupportTicketsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {filteredTickets.map((row) => (
-                <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
+              {paginatedTickets.map((row, idx) => (
+                <tr key={`${row.id}-${idx}`} className="hover:bg-[var(--admin-border)] transition-colors group">
                   <td className="px-4 py-4">
                     <div className="font-medium text-[var(--admin-text)]">{row.id}</div>
                     <div className="text-xs text-[var(--admin-muted)] mt-0.5">{row.createdOn}</div>
@@ -265,7 +272,7 @@ export default function SupportTicketsPage() {
                 </tr>
               ))}
               
-              {filteredTickets.length === 0 && (
+              {paginatedTickets.length === 0 && (
                 <tr>
                   <td colSpan={7} className="px-4 py-12 text-center text-[var(--admin-muted)]">
                     No tickets found matching your criteria.
@@ -274,6 +281,32 @@ export default function SupportTicketsPage() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Pagination Footer */}
+        <div className="p-4 border-t border-[var(--admin-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--admin-muted)]">
+          <div>
+            Showing {filteredTickets.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0} to {Math.min(currentPage * itemsPerPage, filteredTickets.length)} of {filteredTickets.length} entries
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1 || filteredTickets.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Previous
+            </button>
+            <span className="font-medium text-[var(--admin-text)]">
+              Page {filteredTickets.length > 0 ? currentPage : 0} of {totalPages || 1}
+            </span>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages || filteredTickets.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 

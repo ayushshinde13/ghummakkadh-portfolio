@@ -66,18 +66,18 @@ export const Navbar: React.FC = () => {
           {/* Theme Toggle Button (Desktop & Mobile) */}
           <button
             onClick={toggleTheme}
-            className="p-2 sm:p-2.5 rounded-full border border-slate-200 dark:border-white/20 bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-yellow-400 hover:bg-slate-200 dark:hover:bg-white/10 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-sm"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-slate-100 dark:bg-[#0B101D] text-slate-700 dark:text-[#FBBF24] hover:bg-slate-200 dark:hover:bg-[#131B2E] hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-sm active:scale-95 shrink-0"
             aria-label={mounted ? (theme === "dark" ? "Switch to Light Mode" : "Switch to Night Mode") : "Toggle theme"}
             title={mounted ? (theme === "dark" ? "Switch to Light Mode" : "Switch to Night Mode") : "Toggle theme"}
           >
             {mounted ? (
               theme === "dark" ? (
-                <Sun className="w-4 h-4 text-yellow-400 transition-transform duration-300 rotate-0 hover:rotate-45" />
+                <Sun className="w-5 h-5 text-[#FBBF24] stroke-[2.2] transition-transform duration-300 hover:rotate-45" />
               ) : (
-                <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300 rotate-0 hover:-rotate-12" />
+                <Moon className="w-5 h-5 text-slate-700 stroke-[2.2] transition-transform duration-300 hover:-rotate-12" />
               )
             ) : (
-              <span className="w-4 h-4 block" />
+              <span className="w-5 h-5 block" />
             )}
           </button>
 

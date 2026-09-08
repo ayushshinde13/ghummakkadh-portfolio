@@ -30,6 +30,7 @@ export default function AdminLogin() {
       const resultData = response.data || response;
       const user = resultData.user || resultData.data?.user;
       const accessToken = resultData.tokens?.accessToken || resultData.data?.tokens?.accessToken;
+      const refreshToken = resultData.tokens?.refreshToken || resultData.data?.tokens?.refreshToken;
 
       if (user && (!user.roles || !user.roles.includes("ADMIN"))) {
         throw new Error("Unauthorized: Access restricted to Administrators only.");
@@ -42,10 +43,12 @@ export default function AdminLogin() {
       if (accessToken) {
         localStorage.setItem("admin_access_token", accessToken);
       }
+      if (refreshToken) {
+        localStorage.setItem("admin_refresh_token", refreshToken);
+      }
 
-      // Set the client-side cookie hint for ProtectedRoute
-      // The actual secure accessToken is set as an httpOnly cookie by the backend response
-      document.cookie = "admin_token=true; path=/";
+      // Set the client-side cookie hint for ProtectedRoute with 7 days lifetime
+      document.cookie = "admin_token=true; path=/; max-age=604800; SameSite=Lax";
       
       router.push("/admin/dashboard");
     } catch (err: any) {

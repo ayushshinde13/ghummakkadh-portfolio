@@ -288,12 +288,22 @@ export default function PricingPage() {
   const simResult = calculateSimulatedFare();
 
   // Filtered Cities for City-Wise View
+  const [cityPage, setCityPage] = useState(1);
+  const itemsPerCityPage = 5;
+
   const filteredCities = cities.filter((c) => {
     const matchesSearch = c.name.toLowerCase().includes(citySearchQuery.toLowerCase()) ||
       (c.state && c.state.toLowerCase().includes(citySearchQuery.toLowerCase()));
     if (selectedCityTab === "all") return matchesSearch;
     return matchesSearch && c.id === selectedCityTab;
   });
+
+  const totalCityPages = Math.ceil(filteredCities.length / itemsPerCityPage);
+  const paginatedCities = filteredCities.slice((cityPage - 1) * itemsPerCityPage, cityPage * itemsPerCityPage);
+
+  useEffect(() => {
+    setCityPage(1);
+  }, [selectedCityTab, citySearchQuery]);
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 font-sans min-h-full">
@@ -618,12 +628,12 @@ export default function PricingPage() {
               </button>
             </div>
           ) : (
-            filteredCities.map((city) => {
+            paginatedCities.map((city, idx) => {
               const cityRules = cityOverrides.filter((r) => r.cityId === city.id);
 
               return (
                 <div
-                  key={city.id}
+                  key={`${city.id}-${idx}`}
                   className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] overflow-hidden shadow-sm"
                 >
                   {/* City Header */}
@@ -764,6 +774,34 @@ export default function PricingPage() {
                 </div>
               );
             })
+          )}
+
+          {/* City Pagination Controls */}
+          {filteredCities.length > 0 && (
+            <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--admin-muted)]">
+              <div>
+                Showing {(cityPage - 1) * itemsPerCityPage + 1} to {Math.min(cityPage * itemsPerCityPage, filteredCities.length)} of {filteredCities.length} operational cities
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setCityPage(prev => Math.max(prev - 1, 1))}
+                  disabled={cityPage === 1}
+                  className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                >
+                  Previous
+                </button>
+                <span className="font-medium text-[var(--admin-text)]">
+                  Page {cityPage} of {totalCityPages || 1}
+                </span>
+                <button
+                  onClick={() => setCityPage(prev => Math.min(prev + 1, totalCityPages))}
+                  disabled={cityPage === totalCityPages}
+                  className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
           )}
         </div>
       )}

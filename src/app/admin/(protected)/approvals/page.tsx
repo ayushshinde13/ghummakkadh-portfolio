@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 import { api } from "@/lib/api";
 import { 
   FileText, Clock, CheckCircle, XCircle, Search, 
-  SlidersHorizontal, ChevronDown, ChevronUp, MoreHorizontal,
-  X, User, Mail
+  ChevronDown, ChevronUp, MoreHorizontal,
+  X, User, Eye
 } from "lucide-react";
 
-type ApprovalStatus = "Pending" | "Approved" | "Rejected";
+type ApprovalStatus = "Pending" | "Approved" | "Rejected" | "N/A";
 type VerificationStatus = "Verified" | "Pending" | "Rejected";
 
 interface Application {
@@ -24,11 +24,9 @@ interface Application {
 }
 
 export default function ApprovalsPage() {
-  const [activeTab, setActiveTab] = useState<"customers" | "drivers">("customers");
   const [currentPage, setCurrentPage] = useState(1);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [selectedViewDetailsId, setSelectedViewDetailsId] = useState<string | null>(null);
-  const [selectedContactUserId, setSelectedContactUserId] = useState<string | null>(null);
 
   const [dossier, setDossier] = useState<any>(null);
   const [isDossierLoading, setIsDossierLoading] = useState(false);
@@ -75,7 +73,7 @@ export default function ApprovalsPage() {
   const [data, setData] = useState<Application[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchDrivers = async () => {
+  const fetchApplications = async () => {
     try {
       setIsLoading(true);
       
@@ -91,23 +89,24 @@ export default function ApprovalsPage() {
         id: d.id,
         name: d.user?.name || "Unknown",
         phone: d.user?.phone || "Unknown",
-        city: "Unknown", 
+        city: d.user?.city || "Unknown", 
         appliedOn: new Date(d.createdAt).toLocaleString(),
         verification: d.isVerified ? "Verified" : "Pending",
         approval: d.isVerified ? "Approved" : "Pending",
         role: "Driver",
-        vehicle: d.vehicles?.[0]?.vehicleType?.name || "None"
+        vehicle: d.vehicles?.[0]?.vehicleType?.name || d.vehicles?.[0]?.model || "None"
       }));
 
       const formattedRiders: Application[] = riders.map((r: any) => ({
         id: r.id,
         name: r.name || "Unknown",
         phone: r.phone || "Unknown",
-        city: "Unknown",
+        city: r.city || "Unknown",
         appliedOn: new Date(r.createdAt).toLocaleString(),
-        verification: r.isPhoneVerified ? "Verified" : "Pending",
-        approval: r.status === "ACTIVE" ? "Approved" : (r.status === "SUSPENDED" || r.status === "BLOCKED" ? "Rejected" : "Pending"),
+        verification: "Verified",
+        approval: "N/A",
         role: "Rider",
+        vehicle: "—"
       }));
 
       setData([...formattedDrivers, ...formattedRiders]);
@@ -119,7 +118,7 @@ export default function ApprovalsPage() {
   };
 
   useEffect(() => {
-    fetchDrivers();
+    fetchApplications();
   }, []);
 
   const handleApprove = async (id: string) => {
@@ -127,10 +126,8 @@ export default function ApprovalsPage() {
       const app = data.find(item => item.id === id);
       if (app?.role === "Driver") {
         await api.put(`/admin/approve/drivers/${id}/verify`, { isVerified: true });
-      } else if (app?.role === "Rider") {
-        await api.put(`/admin/users/${id}/status`, { status: "ACTIVE", reason: "Approved via dashboard" });
+        fetchApplications(); 
       }
-      fetchDrivers(); 
     } catch (error: any) {
       console.error("Approval failed", error);
       alert(error.message || "Failed to approve. Make sure all mandatory documents are approved first.");
@@ -142,10 +139,8 @@ export default function ApprovalsPage() {
       const app = data.find(item => item.id === id);
       if (app?.role === "Driver") {
         await api.put(`/admin/approve/drivers/${id}/verify`, { isVerified: false });
-      } else if (app?.role === "Rider") {
-        await api.put(`/admin/users/${id}/status`, { status: "SUSPENDED", reason: "Rejected via dashboard" });
+        fetchApplications();
       }
-      fetchDrivers();
     } catch (error) {
       console.error("Rejection failed", error);
       alert("Failed to reject");
@@ -154,18 +149,17 @@ export default function ApprovalsPage() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-  const [cityFilter, setCityFilter] = useState("all");
-  const [verificationFilter, setVerificationFilter] = useState("all");
+  const [roleFilter, setRoleFilter] = useState("all");
 
   const filteredData = data.filter(d => {
-    const matchesTab = activeTab === "customers" ? d.role === "Rider" : d.role === "Driver";
-    const matchesSearch = d.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          d.id.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter === "all" || d.approval.toLowerCase() === statusFilter;
-    const matchesCity = cityFilter === "all" || d.city.toLowerCase() === cityFilter;
-    const matchesVerification = verificationFilter === "all" || d.verification.toLowerCase() === verificationFilter;
+    const query = searchQuery.toLowerCase();
+    const matchesSearch = d.name.toLowerCase().includes(query) || 
+                          d.id.toLowerCase().includes(query) ||
+                          d.phone.toLowerCase().includes(query);
+    const matchesStatus = statusFilter === "all" || (d.role === "Driver" && d.approval.toLowerCase() === statusFilter.toLowerCase());
+    const matchesRole = roleFilter === "all" || d.role.toLowerCase() === roleFilter.toLowerCase();
     
-    return matchesTab && matchesSearch && matchesStatus && matchesCity && matchesVerification;
+    return matchesSearch && matchesStatus && matchesRole;
   });
   
   // Pagination logic (Mock)
@@ -192,38 +186,10 @@ export default function ApprovalsPage() {
       {/* 1. Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">Approvals</span>
-          </nav>
-          <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Driver & Rider Registrations</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Driver Approvals</h2>
           <p className="text-[var(--admin-muted)] mt-1">
-            Review and manage driver and rider onboarding applications.
+            Review and manage driver onboarding applications, documents, and vehicle verification.
           </p>
-        </div>
-        
-        {/* Pill-style Tabs */}
-        <div className="inline-flex items-center rounded-full border border-[var(--admin-border)] bg-[var(--admin-card)] p-1">
-          <button 
-            onClick={() => { setActiveTab("customers"); setCurrentPage(1); }}
-            className={`py-3 px-4 rounded-full font-medium text-sm transition-colors ${
-              activeTab === "customers"
-                ? "bg-[var(--admin-background)] text-[var(--admin-text)] shadow-sm"
-                : "text-[var(--admin-muted)] hover:text-[var(--admin-text)]"
-            }`}
-          >
-            Customers (Riders)
-          </button>
-          <button 
-            onClick={() => { setActiveTab("drivers"); setCurrentPage(1); }}
-            className={`py-3 px-4 rounded-full font-medium text-sm transition-colors ${
-              activeTab === "drivers"
-                ? "bg-[var(--admin-background)] text-[var(--admin-text)] shadow-sm"
-                : "text-[var(--admin-muted)] hover:text-[var(--admin-text)]"
-            }`}
-          >          Drivers
-          </button>
         </div>
       </div>
 
@@ -239,26 +205,26 @@ export default function ApprovalsPage() {
         
         <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Pending Review</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Pending Driver Approvals</span>
             <div className="p-2 rounded-md bg-amber-500/10"><Clock size={16} className="text-amber-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-amber-500">{data.filter(d => d.approval === "Pending").length}</span>
+          <span className="text-3xl font-bold text-amber-500">{data.filter(d => d.role === "Driver" && d.approval === "Pending").length}</span>
         </div>
 
         <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Approved</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Approved Drivers</span>
             <div className="p-2 rounded-md bg-[var(--admin-primary)]/10"><CheckCircle size={16} className="text-[var(--admin-primary)]" /></div>
           </div>
-          <span className="text-3xl font-bold text-[var(--admin-primary)]">{data.filter(d => d.approval === "Approved").length}</span>
+          <span className="text-3xl font-bold text-[var(--admin-primary)]">{data.filter(d => d.role === "Driver" && d.approval === "Approved").length}</span>
         </div>
 
         <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Rejected</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)]">Rejected Drivers</span>
             <div className="p-2 rounded-md bg-red-500/10"><XCircle size={16} className="text-red-500" /></div>
           </div>
-          <span className="text-3xl font-bold text-red-500">{data.filter(d => d.approval === "Rejected").length}</span>
+          <span className="text-3xl font-bold text-red-500">{data.filter(d => d.role === "Driver" && d.approval === "Rejected").length}</span>
         </div>
       </div>
 
@@ -266,7 +232,7 @@ export default function ApprovalsPage() {
       <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] shadow-sm overflow-hidden flex flex-col">
         {/* Card Header */}
         <div className="p-6 border-b border-[var(--admin-border)] flex items-center justify-between">
-          <h3 className="text-lg font-bold text-[var(--admin-text)] tracking-tight">All Applications</h3>
+          <h3 className="text-lg font-bold text-[var(--admin-text)] tracking-tight">Applications & Registrations</h3>
           <span className="text-sm font-medium text-[var(--admin-muted)]">{filteredData.length} results</span>
         </div>
 
@@ -278,41 +244,40 @@ export default function ApprovalsPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search customer or driver..."
+              placeholder="Search name, ID, or phone..."
               className="w-full h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-md pl-9 pr-4 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
             />
           </div>
           
           <select 
+            value={roleFilter}
+            onChange={(e) => {
+              const selected = e.target.value;
+              setRoleFilter(selected);
+              if (selected === "rider") {
+                setStatusFilter("all");
+              }
+            }}
+            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-text)] outline-none focus:border-[var(--admin-primary)]/50 cursor-pointer"
+          >
+            <option value="all">All Users</option>
+            <option value="rider">Rider</option>
+            <option value="driver">Driver</option>
+          </select>
+
+          <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
+            disabled={roleFilter === "rider"}
+            className={`h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm outline-none transition-all ${
+              roleFilter === "rider"
+                ? "opacity-50 cursor-not-allowed text-[var(--admin-muted)]"
+                : "text-[var(--admin-text)] focus:border-[var(--admin-primary)]/50 cursor-pointer"
+            }`}
           >
-            <option value="all">Status: All</option>
+            <option value="all">{roleFilter === "rider" ? "Approval: N/A (Riders)" : "Approval: All"}</option>
             <option value="pending">Pending</option>
             <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-          </select>
-
-          <select 
-            value={cityFilter}
-            onChange={(e) => setCityFilter(e.target.value)}
-            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
-          >
-            <option value="all">City: All</option>
-            <option value="raipur">Raipur</option>
-            <option value="bhilai">Bhilai</option>
-            <option value="bilaspur">Bilaspur</option>
-          </select>
-
-          <select 
-            value={verificationFilter}
-            onChange={(e) => setVerificationFilter(e.target.value)}
-            className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none focus:border-[var(--admin-primary)]/50"
-          >
-            <option value="all">Verification: All</option>
-            <option value="verified">Verified</option>
-            <option value="pending">Pending</option>
             <option value="rejected">Rejected</option>
           </select>
 
@@ -321,11 +286,6 @@ export default function ApprovalsPage() {
             <span className="text-[var(--admin-muted)] text-sm">to</span>
             <input type="date" className="h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-md px-3 text-sm text-[var(--admin-muted)] outline-none [color-scheme:dark]" />
           </div>
-
-          <button className="ml-auto flex items-center gap-2 h-9 px-3 rounded-md border border-[var(--admin-border)] bg-[var(--admin-border)] text-sm font-medium text-[var(--admin-text)] hover:bg-[var(--admin-border)] transition-colors">
-            <SlidersHorizontal size={14} />
-            Columns
-          </button>
         </div>
 
         {/* Data Table */}
@@ -343,13 +303,14 @@ export default function ApprovalsPage() {
                   <div className="flex items-center gap-1">Role <ChevronDown size={14} /></div>
                 </th>
                 <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
+                  <div className="flex items-center gap-1">Contact <ChevronDown size={14} /></div>
+                </th>
+                <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
+                  <div className="flex items-center gap-1">Vehicle <ChevronDown size={14} /></div>
+                </th>
+                <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
                   <div className="flex items-center gap-1">City <ChevronDown size={14} /></div>
                 </th>
-                {activeTab === "drivers" && (
-                  <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
-                    <div className="flex items-center gap-1">Vehicle <ChevronDown size={14} /></div>
-                  </th>
-                )}
                 <th className="px-4 py-3 font-medium cursor-pointer hover:text-[var(--admin-text)]">
                   <div className="flex items-center gap-1">Applied On <ChevronDown size={14} /></div>
                 </th>
@@ -372,11 +333,16 @@ export default function ApprovalsPage() {
                     <div className="font-medium text-[var(--admin-text)]">{row.name}</div>
                     <div className="text-xs text-[var(--admin-muted)] mt-0.5 font-mono">{row.id}</div>
                   </td>
-                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.role}</td>
+                  <td className="px-4 py-4">
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold ${
+                      row.role === "Driver" ? "bg-blue-500/10 text-blue-400 border border-blue-500/20" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                    }`}>
+                      {row.role}
+                    </span>
+                  </td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.phone}</td>
+                  <td className="px-4 py-4 text-[var(--admin-muted)]">{row.vehicle}</td>
                   <td className="px-4 py-4 text-[var(--admin-muted)]">{row.city}</td>
-                  {activeTab === "drivers" && (
-                    <td className="px-4 py-4 text-[var(--admin-muted)]">{row.vehicle}</td>
-                  )}
                   <td className="px-4 py-4 text-[var(--admin-muted)]">{row.appliedOn}</td>
                   <td className="px-4 py-4">
                     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${getBadgeColors(row.verification)}`}>
@@ -384,13 +350,17 @@ export default function ApprovalsPage() {
                     </span>
                   </td>
                   <td className="px-4 py-4">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${getBadgeColors(row.approval)}`}>
-                      {row.approval}
-                    </span>
+                    {row.role === "Driver" ? (
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${getBadgeColors(row.approval)}`}>
+                        {row.approval}
+                      </span>
+                    ) : (
+                      <span className="text-xs text-[var(--admin-muted)]">—</span>
+                    )}
                   </td>
                   <td className="px-4 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      {row.approval === "Pending" && (
+                      {row.role === "Driver" && row.approval === "Pending" && (
                         <>
                           <button 
                             onClick={() => handleApprove(row.id)}
@@ -422,18 +392,13 @@ export default function ApprovalsPage() {
                         {openMenuId === row.id && (
                           <>
                             <div className="fixed inset-0 z-30" onClick={() => setOpenMenuId(null)}></div>
-                            <div className="absolute right-0 top-full mt-1 w-32 bg-[#1A1A1A] border border-[var(--admin-border)] rounded-md shadow-lg z-40 py-1 overflow-hidden animate-in fade-in zoom-in-95">
+                            <div className="absolute right-0 top-full mt-1 w-36 bg-white dark:bg-[#131B2E] border border-slate-200 dark:border-white/10 rounded-lg shadow-xl z-40 py-1.5 overflow-hidden animate-in fade-in zoom-in-95">
                               <button 
                                 onClick={() => { setOpenMenuId(null); setSelectedViewDetailsId(row.id); }}
-                                className="w-full text-left px-3 py-1.5 text-xs text-[var(--admin-muted)] hover:bg-[var(--admin-border)] hover:text-[var(--admin-text)] transition-colors"
+                                className="w-full text-left px-3.5 py-2 text-xs font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2"
                               >
-                                View Details
-                              </button>
-                              <button 
-                                onClick={() => { setOpenMenuId(null); setSelectedContactUserId(row.id); }}
-                                className="w-full text-left px-3 py-1.5 text-xs text-[var(--admin-muted)] hover:bg-[var(--admin-border)] hover:text-[var(--admin-text)] transition-colors"
-                              >
-                                Contact User
+                                <Eye size={14} className="text-slate-500 dark:text-slate-400" />
+                                <span>View Details</span>
                               </button>
                             </div>
                           </>
@@ -592,57 +557,6 @@ export default function ApprovalsPage() {
               >
                 Close
               </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Contact User Modal Overlay */}
-      {selectedContactUserId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-border)] shrink-0">
-              <h3 className="text-[var(--admin-text)] font-bold tracking-tight">Contact User</h3>
-              <button 
-                onClick={() => setSelectedContactUserId(null)}
-                className="p-2 rounded-full hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            
-            <div className="p-6 bg-[var(--admin-background)] flex flex-col">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center shrink-0">
-                  <User size={24} className="text-blue-500" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-[var(--admin-text)] leading-none">
-                    {data.find(u => u.id === selectedContactUserId)?.name}
-                  </h4>
-                  <span className="text-sm text-[var(--admin-muted)] mt-1 block">
-                    {data.find(u => u.id === selectedContactUserId)?.phone}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-[var(--admin-muted)] mb-1.5">Send a Message (Mock)</label>
-                  <textarea 
-                    rows={4}
-                    className="w-full bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-lg p-3 text-sm text-[var(--admin-text)] placeholder:text-gray-600 focus:outline-none focus:border-[var(--admin-primary)]/50 focus:ring-1 focus:ring-[var(--admin-primary)]/30 transition-all resize-none"
-                    placeholder="Type your message here..."
-                  ></textarea>
-                </div>
-                <button 
-                  onClick={() => setSelectedContactUserId(null)}
-                  className="w-full bg-[var(--admin-primary)] hover:bg-[#66E000] text-[#0A0E1A] font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(126,211,33,0.3)]"
-                >
-                  <Mail size={16} />
-                  Send Message
-                </button>
-              </div>
             </div>
           </div>
         </div>

@@ -47,12 +47,22 @@ export default function PayoutsPage() {
     fetchPayouts();
   }, []);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
   const filteredPayouts = payouts.filter(payout => {
     const matchesSearch = payout.driver.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           payout.id.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === "all" || payout.status.toLowerCase() === statusFilter;
     return matchesSearch && matchesStatus;
   });
+
+  const totalPages = Math.ceil(filteredPayouts.length / itemsPerPage);
+  const paginatedPayouts = filteredPayouts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, statusFilter]);
 
   const handleProcessSubmit = async () => {
     if (!selectedPayout || !referenceNumber) return;
@@ -95,11 +105,6 @@ export default function PayoutsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">Payouts</span>
-          </nav>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Driver Payouts</h2>
           <p className="text-[var(--admin-muted)] mt-1">
             Manage settlements, review driver earnings, and process pending payments.
@@ -175,8 +180,8 @@ export default function PayoutsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {filteredPayouts.map((row) => (
-                <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
+              {paginatedPayouts.map((row, idx) => (
+                <tr key={`${row.id || "payout"}-${idx}`} className="hover:bg-[var(--admin-border)] transition-colors group">
                   <td className="px-4 py-4">
                     <div className="font-medium text-[var(--admin-text)]">{row.driver}</div>
                     <div className="text-xs text-[var(--admin-muted)] font-mono mt-0.5">{row.id}</div>
@@ -236,7 +241,7 @@ export default function PayoutsPage() {
                 </tr>
               ))}
               
-              {filteredPayouts.length === 0 && (
+              {paginatedPayouts.length === 0 && (
                 <tr>
                   <td colSpan={6} className="px-4 py-12 text-center text-[var(--admin-muted)]">
                     No payouts found matching your search.
@@ -245,6 +250,32 @@ export default function PayoutsPage() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-card)] flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-[var(--admin-muted)]">
+          <span>
+            Showing <span className="font-medium text-[var(--admin-text)]">{(currentPage - 1) * itemsPerPage + (paginatedPayouts.length > 0 ? 1 : 0)}</span> to <span className="font-medium text-[var(--admin-text)]">{(currentPage - 1) * itemsPerPage + paginatedPayouts.length}</span> of <span className="font-medium text-[var(--admin-text)]">{filteredPayouts.length}</span> payouts
+          </span>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="px-3 py-1.5 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium"
+            >
+              Previous
+            </button>
+            <span className="text-xs text-[var(--admin-muted)] px-1">
+              Page <span className="font-semibold text-[var(--admin-text)]">{currentPage}</span> of <span className="font-semibold text-[var(--admin-text)]">{totalPages || 1}</span>
+            </span>
+            <button 
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages || totalPages === 0}
+              className="px-3 py-1.5 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 

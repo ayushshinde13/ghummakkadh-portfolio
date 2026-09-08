@@ -45,12 +45,22 @@ export default function ComplaintsPage() {
     fetchComplaints();
   }, []);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
   const filteredComplaints = complaints.filter(c => {
     const query = searchQuery.toLowerCase();
     const matchesSearch = c.id.toLowerCase().includes(query) || c.raisedByName.toLowerCase().includes(query) || c.against.toLowerCase().includes(query);
     const matchesStatus = statusFilter === "all" || (statusFilter === "in_progress" ? c.status === "In Progress" : c.status.toLowerCase() === statusFilter);
     return matchesSearch && matchesStatus;
   });
+
+  const totalPages = Math.ceil(filteredComplaints.length / itemsPerPage);
+  const paginatedComplaints = filteredComplaints.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, statusFilter]);
 
   const handleResolve = async (id: string) => {
     try {
@@ -101,11 +111,6 @@ export default function ComplaintsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">Complaints</span>
-          </nav>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Disputes & Complaints</h2>
           <p className="text-[var(--admin-muted)] mt-1">
             Review and resolve issues raised by customers and drivers.
@@ -154,8 +159,8 @@ export default function ComplaintsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {filteredComplaints.map((row) => (
-                <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
+              {paginatedComplaints.map((row, idx) => (
+                <tr key={`${row.id || "complaint"}-${idx}`} className="hover:bg-[var(--admin-border)] transition-colors group">
                   <td className="px-4 py-4">
                     <div className="font-medium text-[var(--admin-text)]">{row.id}</div>
                     <div className="text-xs text-[var(--admin-muted)] mt-0.5">{row.date}</div>
@@ -216,7 +221,7 @@ export default function ComplaintsPage() {
                 </tr>
               ))}
               
-              {filteredComplaints.length === 0 && (
+              {paginatedComplaints.length === 0 && (
                 <tr>
                   <td colSpan={6} className="px-4 py-12 text-center text-[var(--admin-muted)]">
                     No complaints found matching your criteria.
@@ -225,6 +230,32 @@ export default function ComplaintsPage() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-card)] flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-[var(--admin-muted)]">
+          <span>
+            Showing <span className="font-medium text-[var(--admin-text)]">{(currentPage - 1) * itemsPerPage + (paginatedComplaints.length > 0 ? 1 : 0)}</span> to <span className="font-medium text-[var(--admin-text)]">{(currentPage - 1) * itemsPerPage + paginatedComplaints.length}</span> of <span className="font-medium text-[var(--admin-text)]">{filteredComplaints.length}</span> complaints
+          </span>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="px-3 py-1.5 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium"
+            >
+              Previous
+            </button>
+            <span className="text-xs text-[var(--admin-muted)] px-1">
+              Page <span className="font-semibold text-[var(--admin-text)]">{currentPage}</span> of <span className="font-semibold text-[var(--admin-text)]">{totalPages || 1}</span>
+            </span>
+            <button 
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages || totalPages === 0}
+              className="px-3 py-1.5 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 

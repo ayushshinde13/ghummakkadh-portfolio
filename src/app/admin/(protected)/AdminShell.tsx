@@ -28,7 +28,9 @@ import {
   LogOut,
   Megaphone,
   Cpu,
-  HeartPulse
+  HeartPulse,
+  Sun,
+  Moon
 } from "lucide-react";
 
 export const navItems = [
@@ -57,7 +59,8 @@ export default function AdminShell({
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { theme } = useThemeContext();
+  const router = useRouter();
+  const { theme, toggleTheme, mounted } = useThemeContext();
   const isDarkMode = theme === "dark";
 
   const currentNavItem = navItems.find((item) => pathname.startsWith(item.href)) || { name: "Dashboard" };
@@ -144,7 +147,25 @@ export default function AdminShell({
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-4 ml-auto">
+          <div className="flex items-center gap-3 sm:gap-4 ml-auto">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 rounded-xl border border-slate-200 dark:border-[#1E293B] bg-slate-100 dark:bg-[#0B101D] text-slate-700 dark:text-[#FBBF24] hover:bg-slate-200 dark:hover:bg-[#131B2E] hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-sm active:scale-95 shrink-0"
+              aria-label={mounted ? (theme === "dark" ? "Switch to Light Mode" : "Switch to Night Mode") : "Toggle theme"}
+              title={mounted ? (theme === "dark" ? "Switch to Light Mode" : "Switch to Night Mode") : "Toggle theme"}
+            >
+              {mounted ? (
+                theme === "dark" ? (
+                  <Sun className="w-4 h-4 text-[#FBBF24] stroke-[2.2] transition-transform duration-300 hover:rotate-45" />
+                ) : (
+                  <Moon className="w-4 h-4 text-slate-700 stroke-[2.2] transition-transform duration-300 hover:-rotate-12" />
+                )
+              ) : (
+                <span className="w-4 h-4 block" />
+              )}
+            </button>
+
             {/* Bell Icon with Badge */}
             <button className="relative text-[var(--admin-muted)] hover:text-[var(--admin-text)] transition-colors">
               <Bell size={20} />
@@ -165,9 +186,19 @@ export default function AdminShell({
 
             <div className="w-px h-6 bg-[var(--admin-border)] mx-1 hidden sm:block" />
 
-            <Link href="/" className="text-[var(--admin-muted)] hover:text-red-400 transition-colors p-2 rounded-md hover:bg-[var(--admin-border)]" title="Logout">
+            <button
+              onClick={() => {
+                document.cookie = "admin_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+                localStorage.removeItem("admin_access_token");
+                localStorage.removeItem("admin_refresh_token");
+                localStorage.removeItem("admin_user");
+                router.push("/admin");
+              }}
+              className="text-[var(--admin-muted)] hover:text-red-400 transition-colors p-2 rounded-md hover:bg-[var(--admin-border)]"
+              title="Logout"
+            >
               <LogOut size={18} />
-            </Link>
+            </button>
           </div>
         </header>
 

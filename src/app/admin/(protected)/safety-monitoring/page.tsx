@@ -44,12 +44,18 @@ export default function SafetyMonitoringPage() {
     }
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(events.length / itemsPerPage);
+  const paginatedEvents = events.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
   useEffect(() => {
     fetchDashboard();
   }, []);
 
   useEffect(() => {
     fetchAlerts();
+    setCurrentPage(1);
   }, [searchQuery, statusFilter]);
 
   const handleAcknowledge = async () => {
@@ -121,11 +127,6 @@ export default function SafetyMonitoringPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">Safety Monitoring</span>
-          </nav>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Safety Monitoring</h2>
           <p className="text-[var(--admin-muted)] mt-1">
             Monitor SOS alerts, acknowledge emergencies, and resolve safety incidents in real-time.
@@ -223,11 +224,11 @@ export default function SafetyMonitoringPage() {
                   </td>
                 </tr>
               ) : (
-                events.map((row) => {
+                paginatedEvents.map((row, idx) => {
                   const severity = getSeverityFromStatus(row.status);
                   const displayStatus = getDisplayStatus(row.status);
                   return (
-                    <tr key={row.id} className="hover:bg-[var(--admin-border)] transition-colors group">
+                    <tr key={`${row.id}-${idx}`} className="hover:bg-[var(--admin-border)] transition-colors group">
                       <td className="px-4 py-4">
                         <div className="font-medium text-[var(--admin-text)] text-xs truncate max-w-[140px]" title={row.id}>{row.id.slice(-8)}</div>
                         <div className="text-xs text-[var(--admin-primary)] font-mono mt-0.5 truncate max-w-[140px]" title={row.tripId}>{row.tripId?.slice(-8) || "—"}</div>
@@ -294,6 +295,32 @@ export default function SafetyMonitoringPage() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Pagination Footer */}
+        <div className="p-4 border-t border-[var(--admin-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--admin-muted)]">
+          <div>
+            Showing {events.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0} to {Math.min(currentPage * itemsPerPage, events.length)} of {events.length} entries
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1 || events.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Previous
+            </button>
+            <span className="font-medium text-[var(--admin-text)]">
+              Page {events.length > 0 ? currentPage : 0} of {totalPages || 1}
+            </span>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages || events.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 

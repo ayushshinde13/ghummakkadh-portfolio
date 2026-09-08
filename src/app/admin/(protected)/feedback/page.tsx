@@ -48,14 +48,23 @@ export default function FeedbackPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [ratingFilter, setRatingFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
   const filteredFeedbacks = feedbacks.filter(f => {
     const query = searchQuery.toLowerCase();
-    const matchesSearch = f.user.toLowerCase().includes(query) || f.comment.toLowerCase().includes(query);
+    const matchesSearch = f.user.toLowerCase().includes(query) || f.comment?.toLowerCase().includes(query);
     const matchesRole = roleFilter === "all" || f.role.toLowerCase() === roleFilter.toLowerCase();
     const matchesRating = ratingFilter === "all" || f.rating.toString() === ratingFilter;
     return matchesSearch && matchesRole && matchesRating;
   });
+
+  const totalPages = Math.ceil(filteredFeedbacks.length / itemsPerPage);
+  const paginatedFeedbacks = filteredFeedbacks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, roleFilter, ratingFilter]);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }).map((_, i) => (
@@ -72,11 +81,6 @@ export default function FeedbackPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">Feedback</span>
-          </nav>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">User Feedback & Ratings</h2>
           <p className="text-[var(--admin-muted)] mt-1">
             Review feedback from customers and drivers to improve service quality.
@@ -139,13 +143,13 @@ export default function FeedbackPage() {
 
         {/* Feedback List */}
         <div className="divide-y divide-white/10">
-          {filteredFeedbacks.length === 0 ? (
+          {paginatedFeedbacks.length === 0 ? (
             <div className="p-12 text-center text-[var(--admin-muted)]">
               No reviews found matching your criteria.
             </div>
           ) : (
-            filteredFeedbacks.map((item) => (
-              <div key={item.id} className="p-6 hover:bg-[var(--admin-border)] transition-colors">
+            paginatedFeedbacks.map((item, idx) => (
+              <div key={`${item.id}-${idx}`} className="p-6 hover:bg-[var(--admin-border)] transition-colors">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-3 mb-1">
@@ -164,6 +168,32 @@ export default function FeedbackPage() {
               </div>
             ))
           )}
+        </div>
+
+        {/* Pagination Footer */}
+        <div className="p-4 border-t border-[var(--admin-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--admin-muted)]">
+          <div>
+            Showing {filteredFeedbacks.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0} to {Math.min(currentPage * itemsPerPage, filteredFeedbacks.length)} of {filteredFeedbacks.length} entries
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1 || filteredFeedbacks.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Previous
+            </button>
+            <span className="font-medium text-[var(--admin-text)]">
+              Page {filteredFeedbacks.length > 0 ? currentPage : 0} of {totalPages || 1}
+            </span>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages || filteredFeedbacks.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>

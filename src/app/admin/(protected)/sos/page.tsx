@@ -65,12 +65,22 @@ export default function SOSPage() {
     };
   }, []);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
   const filteredAlerts = alerts.filter(a => {
     const query = searchQuery.toLowerCase();
     const matchesSearch = a.id.toLowerCase().includes(query) || a.name.toLowerCase().includes(query);
     const matchesStatus = statusFilter === "all" || a.status.toLowerCase() === statusFilter;
     return matchesSearch && matchesStatus;
   });
+
+  const totalPages = Math.ceil(filteredAlerts.length / itemsPerPage);
+  const paginatedAlerts = filteredAlerts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, statusFilter]);
 
   const handleResolve = async (id: string) => {
     try {
@@ -118,11 +128,6 @@ export default function SOSPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-2">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-gray-200">Safety (SOS)</span>
-          </nav>
           <div className="flex items-center gap-3">
             <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Emergency SOS Alerts</h2>
             {activeAlertsCount > 0 && (
@@ -203,8 +208,8 @@ export default function SOSPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {filteredAlerts.map((row) => (
-                <tr key={row.id} className={`transition-colors group ${row.status === "Active" ? "bg-red-500/5 hover:bg-red-500/10" : "hover:bg-[var(--admin-border)]"}`}>
+              {paginatedAlerts.map((row, idx) => (
+                <tr key={`${row.id}-${idx}`} className={`transition-colors group ${row.status === "Active" ? "bg-red-500/5 hover:bg-red-500/10" : "hover:bg-[var(--admin-border)]"}`}>
                   <td className="px-4 py-4">
                     <div className={`font-medium ${row.status === "Active" ? "text-red-400" : "text-[var(--admin-text)]"}`}>{row.id}</div>
                     <div className="text-xs text-[var(--admin-muted)] font-mono mt-0.5 cursor-pointer hover:underline">{row.tripId}</div>
@@ -267,7 +272,7 @@ export default function SOSPage() {
                 </tr>
               ))}
               
-              {filteredAlerts.length === 0 && (
+              {paginatedAlerts.length === 0 && (
                 <tr>
                   <td colSpan={6} className="px-4 py-12 text-center text-[var(--admin-muted)]">
                     No SOS alerts found matching your criteria.
@@ -276,6 +281,32 @@ export default function SOSPage() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Pagination Footer */}
+        <div className="p-4 border-t border-[var(--admin-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--admin-muted)]">
+          <div>
+            Showing {filteredAlerts.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0} to {Math.min(currentPage * itemsPerPage, filteredAlerts.length)} of {filteredAlerts.length} entries
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1 || filteredAlerts.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Previous
+            </button>
+            <span className="font-medium text-[var(--admin-text)]">
+              Page {filteredAlerts.length > 0 ? currentPage : 0} of {totalPages || 1}
+            </span>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages || filteredAlerts.length === 0}
+              className="px-3 py-1.5 rounded-md border border-[var(--admin-border)] bg-[var(--admin-background)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 

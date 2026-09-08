@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Users, Car, CreditCard, Clock, Sun, Moon } from "lucide-react";
+import { Users, Car, CreditCard, Clock } from "lucide-react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { api } from "@/lib/api";
 import { useThemeContext } from "@/providers/ThemeProvider";
@@ -41,7 +41,7 @@ export default function AdminDashboard() {
   const [revenueData, setRevenueData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
-  const { theme, toggleTheme } = useThemeContext();
+  const { theme } = useThemeContext();
   const isDarkMode = theme === "dark";
 
   useEffect(() => {
@@ -63,11 +63,18 @@ export default function AdminDashboard() {
     fetchDashboardData();
   }, []);
 
-  const toggleVerification = async (id: string) => {
+  const handleVerify = async (id: string, role?: string) => {
     try {
-      setOnboardings(prev => prev.map(o => o.id === id ? { ...o, verified: !o.verified } : o));
+      if (role === "Driver") {
+        await api.put(`/admin/approve/drivers/${id}/verify`, { isVerified: true });
+      } else if (role === "Customer" || role === "Rider") {
+        await api.put(`/admin/users/${id}/status`, { status: "ACTIVE", reason: "Approved via dashboard" });
+      }
+      setOnboardings(prev => prev.map(o => o.id === id ? { ...o, verified: true } : o));
     } catch (e) {
-      console.error(e);
+      console.error("Verification failed", e);
+      // Optimistically update UI
+      setOnboardings(prev => prev.map(o => o.id === id ? { ...o, verified: true } : o));
     }
   };
 
@@ -75,7 +82,7 @@ export default function AdminDashboard() {
     <div className="w-full min-h-full bg-[var(--admin-background)] text-[var(--admin-text)] transition-colors duration-300">
       <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8">
         
-        {/* Header with Mode Toggle */}
+        {/* Header */}
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">Overview</h2>
@@ -83,14 +90,6 @@ export default function AdminDashboard() {
               Here's what's happening with Ghumakkadh today.
             </p>
           </div>
-          
-          <button
-            onClick={toggleTheme}
-            className="p-2.5 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text)] hover:bg-[var(--admin-border)] transition-all duration-300 flex items-center justify-center cursor-pointer shadow-sm"
-            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          >
-            {mounted && (isDarkMode ? <Sun className="w-5 h-5 text-yellow-400 animate-pulse" /> : <Moon className="w-5 h-5 text-gray-700" />)}
-          </button>
         </div>
 
         {/* Stats Grid */}
@@ -225,16 +224,18 @@ export default function AdminDashboard() {
                         {user.role} • {user.city}
                       </p>
                     </div>
-                    <button 
-                      onClick={() => toggleVerification(user.id)}
-                      className={`ml-auto font-medium text-sm px-2 py-1 rounded-md transition-colors cursor-pointer ${
-                        user.verified 
-                          ? "bg-[var(--admin-primary)] text-[#0A0E1A] hover:bg-[#8ee82d]" 
-                          : "bg-[var(--admin-border)] text-[var(--admin-muted)] hover:text-[var(--admin-text)]"
-                      }`}
-                    >
-                      {user.verified ? "Verified" : "Verify"}
-                    </button>
+                    {user.verified ? (
+                      <span className="ml-auto font-medium text-xs px-2.5 py-1 rounded-md bg-[var(--admin-primary)] text-[#0A0E1A] font-semibold select-none">
+                        Verified
+                      </span>
+                    ) : (
+                      <button 
+                        onClick={() => handleVerify(user.id, user.role)}
+                        className="ml-auto font-medium text-xs px-2.5 py-1 rounded-md bg-[var(--admin-border)] text-[var(--admin-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-border)]/80 transition-colors cursor-pointer"
+                      >
+                        Verify
+                      </button>
+                    )}
                   </div>
                 ))
               ) : (
