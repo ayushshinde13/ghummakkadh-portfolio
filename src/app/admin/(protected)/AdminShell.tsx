@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useThemeContext } from "@/providers/ThemeProvider";
+import { api } from "@/lib/api";
 import {
   LayoutGrid,
   ClipboardCheck,
@@ -30,7 +31,13 @@ import {
   Cpu,
   HeartPulse,
   Sun,
-  Moon
+  Moon,
+  CheckCheck,
+  AlertTriangle,
+  ChevronRight,
+  RefreshCw,
+  Clock,
+  Loader2
 } from "lucide-react";
 
 export const navItems = [
@@ -52,6 +59,16 @@ export const navItems = [
   { name: "System Health", href: "/admin/health-monitoring", icon: HeartPulse },
 ];
 
+export interface AdminNotification {
+  id: string;
+  title: string;
+  description: string;
+  type: "urgent" | "approval" | "complaint" | "payout" | "info";
+  time: string;
+  link: string;
+  read?: boolean;
+}
+
 export default function AdminShell({
   children,
 }: {
@@ -62,6 +79,111 @@ export default function AdminShell({
   const router = useRouter();
   const { theme, toggleTheme, mounted } = useThemeContext();
   const isDarkMode = theme === "dark";
+
+  // Notification State
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [notifications, setNotifications] = useState<AdminNotification[]>([]);
+  const [isLoadingNotifications, setIsLoadingNotifications] = useState(false);
+  const notificationRef = useRef<HTMLDivElement>(null);
+
+  const fetchLiveNotifications = async () => {
+    try {
+      setIsLoadingNotifications(true);
+      const [sosRes, driversRes, complaintsRes, payoutsRes] = await Promise.allSettled([
+        api.get("/admin/sos/alerts"),
+        api.get("/admin/approve/drivers"),
+        api.get("/admin/complaints"),
+        api.get("/admin/payouts"),
+      ]);
+
+      const items: AdminNotification[] = [];
+
+      // 1. SOS Alerts
+      if (sosRes.status === "fulfilled" && sosRes.value?.success && Array.isArray(sosRes.value?.data?.alerts)) {
+        const activeSos = sosRes.value.data.alerts.filter((a: any) => a.status === "TRIGGERED" || a.status === "ACKNOWLEDGED");
+        activeSos.slice(0, 3).forEach((sos: any) => {
+          items.push({
+            id: `sos-${sos.id}`,
+            title: `SOS Alert: ${sos.user?.name || "Passenger"}`,
+            description: `Emergency triggered on Trip #${sos.tripId || sos.id.slice(0, 8)}`,
+            type: "urgent",
+            time: new Date(sos.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            link: "/admin/sos",
+          });
+        });
+      }
+
+      // 2. Pending Driver Approvals
+      if (driversRes.status === "fulfilled" && driversRes.value?.success && Array.isArray(driversRes.value?.data)) {
+        const pendingDrivers = driversRes.value.data.filter((d: any) => d.status === "PENDING" || d.verificationStatus === "PENDING");
+        if (pendingDrivers.length > 0) {
+          items.push({
+            id: "approvals-pending",
+            title: `${pendingDrivers.length} Pending Driver ${pendingDrivers.length === 1 ? "Approval" : "Approvals"}`,
+            description: `${pendingDrivers[0]?.name || "New driver"} & others awaiting document review`,
+            type: "approval",
+            time: "Action required",
+            link: "/admin/approvals",
+          });
+        }
+      }
+
+      // 3. Open Complaints
+      if (complaintsRes.status === "fulfilled" && complaintsRes.value?.success && Array.isArray(complaintsRes.value?.data?.complaints)) {
+        const openComplaints = complaintsRes.value.data.complaints.filter((c: any) => c.status === "OPEN" || c.status === "IN_PROGRESS");
+        if (openComplaints.length > 0) {
+          items.push({
+            id: `complaint-${openComplaints[0].id}`,
+            title: `${openComplaints.length} Open Customer ${openComplaints.length === 1 ? "Complaint" : "Complaints"}`,
+            description: openComplaints[0].subject || openComplaints[0].category || "Customer complaint awaiting resolution",
+            type: "complaint",
+            time: new Date(openComplaints[0].createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            link: "/admin/complaints",
+          });
+        }
+      }
+
+      // 4. Pending Payouts
+      if (payoutsRes.status === "fulfilled" && Array.isArray(payoutsRes.value?.data?.payouts)) {
+        const pendingPayouts = payoutsRes.value.data.payouts.filter((p: any) => p.status === "PENDING");
+        if (pendingPayouts.length > 0) {
+          items.push({
+            id: "payouts-pending",
+            title: `${pendingPayouts.length} Driver Payout ${pendingPayouts.length === 1 ? "Request" : "Requests"}`,
+            description: `Total ₹${pendingPayouts.reduce((sum: number, p: any) => sum + (p.amount || 0), 0)} ready for processing`,
+            type: "payout",
+            time: "Pending bank transfer",
+            link: "/admin/payouts",
+          });
+        }
+      }
+
+      setNotifications(items);
+    } catch (err) {
+      console.error("Failed to fetch admin notifications", err);
+    } finally {
+      setIsLoadingNotifications(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchLiveNotifications();
+    const interval = setInterval(fetchLiveNotifications, 30000); // 30s polling
+    return () => clearInterval(interval);
+  }, []);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (notificationRef.current && !notificationRef.current.contains(e.target as Node)) {
+        setIsNotificationOpen(false);
+      }
+    };
+    if (isNotificationOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isNotificationOpen]);
 
   const currentNavItem = navItems.find((item) => pathname.startsWith(item.href)) || { name: "Dashboard" };
 
@@ -166,11 +288,122 @@ export default function AdminShell({
               )}
             </button>
 
-            {/* Bell Icon with Badge */}
-            <button className="relative text-[var(--admin-muted)] hover:text-[var(--admin-text)] transition-colors">
-              <Bell size={20} />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[var(--admin-primary)] rounded-full border border-[var(--admin-topbar-bg)]" />
-            </button>
+            {/* Bell Icon with Interactive Dropdown */}
+            <div className="relative" ref={notificationRef}>
+              <button
+                onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+                className={`relative w-9 h-9 rounded-xl border flex items-center justify-center transition-all cursor-pointer shadow-sm active:scale-95 ${
+                  isNotificationOpen
+                    ? "bg-[var(--admin-primary)]/15 border-[var(--admin-primary)] text-[var(--admin-primary)]"
+                    : "bg-slate-100 dark:bg-[#0B101D] border-slate-200 dark:border-[#1E293B] text-slate-700 dark:text-[var(--admin-muted)] hover:text-[var(--admin-text)] hover:bg-slate-200 dark:hover:bg-[#131B2E]"
+                }`}
+                aria-label="Notifications"
+                title="System Notifications"
+              >
+                <Bell size={18} />
+                {notifications.length > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-extrabold text-white ring-2 ring-[var(--admin-topbar-bg)] animate-pulse">
+                    {notifications.length}
+                  </span>
+                )}
+              </button>
+
+              {/* Dropdown Popover */}
+              {isNotificationOpen && (
+                <div className="absolute right-0 mt-2.5 w-80 sm:w-96 rounded-2xl bg-[var(--admin-card)] border border-[var(--admin-border)] shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200 flex flex-col">
+                  {/* Header */}
+                  <div className="px-4 py-3 border-b border-[var(--admin-border)] bg-[var(--admin-card)] flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-[var(--admin-text)]">Notifications</span>
+                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-[var(--admin-primary)]/10 text-[var(--admin-primary)] font-bold">
+                        {notifications.length} new
+                      </span>
+                    </div>
+                    <button
+                      onClick={fetchLiveNotifications}
+                      disabled={isLoadingNotifications}
+                      className="p-1 rounded-md text-[var(--admin-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-border)] transition-colors cursor-pointer"
+                      title="Refresh"
+                    >
+                      <RefreshCw size={13} className={isLoadingNotifications ? "animate-spin text-[var(--admin-primary)]" : ""} />
+                    </button>
+                  </div>
+
+                  {/* Notification Items List */}
+                  <div className="max-h-80 overflow-y-auto divide-y divide-[var(--admin-border)] custom-scrollbar">
+                    {isLoadingNotifications && notifications.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-[var(--admin-muted)]">
+                        <Loader2 className="w-5 h-5 mx-auto mb-2 animate-spin text-[var(--admin-primary)]" />
+                        Fetching live alerts...
+                      </div>
+                    ) : notifications.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-[var(--admin-muted)]">
+                        <CheckCheck className="w-8 h-8 mx-auto mb-2 text-emerald-400 opacity-60" />
+                        <p className="font-semibold text-[var(--admin-text)]">All clear!</p>
+                        <p className="mt-0.5">No pending emergencies or urgent action items.</p>
+                      </div>
+                    ) : (
+                      notifications.map((item) => {
+                        let iconBg = "bg-blue-500/10 text-blue-400";
+                        let IconComponent = Bell;
+
+                        if (item.type === "urgent") {
+                          iconBg = "bg-red-500/15 text-red-400";
+                          IconComponent = Siren;
+                        } else if (item.type === "approval") {
+                          iconBg = "bg-emerald-500/15 text-emerald-400";
+                          IconComponent = ClipboardCheck;
+                        } else if (item.type === "complaint") {
+                          iconBg = "bg-amber-500/15 text-amber-400";
+                          IconComponent = MessageSquare;
+                        } else if (item.type === "payout") {
+                          iconBg = "bg-purple-500/15 text-purple-400";
+                          IconComponent = Wallet;
+                        }
+
+                        return (
+                          <Link
+                            key={item.id}
+                            href={item.link}
+                            onClick={() => setIsNotificationOpen(false)}
+                            className="p-3.5 hover:bg-[var(--admin-border)]/50 transition-colors flex items-start gap-3 group cursor-pointer block"
+                          >
+                            <div className={`p-2 rounded-xl ${iconBg} shrink-0 mt-0.5`}>
+                              <IconComponent size={15} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between gap-1">
+                                <span className="text-xs font-bold text-[var(--admin-text)] truncate group-hover:text-[var(--admin-primary)] transition-colors">
+                                  {item.title}
+                                </span>
+                                <span className="text-[10px] text-[var(--admin-muted)] shrink-0 font-medium">
+                                  {item.time}
+                                </span>
+                              </div>
+                              <p className="text-[11px] text-[var(--admin-muted)] mt-0.5 line-clamp-1">
+                                {item.description}
+                              </p>
+                            </div>
+                            <ChevronRight size={13} className="text-[var(--admin-muted)] group-hover:text-[var(--admin-primary)] self-center opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </Link>
+                        );
+                      })
+                    )}
+                  </div>
+
+                  {/* Footer */}
+                  <div className="p-2.5 border-t border-[var(--admin-border)] bg-[var(--admin-card)] text-center">
+                    <Link
+                      href="/admin/safety-monitoring"
+                      onClick={() => setIsNotificationOpen(false)}
+                      className="text-xs font-bold text-[var(--admin-primary)] hover:underline inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      View Safety Center <ChevronRight size={12} />
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Avatar */}
             <div className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">

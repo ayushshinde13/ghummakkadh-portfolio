@@ -177,9 +177,16 @@ export default function JobMonitoringPage() {
     }
   };
 
-  // Delete Job
-  const handleDeleteJob = async (queue: string, id: string) => {
-    if (!confirm(`Are you sure you want to remove job #${id}?`)) return;
+  // Delete Job State & Handler
+  const [deleteConfirmJob, setDeleteConfirmJob] = useState<{ queue: string; id: string } | null>(null);
+
+  const handleDeleteJob = (queue: string, id: string) => {
+    setDeleteConfirmJob({ queue, id });
+  };
+
+  const confirmDeleteJob = async () => {
+    if (!deleteConfirmJob) return;
+    const { queue, id } = deleteConfirmJob;
 
     try {
       setActionLoading(`delete-${id}`);
@@ -190,6 +197,7 @@ export default function JobMonitoringPage() {
         if (selectedJob && selectedJob.id === id) {
           setDetailModalOpen(false);
         }
+        setDeleteConfirmJob(null);
         fetchStats();
         fetchJobs();
       }
@@ -554,36 +562,43 @@ export default function JobMonitoringPage() {
         </div>
       </div>
 
-      {/* Deep Inspection Modal */}
+      {/* Deep Inspection Modal (Rectangular Shape) */}
       {detailModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-2xl max-h-[85vh] bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-4xl max-h-[90vh] bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
             {/* Modal Header */}
-            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-border)]/50 shrink-0">
-              <div className="flex items-center gap-3">
-                <Cpu size={20} className="text-[var(--admin-primary)]" />
-                <div>
-                  <h3 className="text-[var(--admin-text)] font-bold text-base flex items-center gap-2">
-                    Job #{selectedJob?.id || "..."}
+            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-card)] shrink-0">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="p-2 rounded-lg bg-[var(--admin-primary)]/10 text-[var(--admin-primary)] shrink-0">
+                  <Cpu size={20} />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2.5 flex-wrap">
+                    <h3 className="text-[var(--admin-text)] font-bold text-base tracking-tight font-mono">
+                      Job #{selectedJob?.id || "..."}
+                    </h3>
                     {selectedJob && getStatusBadge(selectedJob.status)}
-                  </h3>
-                  <span className="text-xs text-[var(--admin-muted)] font-mono">
-                    Queue: {selectedJob?.queue} • {selectedJob?.name}
-                  </span>
+                  </div>
+                  <div className="text-xs text-[var(--admin-muted)] flex items-center gap-2 mt-0.5 truncate">
+                    <span className="px-1.5 py-0.5 rounded bg-[var(--admin-border)] text-[var(--admin-text)] font-semibold text-[10px]">
+                      {selectedJob?.queue}
+                    </span>
+                    <span className="truncate">{selectedJob?.name}</span>
+                  </div>
                 </div>
               </div>
               <button
                 onClick={() => setDetailModalOpen(false)}
-                className="p-2 rounded-full hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors cursor-pointer"
+                className="p-2 rounded-lg hover:bg-[var(--admin-border)] text-[var(--admin-muted)] hover:text-[var(--admin-text)] transition-colors cursor-pointer shrink-0 ml-2"
               >
-                <X size={18} />
+                <X size={20} />
               </button>
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 overflow-y-auto space-y-5 bg-[var(--admin-background)]">
+            <div className="p-6 overflow-y-auto space-y-6 bg-[var(--admin-background)] custom-scrollbar">
               {isLoadingDetail ? (
-                <div className="py-16 text-center text-[var(--admin-muted)]">
+                <div className="py-20 text-center text-[var(--admin-muted)]">
                   <Loader2 className="animate-spin w-8 h-8 mx-auto mb-2 text-[var(--admin-primary)]" />
                   Loading execution metadata...
                 </div>
@@ -591,7 +606,7 @@ export default function JobMonitoringPage() {
                 <>
                   {feedbackMessage && (
                     <div
-                      className={`p-3.5 rounded-lg flex items-center gap-2 text-xs font-medium border ${
+                      className={`p-3.5 rounded-xl flex items-center gap-2 text-xs font-medium border ${
                         feedbackMessage.type === "success"
                           ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
                           : "bg-red-500/10 border-red-500/20 text-red-400"
@@ -602,27 +617,37 @@ export default function JobMonitoringPage() {
                     </div>
                   )}
 
-                  {/* Summary Grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-xl p-3.5 text-xs">
-                    <div>
-                      <span className="text-[var(--admin-muted)] block">Created At</span>
-                      <span className="font-semibold text-[var(--admin-text)]">
+                  {/* 4 Summary Stat Cards */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
+                      <span className="text-[10px] uppercase font-semibold tracking-wider text-[var(--admin-muted)] block mb-1">
+                        Created At
+                      </span>
+                      <span className="font-semibold text-xs text-[var(--admin-text)] block truncate" title={new Date(selectedJob.timestamp).toLocaleString()}>
                         {new Date(selectedJob.timestamp).toLocaleString()}
                       </span>
                     </div>
-                    <div>
-                      <span className="text-[var(--admin-muted)] block">Processed Duration</span>
-                      <span className="font-semibold text-[var(--admin-text)]">
+                    <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
+                      <span className="text-[10px] uppercase font-semibold tracking-wider text-[var(--admin-muted)] block mb-1">
+                        Processing Time
+                      </span>
+                      <span className="font-semibold text-xs text-[var(--admin-text)] block">
                         {formatDuration(selectedJob.durationMs)}
                       </span>
                     </div>
-                    <div>
-                      <span className="text-[var(--admin-muted)] block">Attempts Made</span>
-                      <span className="font-semibold text-[var(--admin-text)]">{selectedJob.attemptsMade}</span>
+                    <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
+                      <span className="text-[10px] uppercase font-semibold tracking-wider text-[var(--admin-muted)] block mb-1">
+                        Attempts
+                      </span>
+                      <span className="font-semibold text-xs text-[var(--admin-text)] block">
+                        {selectedJob.attemptsMade}
+                      </span>
                     </div>
-                    <div>
-                      <span className="text-[var(--admin-muted)] block">Delayed / Timeout</span>
-                      <span className="font-semibold text-[var(--admin-text)]">
+                    <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
+                      <span className="text-[10px] uppercase font-semibold tracking-wider text-[var(--admin-muted)] block mb-1">
+                        Delay / Timeout
+                      </span>
+                      <span className="font-semibold text-xs text-[var(--admin-text)] block">
                         {selectedJob.opts?.delay ? `${selectedJob.opts.delay}ms` : "None"}
                       </span>
                     </div>
@@ -642,16 +667,16 @@ export default function JobMonitoringPage() {
                               "error"
                             )
                           }
-                          className="flex items-center gap-1 text-[11px] text-[var(--admin-muted)] hover:text-[var(--admin-text)] cursor-pointer"
+                          className="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-500/10 hover:bg-red-500/20 text-[11px] text-red-400 font-medium transition-colors cursor-pointer"
                         >
                           {copiedKey === "error" ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
                           Copy Error
                         </button>
                       </div>
-                      <div className="bg-red-950/20 border border-red-500/30 rounded-xl p-3 text-xs font-mono text-red-300 max-h-48 overflow-y-auto space-y-1">
+                      <div className="bg-red-950/20 border border-red-500/30 rounded-xl p-4 text-xs font-mono text-red-300 max-h-48 overflow-y-auto space-y-2 custom-scrollbar">
                         <p className="font-bold">{selectedJob.failedReason}</p>
                         {selectedJob.stacktrace && selectedJob.stacktrace.length > 0 && (
-                          <pre className="text-[11px] text-red-400/80 whitespace-pre-wrap mt-2">
+                          <pre className="text-[11px] text-red-400/80 whitespace-pre-wrap">
                             {selectedJob.stacktrace.join("\n")}
                           </pre>
                         )}
@@ -659,52 +684,55 @@ export default function JobMonitoringPage() {
                     </div>
                   )}
 
-                  {/* Input Data Payload (JSON) */}
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs font-semibold text-[var(--admin-muted)]">
-                      <span>Input Payload (`data`)</span>
-                      <button
-                        onClick={() => copyToClipboard(JSON.stringify(selectedJob.data, null, 2), "payload")}
-                        className="flex items-center gap-1 text-[11px] hover:text-[var(--admin-text)] cursor-pointer"
-                      >
-                        {copiedKey === "payload" ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
-                        Copy JSON
-                      </button>
-                    </div>
-                    <pre className="bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-xl p-3.5 text-xs font-mono text-[var(--admin-text)] max-h-48 overflow-y-auto">
-                      {JSON.stringify(selectedJob.data, null, 2)}
-                    </pre>
-                  </div>
-
-                  {/* Return Value / Result (JSON) */}
-                  {selectedJob.returnvalue && (
-                    <div className="space-y-1.5">
+                  {/* 2-Column Code Grid for Input & Output */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Input Payload */}
+                    <div className="space-y-1.5 flex flex-col">
                       <div className="flex items-center justify-between text-xs font-semibold text-[var(--admin-muted)]">
-                        <span>Output Result (`returnvalue`)</span>
+                        <span>Input Payload (`data`)</span>
                         <button
-                          onClick={() => copyToClipboard(JSON.stringify(selectedJob.returnvalue, null, 2), "result")}
-                          className="flex items-center gap-1 text-[11px] hover:text-[var(--admin-text)] cursor-pointer"
+                          onClick={() => copyToClipboard(JSON.stringify(selectedJob.data, null, 2), "payload")}
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[var(--admin-border)] hover:bg-[var(--admin-border)]/80 text-[11px] text-[var(--admin-text)] transition-colors cursor-pointer"
                         >
-                          {copiedKey === "result" ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                          {copiedKey === "payload" ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
                           Copy JSON
                         </button>
                       </div>
-                      <pre className="bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-xl p-3.5 text-xs font-mono text-[var(--admin-text)] max-h-40 overflow-y-auto">
-                        {JSON.stringify(selectedJob.returnvalue, null, 2)}
+                      <pre className="bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-xl p-4 text-xs font-mono text-[var(--admin-text)] h-56 overflow-y-auto overflow-x-auto custom-scrollbar leading-relaxed">
+                        {JSON.stringify(selectedJob.data, null, 2)}
                       </pre>
                     </div>
-                  )}
+
+                    {/* Return Value / Result */}
+                    <div className="space-y-1.5 flex flex-col">
+                      <div className="flex items-center justify-between text-xs font-semibold text-[var(--admin-muted)]">
+                        <span>Output Result (`returnvalue`)</span>
+                        {selectedJob.returnvalue && (
+                          <button
+                            onClick={() => copyToClipboard(JSON.stringify(selectedJob.returnvalue, null, 2), "result")}
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[var(--admin-border)] hover:bg-[var(--admin-border)]/80 text-[11px] text-[var(--admin-text)] transition-colors cursor-pointer"
+                          >
+                            {copiedKey === "result" ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                            Copy JSON
+                          </button>
+                        )}
+                      </div>
+                      <pre className="bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-xl p-4 text-xs font-mono text-[var(--admin-text)] h-56 overflow-y-auto overflow-x-auto custom-scrollbar leading-relaxed">
+                        {selectedJob.returnvalue ? JSON.stringify(selectedJob.returnvalue, null, 2) : "// No return value recorded (Job still processing or void)"}
+                      </pre>
+                    </div>
+                  </div>
                 </>
               ) : null}
             </div>
 
             {/* Modal Actions */}
-            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)]/30 flex items-center justify-between shrink-0">
+            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-card)] flex items-center justify-between px-6 shrink-0">
               {selectedJob ? (
                 <button
                   onClick={() => handleDeleteJob(selectedJob.queue, selectedJob.id)}
                   disabled={actionLoading === `delete-${selectedJob.id}`}
-                  className="px-3.5 py-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 font-medium hover:bg-red-500/20 text-xs flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+                  className="px-3.5 py-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 font-semibold hover:bg-red-500/20 text-xs flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
                 >
                   <Trash2 size={14} />
                   Delete Job
@@ -714,7 +742,7 @@ export default function JobMonitoringPage() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setDetailModalOpen(false)}
-                  className="px-4 py-2 rounded-lg hover:bg-[var(--admin-border)] text-[var(--admin-muted)] font-medium text-xs transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] font-semibold text-xs transition-colors cursor-pointer"
                 >
                   Close
                 </button>
@@ -730,6 +758,56 @@ export default function JobMonitoringPage() {
                   </button>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Custom Delete Confirmation Modal */}
+      {deleteConfirmJob && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-md bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-2xl shadow-2xl p-6 space-y-5 animate-in zoom-in-95 duration-150">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 shrink-0">
+                <Trash2 size={22} />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-[var(--admin-text)]">
+                  Remove Background Job?
+                </h3>
+                <p className="text-xs text-[var(--admin-muted)] mt-1.5 leading-relaxed">
+                  Are you sure you want to permanently remove job <span className="font-mono text-red-400 font-semibold">#{deleteConfirmJob.id}</span> from queue <span className="font-semibold text-[var(--admin-text)]">{deleteConfirmJob.queue}</span>? This action cannot be undone.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => setDeleteConfirmJob(null)}
+                disabled={!!actionLoading}
+                className="px-4 py-2 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] font-semibold text-xs transition-colors cursor-pointer disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmDeleteJob}
+                disabled={!!actionLoading}
+                className="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-lg shadow-red-500/20 disabled:opacity-50"
+              >
+                {actionLoading === `delete-${deleteConfirmJob.id}` ? (
+                  <>
+                    <Loader2 size={14} className="animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 size={14} />
+                    Delete Job
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>

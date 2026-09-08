@@ -259,123 +259,156 @@ export default function ComplaintsPage() {
         </div>
       </div>
 
-      {/* View Complaint Modal */}
+      {/* View Complaint Modal (Rectangular Shape) */}
       {isModalOpen && selectedComplaint && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-lg bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-border)] shrink-0">
-              <h3 className="text-[var(--admin-text)] font-bold tracking-tight flex items-center gap-2">
-                <FileText size={18} className="text-[var(--admin-primary)]" />
-                Complaint Details
-              </h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-4xl max-h-[90vh] bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            {/* Modal Header */}
+            <div className="h-16 border-b border-[var(--admin-border)] flex items-center justify-between px-6 bg-[var(--admin-card)] shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[var(--admin-primary)]/10 text-[var(--admin-primary)]">
+                  <FileText size={18} />
+                </div>
+                <div>
+                  <h3 className="text-[var(--admin-text)] font-bold text-base tracking-tight">
+                    Complaint Details
+                  </h3>
+                  <p className="text-xs text-[var(--admin-muted)]">
+                    ID: <span className="font-mono text-[var(--admin-primary)]">{selectedComplaint.id}</span> • {selectedComplaint.date}
+                  </p>
+                </div>
+              </div>
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="p-2 rounded-full hover:bg-[var(--admin-border)] text-[var(--admin-muted)] transition-colors"
+                className="p-2 rounded-lg hover:bg-[var(--admin-border)] text-[var(--admin-muted)] hover:text-[var(--admin-text)] transition-colors cursor-pointer"
               >
                 <X size={20} />
               </button>
             </div>
             
-            <div className="p-6 bg-[var(--admin-background)] flex flex-col space-y-6">
-              <div className="flex justify-between items-start pb-4 border-b border-[var(--admin-border)]">
+            {/* Modal Body - 2 Column Rectangular Grid */}
+            <div className="p-6 overflow-y-auto custom-scrollbar grid grid-cols-1 md:grid-cols-12 gap-6 bg-[var(--admin-background)]">
+              {/* Left Column: Complaint Metadata & Description (6 cols) */}
+              <div className="md:col-span-6 space-y-4">
+                <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-xs text-[var(--admin-muted)] uppercase tracking-wider font-semibold">Raised By</span>
+                      <div className="text-base font-bold text-[var(--admin-text)] mt-0.5">
+                        {selectedComplaint.raisedByName}
+                        <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-[var(--admin-primary)]/10 text-[var(--admin-primary)] font-semibold">
+                          {selectedComplaint.raisedBy}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-xs text-[var(--admin-muted)] uppercase tracking-wider font-semibold">Status</span>
+                      <div className="mt-0.5">
+                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold border ${
+                          selectedComplaint.status === "Open" ? "border-red-500/20 bg-red-500/10 text-red-500" :
+                          selectedComplaint.status === "In Progress" ? "border-amber-500/20 bg-amber-500/10 text-amber-500" :
+                          "border-green-500/20 bg-green-500/10 text-[var(--admin-primary)]"
+                        }`}>
+                          {selectedComplaint.status === "Open" && <MessageSquare size={12} />}
+                          {selectedComplaint.status === "In Progress" && <Clock size={12} />}
+                          {selectedComplaint.status === "Resolved" && <CheckCircle size={12} />}
+                          {selectedComplaint.status}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3 pt-2 border-t border-[var(--admin-border)]">
+                    <div className="p-2.5 rounded-lg bg-[var(--admin-background)] border border-[var(--admin-border)]">
+                      <span className="text-[11px] text-[var(--admin-muted)] font-medium block">Against</span>
+                      <span className="text-sm font-semibold text-[var(--admin-text)]">{selectedComplaint.against}</span>
+                    </div>
+                    <div className="p-2.5 rounded-lg bg-[var(--admin-background)] border border-[var(--admin-border)]">
+                      <span className="text-[11px] text-[var(--admin-muted)] font-medium block">Category</span>
+                      <span className="text-sm font-semibold text-[var(--admin-text)]">{selectedComplaint.category}</span>
+                    </div>
+                  </div>
+                </div>
+
                 <div>
-                  <div className="text-sm text-[var(--admin-muted)]">Raised By</div>
-                  <div className="text-lg font-bold text-[var(--admin-text)]">{selectedComplaint.raisedByName} <span className="text-sm font-normal text-[var(--admin-muted)]">({selectedComplaint.raisedBy})</span></div>
-                </div>
-                <div className="text-right">
-                  <div className="text-sm text-[var(--admin-muted)]">Complaint ID</div>
-                  <div className="text-sm font-mono text-[var(--admin-primary)]">{selectedComplaint.id}</div>
-                  <div className="text-xs text-[var(--admin-muted)] mt-1">{selectedComplaint.date}</div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-border)]">
-                  <div className="text-xs text-[var(--admin-muted)] mb-1">Against</div>
-                  <div className="text-sm font-medium text-[var(--admin-text)]">{selectedComplaint.against}</div>
-                </div>
-                <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-border)]">
-                  <div className="text-xs text-[var(--admin-muted)] mb-1">Category</div>
-                  <div className="text-sm font-medium text-[var(--admin-text)]">{selectedComplaint.category}</div>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)] block mb-1.5">
+                    Description / Complaint Issue
+                  </label>
+                  <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-sm text-[var(--admin-text)] leading-relaxed whitespace-pre-wrap min-h-[100px]">
+                    {selectedComplaint.description}
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <div className="text-sm font-medium text-[var(--admin-muted)] mb-2">Description</div>
-                <div className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-sm text-[var(--admin-muted)] leading-relaxed">
-                  {selectedComplaint.description}
-                </div>
-              </div>
+              {/* Right Column: Message History & Reply Box (6 cols) */}
+              <div className="md:col-span-6 flex flex-col space-y-3">
+                <label className="text-xs font-semibold uppercase tracking-wider text-[var(--admin-muted)] block">
+                  Communication History
+                </label>
 
-              <div className="flex justify-between items-center pt-2">
-                <div className="text-sm text-[var(--admin-muted)]">Current Status</div>
-                <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border ${
-                    selectedComplaint.status === "Open" ? "border-red-500/20 bg-red-500/10 text-red-500" :
-                    selectedComplaint.status === "In Progress" ? "border-amber-500/20 bg-amber-500/10 text-amber-500" :
-                    "border-green-500/20 bg-green-500/10 text-[var(--admin-primary)]"
-                  }`}>
-                  {selectedComplaint.status === "Open" && <MessageSquare size={12} />}
-                  {selectedComplaint.status === "In Progress" && <Clock size={12} />}
-                  {selectedComplaint.status === "Resolved" && <CheckCircle size={12} />}
-                  {selectedComplaint.status}
-                </span>
-              </div>
-              <div>
-                <div className="text-sm font-medium text-[var(--admin-muted)] mb-2">Message History</div>
-                <div className="bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-xl p-4 max-h-48 overflow-y-auto flex flex-col gap-3">
+                <div className="bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-xl p-4 h-64 overflow-y-auto flex flex-col gap-3 custom-scrollbar">
                   {isDetailsLoading ? (
-                    <div className="text-[var(--admin-muted)] text-sm">Loading messages...</div>
+                    <div className="text-[var(--admin-muted)] text-xs flex items-center justify-center h-full">Loading message history...</div>
                   ) : complaintDetails?.ticket?.messages?.length > 0 ? (
                     complaintDetails.ticket.messages.map((msg: any) => (
                       <div key={msg.id} className={`flex flex-col ${msg.senderRole === 'ADMIN' ? 'items-end' : 'items-start'}`}>
-                        <div className={`px-3 py-2 rounded-lg text-sm max-w-[80%] ${msg.senderRole === 'ADMIN' ? 'bg-[var(--admin-primary)]/10 text-[var(--admin-primary)]' : 'bg-white/10 text-[var(--admin-text)]'}`}>
+                        <div className={`px-3.5 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed ${
+                          msg.senderRole === 'ADMIN' 
+                            ? 'bg-[var(--admin-primary)] text-[#0A0E1A] font-medium' 
+                            : 'bg-[var(--admin-border)] text-[var(--admin-text)]'
+                        }`}>
                           {msg.message}
                         </div>
-                        <div className="text-xs text-[var(--admin-muted)] mt-1">{new Date(msg.createdAt).toLocaleString()}</div>
+                        <span className="text-[10px] text-[var(--admin-muted)] mt-1 px-1">{new Date(msg.createdAt).toLocaleString()}</span>
                       </div>
                     ))
                   ) : (
-                    <div className="text-[var(--admin-muted)] text-sm">No messages yet.</div>
+                    <div className="text-[var(--admin-muted)] text-xs flex items-center justify-center h-full">
+                      No message history recorded yet.
+                    </div>
                   )}
                 </div>
-              </div>
 
-              {selectedComplaint.status !== "Resolved" && (
-                <div>
-                  <div className="text-sm font-medium text-[var(--admin-muted)] mb-2">Reply</div>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={replyText}
-                      onChange={(e) => setReplyText(e.target.value)}
-                      placeholder="Type your response..."
-                      className="flex-1 h-10 bg-[var(--admin-card)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)]/50 rounded-lg px-3 text-sm text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
-                    />
-                    <button 
-                      onClick={handleSendReply}
-                      disabled={!replyText.trim()}
-                      className="h-10 px-4 rounded-lg bg-[var(--admin-primary)] text-[#0A0E1A] font-bold hover:bg-[#66E000] disabled:opacity-50 transition-colors text-sm flex items-center justify-center"
-                    >
-                      <Send size={16} />
-                    </button>
+                {selectedComplaint.status !== "Resolved" && (
+                  <div className="space-y-1.5 pt-1">
+                    <span className="text-xs text-[var(--admin-muted)] font-medium">Send Reply</span>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={replyText}
+                        onChange={(e) => setReplyText(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleSendReply()}
+                        placeholder="Type response to complainant..."
+                        className="flex-1 h-10 bg-[var(--admin-card)] border border-[var(--admin-border)] focus:border-[var(--admin-primary)] rounded-lg px-3.5 text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-muted)] outline-none transition-all"
+                      />
+                      <button 
+                        onClick={handleSendReply}
+                        disabled={!replyText.trim()}
+                        className="h-10 px-4 rounded-lg bg-[var(--admin-primary)] text-[#0A0E1A] font-bold hover:bg-[#66E000] disabled:opacity-50 transition-colors text-xs flex items-center justify-center gap-1 cursor-pointer"
+                      >
+                        <Send size={14} />
+                        Send
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
             
-            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-border)] flex justify-end gap-3">
+            {/* Modal Footer */}
+            <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-card)] flex items-center justify-between px-6 shrink-0">
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 rounded-md hover:bg-[var(--admin-border)] text-[var(--admin-muted)] font-medium transition-colors text-sm"
+                className="px-4 py-2 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] font-semibold transition-colors text-xs cursor-pointer"
               >
                 Close
               </button>
               {selectedComplaint.status !== "Resolved" && (
                 <button 
                   onClick={() => { handleResolve(selectedComplaint.id); setIsModalOpen(false); }}
-                  className="px-4 py-2 rounded-md bg-[var(--admin-primary)] text-[#0A0E1A] font-bold hover:bg-[#66E000] transition-colors text-sm flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-lg bg-[var(--admin-primary)] text-[#0A0E1A] font-bold hover:bg-[#66E000] transition-colors text-xs flex items-center gap-1.5 shadow-sm cursor-pointer"
                 >
-                  <CheckCircle size={16} />
+                  <CheckCircle size={15} />
                   Mark as Resolved
                 </button>
               )}

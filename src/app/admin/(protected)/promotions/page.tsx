@@ -41,17 +41,23 @@ export default function PromotionsPage() {
     setCurrentPage(1);
   }, [searchQuery, statusFilter]);
 
-  const handleDisable = async (id: string) => {
-    if (confirm("Are you sure you want to disable/expire this promotion?")) {
-      try {
-        const res = await api.put(`/admin/promotions/${id}/disable`, {});
-        if (res.success) {
-          await fetchPromotions();
-        }
-      } catch (error) {
-        console.error(error);
-        alert("Failed to disable promotion");
+  const [disableConfirmPromo, setDisableConfirmPromo] = useState<any | null>(null);
+  const [isDisabling, setIsDisabling] = useState(false);
+
+  const confirmDisablePromo = async () => {
+    if (!disableConfirmPromo) return;
+    try {
+      setIsDisabling(true);
+      const res = await api.put(`/admin/promotions/${disableConfirmPromo.id}/disable`, {});
+      if (res.success) {
+        setDisableConfirmPromo(null);
+        await fetchPromotions();
       }
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message || "Failed to disable promotion");
+    } finally {
+      setIsDisabling(false);
     }
   };
 
@@ -234,9 +240,9 @@ export default function PromotionsPage() {
                         </button>
                         {row.status === "Active" && (
                           <button 
-                            onClick={() => handleDisable(row.id)}
+                            onClick={() => setDisableConfirmPromo(row)}
                             className="p-1.5 rounded-md hover:bg-red-500/20 text-[var(--admin-muted)] hover:text-red-500 transition-colors cursor-pointer" 
-                            title="Disable"
+                            title="Disable Promotion"
                           >
                             <Ban size={16} />
                           </button>
@@ -387,6 +393,56 @@ export default function PromotionsPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Custom Disable Confirmation Modal */}
+      {disableConfirmPromo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-md bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-2xl shadow-2xl p-6 space-y-5 animate-in zoom-in-95 duration-150">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 shrink-0">
+                <Ban size={22} />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-[var(--admin-text)]">
+                  Disable Promotion Campaign?
+                </h3>
+                <p className="text-xs text-[var(--admin-muted)] mt-1.5 leading-relaxed">
+                  Are you sure you want to deactivate and expire coupon code <span className="font-mono text-[var(--admin-primary)] font-bold">{disableConfirmPromo.code}</span>? Customers will no longer be able to apply this discount.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => setDisableConfirmPromo(null)}
+                disabled={isDisabling}
+                className="px-4 py-2 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-background)] hover:bg-[var(--admin-border)] text-[var(--admin-text)] font-semibold text-xs transition-colors cursor-pointer disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmDisablePromo}
+                disabled={isDisabling}
+                className="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-lg shadow-red-500/20 disabled:opacity-50"
+              >
+                {isDisabling ? (
+                  <>
+                    <Loader2 size={14} className="animate-spin" />
+                    Deactivating...
+                  </>
+                ) : (
+                  <>
+                    <Ban size={14} />
+                    Deactivate Coupon
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -35,8 +35,6 @@ export default function PricingPage() {
   const [cities, setCities] = useState<any[]>([]);
   const [cityOverrides, setCityOverrides] = useState<any[]>([]);
 
-  // Selected City in City-Wise Tab
-  const [selectedCityTab, setSelectedCityTab] = useState<string>("all");
   const [citySearchQuery, setCitySearchQuery] = useState("");
 
   // Modals state
@@ -292,10 +290,11 @@ export default function PricingPage() {
   const itemsPerCityPage = 5;
 
   const filteredCities = cities.filter((c) => {
-    const matchesSearch = c.name.toLowerCase().includes(citySearchQuery.toLowerCase()) ||
-      (c.state && c.state.toLowerCase().includes(citySearchQuery.toLowerCase()));
-    if (selectedCityTab === "all") return matchesSearch;
-    return matchesSearch && c.id === selectedCityTab;
+    const q = citySearchQuery.trim().toLowerCase();
+    if (!q) return true;
+    const nameMatch = (c?.name || "").toLowerCase().includes(q);
+    const stateMatch = (c?.state || "").toLowerCase().includes(q);
+    return nameMatch || stateMatch;
   });
 
   const totalCityPages = Math.ceil(filteredCities.length / itemsPerCityPage);
@@ -303,18 +302,13 @@ export default function PricingPage() {
 
   useEffect(() => {
     setCityPage(1);
-  }, [selectedCityTab, citySearchQuery]);
+  }, [citySearchQuery]);
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 font-sans min-h-full">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <nav className="flex items-center text-sm font-medium text-[var(--admin-muted)] mb-1">
-            <span>Admin</span>
-            <span className="mx-2 text-[var(--admin-text)]/20">/</span>
-            <span className="text-[var(--admin-text)]">Pricing & Fares</span>
-          </nav>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--admin-text)]">
             Vehicle & City Pricing System
           </h2>
@@ -565,53 +559,31 @@ export default function PricingPage() {
       {/* ========================================================================= */}
       {activeTab === "cities" && (
         <div className="space-y-6">
-          {/* Filter Bar & City Selector Tabs */}
+          {/* Filter Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[var(--admin-card)] p-4 rounded-xl border border-[var(--admin-border)]">
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 max-w-full">
-              <button
-                onClick={() => setSelectedCityTab("all")}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
-                  selectedCityTab === "all"
-                    ? "bg-[var(--admin-primary)] text-[#0A0E1A]"
-                    : "bg-[var(--admin-background)] text-[var(--admin-muted)] hover:text-[var(--admin-text)] border border-[var(--admin-border)]"
-                }`}
-              >
-                All Cities ({cities.length})
-              </button>
-              {cities.map((city) => {
-                const count = cityOverrides.filter((r) => r.cityId === city.id).length;
-                return (
-                  <button
-                    key={city.id}
-                    onClick={() => setSelectedCityTab(city.id)}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap flex items-center gap-1.5 transition-all cursor-pointer ${
-                      selectedCityTab === city.id
-                        ? "bg-[var(--admin-primary)] text-[#0A0E1A]"
-                        : "bg-[var(--admin-background)] text-[var(--admin-muted)] hover:text-[var(--admin-text)] border border-[var(--admin-border)]"
-                    }`}
-                  >
-                    <span>{city.name}</span>
-                    {count > 0 && (
-                      <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
-                        selectedCityTab === city.id ? "bg-[#0A0E1A]/20 text-[#0A0E1A]" : "bg-white/10 text-[var(--admin-text)]"
-                      }`}>
-                        {count}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+            <h3 className="text-base font-bold text-[var(--admin-text)]">
+              All Cities
+            </h3>
 
-            <div className="relative w-full sm:w-64 shrink-0">
-              <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--admin-muted)]" />
+            <div className="relative w-full sm:w-72 shrink-0">
+              <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--admin-muted)] pointer-events-none" />
               <input
                 type="text"
                 placeholder="Search city or state..."
                 value={citySearchQuery}
                 onChange={(e) => setCitySearchQuery(e.target.value)}
-                className="w-full h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-lg pl-9 pr-3 text-xs text-[var(--admin-text)] outline-none focus:border-[var(--admin-primary)]"
+                className="w-full h-9 bg-[var(--admin-background)] border border-[var(--admin-border)] rounded-lg pl-9 pr-8 text-xs text-[var(--admin-text)] outline-none focus:border-[var(--admin-primary)] transition-colors"
               />
+              {citySearchQuery.trim() && (
+                <button
+                  type="button"
+                  onClick={() => setCitySearchQuery("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[var(--admin-muted)] hover:text-[var(--admin-text)] p-0.5 rounded transition-colors cursor-pointer"
+                  title="Clear search"
+                >
+                  <X size={14} />
+                </button>
+              )}
             </div>
           </div>
 
@@ -624,7 +596,8 @@ export default function PricingPage() {
                 onClick={() => setIsNewCityModalOpen(true)}
                 className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--admin-primary)] text-[#0A0E1A] text-xs font-bold"
               >
-                + Add New City
+                <Plus size={14} />
+                Add New City
               </button>
             </div>
           ) : (
@@ -665,7 +638,7 @@ export default function PricingPage() {
                       className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--admin-primary)] text-[#0A0E1A] font-bold text-xs hover:bg-[#66E000] transition-colors shadow-sm cursor-pointer"
                     >
                       <Plus size={14} />
-                      + Add / Override Vehicle in {city.name}
+                      Add / Override Vehicle in {city.name}
                     </button>
                   </div>
 
