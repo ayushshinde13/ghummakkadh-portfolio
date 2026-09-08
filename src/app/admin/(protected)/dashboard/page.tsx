@@ -8,19 +8,31 @@ import { useThemeContext } from "@/providers/ThemeProvider";
 
 const CustomTooltip = ({ active, payload, label, isDarkMode }: any) => {
   if (active && payload && payload.length) {
+    const data = payload[0].payload || {};
     return (
-      <div className={`border rounded-lg shadow-lg p-3 z-50 transition-colors duration-300 ${
+      <div className={`border rounded-xl shadow-xl p-3 z-50 transition-colors duration-300 min-w-[170px] ${
         isDarkMode ? "bg-[var(--admin-card)] border-[var(--admin-border)]" : "bg-white border-gray-200"
       }`}>
-        <p className={`text-xs mb-1 transition-colors duration-300 ${isDarkMode ? "text-[var(--admin-muted)]" : "text-[var(--admin-muted)]"}`}>{label}</p>
-        <p className="text-[var(--admin-primary)] font-bold text-sm">
-          Platform Earned: ₹{payload[0].value.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+        <p className="text-xs font-semibold text-[var(--admin-muted)] mb-1.5 pb-1 border-b border-[var(--admin-border)]">
+          {label}
         </p>
-        {payload[0].payload.grossBooking !== undefined && (
-          <p className="text-xs text-[var(--admin-muted)] mt-0.5">
-            Gross Bookings: ₹{payload[0].payload.grossBooking.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+        <div className="space-y-1">
+          <p className="text-[var(--admin-primary)] font-bold text-sm">
+            Platform Earned: ₹{Number(payload[0].value || 0).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
           </p>
-        )}
+          {data.grossBooking !== undefined && (
+            <p className="text-xs text-[var(--admin-muted)] flex justify-between">
+              <span>Gross Booking:</span>
+              <span className="text-[var(--admin-text)] font-medium">₹{Number(data.grossBooking).toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
+            </p>
+          )}
+          {data.tripsCount !== undefined && (
+            <p className="text-[11px] text-[var(--admin-muted)] flex justify-between pt-0.5">
+              <span>Completed Trips:</span>
+              <span className="text-[var(--admin-text)] font-semibold">{data.tripsCount}</span>
+            </p>
+          )}
+        </div>
       </div>
     );
   }
@@ -39,16 +51,32 @@ export default function AdminDashboard() {
   });
   const [onboardings, setOnboardings] = useState<any[]>([]);
   const [revenueData, setRevenueData] = useState<any[]>([]);
+  const [revenuePeriod, setRevenuePeriod] = useState<"weekly" | "monthly" | "yearly" | "all">("weekly");
+  const [isRevenueLoading, setIsRevenueLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
   const { theme } = useThemeContext();
   const isDarkMode = theme === "dark";
 
+  const fetchRevenueData = async (period: string) => {
+    try {
+      setIsRevenueLoading(true);
+      const res = await api.get(`/admin/dashboard/stats?period=${period}`);
+      if (res.success && res.revenueChartData) {
+        setRevenueData(res.revenueChartData);
+      }
+    } catch (error) {
+      console.error("Failed to fetch revenue data", error);
+    } finally {
+      setIsRevenueLoading(false);
+    }
+  };
+
   useEffect(() => {
     setMounted(true);
     const fetchDashboardData = async () => {
       try {
-        const res = await api.get("/admin/dashboard/stats");
+        const res = await api.get("/admin/dashboard/stats?period=weekly");
         if (res.success) {
           setStats(res.stats);
           setOnboardings(res.recentOnboardings);
@@ -155,13 +183,46 @@ export default function AdminDashboard() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           {/* Revenue Chart Card */}
           <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text)] col-span-4 p-6 relative z-10 transition-colors duration-300">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-semibold leading-none tracking-tight text-[var(--admin-text)]">Platform Revenue Overview</h3>
-              <span className="text-xs font-medium px-2 py-0.5 rounded bg-[var(--admin-primary)]/10 text-[var(--admin-primary)]">
-                Net Commission (Last 7 Days)
-              </span>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+              <div>
+                <h3 className="font-semibold leading-none tracking-tight text-[var(--admin-text)]">Platform Revenue Overview</h3>
+                <p className="text-xs text-[var(--admin-muted)] mt-1">
+                  Net commission earnings across selected timeframe
+                </p>
+              </div>
+              
+              <div className="flex items-center gap-2 flex-wrap">
+                {/* Timeframe Dropdown */}
+                <select
+                  value={revenuePeriod}
+                  onChange={(e) => {
+                    const newPeriod = e.target.value as any;
+                    setRevenuePeriod(newPeriod);
+                    fetchRevenueData(newPeriod);
+                  }}
+                  className="h-8 px-2.5 py-1 text-xs font-semibold rounded-lg bg-[var(--admin-background)] border border-[var(--admin-border)] text-[var(--admin-text)] outline-none focus:border-[var(--admin-primary)] cursor-pointer shadow-sm transition-all"
+                >
+                  <option value="weekly">Weeks (Last 7 Days)</option>
+                  <option value="monthly">Months (Last 30 Days)</option>
+                  <option value="yearly">Years (Last 12 Months)</option>
+                  <option value="all">All Time (Years)</option>
+                </select>
+
+                <span className="text-[11px] font-semibold px-2 py-1 rounded-md bg-[var(--admin-primary)]/10 text-[var(--admin-primary)] border border-[var(--admin-primary)]/20 whitespace-nowrap">
+                  {revenuePeriod === "weekly" && "Last 7 Days"}
+                  {revenuePeriod === "monthly" && "Last 30 Days"}
+                  {revenuePeriod === "yearly" && "Last 12 Months"}
+                  {revenuePeriod === "all" && "All Time"}
+                </span>
+              </div>
             </div>
-            <div className="h-[300px] w-full mt-4">
+
+            <div className="h-[300px] w-full mt-4 relative">
+              {isRevenueLoading && (
+                <div className="absolute inset-0 z-20 bg-[var(--admin-card)]/50 backdrop-blur-[1px] flex items-center justify-center">
+                  <span className="w-2 h-2 rounded-full bg-[var(--admin-primary)] animate-ping" />
+                </div>
+              )}
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
                   data={revenueData}
@@ -197,7 +258,9 @@ export default function AdminDashboard() {
                     type="monotone" 
                     dataKey="revenue" 
                     stroke="#7ED321" 
-                    strokeWidth={2}
+                    strokeWidth={2.5}
+                    dot={{ r: 3, fill: '#7ED321', strokeWidth: 0 }}
+                    activeDot={{ r: 6, stroke: '#7ED321', strokeWidth: 2, fill: isDarkMode ? '#0F172A' : '#FFFFFF' }}
                     fillOpacity={1} 
                     fill="url(#colorRevenue)" 
                   />
